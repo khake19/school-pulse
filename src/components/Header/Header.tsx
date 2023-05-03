@@ -4,10 +4,9 @@ import { TriangleDownIcon } from '@chakra-ui/icons'
 
 const Header = () => {
   return (
-    <Box w="100%" bg="#B9EDDD" px={4} boxShadow="base" borderTop="solid 4px #569DAA">
+    <Box w="100%" px={4} boxShadow="base" borderTop="solid 4px #569DAA">
       <Flex h={20} alignItems="center" justifyContent="space-between">
         <Box>
-          School Pulse
           <Menu>
             <MenuButton as={Button}>
               Aroroy East Central School

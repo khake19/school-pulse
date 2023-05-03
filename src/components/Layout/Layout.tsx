@@ -11,10 +11,6 @@ const Layout = ({ children }) => {
           {/* Main content goes here */}
           <Text>Body content goes here.</Text>
         </Box>
-
-        <Box w="100%" bg="#577D86" p={4}>
-          Footer
-        </Box>
       </Flex>
     </Flex>
   )
