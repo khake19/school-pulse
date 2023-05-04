@@ -1,18 +1,24 @@
 import React from 'react'
-import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react'
 import { TriangleDownIcon } from '@chakra-ui/icons'
+import HeaderStyle from './Header.style'
 
 const Header = () => {
   return (
-    <Box w="100%" px={4} boxShadow="base" borderTop="solid 4px #569DAA">
+    <Box css={HeaderStyle.header} zIndex={100}>
       <Flex h={20} alignItems="center" justifyContent="space-between">
         <Box>
           <Menu>
-            <MenuButton as={Button}>
-              Aroroy East Central School
-              <TriangleDownIcon />
+            <MenuButton as={Button} css={HeaderStyle.menuButton}>
+              <Flex direction="row">
+                <Text marginRight="12px" fontSize="md" fontWeight="500">
+                  Aroroy National High School
+                </Text>
+                <Spacer />
+                <TriangleDownIcon />
+              </Flex>
             </MenuButton>
-            <MenuList>
+            <MenuList width="300px">
               <MenuItem minH="48px">
                 <span>Fluffybuns the Destroyer</span>
               </MenuItem>
@@ -22,7 +28,6 @@ const Header = () => {
             </MenuList>
           </Menu>
         </Box>
-        <Spacer />
       </Flex>
     </Box>
   )
