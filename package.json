@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "analyze": "source-map-explorer .next/static/**/*.js",
+    "build:analyze": "npm run build && npm run analyze"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
@@ -25,6 +27,7 @@
     "next": "13.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "5.0.4"
   },
   "devDependencies": {
