@@ -4,9 +4,7 @@ import Header from '~/components/Header'
 const Layout = () => {
   return (
     <Grid templateAreas={`"header header" "nav main"`} gridTemplateRows={'80px 1fr'} gridTemplateColumns={'150px 1fr'}>
-      <GridItem area={'header'}>
-        <Header />
-      </GridItem>
+      <Header />
       <GridItem bg="purple.50" area={'nav'} height="calc(100vh - 75px)">
         <Box>Nav</Box>
       </GridItem>
