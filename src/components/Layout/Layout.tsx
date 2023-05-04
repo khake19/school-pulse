@@ -1,18 +1,23 @@
-import { Flex, Box, Heading, Text, IconButton, useDisclosure } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { Box, Text, Grid, GridItem } from '@chakra-ui/react'
 import Header from '~/components/Header'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
-    <Flex direction="row" align="stretch" justify="flex-start" minHeight="100vh">
-      <Flex flex="1" direction="column" align="stretch" justify="space-between" minHeight="100vh">
+    <Grid
+      templateAreas={`"header header" "nav main"`}
+      gridTemplateRows={'80px 1fr'}
+      gridTemplateColumns={'150px 1fr'}
+    >
+      <GridItem area={'header'}>
         <Header />
-        <Box flex="1" w="100%" bg="#f6f7fa" p={4}>
-          {/* Main content goes here */}
-          <Text>Body content goes here.</Text>
-        </Box>
-      </Flex>
-    </Flex>
+      </GridItem>
+      <GridItem bg="purple.50" area={'nav'}>
+        <Box>Nav</Box>
+      </GridItem>
+      <GridItem area={'main'}>
+        <Box>Main</Box>
+      </GridItem>
+    </Grid>
   )
 }
 
