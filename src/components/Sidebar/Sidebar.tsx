@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { Avatar, Divider, Heading, IconButton, Flex, GridItem, Text } from '@chakra-ui/react'
+import { Avatar, Divider, Heading, Flex, GridItem, Text } from '@chakra-ui/react'
 import SidebarStyle from './Sidebar.style'
 import Item from './Item'
 
