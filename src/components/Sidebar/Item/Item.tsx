@@ -7,11 +7,12 @@ interface SidebarItemProps {
   title: string
   active?: boolean
   navSize: string
+  handleClick: (title: string) => void
 }
 
-const SidebarItem = ({ icon, title, active, navSize }: SidebarItemProps) => {
+const SidebarItem = ({ icon, title, active, navSize, handleClick }: SidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const iconActive = isOpen || active ? "-active": ""
+  const iconActive = isOpen || active ? '-active' : ''
   return (
     <Flex
       mt="20px"
@@ -20,6 +21,7 @@ const SidebarItem = ({ icon, title, active, navSize }: SidebarItemProps) => {
       alignItems={navSize == 'small' ? 'center' : 'flex-start'}
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
+      onClick={() => handleClick(title)}
     >
       <Link p="15px 10px" _hover={{ textDecor: 'none' }}>
         <Flex>

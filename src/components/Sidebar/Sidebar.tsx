@@ -6,6 +6,8 @@ import Item from './Item'
 
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState('large')
+  const [activeItem, setActiveItem] = useState('Dashboard')
+
   return (
     <GridItem area={'nav'}>
       <Flex
@@ -35,10 +37,34 @@ const Sidebar = () => {
               }}
             />
           </Flex>
-          <Item navSize={navSize} icon="home" title="Dashboard" />
-          <Item navSize={navSize} icon="bar-chart-2" title="Report" active />
-          <Item navSize={navSize} icon="users" title="Teachers" />
-          <Item navSize={navSize} icon="calendar" title="Attendance" />
+          <Item
+            navSize={navSize}
+            icon="home"
+            title="Dashboard"
+            handleClick={(title: string) => setActiveItem(title)}
+            active={activeItem === 'Dashboard'}
+          />
+          <Item
+            navSize={navSize}
+            icon="bar-chart-2"
+            title="Report"
+            handleClick={(title: string) => setActiveItem(title)}
+            active={activeItem === 'Report'}
+          />
+          <Item
+            navSize={navSize}
+            icon="users"
+            title="Teachers"
+            handleClick={(title: string) => setActiveItem(title)}
+            active={activeItem === 'Teachers'}
+          />
+          <Item
+            navSize={navSize}
+            icon="calendar"
+            title="Attendance"
+            handleClick={(title: string) => setActiveItem(title)}
+            active={activeItem === 'Attendance'}
+          />
         </Flex>
         <Flex css={SidebarStyle.avatar} alignItems={navSize === 'small' ? 'center' : 'flex-start'}>
           <Divider display={navSize === 'small' ? 'none' : 'flex'} />
