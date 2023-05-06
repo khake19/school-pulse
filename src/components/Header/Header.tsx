@@ -10,7 +10,13 @@ const Header = () => {
         <Flex h={20} alignItems="center" justifyContent="space-between">
           <Box>
             <Menu>
-              <MenuButton as={Button} css={HeaderStyle.menuButton}>
+              <MenuButton
+                as={Button}
+                css={HeaderStyle.menuButton}
+                bg="#B9EDDD"
+                _hover={{ bg: '#87CBB9' }}
+                _active={{ bg: '#87CBB9' }}
+              >
                 <Flex direction="row">
                   <Text marginRight="12px" fontSize="md" fontWeight="500">
                     Aroroy National High School
@@ -20,10 +26,10 @@ const Header = () => {
                 </Flex>
               </MenuButton>
               <MenuList width="300px">
-                <MenuItem minH="48px">
+                <MenuItem minH="48px" _focus={{ bg: '#87CBB9' }}>
                   <Text>Matongog Elementary School</Text>
                 </MenuItem>
-                <MenuItem minH="40px">
+                <MenuItem minH="40px" _focus={{ bg: '#87CBB9' }}>
                   <Text>Calanay High School</Text>
                 </MenuItem>
               </MenuList>

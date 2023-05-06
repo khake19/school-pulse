@@ -69,12 +69,14 @@ const Sidebar = () => {
         <Flex css={SidebarStyle.avatar} alignItems={navSize === 'small' ? 'center' : 'flex-start'}>
           <Divider display={navSize === 'small' ? 'none' : 'flex'} />
           <Flex mt={4} align="center">
-            <Avatar size="sm" />
+            <Avatar size="sm" src="/profile-picture.jpeg" />
             <Flex flexDir="column" ml={4} display={navSize === 'small' ? 'none' : 'flex'}>
-              <Heading as="h3" size="sm">
-                Eduard Jazul
+              <Heading as="h3" size="sm" color="#577D86">
+                Kerk Jazul
               </Heading>
-              <Text color="gray">Admin</Text>
+              <Text color="gray.400" fontSize="14px">
+                Admin
+              </Text>
             </Flex>
           </Flex>
         </Flex>
