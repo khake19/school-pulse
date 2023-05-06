@@ -6,7 +6,7 @@ import HeaderStyle from './Header.style'
 const Header = () => {
   return (
     <GridItem area={'header'}>
-      <Box css={HeaderStyle.header} zIndex={100}>
+      <Box css={HeaderStyle.header} zIndex={100} color="gray.600">
         <Flex h={20} alignItems="center" justifyContent="space-between">
           <Box>
             <Menu>
@@ -21,10 +21,10 @@ const Header = () => {
               </MenuButton>
               <MenuList width="300px">
                 <MenuItem minH="48px">
-                  <span>Matongog Elementary School</span>
+                  <Text>Matongog Elementary School</Text>
                 </MenuItem>
                 <MenuItem minH="40px">
-                  <span>Calanay High School</span>
+                  <Text>Calanay High School</Text>
                 </MenuItem>
               </MenuList>
             </Menu>
