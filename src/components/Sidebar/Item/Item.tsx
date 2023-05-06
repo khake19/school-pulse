@@ -11,6 +11,7 @@ interface SidebarItemProps {
 
 const SidebarItem = ({ icon, title, active, navSize }: SidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const iconActive = isOpen || active ? "-active": ""
   return (
     <Flex
       mt="20px"
@@ -22,7 +23,7 @@ const SidebarItem = ({ icon, title, active, navSize }: SidebarItemProps) => {
     >
       <Link p="15px 10px" _hover={{ textDecor: 'none' }}>
         <Flex>
-          <Image src={icon} height={0} width={21} alt="sidebar-icon" color="red" />
+          <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" color="red" />
           <Text
             ml={5}
             display={navSize == 'small' ? 'none' : 'flex'}

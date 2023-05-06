@@ -35,10 +35,10 @@ const Sidebar = () => {
               }}
             />
           </Flex>
-          <Item navSize={navSize} icon="/icons/home.svg" title="Dashboard" />
-          <Item navSize={navSize} icon="/icons/bar-chart-2-active.svg" title="Report" active />
-          <Item navSize={navSize} icon="icons/users.svg" title="Teachers" />
-          <Item navSize={navSize} icon="icons/calendar.svg" title="Attendance" />
+          <Item navSize={navSize} icon="home" title="Dashboard" />
+          <Item navSize={navSize} icon="bar-chart-2" title="Report" active />
+          <Item navSize={navSize} icon="users" title="Teachers" />
+          <Item navSize={navSize} icon="calendar" title="Attendance" />
         </Flex>
         <Flex css={SidebarStyle.avatar} alignItems={navSize === 'small' ? 'center' : 'flex-start'}>
           <Divider display={navSize === 'small' ? 'none' : 'flex'} />
