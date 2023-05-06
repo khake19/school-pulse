@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { Avatar, Divider, Heading, IconButton, Flex, GridItem, Text } from '@chakra-ui/react'
-import { FiMenu } from 'react-icons/fi'
 import SidebarStyle from './Sidebar.style'
+import Item from './Item'
 
 const Sidebar = () => {
   const [navSize, changeNavSize] = useState('large')
@@ -9,24 +10,35 @@ const Sidebar = () => {
     <GridItem area={'nav'}>
       <Flex
         css={SidebarStyle.sidebar}
-        width={navSize === 'small' ? '75px' : '200px'}
+        width={navSize === 'small' ? '75px' : '180px'}
         borderRadius={navSize === 'small' ? '0 15px 15px 0' : '0 30px 30px 0'}
       >
-        <Flex p="5%" flexDir="column" alignItems={navSize === 'small' ? 'center' : 'flex-start'} as="nav">
-          <IconButton
-            aria-label="icon-menu"
-            background="none"
+        <Flex flexDir="column" alignItems={navSize === 'small' ? 'center' : 'flex-start'} as="nav">
+          <Flex
             mt={5}
-            _hover={{ background: 'none' }}
-            icon={<FiMenu />}
-            onClick={() => {
-              if (navSize === 'small') {
-                changeNavSize('large')
-              } else {
-                changeNavSize('small')
-              }
-            }}
-          />
+            flexDir="column"
+            w="100%"
+            alignItems={navSize === 'small' ? 'center' : 'flex-start'}
+            p="15px 10px"
+          >
+            <Image
+              alt="menu"
+              src="/icons/menu.svg"
+              width={21}
+              height={0}
+              onClick={() => {
+                if (navSize === 'small') {
+                  changeNavSize('large')
+                } else {
+                  changeNavSize('small')
+                }
+              }}
+            />
+          </Flex>
+          <Item navSize={navSize} icon="/icons/home.svg" title="Dashboard"/>
+          <Item navSize={navSize} icon="/icons/bar-chart-2-active.svg" title="Report" active/>
+          <Item navSize={navSize} icon="icons/users.svg" title="Teachers" />
+          <Item navSize={navSize} icon="icons/calendar.svg" title="Attendance" />
         </Flex>
         <Flex css={SidebarStyle.avatar} alignItems={navSize === 'small' ? 'center' : 'flex-start'}>
           <Divider display={navSize === 'small' ? 'none' : 'flex'} />
