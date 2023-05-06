@@ -35,8 +35,8 @@ const Sidebar = () => {
               }}
             />
           </Flex>
-          <Item navSize={navSize} icon="/icons/home.svg" title="Dashboard"/>
-          <Item navSize={navSize} icon="/icons/bar-chart-2-active.svg" title="Report" active/>
+          <Item navSize={navSize} icon="/icons/home.svg" title="Dashboard" />
+          <Item navSize={navSize} icon="/icons/bar-chart-2-active.svg" title="Report" active />
           <Item navSize={navSize} icon="icons/users.svg" title="Teachers" />
           <Item navSize={navSize} icon="icons/calendar.svg" title="Attendance" />
         </Flex>
