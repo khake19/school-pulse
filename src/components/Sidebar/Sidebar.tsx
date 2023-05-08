@@ -49,6 +49,7 @@ const Sidebar = () => {
           navSize={navSize}
           icon="users"
           title="Teachers"
+          name="teachers"
           handleClick={(title: string) => setActiveItem(title)}
           active={activeItem === 'Teachers'}
         />

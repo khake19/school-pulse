@@ -1,6 +1,5 @@
 'use client'
 import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-import Layout from '~/components/Layout'
 
 const theme = extendTheme({
   fonts: {
@@ -17,11 +16,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="en">
       <body>
-        <ChakraProvider theme={theme}>
-          <Layout>{children}</Layout>
-        </ChakraProvider>
+        <ChakraProvider theme={theme}>{children}</ChakraProvider>
       </body>
     </html>
   )
