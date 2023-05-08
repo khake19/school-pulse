@@ -4,5 +4,6 @@
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "plugin:storybook/recommended"
-  ]
+  ],
+  "rules": { "react/no-unescaped-entities": 0 }
 }
