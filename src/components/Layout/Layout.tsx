@@ -3,7 +3,7 @@ import Header from '~/components/Header'
 import Sidebar from '~/components/Sidebar'
 
 type Props = {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 const Layout = ({ children }: Props) => {
