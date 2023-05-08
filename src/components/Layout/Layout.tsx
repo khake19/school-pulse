@@ -10,7 +10,7 @@ const Layout = ({ children }: Props) => {
   return (
     <Flex direction="column" align="stretch" justify="flex-start">
       <Header />
-      <Flex direction="row" align="stretch" justify="flex-start" flex="1">
+      <Flex direction="row" align="stretch" justify="flex-start" flex="1" bg="#F9F9F9">
         <Sidebar />
         {children}
       </Flex>

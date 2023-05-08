@@ -1,7 +1,6 @@
-export const metadata = {
-  title: 'My Page Title'
-}
+'use client'
+import { Box } from '@chakra-ui/react'
 
 export default function Page() {
-  return '...'
+  return <Box width="100%">Hello</Box>
 }
