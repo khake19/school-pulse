@@ -3,7 +3,7 @@ import { Flex, Text, Link, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
 
 interface SidebarItemProps {
-  icon: any
+  icon: string
   title: string
   active?: boolean
   navSize: string
