@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import Header from '~/components/Header'
 import Sidebar from '~/components/Sidebar'
 
@@ -8,11 +8,13 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <Grid templateAreas={`"header header" "nav main"`} gridTemplateRows={'80px 1fr'} gridTemplateColumns={'200px 1fr'}>
+    <Flex direction="column" align="stretch" justify="flex-start">
       <Header />
-      <Sidebar />
-      <GridItem area={'main'}>{children}</GridItem>
-    </Grid>
+      <Flex direction="row" align="stretch" justify="flex-start" flex="1">
+        <Sidebar />
+        {children}
+      </Flex>
+    </Flex>
   )
 }
 
