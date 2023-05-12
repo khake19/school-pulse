@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react'
 import { TriangleDownIcon } from '@chakra-ui/icons'
 import HeaderStyle from './Header.style'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+
+type School = { id: string; name: string }
 
 const Header = () => {
+  const schools = [
+    { id: '1', name: 'Aroroy East Elementary School' },
+    { id: '2', name: 'Balawing Elementary School' },
+    { id: '3', name: 'Balete Elementary School' },
+    { id: '4', name: 'Bienvinido R. Bulalacao Memorial Elementary School' },
+    { id: '5', name: 'Cabangcalan Elementary School' },
+    { id: '6', name: 'Capsay Elementary School' },
+    { id: '7', name: 'Concepcion Elementary School' },
+    { id: '8', name: 'Lanang Elementary School' },
+    { id: '9', name: 'Luy-a Elementary School' },
+    { id: '10', name: 'Malubi Elementary School' },
+    { id: '11', name: 'Managanaga Elementary School' }
+  ]
+
+  const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
+
+  useEffect(() => {
+    !school.id && setSchool(schools[0])
+  }, [])
+
+  const handleClick = (selectedSchool: School) => {
+    setSchool(selectedSchool)
+  }
   return (
     <Box css={HeaderStyle.header} zIndex={100} color="gray.600">
       <Flex h={20} alignItems="center" justifyContent="space-between">
@@ -18,19 +44,23 @@ const Header = () => {
             >
               <Flex direction="row">
                 <Text marginRight="12px" fontSize="md" fontWeight="500">
-                  Aroroy National High School
+                  {school.name}
                 </Text>
                 <Spacer />
                 <TriangleDownIcon />
               </Flex>
             </MenuButton>
             <MenuList width="300px">
-              <MenuItem minH="48px" _focus={{ bg: '#87CBB9' }}>
-                <Text>Matongog Elementary School</Text>
-              </MenuItem>
-              <MenuItem minH="40px" _focus={{ bg: '#87CBB9' }}>
-                <Text>Calanay High School</Text>
-              </MenuItem>
+              {schools.map(({ id, name }) => (
+                <MenuItem
+                  key={id}
+                  minH="48px"
+                  _focus={{ bg: '#87CBB9' }}
+                  onClick={() => handleClick({ id: id, name: name })}
+                >
+                  <Text>{name}</Text>
+                </MenuItem>
+              ))}
             </MenuList>
           </Menu>
         </Box>
