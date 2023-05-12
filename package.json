@@ -26,11 +26,13 @@
     "eslint": "8.39.0",
     "eslint-config-next": "^13.4.1",
     "framer-motion": "^10.12.5",
+    "immer": "^10.0.2",
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "source-map-explorer": "^2.5.3",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.9",
