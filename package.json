@@ -11,7 +11,8 @@
     "analyze": "source-map-explorer .next/static/**/*.js",
     "build:analyze": "npm run build && npm run analyze",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
@@ -42,9 +43,13 @@
     "@storybook/nextjs": "^7.0.9",
     "@storybook/react": "^7.0.9",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-storybook": "^0.6.12",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "prettier": "^2.8.8",
     "storybook": "^7.0.9"
   }

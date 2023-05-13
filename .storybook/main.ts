@@ -9,9 +9,9 @@ const config: StorybookConfig = {
      */
     config.resolve.alias = {
       ...config.resolve?.alias,
-      '~': [path.resolve(__dirname, '../src/'), path.resolve(__dirname, '../')],
-    };
-    return config;
+      '~': [path.resolve(__dirname, '../src/'), path.resolve(__dirname, '../')]
+    }
+    return config
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
@@ -22,6 +22,6 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag'
-  },
+  }
 }
 export default config
