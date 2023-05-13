@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react'
 import { TriangleDownIcon } from '@chakra-ui/icons'
 import HeaderStyle from './Header.style'
@@ -9,13 +9,20 @@ type Schools = { schools: School[] }
 
 const Header = ({ schools }: Schools) => {
   const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
+  const [selectedSchoolName, setSelectedSchoolName] = useState('')
 
   useEffect(() => {
-    !school.id && setSchool(schools[0])
+    if (!school.id) {
+      setSchool(schools[0])
+      setSelectedSchoolName(schools[0].name)
+    } else {
+      setSelectedSchoolName(school.name)
+    }
   }, [])
 
   const handleClick = (selectedSchool: School) => {
     setSchool(selectedSchool)
+    setSelectedSchoolName(selectedSchool.name)
   }
   return (
     <Box css={HeaderStyle.header} zIndex={100} color="gray.600">
@@ -32,7 +39,7 @@ const Header = ({ schools }: Schools) => {
             >
               <Flex direction="row">
                 <Text marginRight="12px" fontSize="md" fontWeight="500">
-                  {school.name}
+                  {selectedSchoolName}
                 </Text>
                 <Spacer />
                 <TriangleDownIcon />
