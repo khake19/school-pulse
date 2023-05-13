@@ -5,22 +5,9 @@ import HeaderStyle from './Header.style'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 type School = { id: string; name: string }
+type Schools = { schools: School[] }
 
-const Header = () => {
-  const schools = [
-    { id: '1', name: 'Aroroy East Elementary School' },
-    { id: '2', name: 'Balawing Elementary School' },
-    { id: '3', name: 'Balete Elementary School' },
-    { id: '4', name: 'Bienvinido R. Bulalacao Memorial Elementary School' },
-    { id: '5', name: 'Cabangcalan Elementary School' },
-    { id: '6', name: 'Capsay Elementary School' },
-    { id: '7', name: 'Concepcion Elementary School' },
-    { id: '8', name: 'Lanang Elementary School' },
-    { id: '9', name: 'Luy-a Elementary School' },
-    { id: '10', name: 'Malubi Elementary School' },
-    { id: '11', name: 'Managanaga Elementary School' }
-  ]
-
+const Header = ({ schools }: Schools) => {
   const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
 
   useEffect(() => {
@@ -41,6 +28,7 @@ const Header = () => {
               bg="#B9EDDD"
               _hover={{ bg: '#87CBB9' }}
               _active={{ bg: '#87CBB9' }}
+              data-testid="school-menu"
             >
               <Flex direction="row">
                 <Text marginRight="12px" fontSize="md" fontWeight="500">
