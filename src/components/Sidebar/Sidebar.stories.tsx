@@ -4,11 +4,7 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react'
 import Sidebar from './Sidebar'
 
 const meta: Meta<typeof Sidebar> = {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-   * to learn how to generate automatic titles
-   */
-  title: 'Sidebar',
+  title: 'School Pulse/Sidebar',
   component: Sidebar,
   tags: ['autodocs']
 }
