@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
 import CalendarStyle from './Calendar.style'
+import { JsxElement } from 'typescript'
 
 type EventInfo = {
   timeText: string
@@ -22,18 +23,10 @@ type Event = {
 
 type CalendarProps = {
   events: Event[]
+  renderEventContent: (eventInfo: EventInfo) => JSX.Element
 }
 
-const Calendar = ({ events }: CalendarProps) => {
-  const renderEventContent = (eventInfo: EventInfo) => {
-    return (
-      <Box padding="5px">
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </Box>
-    )
-  }
-
+const Calendar = ({ events, renderEventContent }: CalendarProps) => {
   const handleSelectedDate = () => {}
   return (
     <>

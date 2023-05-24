@@ -21,6 +21,13 @@ type Event = {
   date?: string
 }
 
+type EventInfo = {
+  timeText: string
+  event: {
+    title: string
+  }
+}
+
 const events: Event[] = [
   { title: 'Force Leave', start: '2023-05-11', end: '2023-05-15' },
   { title: 'Accrued Leave', date: '2023-05-24' }
@@ -51,10 +58,19 @@ const SingleLeaveCaelendar = () => {
       </>
     )
   }
+
+  const renderEventContent = (eventInfo: EventInfo) => {
+    return (
+      <Box padding="5px">
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </Box>
+    )
+  }
   return (
     <Box>
       <ConfirmationModal />
-      <Calendar events={events} />
+      <Calendar events={events} renderEventContent={renderEventContent} />
     </Box>
   )
 }
