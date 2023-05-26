@@ -1,11 +1,9 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
 import CalendarStyle from './Calendar.style'
-import { JsxElement } from 'typescript'
 
 type EventInfo = {
   timeText: string
@@ -24,10 +22,17 @@ type Event = {
 type CalendarProps = {
   events: Event[]
   renderEventContent: (eventInfo: EventInfo) => JSX.Element
+  handleSelectedDate: (eventContent: EventContent) => void
 }
 
-const Calendar = ({ events, renderEventContent }: CalendarProps) => {
-  const handleSelectedDate = () => {}
+type EventContent = {
+  start: Date
+  end: Date
+  startStr: string
+  endStr: string
+}
+
+const Calendar = ({ events, renderEventContent, handleSelectedDate }: CalendarProps) => {
   return (
     <>
       <CalendarStyle>
