@@ -19,6 +19,8 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import Select from 'react-select'
+import format from 'date-fns/format'
+import subDays from 'date-fns/subDays'
 
 import Calendar from '~/components/Calendar'
 
@@ -47,9 +49,10 @@ const events: Event[] = [
   { title: 'Force Leave', start: '2023-05-11', end: '2023-05-15' },
   { title: 'Accrued Leave', date: '2023-05-24' }
 ]
+
 const SingleLeaveCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [content, setContent] = useState({})
+  const [content, setContent] = useState<EventContent | undefined>()
   const {
     register,
     handleSubmit,
@@ -59,6 +62,7 @@ const SingleLeaveCalendar = () => {
 
   const onSubmit = (data) => console.log(data)
 
+  // https://github.com/fullcalendar/fullcalendar/issues/3679#issuecomment-302919588
   const ConfirmationModal = () => {
     const options = [
       { label: 'Force Leave', value: 'force_leave' },
@@ -79,14 +83,14 @@ const SingleLeaveCalendar = () => {
                   <Box color="gray.500" fontSize="14px">
                     Start Date
                   </Box>
-                  <Box color="gray.600">January 1, 2023</Box>
+                  <Box color="gray.600">{content && format(content.start, 'MMMM d, yyyy')}</Box>
                 </Box>
                 <Spacer />
                 <Box>
                   <Box color="gray.500" fontSize="14px">
                     End Date
                   </Box>
-                  <Box color="gray.600">January 5, 2023</Box>
+                  <Box color="gray.600">{content && format(subDays(content.end, 1), 'MMMM d, yyyy')}</Box>
                 </Box>
               </Flex>
               <Divider margin="10px 0" />
