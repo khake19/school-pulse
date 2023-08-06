@@ -5,7 +5,7 @@ const TeachersStyle = {
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
     background-color: #ffff;
     border-radius: 20px;
-    width: 20%;
+    width: 100%;
     margin: 12px;
   `,
   header: css`
