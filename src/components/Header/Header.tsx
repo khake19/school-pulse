@@ -4,10 +4,11 @@ import { TriangleDownIcon } from '@chakra-ui/icons'
 import HeaderStyle from './Header.style'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
-type School = { id: string; name: string }
-type Schools = { schools: School[] }
+type TSchool = { id: string; name: string }
+type THeaderProps = { schools: TSchool[] }
 
-const Header = ({ schools }: Schools) => {
+const Header = (props: THeaderProps) => {
+  const { schools } = props;
   const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
   const [selectedSchoolName, setSelectedSchoolName] = useState('')
 
@@ -18,9 +19,9 @@ const Header = ({ schools }: Schools) => {
     } else {
       setSelectedSchoolName(school.name)
     }
-  }, [])
+  }, [school, schools, setSchool])
 
-  const handleClick = (selectedSchool: School) => {
+  const handleClick = (selectedSchool: TSchool) => {
     setSchool(selectedSchool)
     setSelectedSchoolName(selectedSchool.name)
   }
@@ -50,7 +51,8 @@ const Header = ({ schools }: Schools) => {
                 <MenuItem
                   key={id}
                   minH="48px"
-                  _focus={{ bg: '#87CBB9' }}
+                  _hover={{ bg: '#87CBB9' }}
+                  bg={selectedSchoolName === name ? '#87CBB9': ""}
                   onClick={() => handleClick({ id: id, name: name })}
                 >
                   <Text>{name}</Text>

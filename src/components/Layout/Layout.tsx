@@ -2,11 +2,12 @@ import { Flex } from '@chakra-ui/react'
 import Header from '~/components/Header'
 import Sidebar from '~/components/Sidebar'
 
-type Props = {
+type TLayoutProps = {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = (props: TLayoutProps) => {
+  const { children } = props
   const schools = [
     { id: '1', name: 'Aroroy East Central School' },
     { id: '2', name: 'Balawing Elementary School' },
