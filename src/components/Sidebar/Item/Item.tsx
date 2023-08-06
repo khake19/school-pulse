@@ -34,12 +34,13 @@ const SidebarItem = ({ icon, title, name = '', href }: ISidebarItemProps) => {
     >
       <Link p="15px 10px" _hover={{ textDecor: 'none' }} as={NextLink} href={name}>
         <Flex>
-          <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" color="red" />
+          <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" />
           <Text
             ml={5}
             display={isSidebarOpen ? 'none' : 'flex'}
             fontSize="14px"
-            color={active || isOpen ? '#87CBB9' : 'gray.500'}
+            fontWeight={500}
+            color={active || isOpen ? '#5B9A8B' : 'gray.500'}
           >
             {title}
           </Text>

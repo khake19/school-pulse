@@ -20,9 +20,9 @@ type Event = {
 }
 
 type CalendarProps = {
-  events: Event[]
-  renderEventContent: (eventInfo: EventInfo) => JSX.Element
-  handleSelectedDate: (eventContent: EventContent) => void
+  events?: Event[]
+  renderEventContent?: (eventInfo: EventInfo) => JSX.Element
+  handleSelectedDate?: (eventContent: EventContent) => void
 }
 
 type EventContent = {

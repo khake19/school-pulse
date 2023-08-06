@@ -60,7 +60,7 @@ const SingleLeaveCalendar = () => {
     formState: { errors }
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data: any) => console.log(data)
 
   // https://github.com/fullcalendar/fullcalendar/issues/3679#issuecomment-302919588
   const ConfirmationModal = () => {
