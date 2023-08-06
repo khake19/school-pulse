@@ -1,20 +1,25 @@
+'use client'
+
 import React from 'react'
 import { Flex, Text, Link, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
 import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
 
-interface SidebarItemProps {
-  icon: string
-  title: string
-  name?: string
-  active?: boolean
-  navSize: string
-  handleClick: (title: string) => void
+interface ISidebarItemProps {
+  icon: string;
+  title: string;
+  name?: string;
+  href?: string;
+  navSize: string;
 }
 
-const SidebarItem = ({ icon, title, name = '', active, navSize, handleClick }: SidebarItemProps) => {
+const SidebarItem = ({ icon, title, name = '', navSize, href }: ISidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const pathname = usePathname()
+  const active = pathname === href 
   const iconActive = isOpen || active ? '-active' : ''
+
   return (
     <Flex
       mt="20px"
@@ -23,7 +28,6 @@ const SidebarItem = ({ icon, title, name = '', active, navSize, handleClick }: S
       alignItems={navSize == 'small' ? 'center' : 'flex-start'}
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
-      onClick={() => handleClick(title)}
     >
       <Link p="15px 10px" _hover={{ textDecor: 'none' }} as={NextLink} href={name}>
         <Flex>

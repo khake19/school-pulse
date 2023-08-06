@@ -5,8 +5,7 @@ import SidebarStyle from './Sidebar.style'
 import Item from './Item'
 
 const Sidebar = () => {
-  const [navSize, changeNavSize] = useState('large')
-  const [activeItem, setActiveItem] = useState('Dashboard')
+  const [navSize, changeNavSize] = useState<string>('large')
 
   return (
     <Flex
@@ -35,30 +34,26 @@ const Sidebar = () => {
           navSize={navSize}
           icon="home"
           title="Dashboard"
-          handleClick={(title: string) => setActiveItem(title)}
-          active={activeItem === 'Dashboard'}
+          href=""
         />
         <Item
           navSize={navSize}
           icon="bar-chart-2"
           title="Report"
-          handleClick={(title: string) => setActiveItem(title)}
-          active={activeItem === 'Report'}
+          href="/reports"
         />
         <Item
           navSize={navSize}
           icon="users"
           title="Teachers"
           name="teachers"
-          handleClick={(title: string) => setActiveItem(title)}
-          active={activeItem === 'Teachers'}
+          href="/teachers"
         />
         <Item
           navSize={navSize}
           icon="calendar"
           title="Attendance"
-          handleClick={(title: string) => setActiveItem(title)}
-          active={activeItem === 'Attendance'}
+          href="/attendance"
         />
       </Flex>
       <Flex css={SidebarStyle.avatar} alignItems={navSize === 'small' ? 'center' : 'flex-start'}>
