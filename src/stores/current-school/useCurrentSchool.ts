@@ -11,7 +11,7 @@ type State = {
 
 const useCurrentSchool = create<
   State,
-  [['zustand/devtools', never], ['zustand/persist', {school: School}], ['zustand/immer', never]]
+  [['zustand/devtools', never], ['zustand/persist', { school: School }], ['zustand/immer', never]]
 >(
   devtools(
     persist(
@@ -21,7 +21,7 @@ const useCurrentSchool = create<
       })),
       {
         name: 'school-storage',
-        partialize: (state) => ({ school: state.school})
+        partialize: (state) => ({ school: state.school })
       }
     )
   )

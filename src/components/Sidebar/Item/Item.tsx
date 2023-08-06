@@ -6,18 +6,21 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import usePreference from '~/stores/navigation/usePreference'
+
 interface ISidebarItemProps {
-  icon: string;
-  title: string;
-  name?: string;
-  href?: string;
-  navSize: string;
+  icon: string
+  title: string
+  name?: string
+  href?: string
 }
 
-const SidebarItem = ({ icon, title, name = '', navSize, href }: ISidebarItemProps) => {
+const SidebarItem = ({ icon, title, name = '', href }: ISidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const pathname = usePathname()
-  const active = pathname === href 
+  const isSidebarOpen = usePreference((state) => state.isSidebarOpen)
+
+  const active = pathname === href
   const iconActive = isOpen || active ? '-active' : ''
 
   return (
@@ -25,7 +28,7 @@ const SidebarItem = ({ icon, title, name = '', navSize, href }: ISidebarItemProp
       mt="20px"
       flexDir="column"
       w="100%"
-      alignItems={navSize == 'small' ? 'center' : 'flex-start'}
+      alignItems={isSidebarOpen ? 'center' : 'flex-start'}
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
     >
@@ -34,7 +37,7 @@ const SidebarItem = ({ icon, title, name = '', navSize, href }: ISidebarItemProp
           <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" color="red" />
           <Text
             ml={5}
-            display={navSize == 'small' ? 'none' : 'flex'}
+            display={isSidebarOpen ? 'none' : 'flex'}
             fontSize="14px"
             color={active || isOpen ? '#87CBB9' : 'gray.500'}
           >

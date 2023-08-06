@@ -49,12 +49,11 @@ const Teachers = () => {
                   Callum Kerk Jazul
                 </Text>
                 <Text fontSize="xs" color="gray.500">
-                  Teacher 2 
+                  Teacher 2
                 </Text>
               </Box>
             </ListItem>
           </List>
-          
         </Box>
       </Box>
     </Layout>
