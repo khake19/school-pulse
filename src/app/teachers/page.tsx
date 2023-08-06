@@ -34,7 +34,27 @@ const Teachers = () => {
                 </Text>
               </Box>
             </ListItem>
+            <ListItem
+              display="flex"
+              alignItems="center"
+              height="60px"
+              padding="0 20px"
+              borderBottom="1px"
+              borderColor="gray.200"
+              _hover={{ bg: '#B9EDDD' }}
+            >
+              <Avatar size="md" src="https://robohash.org/callum" mr={2} />
+              <Box>
+                <Text fontSize="sm" fontWeight="600">
+                  Callum Kerk Jazul
+                </Text>
+                <Text fontSize="xs" color="gray.500">
+                  Teacher 2 
+                </Text>
+              </Box>
+            </ListItem>
           </List>
+          
         </Box>
       </Box>
     </Layout>
