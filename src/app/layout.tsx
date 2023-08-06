@@ -1,12 +1,6 @@
 'use client'
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
-
-const theme = extendTheme({
-  fonts: {
-    heading: `'Open Sans', sans-serif`,
-    body: `'Raleway', sans-serif`
-  }
-})
+import theme from '../theme'
+import { ChakraProvider } from '@chakra-ui/react'
 
 export default function RootLayout({
   // Layouts must accept a children prop.
