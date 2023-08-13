@@ -23,12 +23,14 @@ import format from 'date-fns/format'
 import subDays from 'date-fns/subDays'
 
 import Calendar from '~/components/Calendar'
+import Leaves from '~/constant/leave'
 
 type Event = {
   title: string
   start?: string
   end?: string
   date?: string
+  color: string
 }
 
 type EventInfo = {
@@ -46,18 +48,16 @@ type EventContent = {
 }
 
 const events: Event[] = [
-  { title: 'Force Leave', start: '2023-05-11', end: '2023-05-15' },
-  { title: 'Accrued Leave', date: '2023-05-24' }
+  { title: Leaves.force, start: '2023-08-24', end: '2023-08-29', color: '#FC8181' },
+  { title: Leaves.accrued, date: '2023-08-24', color: '#F6AD55' },
+  { title: Leaves.regular, date: '2023-08-23', color: '#68D391' }
 ]
 
 const SingleLeaveCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [content, setContent] = useState<EventContent | undefined>()
   const {
-    register,
     handleSubmit,
-    watch,
-    formState: { errors }
   } = useForm()
 
   const onSubmit = (data: any) => console.log(data)

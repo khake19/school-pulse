@@ -34,7 +34,7 @@ const Sidebar = () => {
         <Item icon="home" title="Dashboard" href="" />
         <Item icon="bar-chart-2" title="Report" href="/reports" />
         <Item icon="users" title="Teachers" name="teachers" href="/teachers" />
-        <Item icon="calendar" title="Attendance" href="/attendance" />
+        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" />
       </Flex>
       <Flex css={SidebarStyle.avatar} alignItems={isSidebarOpen ? 'center' : 'flex-start'}>
         <Divider display={isSidebarOpen ? 'none' : 'flex'} />

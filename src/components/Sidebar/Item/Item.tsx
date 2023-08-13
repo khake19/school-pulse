@@ -40,7 +40,7 @@ const SidebarItem = ({ icon, title, name = '', href }: ISidebarItemProps) => {
             display={isSidebarOpen ? 'none' : 'flex'}
             fontSize="14px"
             fontWeight={500}
-            color={active || isOpen ? '#5B9A8B' : 'gray.500'}
+            color={active || isOpen ? 'teal.500' : 'gray.500'}
           >
             {title}
           </Text>
