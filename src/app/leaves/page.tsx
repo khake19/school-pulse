@@ -6,19 +6,20 @@ import SingleLeaveCalendar from '~/components/SingleLeaveCalendar/SingleLeaveCal
 import LeaveStyle from './Leave.style'
 
 const Leaves = () => {
-    return  (<Layout>
-        <Box css={LeaveStyle.main}>
-            <Box css={LeaveStyle.header}>
-            <Heading as="h4" size="md">
-                Teachers
-            </Heading>
-            </Box>
-            <Box>
-                <SingleLeaveCalendar />
-            </Box>
+  return (
+    <Layout>
+      <Box css={LeaveStyle.main}>
+        <Box css={LeaveStyle.header}>
+          <Heading as="h4" size="md">
+            Teachers
+          </Heading>
         </Box>
+        <Box>
+          <SingleLeaveCalendar />
+        </Box>
+      </Box>
     </Layout>
-    )
+  )
 }
 
 export default Leaves

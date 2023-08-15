@@ -56,9 +56,7 @@ const events: Event[] = [
 const SingleLeaveCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [content, setContent] = useState<EventContent | undefined>()
-  const {
-    handleSubmit,
-  } = useForm()
+  const { handleSubmit } = useForm()
 
   const onSubmit = (data: any) => console.log(data)
 

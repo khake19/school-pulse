@@ -8,7 +8,7 @@ type TSchool = { id: string; name: string }
 type THeaderProps = { schools: TSchool[] }
 
 const Header = (props: THeaderProps) => {
-  const { schools } = props;
+  const { schools } = props
   const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
   const [selectedSchoolName, setSelectedSchoolName] = useState('')
 
@@ -52,7 +52,7 @@ const Header = (props: THeaderProps) => {
                   key={id}
                   minH="48px"
                   _hover={{ bg: '#87CBB9' }}
-                  bg={selectedSchoolName === name ? '#87CBB9': ""}
+                  bg={selectedSchoolName === name ? '#87CBB9' : ''}
                   onClick={() => handleClick({ id: id, name: name })}
                 >
                   <Text>{name}</Text>
