@@ -23,49 +23,33 @@ import format from 'date-fns/format'
 import subDays from 'date-fns/subDays'
 
 import Calendar from '~/components/Calendar'
-import Leaves from '~/constant/leave'
+import Leaves, { TLeaves } from '~/constant/leave'
+import { IEvent, IEventContent, IEventInfo } from '../Calendar/types/event'
 
-type Event = {
-  title: string
-  start?: string
-  end?: string
-  date?: string
-  color: string
-}
-
-type EventInfo = {
-  timeText: string
-  event: {
-    title: string
-  }
-}
-
-type EventContent = {
-  start: Date
-  end: Date
-  startStr: string
-  endStr: string
-}
-
-const events: Event[] = [
+const events: IEvent[] = [
   { title: Leaves.force, start: '2023-08-24', end: '2023-08-29', color: '#FC8181' },
   { title: Leaves.accrued, date: '2023-08-24', color: '#F6AD55' },
   { title: Leaves.regular, date: '2023-08-23', color: '#68D391' }
 ]
 
+type Options = {
+  label: (typeof Leaves)[TLeaves]
+  value: TLeaves
+}
+
 const SingleLeaveCalendar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [content, setContent] = useState<EventContent | undefined>()
+  const [content, setContent] = useState<IEventContent | undefined>()
   const { handleSubmit } = useForm()
 
   const onSubmit = (data: any) => console.log(data)
 
   // https://github.com/fullcalendar/fullcalendar/issues/3679#issuecomment-302919588
   const ConfirmationModal = () => {
-    const options = [
-      { label: 'Force Leave', value: 'force_leave' },
-      { label: 'Accrued Leave', value: 'accrued_leave' },
-      { label: 'Regular Leave', value: 'regular_leave' }
+    const options: Options[] = [
+      { label: Leaves.force, value: 'force' },
+      { label: Leaves.accrued, value: 'accrued' },
+      { label: Leaves.regular, value: 'regular' }
     ]
 
     return (
@@ -118,7 +102,7 @@ const SingleLeaveCalendar = () => {
     )
   }
 
-  const renderEventContent = (eventInfo: EventInfo) => {
+  const renderEventContent = (eventInfo: IEventInfo) => {
     return (
       <Box padding="5px" margin="2px">
         <b>{eventInfo.timeText}</b>
@@ -128,7 +112,7 @@ const SingleLeaveCalendar = () => {
   }
 
   // Issue: https://github.com/fullcalendar/fullcalendar/issues/7334
-  const handleSelectedDate = (eventContent: EventContent) => {
+  const handleSelectedDate = (eventContent: IEventContent) => {
     setContent(eventContent)
     onOpen()
   }
