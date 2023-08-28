@@ -1,38 +1,36 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import dayGridPlugin from '@fullcalendar/daygrid' 
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
 
 import CalendarStyle from './Calendar.style'
 
-type EventInfo = {
+interface IEventInfo {
   timeText: string
-  event: {
-    title: string
-  }
+  event: IEvent
 }
 
-type Event = {
+interface IEvent {
   title: string
   start?: string
   end?: string
   date?: string
 }
 
-type CalendarProps = {
+interface ICalendarProps {
   events?: Event[]
-  renderEventContent?: (eventInfo: EventInfo) => JSX.Element
-  handleSelectedDate?: (eventContent: EventContent) => void
+  renderEventContent: (eventInfo: IEventInfo) => JSX.Element
+  handleSelectedDate: (eventContent: IEventContent) => void
 }
 
-type EventContent = {
+interface IEventContent {
   start: Date
   end: Date
   startStr: string
   endStr: string
 }
 
-const Calendar = ({ events, renderEventContent, handleSelectedDate }: CalendarProps) => {
+const Calendar = ({ events, renderEventContent, handleSelectedDate }: ICalendarProps) => {
   return (
     <>
       <CalendarStyle>
