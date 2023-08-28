@@ -1,7 +1,7 @@
 'use client'
 
 import { Avatar, Box, Heading, List, ListItem, Text } from '@chakra-ui/react'
-import Layout from '~/components/Layout'
+
 import TeachersStyle from './Teacher.style'
 import useGetTeachers from './hooks/useGetTeachers'
 
@@ -9,7 +9,6 @@ const TeacherList = () => {
   const { teachers } = useGetTeachers()
 
   return (
-    <Layout>
       <Box css={TeachersStyle.main}>
         <Box css={TeachersStyle.header}>
           <Heading as="h4" size="md">
@@ -18,7 +17,7 @@ const TeacherList = () => {
         </Box>
         <Box>
           <List>
-            {teachers?.data.map((teacher) => {
+            {teachers?.map((teacher) => {
               return (
                 <ListItem
                   key={teacher.id}
@@ -45,7 +44,6 @@ const TeacherList = () => {
           </List>
         </Box>
       </Box>
-    </Layout>
   )
 }
 
