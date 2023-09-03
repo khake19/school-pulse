@@ -6,17 +6,20 @@ import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experime
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import theme from '../theme'
 import { ChakraProvider } from '@chakra-ui/react'
+import { CacheProvider } from '@chakra-ui/next-js'
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   const [client] = React.useState(new QueryClient())
 
   return (
-    <ChakraProvider theme={theme}>
-      <QueryClientProvider client={client}>
-        <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <CacheProvider>
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={client}>
+          <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ChakraProvider>
+    </CacheProvider>
   )
 }
 
