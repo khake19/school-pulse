@@ -5,7 +5,3 @@ export interface ITeacher extends IBase {
   first_name: string
   last_name: string
 }
-
-export interface ITeachers {
-  data: ITeacher[]
-}

@@ -1,9 +1,12 @@
 import { get } from '~/utils/http'
-import { ITeachers } from '../types/teachers'
+import { ITeacher } from '../types/teachers'
+import { IArrayResponse } from '~/types/http'
 
-const getTeachers = async () => {
-  const { data } = await get<ITeachers>('/users')
-  return data
+const all = async (): Promise<IArrayResponse<ITeacher>> => {
+  const result = await get<IArrayResponse<ITeacher>>('/users')
+  return result
 }
 
-export { getTeachers }
+const teacherService = { all }
+
+export default teacherService
