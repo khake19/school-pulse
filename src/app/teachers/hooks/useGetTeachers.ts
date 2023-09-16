@@ -2,14 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
 
 const useGetTeachers = () => {
-  const {
-    data,
-    status,
-    error,
-    isFetching
-  } = useQuery({
+  const { data, status, error, isFetching } = useQuery({
     queryKey: ['users'],
-    queryFn: teacherService.all,
+    queryFn: teacherService.all
   })
 
   return {

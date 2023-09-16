@@ -1,3 +1,3 @@
 export interface IArrayResponse<T> {
-    data: T[]
+  data: T[]
 }
