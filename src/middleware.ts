@@ -1,22 +1,19 @@
-import type { NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+
 
 export function middleware(request: NextRequest) {
   const hasToken = request.cookies.has('token')
 
-  if (request.nextUrl.pathname.startsWith('/api/login') && !hasToken) {
+  if (hasToken) {
     return NextResponse.next()
   }
-
-  if (!hasToken) {
-    return new NextResponse(JSON.stringify({ success: false, message: 'authentication failed' }), {
-      status: 401,
-      headers: { 'content-type': 'application/json' }
-    })
-  }
-  return NextResponse.next()
+  const loginUrl = new URL('/login', request.url)
+  loginUrl.searchParams.set('from', request.nextUrl.pathname)
+ 
+  return NextResponse.redirect(loginUrl)
 }
 
 export const config = {
-  matcher: '/api/:path*'
+  matcher: ['/((?!_next/static|favicon.ico|login).*)']
 }
