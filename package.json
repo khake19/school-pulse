@@ -26,6 +26,7 @@
     "@fullcalendar/daygrid": "^6.1.7",
     "@fullcalendar/interaction": "^6.1.7",
     "@fullcalendar/react": "^6.1.7",
+    "@hookform/resolvers": "^3.3.1",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "@tanstack/react-query-next-experimental": "^5.0.0-alpha.80",
@@ -40,10 +41,11 @@
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.9",
+    "react-hook-form": "^7.46.2",
     "react-select": "^5.7.3",
     "source-map-explorer": "^2.5.3",
     "typescript": "5.0.4",
+    "zod": "^3.22.2",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

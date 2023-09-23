@@ -1,5 +1,7 @@
+import LoginForm from './loginForm'
+
 const Login = () => {
-  return <div>I am login page</div>
+  return <LoginForm />
 }
 
 export default Login

@@ -3,7 +3,7 @@ const defaultOptions = {
 }
 
 const http = async <T>(endpoint: string, options: object): Promise<T> => {
-  const response = await fetch(endpoint, options)
+  const response = await fetch(process.env.NEXT_PUBLIC_CLIENT_URL + '/api' + endpoint, options)
   if (!response.ok) throw new Error(response.statusText)
   return (await response.json()) as Promise<T>
 }
