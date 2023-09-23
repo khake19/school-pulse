@@ -25,14 +25,14 @@ const SidebarItem = ({ icon, title, name = '', href }: ISidebarItemProps) => {
 
   return (
     <Flex
-      mt="20px"
+      mt="10px"
       flexDir="column"
       w="100%"
       alignItems={isSidebarOpen ? 'center' : 'flex-start'}
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
     >
-      <Link p="15px 10px" _hover={{ textDecor: 'none' }} as={NextLink} href={name}>
+      <Link p="8px 10px" _hover={{ textDecor: 'none' }} as={NextLink} href={name}>
         <Flex>
           <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" />
           <Text

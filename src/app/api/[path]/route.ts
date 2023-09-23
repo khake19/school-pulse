@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
+import { HttpResponse } from '~/constant/http'
 
 interface IPathProps {
   params: {
@@ -16,6 +17,9 @@ export async function GET(request: NextRequest, { params }: IPathProps) {
     }
   })
 
-  const response = NextResponse.json(data.json(), { status: data.status })
+  const response = NextResponse.json(await data.json(), { status: data.status })
+  if (data.status === HttpResponse.unauthorized) {
+    response.cookies.delete('token')
+  }
   return response
 }
