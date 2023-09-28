@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import schema, { TLoginSchema } from './schema/login'
+import useLogin from './hooks/useLogin'
 
 const LoginForm = () => {
   const {
@@ -27,20 +28,22 @@ const LoginForm = () => {
     resolver: zodResolver(schema)
   })
 
+  const { login } = useLogin()
+
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
-          <form onSubmit={handleSubmit((d) => console.log(d))}>
-            <FormControl id="username" isInvalid={!!errors.username} mb={4}>
-              <FormLabel>Username</FormLabel>
-              <Input {...register('username')} />
+          <form onSubmit={handleSubmit((data) => login(data))}>
+            <FormControl id="email" isInvalid={!!errors.email} mb={4}>
+              <FormLabel>Email</FormLabel>
+              <Input {...register('email')} />
               <FormErrorMessage>
-                {!errors.username ? (
-                  <FormHelperText>Enter the username you'd like to login.</FormHelperText>
+                {!errors.email ? (
+                  <FormHelperText>Enter the email you'd like to login.</FormHelperText>
                 ) : (
-                  <FormErrorMessage>Username is required.</FormErrorMessage>
+                  <FormErrorMessage>Email is required.</FormErrorMessage>
                 )}
               </FormErrorMessage>
             </FormControl>

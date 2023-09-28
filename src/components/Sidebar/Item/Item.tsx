@@ -15,7 +15,7 @@ interface ISidebarItemProps {
   href?: string
 }
 
-const SidebarItem = ({ icon, title, name = '', href }: ISidebarItemProps) => {
+const SidebarItem = ({ icon, title, name = '/', href }: ISidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const pathname = usePathname()
   const isSidebarOpen = usePreference((state) => state.isSidebarOpen)
