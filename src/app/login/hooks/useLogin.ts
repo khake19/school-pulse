@@ -1,9 +1,8 @@
 import { UseMutationOptions, useMutation } from '@tanstack/react-query'
-import Router from 'next/router'
+import { redirect } from 'next/navigation'
 
 import loginService from '../services/login.service'
 import { ILoginParams, ILoginResponse } from '../types/login'
-import { redirect } from 'next/navigation'
 
 const useLogin = (options?: UseMutationOptions<ILoginResponse, unknown, unknown>) => {
   const { mutateAsync, isLoading: isLoggingIn, isError, isSuccess } = useMutation(loginService.login, options)

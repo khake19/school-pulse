@@ -1,6 +1,9 @@
 'use client'
 
 import {
+  Alert,
+  AlertIcon,
+  AlertDescription,
   Button,
   Flex,
   FormControl,
@@ -28,12 +31,18 @@ const LoginForm = () => {
     resolver: zodResolver(schema)
   })
 
-  const { login } = useLogin()
+  const { login, isError } = useLogin()
 
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
+          {isError && (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertDescription>Incorrect email or password</AlertDescription>
+            </Alert>
+          )}
           <Heading fontSize={'2xl'}>Sign in to your account</Heading>
           <form onSubmit={handleSubmit((data) => login(data))}>
             <FormControl id="email" isInvalid={!!errors.email} mb={4}>
