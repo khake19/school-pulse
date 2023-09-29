@@ -3,7 +3,7 @@ import { ITeacher } from '../types/teachers'
 import { IArrayResponse } from '~/types/http'
 
 const all = async (): Promise<IArrayResponse<ITeacher>> => {
-  const result = await get<IArrayResponse<ITeacher>>('/users')
+  const result = await get<IArrayResponse<ITeacher>>('/api/users')
   return result
 }
 

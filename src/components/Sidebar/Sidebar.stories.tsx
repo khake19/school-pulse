@@ -19,7 +19,7 @@ const theme = extendTheme({
   }
 })
 
-export const Large: Story = {
+export const Base: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
       <Sidebar />
