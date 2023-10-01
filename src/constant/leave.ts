@@ -5,6 +5,6 @@ const Leaves = {
 } as const
 
 export type TLeavesKey = keyof typeof Leaves
-export type TLeavesValue = typeof Leaves[TLeavesKey]
+export type TLeavesValue = (typeof Leaves)[TLeavesKey]
 
 export default Leaves

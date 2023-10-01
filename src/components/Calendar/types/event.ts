@@ -1,4 +1,4 @@
-import { TLeavesValue } from "~/constant/leave"
+import { TLeavesValue } from '~/constant/leave'
 
 export interface IEventInfo {
   timeText: string

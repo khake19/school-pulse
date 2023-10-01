@@ -1,16 +1,20 @@
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
 import { ILoginParams, ILoginResponse } from '~/app/login/types/login'
 import { post } from '~/utils/http'
 
 export async function POST(request: Request) {
   const data = await request.json()
 
-  const result = await post<ILoginResponse, ILoginParams>(process.env.NEXT_PUBLIC_SERVER_URL + '/auth/sign_in', data)
-  const token = result.token
+  const { id, email, token } = await post<ILoginResponse, ILoginParams>(
+    process.env.NEXT_PUBLIC_SERVER_URL + '/auth/sign_in',
+    data
+  )
 
   const response = NextResponse.json(
     {
-      token: 'i am login'
+      id,
+      email
     },
     { status: 200 }
   )

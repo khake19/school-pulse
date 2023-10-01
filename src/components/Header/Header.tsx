@@ -5,7 +5,9 @@ import HeaderStyle from './Header.style'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import { ISchool } from '../Layout/types/schools'
 
-interface THeaderProps { schools?: ISchool[] }
+interface THeaderProps {
+  schools?: ISchool[]
+}
 
 const Header = (props: THeaderProps) => {
   const { schools = [] } = props
