@@ -23,7 +23,7 @@ import format from 'date-fns/format'
 import subDays from 'date-fns/subDays'
 
 import Calendar from '~/components/Calendar'
-import Leaves, { TLeaves } from '~/constant/leave'
+import Leaves, { TLeavesValue, TLeavesKey } from '~/constant/leave'
 import { IEvent, IEventContent, IEventInfo } from '../Calendar/types/event'
 
 const events: IEvent[] = [
@@ -33,8 +33,8 @@ const events: IEvent[] = [
 ]
 
 type Options = {
-  label: (typeof Leaves)[TLeaves]
-  value: TLeaves
+  label: TLeavesValue
+  value: TLeavesKey
 }
 
 const SingleLeaveCalendar = () => {
