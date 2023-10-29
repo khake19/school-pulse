@@ -18,7 +18,7 @@ const useLogin = (options?: UseMutationOptions<ILoginResponse, unknown, unknown>
     redirect('/')
   }
 
-  return { login, isLoggingIn, isError }
+  return { login, isLoggingIn, isError, isSuccess }
 }
 
 export default useLogin
