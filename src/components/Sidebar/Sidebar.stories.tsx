@@ -6,7 +6,8 @@ import Sidebar from './Sidebar'
 const meta: Meta<typeof Sidebar> = {
   title: 'School Pulse/Sidebar',
   component: Sidebar,
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  argTypes: { isSidebarOpen: { control: 'boolean' } }
 }
 
 export default meta
@@ -20,17 +21,9 @@ const theme = extendTheme({
 })
 
 export const Base: Story = {
-  render: () => (
+  render: (args) => (
     <ChakraProvider theme={theme}>
-      <Sidebar isSidebarOpen={false} setSideBarOpen={() => {}} />
-    </ChakraProvider>
-  )
-}
-
-export const Close: Story = {
-  render: () => (
-    <ChakraProvider theme={theme}>
-      <Sidebar isSidebarOpen={true} setSideBarOpen={() => {}} />
+      <Sidebar {...args} setSideBarOpen={() => {}} />
     </ChakraProvider>
   )
 }
