@@ -90,17 +90,13 @@ const columns = [
 export const Base: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
-      <Table defaultData = {defaultData} columns={columns} />
+      <Table defaultData={defaultData} columns={columns} />
     </ChakraProvider>
   )
 }
 
-export const Loading: Story = {
-}
+export const Loading: Story = {}
 
-export const Empty: Story = {
-}
+export const Empty: Story = {}
 
-export const Error: Story = {
-}
-
+export const Error: Story = {}

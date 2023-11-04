@@ -5,8 +5,8 @@ import SidebarStyle from './Sidebar.style'
 import Item from './Item'
 
 interface SidebarProps {
-  isSidebarOpen: boolean;
-  setSideBarOpen: (isSidebarOpen: boolean) => void;
+  isSidebarOpen: boolean
+  setSideBarOpen: (isSidebarOpen: boolean) => void
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -37,8 +37,8 @@ const Sidebar = (props: SidebarProps) => {
         </Flex>
         <Item icon="home" title="Dashboard" href="" isSidebarOpen={isSidebarOpen} />
         <Item icon="bar-chart-2" title="Report" href="/reports" isSidebarOpen={isSidebarOpen} />
-        <Item icon="users" title="Teachers" name="teachers" href="/teachers" isSidebarOpen={isSidebarOpen}/>
-        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" isSidebarOpen={isSidebarOpen}/>
+        <Item icon="users" title="Teachers" name="teachers" href="/teachers" isSidebarOpen={isSidebarOpen} />
+        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" isSidebarOpen={isSidebarOpen} />
       </Flex>
       <Flex css={SidebarStyle.avatar} alignItems={isSidebarOpen ? 'center' : 'flex-start'}>
         <Divider display={isSidebarOpen ? 'none' : 'flex'} />

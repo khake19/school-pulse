@@ -30,7 +30,7 @@ export const Base: Story = {
 export const Close: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
-      <Sidebar isSidebarOpen={true} setSideBarOpen={() => {}}/>
+      <Sidebar isSidebarOpen={true} setSideBarOpen={() => {}} />
     </ChakraProvider>
   )
 }
