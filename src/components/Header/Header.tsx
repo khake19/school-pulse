@@ -15,9 +15,9 @@ const Header = (props: THeaderProps) => {
   const [selectedSchoolName, setSelectedSchoolName] = useState('')
 
   useEffect(() => {
-    if (!school.id) {
+    if (!school?.id) {
       setSchool(schools[0])
-      setSelectedSchoolName(schools[0].name)
+      setSelectedSchoolName(schools[0]?.name)
     } else {
       setSelectedSchoolName(school.name)
     }
