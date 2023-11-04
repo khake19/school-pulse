@@ -26,13 +26,7 @@ const Sidebar = (props: SidebarProps) => {
             src="/icons/menu.svg"
             width={21}
             height={0}
-            onClick={() => {
-              if (isSidebarOpen) {
-                setSideBarOpen(false)
-              } else {
-                setSideBarOpen(true)
-              }
-            }}
+            onClick={() => setSideBarOpen(!isSidebarOpen)}
           />
         </Flex>
         <Item icon="home" title="Dashboard" href="" isSidebarOpen={isSidebarOpen} />
@@ -45,7 +39,7 @@ const Sidebar = (props: SidebarProps) => {
         <Flex mt={4} align="center">
           <Avatar size="sm" src="/profile-picture.jpeg" />
           <Flex flexDir="column" ml={4} display={isSidebarOpen ? 'none' : 'flex'}>
-            <Heading as="h3" size="sm" color="#577D86">
+            <Heading as="h3" size="sm" color="green.700">
               Kerk Jazul
             </Heading>
             <Text color="gray.400" fontSize="14px">

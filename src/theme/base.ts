@@ -1,4 +1,4 @@
-export const color = {
+export const colors = {
   // Official color palette
   primary: '', // coral
   secondary: '', // ocean
