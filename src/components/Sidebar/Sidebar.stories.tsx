@@ -22,7 +22,15 @@ const theme = extendTheme({
 export const Base: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
-      <Sidebar />
+      <Sidebar isSidebarOpen={false} setSideBarOpen={() => {}} />
+    </ChakraProvider>
+  )
+}
+
+export const Close: Story = {
+  render: () => (
+    <ChakraProvider theme={theme}>
+      <Sidebar isSidebarOpen={true} setSideBarOpen={() => {}}/>
     </ChakraProvider>
   )
 }

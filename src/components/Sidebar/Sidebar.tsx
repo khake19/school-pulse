@@ -3,10 +3,14 @@ import Image from 'next/image'
 import { Avatar, Divider, Heading, Flex, Text } from '@chakra-ui/react'
 import SidebarStyle from './Sidebar.style'
 import Item from './Item'
-import usePreference from '~/stores/navigation/usePreference'
 
-const Sidebar = () => {
-  const { isSidebarOpen, setSideBarOpen } = usePreference()
+interface SidebarProps {
+  isSidebarOpen: boolean;
+  setSideBarOpen: (isSidebarOpen: boolean) => void;
+}
+
+const Sidebar = (props: SidebarProps) => {
+  const { isSidebarOpen, setSideBarOpen } = props
 
   return (
     <Flex
@@ -31,10 +35,10 @@ const Sidebar = () => {
             }}
           />
         </Flex>
-        <Item icon="home" title="Dashboard" href="" />
-        <Item icon="bar-chart-2" title="Report" href="/reports" />
-        <Item icon="users" title="Teachers" name="teachers" href="/teachers" />
-        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" />
+        <Item icon="home" title="Dashboard" href="" isSidebarOpen={isSidebarOpen} />
+        <Item icon="bar-chart-2" title="Report" href="/reports" isSidebarOpen={isSidebarOpen} />
+        <Item icon="users" title="Teachers" name="teachers" href="/teachers" isSidebarOpen={isSidebarOpen}/>
+        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" isSidebarOpen={isSidebarOpen}/>
       </Flex>
       <Flex css={SidebarStyle.avatar} alignItems={isSidebarOpen ? 'center' : 'flex-start'}>
         <Divider display={isSidebarOpen ? 'none' : 'flex'} />

@@ -6,19 +6,17 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import usePreference from '~/stores/navigation/usePreference'
-
 interface ISidebarItemProps {
   icon: string
   title: string
   name?: string
   href?: string
+  isSidebarOpen: boolean
 }
 
-const SidebarItem = ({ icon, title, name = '/', href }: ISidebarItemProps) => {
+const SidebarItem = ({ icon, title, name = '/', href, isSidebarOpen }: ISidebarItemProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const pathname = usePathname()
-  const isSidebarOpen = usePreference((state) => state.isSidebarOpen)
 
   const active = pathname === href
   const iconActive = isOpen || active ? '-active' : ''
