@@ -1,15 +1,17 @@
 'use client'
 
-import { Avatar, Box, Heading, List, ListItem, Text } from '@chakra-ui/react'
+import { Avatar, Box, Heading, Text } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import useGetTeachers from './hooks/useGetTeachers'
 import Table from '~/components/Table/Table'
 import { createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 const TeacherList = () => {
-  const { teachers } = useGetTeachers()
+  const school = useCurrentSchool((state) => state.school)
+  const { teachers } = useGetTeachers(school.id)
 
   const columnHelper = createColumnHelper<ITeacher>()
   return (

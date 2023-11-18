@@ -4,14 +4,13 @@ import { HttpResponse } from '~/constant/http'
 
 interface IPathProps {
   params: {
-    path: string
+    path: string[]
   }
 }
 
 export async function GET(request: NextRequest, { params }: IPathProps) {
   const token = request.cookies.get('token')?.value
-
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/' + params.path, {
+  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/' + params.path.join('/'), {
     headers: {
       authorization: 'Bearer ' + token
     }
