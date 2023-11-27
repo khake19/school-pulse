@@ -8,6 +8,7 @@ import Table from '~/components/Table/Table'
 import { createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import {capitalizeFirstLetter} from '~/utils/string';
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
@@ -24,7 +25,7 @@ const TeacherList = () => {
       <Table
         defaultData={teachers ?? []}
         columns={[
-          columnHelper.accessor((row) => `${row.first_name ?? ''} ${row.last_name ?? ''}`, {
+          columnHelper.accessor((row) => `${capitalizeFirstLetter(row.first_name) ?? ''} ${capitalizeFirstLetter(row.last_name) ?? ''}`, {
             id: 'fullName',
             cell: (info) => (
               <Box
@@ -41,7 +42,7 @@ const TeacherList = () => {
                     {info.getValue()}
                   </Text>
                   <Text fontSize="xs" color="gray.500">
-                    Teacher 1
+                    {capitalizeFirstLetter(info.row.original.position)}
                   </Text>
                 </Box>
               </Box>
