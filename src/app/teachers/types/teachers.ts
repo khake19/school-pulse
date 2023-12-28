@@ -6,3 +6,9 @@ export interface ITeacher extends IBase {
   last_name: string
   position: string
 }
+
+export interface IPosition extends IBase {
+  name: string
+  salary_grade: string
+  type: string
+}

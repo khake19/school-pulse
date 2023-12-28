@@ -43,7 +43,7 @@ const LoginForm = () => {
               <AlertDescription>Incorrect email or password</AlertDescription>
             </Alert>
           )}
-          <Heading fontSize={'2xl'}>Sign in to your account</Heading>
+          <Heading fontSize="2xl">Sign in to your account</Heading>
           <form onSubmit={handleSubmit((data) => login(data))}>
             <FormControl id="email" isInvalid={!!errors.email} mb={4}>
               <FormLabel>Email</FormLabel>

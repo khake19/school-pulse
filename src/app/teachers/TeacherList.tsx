@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Box, Button, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Grid, GridItem, Heading, Text, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import useGetTeachers from './hooks/useGetTeachers'
@@ -9,10 +9,12 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import { capitalizeFirstLetter } from '~/utils/string'
+import TeacherFormModal from './TeacherFormModal'
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
   const { teachers } = useGetTeachers(school.id)
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   const columnHelper = createColumnHelper<ITeacher>()
   return (
@@ -25,10 +27,13 @@ const TeacherList = () => {
             </Heading>
           </GridItem>
           <GridItem colEnd={8}>
-            <Button colorScheme="teal">Create Teacher</Button>
+            <Button colorScheme="teal" onClick={onOpen}>
+              Create Teacher
+            </Button>
           </GridItem>
         </Grid>
       </Box>
+      <TeacherFormModal isOpen={isOpen} onClose={onClose} />
       <Table
         defaultData={teachers ?? []}
         columns={[

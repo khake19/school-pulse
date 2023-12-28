@@ -33,7 +33,7 @@ const Table = <T extends object>(props: TableProps<T>) => {
         {table.getRowModel().rows.map((row) => (
           <Tr key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <Td css={{ padding: 0 }} key={cell.id}>
+              <Td sx={{ padding: 0 }} key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Td>
             ))}

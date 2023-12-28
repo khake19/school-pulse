@@ -18,7 +18,6 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-//test here
 export const config = {
   matcher: ['/((?!_next/static|favicon.ico|api).*)']
 }

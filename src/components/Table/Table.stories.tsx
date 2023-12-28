@@ -28,6 +28,7 @@ type Person = {
   status: string
   progress: number
 }
+
 const defaultData: Person[] = [
   {
     firstName: 'tanner',
