@@ -13,9 +13,13 @@ export default meta
 type Story = StoryObj<typeof TeacherFormModal>
 
 export const Base: Story = {
-  render: () => (
+  args: {
+    isOpen: true,
+    onClose: () => undefined
+  },
+  render: (args) => (
     <Providers>
-      <TeacherFormModal isOpen={true} onClose={() => undefined}/>
+      <TeacherFormModal {...args} />
     </Providers>
   )
 }
