@@ -1,17 +1,25 @@
 import { FormErrorMessage, FormLabel, FormControl, Input, Button } from '@chakra-ui/react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, SubmitHandler } from 'react-hook-form'
 
-import { TTeacherSchema } from './schema/teachers'
+import { TTeacherFormInput } from './schema/teachers'
 import PositionSelect from './component/PositionSelect'
+import useCreateTeacher from './hooks/useCreateTask'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 const TeacherForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useFormContext<TTeacherSchema>()
+  } = useFormContext<TTeacherFormInput>()
+  
+  const school = useCurrentSchool((state) => state.school)
+  const { createTeacher } = useCreateTeacher()
 
-  const onSubmit = (data) => console.log('data', data)
+  const onSubmit: SubmitHandler<TTeacherFormInput> = (data) => {
+    console.log('data', data)
+    createTeacher(school.id, data)
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

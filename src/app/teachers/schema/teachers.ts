@@ -7,6 +7,6 @@ const teacherSchema = z.object({
   email: z.string().min(1, { message: 'Required' })
 })
 
-export type TTeacherSchema = z.infer<typeof teacherSchema>
+export type TTeacherFormInput = z.infer<typeof teacherSchema>
 
 export default teacherSchema
