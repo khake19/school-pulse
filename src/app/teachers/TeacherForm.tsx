@@ -12,7 +12,7 @@ const TeacherForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting }
   } = useFormContext<TTeacherFormInput>()
-  
+
   const school = useCurrentSchool((state) => state.school)
   const { createTeacher } = useCreateTeacher()
 
