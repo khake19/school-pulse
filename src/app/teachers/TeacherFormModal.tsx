@@ -1,10 +1,16 @@
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '@chakra-ui/react'
 
 import BasicModal from '~/components/Modal'
 
-import schema, { TTeacherSchema } from './schema/teachers'
+import useCreateTeacher from './hooks/useCreateTeacher'
+import useAlert from '~/hooks/useAlert'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+
+import schema, { TTeacherFormInput } from './schema/teachers'
 import TeacherForm from './TeacherForm'
+import TeachersMessage from './constant/teachers'
 
 interface ITeacherFormModalProps {
   isOpen: boolean
@@ -14,12 +20,33 @@ interface ITeacherFormModalProps {
 const TeacherFormModal = (props: ITeacherFormModalProps) => {
   const { isOpen, onClose } = props
 
-  const methods = useForm<TTeacherSchema>({
+  const methods = useForm<TTeacherFormInput>({
     resolver: zodResolver(schema)
   })
+  const school = useCurrentSchool((state) => state.school)
+  const alert = useAlert()
+
+  const { handleSubmit } = methods
+
+  const { createTeacher } = useCreateTeacher({
+    onSuccess: async () => {
+      alert.success(TeachersMessage.success)
+      onClose()
+    }
+  })
+
+  const handleCreateTeacher = () => {
+    handleSubmit((data) => createTeacher(school.id, data))()
+  }
+
+  const actions = (
+    <Button onClick={handleCreateTeacher} mt={4} colorScheme="teal" type="submit">
+      Submit
+    </Button>
+  )
 
   return (
-    <BasicModal title="Create Teacher" actions={undefined} isOpen={isOpen} onClose={onClose}>
+    <BasicModal title="Create Teacher" actions={actions} isOpen={isOpen} onClose={onClose}>
       <FormProvider {...methods}>
         <TeacherForm />
       </FormProvider>
