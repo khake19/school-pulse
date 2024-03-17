@@ -9,7 +9,7 @@ const all = async (schoolId: string): Promise<IArrayResponse<ITeacher>> => {
 }
 
 const create = async (schoolId: string, body: TTeacherFormInput) => {
-  const result = await post(`api/schools/${schoolId}/teachers`, body)
+  const result = await post(`api/schools/${schoolId}/teachers`, { teacher: body })
   return result
 }
 

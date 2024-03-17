@@ -1,4 +1,6 @@
 import Providers from '~/utils/provider'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -10,7 +12,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ToastContainer />
+          {children}
+        </Providers>
       </body>
     </html>
   )

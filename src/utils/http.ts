@@ -4,7 +4,9 @@ const defaultOptions = {
 
 const http = async <T>(endpoint: string, options: object = {}): Promise<T> => {
   const response: Response = await fetch(endpoint, { ...defaultOptions, ...options })
-  if (!response.ok) throw new Error(response.statusText)
+  if (!response.ok) {
+    throw new Error(JSON.stringify(await response.json()))
+  }
   return await response.json()
 }
 

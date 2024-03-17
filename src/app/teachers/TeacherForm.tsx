@@ -3,8 +3,10 @@ import { useFormContext, SubmitHandler } from 'react-hook-form'
 
 import { TTeacherFormInput } from './schema/teachers'
 import PositionSelect from './component/PositionSelect'
-import useCreateTeacher from './hooks/useCreateTask'
+import useCreateTeacher from './hooks/useCreateTeacher'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import useAlert from '~/hooks/useAlert'
+import TeachersMessage from './constant/teachers'
 
 const TeacherForm = () => {
   const {
@@ -14,10 +16,15 @@ const TeacherForm = () => {
   } = useFormContext<TTeacherFormInput>()
 
   const school = useCurrentSchool((state) => state.school)
-  const { createTeacher } = useCreateTeacher()
+  const alert = useAlert()
+
+  const { createTeacher } = useCreateTeacher({
+    onSuccess: async () => {
+      alert.success(TeachersMessage.success)
+    }
+  })
 
   const onSubmit: SubmitHandler<TTeacherFormInput> = (data) => {
-    console.log('data', data)
     createTeacher(school.id, data)
   }
 
