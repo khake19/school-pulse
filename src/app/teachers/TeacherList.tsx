@@ -42,14 +42,7 @@ const TeacherList = () => {
             {
               id: 'fullName',
               cell: (info) => (
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  height="60px"
-                  padding="0 20px"
-                  borderColor="gray.200"
-                  _hover={{ bg: '#B9EDDD' }}
-                >
+                <Box display="flex" alignItems="center">
                   <Avatar size="md" src="https://robohash.org/sam" mr={2} />
                   <Box>
                     <Text fontSize="sm" fontWeight="600">

@@ -1,6 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@chakra-ui/react'
+import { useQueryClient } from '@tanstack/react-query'
 
 import BasicModal from '~/components/Modal'
 
@@ -25,12 +26,15 @@ const TeacherFormModal = (props: ITeacherFormModalProps) => {
   })
   const school = useCurrentSchool((state) => state.school)
   const alert = useAlert()
+  const queryClient = useQueryClient()
 
-  const { handleSubmit } = methods
+  const { handleSubmit, reset } = methods
 
   const { createTeacher } = useCreateTeacher({
     onSuccess: async () => {
       alert.success(TeachersMessage.success)
+      queryClient.invalidateQueries(['users'])
+      reset()
       onClose()
     }
   })

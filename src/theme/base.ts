@@ -1,6 +1,6 @@
 export const colors = {
   // Official color palette
-  primary: '', // coral
+  primary: '#B9EDDD', // coral
   secondary: '', // ocean
   tertiary: '',
   ancillary: '',
