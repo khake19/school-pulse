@@ -1,9 +1,9 @@
 import { get } from '~/utils/http'
 import { IPosition } from '../types/teachers'
-import { IArrayResponse } from '~/types/http'
+import { IResponse } from '~/types/http'
 
-const all = async (): Promise<IArrayResponse<IPosition>> => {
-  const result = await get<IArrayResponse<IPosition>>(`/api/positions`)
+const all = async (): Promise<IResponse<IPosition[]>> => {
+  const result = await get<IResponse<IPosition[]>>(`/api/positions`)
   return result
 }
 

@@ -1,5 +1,6 @@
 const TeachersMessage = {
-  success: 'Teacher successfully created'
+  created: 'Teacher successfully created',
+  updated: 'Teacher successfully updated'
 } as const
 
 export default TeachersMessage

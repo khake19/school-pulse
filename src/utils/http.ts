@@ -24,4 +24,13 @@ const post = async <T, P extends object>(endpoint: string, params: P): Promise<T
   return await http(endpoint, options)
 }
 
-export { post, get }
+const put = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
+  const options = {
+    method: 'put',
+    body: JSON.stringify(params)
+  }
+
+  return await http(endpoint, options)
+}
+
+export { post, get, put }

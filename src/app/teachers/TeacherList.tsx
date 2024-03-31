@@ -1,5 +1,5 @@
 'use client'
-
+import { useState } from 'react'
 import { Avatar, Box, Button, Grid, GridItem, Heading, Text, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
@@ -15,6 +15,16 @@ const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
   const { teachers } = useGetTeachers(school.id)
   const { isOpen, onClose, onOpen } = useDisclosure()
+  const [teacherId, setTeacherId] = useState('')
+
+  const handleUpdate = (teacherId: string) => {
+    onOpen()
+    setTeacherId(teacherId)
+  }
+  const handleCreate = () => {
+    onOpen()
+    setTeacherId('')
+  }
 
   const columnHelper = createColumnHelper<ITeacher>()
   return (
@@ -27,13 +37,13 @@ const TeacherList = () => {
             </Heading>
           </GridItem>
           <GridItem colEnd={8}>
-            <Button colorScheme="teal" onClick={onOpen}>
+            <Button colorScheme="teal" onClick={handleCreate}>
               Create Teacher
             </Button>
           </GridItem>
         </Grid>
       </Box>
-      <TeacherFormModal isOpen={isOpen} onClose={onClose} />
+      <TeacherFormModal isOpen={isOpen} onClose={onClose} teacherId={teacherId} />
       <Table
         defaultData={teachers ?? []}
         columns={[
@@ -42,14 +52,14 @@ const TeacherList = () => {
             {
               id: 'fullName',
               cell: (info) => (
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" onClick={() => handleUpdate(info.row.original.id)}>
                   <Avatar size="md" src="https://robohash.org/sam" mr={2} />
                   <Box>
                     <Text fontSize="sm" fontWeight="600">
                       {info.getValue()}
                     </Text>
                     <Text fontSize="xs" color="gray.500">
-                      {capitalizeFirstLetter(info.row.original.position)}
+                      {capitalizeFirstLetter(info.row.original.position.name)}
                     </Text>
                   </Box>
                 </Box>

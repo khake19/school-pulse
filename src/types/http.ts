@@ -1,3 +1,3 @@
-export interface IArrayResponse<T> {
-  data: T[]
+export interface IResponse<T> {
+  data: T
 }
