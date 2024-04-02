@@ -1,6 +1,21 @@
 'use client'
 import { useState } from 'react'
-import { Avatar, Box, Button, Grid, GridItem, Heading, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+  useDisclosure
+} from '@chakra-ui/react'
+import Image from 'next/image'
 
 import TeachersStyle from './Teacher.style'
 import useGetTeachers from './hooks/useGetTeachers'
@@ -10,23 +25,72 @@ import { ITeacher } from './types/teachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import { capitalizeFirstLetter } from '~/utils/string'
 import TeacherFormModal from './TeacherFormModal'
+import AlertModal from '~/components/Alert/AlertModal/AlertModal'
+import TeacherDeleteModal from './TeacherDeleteModal'
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
   const { teachers } = useGetTeachers(school.id)
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+  const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
 
   const handleUpdate = (teacherId: string) => {
-    onOpen()
+    onFormModalOpen()
     setTeacherId(teacherId)
   }
   const handleCreate = () => {
-    onOpen()
+    onFormModalOpen()
     setTeacherId('')
   }
 
+  const handleDelete = () => {
+    onAlertModalOpen()
+  }
+
   const columnHelper = createColumnHelper<ITeacher>()
+
+  const columns = [
+    columnHelper.accessor(
+      (row) => `${capitalizeFirstLetter(row.first_name) ?? ''} ${capitalizeFirstLetter(row.last_name) ?? ''}`,
+      {
+        id: 'fullName',
+        cell: (info) => (
+          <Box display="flex" alignItems="center" onClick={() => handleUpdate(info.row.original.id)}>
+            <Avatar size="md" src="https://robohash.org/sam" mr={2} />
+            <Box>
+              <Text fontSize="sm" fontWeight="600">
+                {info.getValue()}
+              </Text>
+              <Text fontSize="xs" color="gray.500">
+                {capitalizeFirstLetter(info.row.original.position.name)}
+              </Text>
+            </Box>
+          </Box>
+        ),
+        header: () => '',
+        footer: (info) => info.column.id
+      }
+    ),
+    columnHelper.display({
+      id: 'actions',
+      cell: (props) => (
+        <Flex flexDir="column" alignItems="flex-end">
+          <Menu>
+            <MenuButton>
+              <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
+            </MenuButton>
+            <MenuList>
+              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={handleDelete}>
+                Delete
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+      )
+    })
+  ]
+
   return (
     <Box css={TeachersStyle.main}>
       <Box css={TeachersStyle.header}>
@@ -43,33 +107,9 @@ const TeacherList = () => {
           </GridItem>
         </Grid>
       </Box>
-      <TeacherFormModal isOpen={isOpen} onClose={onClose} teacherId={teacherId} />
-      <Table
-        defaultData={teachers ?? []}
-        columns={[
-          columnHelper.accessor(
-            (row) => `${capitalizeFirstLetter(row.first_name) ?? ''} ${capitalizeFirstLetter(row.last_name) ?? ''}`,
-            {
-              id: 'fullName',
-              cell: (info) => (
-                <Box display="flex" alignItems="center" onClick={() => handleUpdate(info.row.original.id)}>
-                  <Avatar size="md" src="https://robohash.org/sam" mr={2} />
-                  <Box>
-                    <Text fontSize="sm" fontWeight="600">
-                      {info.getValue()}
-                    </Text>
-                    <Text fontSize="xs" color="gray.500">
-                      {capitalizeFirstLetter(info.row.original.position.name)}
-                    </Text>
-                  </Box>
-                </Box>
-              ),
-              header: () => '',
-              footer: (info) => info.column.id
-            }
-          )
-        ]}
-      />
+      <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
+      <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} />
+      <Table defaultData={teachers ?? []} columns={columns} />
     </Box>
   )
 }

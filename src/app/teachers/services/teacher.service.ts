@@ -1,4 +1,4 @@
-import { get, post, put } from '~/utils/http'
+import { get, post, put, remove } from '~/utils/http'
 import { ITeacher } from '../types/teachers'
 import { IResponse } from '~/types/http'
 import { TTeacherFormInput } from '../schema/teachers'
@@ -23,6 +23,11 @@ const update = async (schoolId: string, teacherId: string, body: TTeacherFormInp
   return result
 }
 
-const teacherService = { all, create, getOne, update }
+const removeTeacher = async (schoolId: string, teacherId: string) => {
+  const result = await remove(`api/schools/${schoolId}/teachers/${teacherId}`)
+  return result
+}
+
+const teacherService = { all, create, getOne, update, removeTeacher }
 
 export default teacherService

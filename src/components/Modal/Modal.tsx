@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-interface IBasicModal {
+interface IBasicModalProps {
   title: string
   children: React.ReactNode
   actions: React.ReactNode
@@ -17,7 +17,7 @@ interface IBasicModal {
   onClose: () => void
 }
 
-const BasicModal = (props: IBasicModal) => {
+const BasicModal = (props: IBasicModalProps) => {
   const { children, title, actions, isOpen, onClose } = props
 
   return (

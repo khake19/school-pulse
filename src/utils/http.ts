@@ -33,4 +33,12 @@ const put = async <T, P extends object>(endpoint: string, params: P): Promise<T>
   return await http(endpoint, options)
 }
 
-export { post, get, put }
+const remove = async <T>(endpoint: string): Promise<T> => {
+  const options = {
+    method: 'delete'
+  }
+
+  return await http(endpoint, options)
+}
+
+export { post, get, put, remove }

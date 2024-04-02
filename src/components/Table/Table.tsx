@@ -32,9 +32,9 @@ const Table = <T extends object>(props: TableProps<T>) => {
         </Thead>
         <Tbody>
           {table.getRowModel().rows.map((row) => (
-            <Tr key={row.id}>
+            <Tr key={row.id} sx={{ _hover: { bg: 'primary' } }}>
               {row.getVisibleCells().map((cell) => (
-                <Td sx={{ padding: '5px 20px', _hover: { bg: 'primary' } }} key={cell.id}>
+                <Td key={cell.id} sx={{ padding: '5px 20px' }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Td>
               ))}
