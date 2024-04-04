@@ -21,14 +21,13 @@ const TeacherDeleteModal = (props: ITeacherDeleteModalProps) => {
 
   const { deleteTeacher } = useDeleteTeacher({
     onSuccess: async () => {
-      alert.success(TeachersMessage.created)
+      alert.success(TeachersMessage.deleted)
       queryClient.invalidateQueries(['users'])
       onClose()
     }
   })
 
   const handleDeleteTeacher = () => {
-    console.log('teacheradsfasdf', teacherId)
     deleteTeacher(school.id, teacherId)
   }
 
