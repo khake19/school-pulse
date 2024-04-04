@@ -27,6 +27,7 @@ import { capitalizeFirstLetter } from '~/utils/string'
 import TeacherFormModal from './TeacherFormModal'
 import AlertModal from '~/components/Alert/AlertModal/AlertModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
+import teacherSchema from './schema/teachers'
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
@@ -44,8 +45,9 @@ const TeacherList = () => {
     setTeacherId('')
   }
 
-  const handleDelete = () => {
+  const handleDelete = (teacherId: string) => {
     onAlertModalOpen()
+    setTeacherId(teacherId)
   }
 
   const columnHelper = createColumnHelper<ITeacher>()
@@ -81,7 +83,7 @@ const TeacherList = () => {
               <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
             </MenuButton>
             <MenuList>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={handleDelete}>
+              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
                 Delete
               </MenuItem>
             </MenuList>
@@ -108,7 +110,7 @@ const TeacherList = () => {
         </Grid>
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
-      <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} />
+      <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
       <Table defaultData={teachers ?? []} columns={columns} />
     </Box>
   )
