@@ -4,7 +4,7 @@ import positionService from '../services/position.service'
 const useGetPositions = () => {
   const { data, status, error, isFetching } = useQuery({
     queryKey: ['positions'],
-    queryFn: positionService.all
+    queryFn: positionService.allPositions
   })
 
   return {

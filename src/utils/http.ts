@@ -24,7 +24,7 @@ const post = async <T, P extends object>(endpoint: string, params: P): Promise<T
     body: JSON.stringify(params)
   }
 
-  const response =  await http(endpoint, options)
+  const response = await http(endpoint, options)
   return response.json()
 }
 
