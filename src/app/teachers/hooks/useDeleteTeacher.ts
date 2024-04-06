@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
-import { TTeacherFormInput } from '../schema/teachers'
 import useAlert from '~/hooks/useAlert'
 
 const useDeleteTeacher = (options?: object) => {

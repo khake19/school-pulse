@@ -42,7 +42,7 @@ const remove = async <T>(endpoint: string): Promise<T | null> => {
     method: 'delete'
   }
 
-  return await http<null>(endpoint, options)
+  return await http(endpoint, options)
 }
 
 export { post, get, put, remove }

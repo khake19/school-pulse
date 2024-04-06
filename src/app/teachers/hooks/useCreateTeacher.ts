@@ -5,7 +5,7 @@ import useAlert from '~/hooks/useAlert'
 
 const useCreateTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(
-    ({ id, data }: { id: string; data: TTeacherFormInput }) => teacherService.create(id, data),
+    ({ id, data }: { id: string; data: TTeacherFormInput }) => teacherService.createTeacher(id, data),
     options
   )
   const alert = useAlert()

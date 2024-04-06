@@ -3,7 +3,7 @@ import teacherService from '../services/teacher.service'
 
 const useGetTeacher = (schoolId: string, teacherId: string) => {
   const { data, status, error, isFetching } = useQuery(['users', schoolId, teacherId], () =>
-    teacherService.getOne(schoolId, teacherId)
+    teacherService.getTeacher(schoolId, teacherId)
   )
 
   return {

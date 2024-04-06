@@ -11,7 +11,7 @@ interface IUpdateTeacherProps {
 
 const useUpdateTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(
-    ({ schoolId, teacherId, data }: IUpdateTeacherProps) => teacherService.update(schoolId, teacherId, data),
+    ({ schoolId, teacherId, data }: IUpdateTeacherProps) => teacherService.updateTeacher(schoolId, teacherId, data),
     options
   )
   const alert = useAlert()
