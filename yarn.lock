@@ -7689,6 +7689,11 @@
   "resolved" "https://registry.npmjs.org/human-signals/-/human-signals-5.0.0.tgz"
   "version" "5.0.0"
 
+"husky@^9.0.11":
+  "integrity" "sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw=="
+  "resolved" "https://registry.npmjs.org/husky/-/husky-9.0.11.tgz"
+  "version" "9.0.11"
+
 "iconv-lite@0.4.24":
   "integrity" "sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA=="
   "resolved" "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz"
