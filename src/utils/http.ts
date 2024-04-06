@@ -4,45 +4,47 @@ const defaultOptions = {
   headers: { 'Content-Type': 'application/json' }
 }
 
-const http = async <T>(endpoint: string, options: object = {}): Promise<T | null> => {
+const http = async (endpoint: string, options: object = {}): Promise<Response> => {
   const response: Response = await fetch(endpoint, { ...defaultOptions, ...options })
   if (!response.ok) {
     throw new Error(JSON.stringify(await response.json()))
   }
 
-  if (response.status === HttpResponse.noContent) return null
-  return await response.json()
-}
-
-const get = async <T>(endpoint: string, options: object = {}): Promise<T | null> => {
-  const response = await http<T>(endpoint, options)
   return response
 }
 
-const post = async <T, P extends object>(endpoint: string, params: P): Promise<T | null> => {
+const get = async <T>(endpoint: string, options: object = {}): Promise<T> => {
+  const response = await http(endpoint, options)
+  return response.json()
+}
+
+const post = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
   const options = {
     method: 'post',
     body: JSON.stringify(params)
   }
 
-  return await http(endpoint, options)
+  const response =  await http(endpoint, options)
+  return response.json()
 }
 
-const put = async <T, P extends object>(endpoint: string, params: P): Promise<T | null> => {
+const put = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
   const options = {
     method: 'put',
     body: JSON.stringify(params)
   }
 
-  return await http(endpoint, options)
+  const response = await http(endpoint, options)
+  return response.json()
 }
 
-const remove = async <T>(endpoint: string): Promise<T | null> => {
+const remove = async <T>(endpoint: string) => {
   const options = {
     method: 'delete'
   }
 
-  return await http(endpoint, options)
+  await http(endpoint, options)
+  return null
 }
 
 export { post, get, put, remove }
