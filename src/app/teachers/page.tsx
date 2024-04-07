@@ -1,7 +1,14 @@
 import Layout from '~/components/Layout'
 import TeacherList from './TeacherList'
 
-const Teachers = () => {
+interface IParamsProps {
+  searchParams?: {
+    query?: string
+    page?: string
+  }
+}
+
+const Teachers = ({ searchParams }: IParamsProps) => {
   return (
     <Layout>
       <TeacherList />

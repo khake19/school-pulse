@@ -2,6 +2,8 @@ import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 
+import Pagination from '../Table/Pagination/Pagination'
+
 interface TableProps<T> {
   defaultData: T[]
   columns: ColumnDef<T, any>[]
@@ -42,6 +44,7 @@ const Table = <T extends object>(props: TableProps<T>) => {
           ))}
         </Tbody>
       </TTable>
+      <Pagination />
     </TableContainer>
   )
 }

@@ -25,9 +25,7 @@ import { ITeacher } from './types/teachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import { capitalizeFirstLetter } from '~/utils/string'
 import TeacherFormModal from './TeacherFormModal'
-import AlertModal from '~/components/Alert/AlertModal/AlertModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
-import teacherSchema from './schema/teachers'
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
