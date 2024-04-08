@@ -25,9 +25,12 @@ const StyledPagination = chakra(ReactPaginate, {
         display: 'inline-block'
       },
       '&:hover': {
-        backgroundColor: '#1d1f20',
-        border: 'solid 1px #1d1f20',
-        color: 'white'
+        a: {
+          borderRadius: '0.2rem',
+          backgroundColor: '#1d1f20',
+          border: 'solid 1px #1d1f20',
+          color: 'white'
+        }
       }
     },
     '.active': {
@@ -39,11 +42,18 @@ const StyledPagination = chakra(ReactPaginate, {
     }
   }
 })
-const Pagination = () => {
-  const [page, setPage] = useState(0)
-  const pageCount = 10
 
-  const handlePageClick = () => {}
+interface IPaginationProps {
+  pageCount: number
+  handlePage: (selected: number) => void
+}
+
+const Pagination = (props: IPaginationProps) => {
+  const { pageCount, handlePage } = props
+
+  const handlePageClick = (event: any) => {
+    handlePage(event.selected + 1)
+  }
 
   return (
     <StyledPagination

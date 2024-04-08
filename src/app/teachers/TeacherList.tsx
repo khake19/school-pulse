@@ -1,31 +1,13 @@
 'use client'
 import { useState } from 'react'
-import {
-  Avatar,
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-  useDisclosure
-} from '@chakra-ui/react'
-import Image from 'next/image'
+import { Box, Button, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import useGetTeachers from './hooks/useGetTeachers'
-import Table from '~/components/Table/Table'
-import { createColumnHelper } from '@tanstack/react-table'
-import { ITeacher } from './types/teachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
-import { capitalizeFirstLetter } from '~/utils/string'
 import TeacherFormModal from './TeacherFormModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
+import TeacherTable from './TeacherTable'
 
 const TeacherList = () => {
   const school = useCurrentSchool((state) => state.school)
@@ -48,49 +30,6 @@ const TeacherList = () => {
     setTeacherId(teacherId)
   }
 
-  const columnHelper = createColumnHelper<ITeacher>()
-
-  const columns = [
-    columnHelper.accessor(
-      (row) => `${capitalizeFirstLetter(row.first_name) ?? ''} ${capitalizeFirstLetter(row.last_name) ?? ''}`,
-      {
-        id: 'fullName',
-        cell: (info) => (
-          <Box display="flex" alignItems="center" onClick={() => handleUpdate(info.row.original.id)}>
-            <Avatar size="md" src="https://robohash.org/sam" mr={2} />
-            <Box>
-              <Text fontSize="sm" fontWeight="600">
-                {info.getValue()}
-              </Text>
-              <Text fontSize="xs" color="gray.500">
-                {capitalizeFirstLetter(info.row.original.position.name)}
-              </Text>
-            </Box>
-          </Box>
-        ),
-        header: () => '',
-        footer: (info) => info.column.id
-      }
-    ),
-    columnHelper.display({
-      id: 'actions',
-      cell: (props) => (
-        <Flex flexDir="column" alignItems="flex-end">
-          <Menu>
-            <MenuButton>
-              <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
-            </MenuButton>
-            <MenuList>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
-                Delete
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-      )
-    })
-  ]
-
   return (
     <Box css={TeachersStyle.main}>
       <Box css={TeachersStyle.header}>
@@ -109,7 +48,7 @@ const TeacherList = () => {
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <Table defaultData={teachers ?? []} columns={columns} />
+      <TeacherTable teachers={teachers ?? []} handleUpdate={handleUpdate} handleDelete={handleDelete} />
     </Box>
   )
 }

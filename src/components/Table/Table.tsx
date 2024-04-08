@@ -18,6 +18,10 @@ const Table = <T extends object>(props: TableProps<T>) => {
     getCoreRowModel: getCoreRowModel()
   })
 
+  const handlePage = (selected: string) => {
+    console.log('selected', selected)
+  }
+
   return (
     <TableContainer width="100%" minHeight={200} maxHeight="100vh">
       <TTable>
@@ -44,7 +48,7 @@ const Table = <T extends object>(props: TableProps<T>) => {
           ))}
         </Tbody>
       </TTable>
-      <Pagination />
+      <Pagination pageCount={10} handlePage={handlePage} />
     </TableContainer>
   )
 }
