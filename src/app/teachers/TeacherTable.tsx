@@ -6,15 +6,19 @@ import Table from '~/components/Table/Table'
 import { createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
+import useGetTeachers from './hooks/useGetTeachers'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 interface ITeacherTableProps {
   handleUpdate: (id: string) => void
   handleDelete: (id: string) => void
-  teachers: ITeacher[]
 }
 
 const TeacherTable = (props: ITeacherTableProps) => {
-  const { teachers, handleUpdate, handleDelete } = props
+  const { handleUpdate, handleDelete } = props
+
+  const school = useCurrentSchool((state) => state.school)
+  const { teachers } = useGetTeachers(school.id)
 
   const columnHelper = createColumnHelper<ITeacher>()
 

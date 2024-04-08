@@ -3,15 +3,11 @@ import { useState } from 'react'
 import { Box, Button, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
-import useGetTeachers from './hooks/useGetTeachers'
-import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import TeacherFormModal from './TeacherFormModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
 import TeacherTable from './TeacherTable'
 
 const TeacherList = () => {
-  const school = useCurrentSchool((state) => state.school)
-  const { teachers } = useGetTeachers(school.id)
   const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
   const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
@@ -48,7 +44,7 @@ const TeacherList = () => {
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <TeacherTable teachers={teachers ?? []} handleUpdate={handleUpdate} handleDelete={handleDelete} />
+      <TeacherTable handleUpdate={handleUpdate} handleDelete={handleDelete} />
     </Box>
   )
 }
