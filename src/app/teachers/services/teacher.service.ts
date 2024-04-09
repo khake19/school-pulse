@@ -1,10 +1,10 @@
 import { get, post, put, remove } from '~/utils/http'
 import { ITeacher } from '../types/teachers'
-import { IResponse, IQueryParams } from '~/types/http'
+import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
 import { TTeacherFormInput } from '../schema/teachers'
 
-const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IResponse<ITeacher[]> | null> => {
-  const result = await get<IResponse<ITeacher[]>>(
+const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacher> | null> => {
+  const result = await get<IArrayResponse<ITeacher>>(
     `/api/schools/${schoolId}/teachers?` + new URLSearchParams({ ...params })
   )
   return result

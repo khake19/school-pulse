@@ -6,7 +6,7 @@ import Pagination from '../Table/Pagination/Pagination'
 
 interface TableProps<T> {
   defaultData: T[]
-  columns: ColumnDef<T, any>[]
+  columns: ColumnDef<T, unknown>[]
   setCurrentPage: (id: number) => void
 }
 

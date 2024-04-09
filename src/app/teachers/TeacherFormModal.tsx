@@ -65,7 +65,7 @@ const TeacherFormModal = (props: ITeacherFormModalProps) => {
         position: teacher?.position?.id
       })
     }
-  }, [status, teacher])
+  }, [status, teacher, reset])
 
   const handleCreateTeacher = () => {
     handleSubmit((data) => createTeacher(school.id, data))()
