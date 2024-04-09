@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
-import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer, Divider } from '@chakra-ui/react'
+import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer, Divider, Flex, Box, Spacer } from '@chakra-ui/react'
 
 import Pagination from '../Table/Pagination/Pagination'
 
@@ -52,7 +52,13 @@ const Table = <T extends object>(props: TableProps<T>) => {
         </TTable>
       </TableContainer>
       <Divider />
-      <Pagination pageCount={10} handlePage={handlePage} />
+      <Flex>
+        <Box p="6">1 out of 20</Box>
+        <Spacer />
+        <Box p="4">
+          <Pagination pageCount={10} handlePage={handlePage} />
+        </Box>
+      </Flex>
     </>
   )
 }

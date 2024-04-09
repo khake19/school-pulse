@@ -9,7 +9,6 @@ const StyledPagination = chakra(ReactPaginate, {
     listStyle: 'none',
     outline: 'none',
     flexDirection: 'row',
-    padding: '0 5rem',
     li: {
       marginRight: '5px',
       a: {
