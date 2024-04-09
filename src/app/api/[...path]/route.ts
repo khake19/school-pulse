@@ -18,7 +18,11 @@ const handleResponse = async (data: Response) => {
 
 export async function GET(request: NextRequest, { params }: IPathProps) {
   const token = request.cookies.get('token')?.value
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/' + params.path.join('/'), {
+
+  const searchParams = request.nextUrl.searchParams
+  const queryParams = new URLSearchParams(searchParams)
+
+  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/' + params.path.join('/') + '?' + queryParams, {
     headers: {
       'Content-Type': 'application/json',
       authorization: 'Bearer ' + token
