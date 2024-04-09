@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 
@@ -12,14 +13,16 @@ interface TableProps<T> {
 const Table = <T extends object>(props: TableProps<T>) => {
   const { defaultData = [], columns = [] } = props
 
+  const [currentPage, setCurrentPage] = useState(1)
+
   const table = useReactTable({
     data: defaultData,
     columns,
     getCoreRowModel: getCoreRowModel()
   })
 
-  const handlePage = (selected: string) => {
-    console.log('selected', selected)
+  const handlePage = (selected: number) => {
+    setCurrentPage(selected)
   }
 
   return (
