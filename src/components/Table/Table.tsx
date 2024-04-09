@@ -8,12 +8,11 @@ import Pagination from '../Table/Pagination/Pagination'
 interface TableProps<T> {
   defaultData: T[]
   columns: ColumnDef<T, any>[]
+  setCurrentPage: (id: number) => void
 }
 
 const Table = <T extends object>(props: TableProps<T>) => {
-  const { defaultData = [], columns = [] } = props
-
-  const [currentPage, setCurrentPage] = useState(1)
+  const { defaultData = [], columns = [], setCurrentPage } = props
 
   const table = useReactTable({
     data: defaultData,

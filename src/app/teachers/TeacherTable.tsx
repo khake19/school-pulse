@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -16,9 +17,14 @@ interface ITeacherTableProps {
 
 const TeacherTable = (props: ITeacherTableProps) => {
   const { handleUpdate, handleDelete } = props
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const defaultParams = {
+    page: currentPage.toString()
+  }
 
   const school = useCurrentSchool((state) => state.school)
-  const { teachers } = useGetTeachers(school.id)
+  const { teachers } = useGetTeachers(school.id, defaultParams)
 
   const columnHelper = createColumnHelper<ITeacher>()
 
@@ -63,7 +69,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
     })
   ]
 
-  return <Table defaultData={teachers ?? []} columns={columns} />
+  return <Table defaultData={teachers ?? []} columns={columns} setCurrentPage={setCurrentPage} />
 }
 
 export default TeacherTable
