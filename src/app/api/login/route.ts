@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { ILoginParams, ILoginResponse } from '~/app/login/types/login'
+import { HttpResponse, HttpStatus } from '~/constant/http'
 import { post } from '~/utils/http'
 
 export async function POST(request: Request) {
@@ -16,7 +17,7 @@ export async function POST(request: Request) {
       id,
       email
     },
-    { status: 200 }
+    { status: HttpResponse.ok }
   )
 
   // Then set a cookie

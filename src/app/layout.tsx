@@ -1,6 +1,7 @@
 import Providers from '~/utils/provider'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { MockProvider } from '~/app/mockProvider'
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -14,7 +15,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <ToastContainer />
-          {children}
+          <MockProvider>{children}</MockProvider>
         </Providers>
       </body>
     </html>
