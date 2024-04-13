@@ -3,7 +3,7 @@
 import { Flex } from '@chakra-ui/react'
 import Header from '~/components/Header'
 import Sidebar from '~/components/Sidebar'
-import useGetSchools from './hooks/useSchool'
+import useGetSchools from '../../app/schools/hooks/useSchool'
 import usePreference from '~/stores/navigation/usePreference'
 
 interface ILayoutProps {

@@ -3,7 +3,7 @@ import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text }
 import { TriangleDownIcon } from '@chakra-ui/icons'
 import HeaderStyle from './Header.style'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
-import { ISchool } from '../Layout/types/schools'
+import { ISchool } from '../../app/schools/types/schools'
 
 interface THeaderProps {
   schools?: ISchool[]
