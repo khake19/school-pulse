@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
-import { createColumnHelper } from '@tanstack/react-table'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
@@ -28,7 +28,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
 
   const columnHelper = createColumnHelper<ITeacher>()
 
-  const columns = [
+  const columns: ColumnDef<ITeacher, string>[] = [
     columnHelper.accessor(
       (row) => `${capitalizeFirstLetter(row.first_name) ?? ''} ${capitalizeFirstLetter(row.last_name) ?? ''}`,
       {
@@ -69,7 +69,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
     })
   ]
 
-  return <TableWrapper defaultData={teachers ?? []} columns={columns} pagination={meta} />
+  return <TableWrapper data={teachers ?? []} pagination={meta} columns={columns} setCurrentPage={setCurrentPage} />
 }
 
 export default TeacherTable

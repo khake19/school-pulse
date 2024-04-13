@@ -7,17 +7,18 @@ import { ColumnDef } from '@tanstack/react-table'
 interface ITableWrapperProps<T> {
   data: T[]
   pagination: IPagination
-  columns: ColumnDef<T, any>[]
+  columns: ColumnDef<T, string>[]
+  setCurrentPage: (selected: number) => void
 }
 
 const TableWrapper = <T extends object>(props: ITableWrapperProps<T>) => {
-  const { data, pagination, columns } = props
+  const { data, pagination, columns = [], setCurrentPage } = props
 
   return (
     <>
       <Table defaultData={data} columns={columns} />
       <Divider />
-      <TablePagination {...pagination} />
+      <TablePagination {...pagination} setCurrentPage={setCurrentPage} />
     </>
   )
 }
