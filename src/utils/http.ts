@@ -1,5 +1,3 @@
-import { HttpResponse, HttpStatus } from '~/constant/http'
-
 const defaultOptions = {
   headers: { 'Content-Type': 'application/json' }
 }

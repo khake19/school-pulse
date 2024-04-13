@@ -3,12 +3,12 @@ import { useState } from 'react'
 import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
-import Table from '~/components/Table/Table'
 import { createColumnHelper } from '@tanstack/react-table'
 import { ITeacher } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import TableWrapper from '~/components/Table/TableWrapper'
 
 interface ITeacherTableProps {
   handleUpdate: (id: string) => void
@@ -24,7 +24,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
   }
 
   const school = useCurrentSchool((state) => state.school)
-  const { teachers } = useGetTeachers(school.id, defaultParams)
+  const { teachers, meta } = useGetTeachers(school.id, defaultParams)
 
   const columnHelper = createColumnHelper<ITeacher>()
 
@@ -69,7 +69,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
     })
   ]
 
-  return <Table defaultData={teachers ?? []} columns={columns} setCurrentPage={setCurrentPage} />
+  return <TableWrapper defaultData={teachers ?? []} columns={columns} pagination={meta} />
 }
 
 export default TeacherTable

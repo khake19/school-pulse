@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { chakra } from '@chakra-ui/react'
 
