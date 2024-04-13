@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
 import useAlert from '~/hooks/useAlert'
+import getErrorMessage from '~/utils/error'
 
 const useDeleteTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(
@@ -15,7 +16,7 @@ const useDeleteTeacher = (options?: object) => {
       await mutateAsync({ schoolId, teacherId })
     } catch (error) {
       if (error instanceof Error) {
-        alert.fetchError(error)
+        alert.fetchError(getErrorMessage(error))
       }
     }
   }

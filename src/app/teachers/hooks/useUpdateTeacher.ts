@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
 import { TTeacherFormInput } from '../schema/teachers'
 import useAlert from '~/hooks/useAlert'
+import getErrorMessage from '~/utils/error'
 
 interface IUpdateTeacherProps {
   schoolId: string
@@ -21,7 +22,7 @@ const useUpdateTeacher = (options?: object) => {
       await mutateAsync({ schoolId, teacherId, data })
     } catch (error) {
       if (error instanceof Error) {
-        alert.fetchError(error)
+        alert.fetchError(getErrorMessage(error))
       }
     }
   }

@@ -14,8 +14,8 @@ const useAlert = () => {
   const success = (element: ToastContent, options?: ToastOptions) => {
     toast.success(element, { ...defaultOptions, ...options })
   }
-  const fetchError = (error: Error, options?: ToastOptions) => {
-    const errorMessage = JSON.parse(error.message).errors
+  const fetchError = (error: string, options?: ToastOptions) => {
+    const errorMessage = JSON.parse(error).errors
     const fields = Object.keys(errorMessage)
 
     for (const field of fields) {
