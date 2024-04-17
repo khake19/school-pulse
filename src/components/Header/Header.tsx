@@ -29,7 +29,7 @@ const Header = (props: THeaderProps) => {
   }
   return (
     <Box css={HeaderStyle.header} zIndex={100} color="gray.600">
-      <Flex h={20} alignItems="center" justifyContent="space-between">
+      <Flex h="60px" alignItems="center" justifyContent="space-between">
         <Box>
           <Menu>
             <MenuButton

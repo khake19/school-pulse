@@ -4,12 +4,11 @@ const TeachersStyle = {
   main: css`
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
     background-color: #ffff;
-    border-radius: 20px;
     width: 100%;
-    margin: 12px;
+    margin: 1px 0;
   `,
   header: css`
-    margin: 20px 20px;
+    margin: 10px 20px;
   `,
   avatar: css`
     padding: 5%;

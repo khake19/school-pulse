@@ -13,12 +13,7 @@ const Sidebar = (props: SidebarProps) => {
   const { isSidebarOpen, setSideBarOpen } = props
 
   return (
-    <Flex
-      css={SidebarStyle.sidebar}
-      width={isSidebarOpen ? '75px' : '180px'}
-      borderRadius={isSidebarOpen ? '0 15px 15px 0' : '0 30px 30px 0'}
-      minHeight="450px"
-    >
+    <Flex css={SidebarStyle.sidebar} width={isSidebarOpen ? '75px' : '180px'} minHeight="450px">
       <Flex flexDir="column" alignItems={isSidebarOpen ? 'center' : 'flex-start'} as="nav">
         <Flex mt={5} flexDir="column" w="100%" alignItems={isSidebarOpen ? 'center' : 'flex-start'} p="15px 10px">
           <Image
@@ -31,8 +26,8 @@ const Sidebar = (props: SidebarProps) => {
         </Flex>
         <Item icon="home" title="Dashboard" href="" isSidebarOpen={isSidebarOpen} />
         <Item icon="bar-chart-2" title="Report" href="/reports" isSidebarOpen={isSidebarOpen} />
-        <Item icon="users" title="Teachers" name="teachers" href="/teachers" isSidebarOpen={isSidebarOpen} />
-        <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" isSidebarOpen={isSidebarOpen} />
+        <Item icon="users" title="Teachers" name="/teachers" href="/teachers" isSidebarOpen={isSidebarOpen} />
+        <Item icon="calendar" title="Leaves" name="l/eaves" href="/leaves" isSidebarOpen={isSidebarOpen} />
       </Flex>
       <Flex css={SidebarStyle.avatar} alignItems={isSidebarOpen ? 'center' : 'flex-start'}>
         <Divider display={isSidebarOpen ? 'none' : 'flex'} />
