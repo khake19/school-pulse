@@ -1,10 +1,18 @@
-import { Box, Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading } from '@chakra-ui/react'
 import TeachersStyle from '../Teacher.style'
+import Profile from './Profile'
 
 const TeacherDetails = () => {
+  //handle id validity
+
   return (
     <Box css={TeachersStyle.main}>
-      <Tabs position="relative">
+      <Box marginBottom={5}>
+        <Heading as="h4" size="md">
+          Teacher Details
+        </Heading>
+      </Box>
+      <Tabs position="relative" colorScheme="teal">
         <TabList>
           <Tab>Profile</Tab>
           <Tab>Documents</Tab>
@@ -12,7 +20,7 @@ const TeacherDetails = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>one!</p> 
+            <Profile />
           </TabPanel>
           <TabPanel>
             <p>twos!</p>

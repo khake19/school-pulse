@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Box, Button, Grid, GridItem, Heading, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Flex, Grid, GridItem, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import TeacherFormModal from './TeacherFormModal'
@@ -29,18 +29,17 @@ const TeacherList = () => {
   return (
     <Box css={TeachersStyle.main}>
       <Box css={TeachersStyle.header}>
-        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-          <GridItem colSpan={2}>
-            <Heading as="h4" size="md">
-              Teachers
-            </Heading>
-          </GridItem>
-          <GridItem colEnd={8}>
+        <Flex minWidth="max-content" alignItems="center" gap="2">
+          <Box p="2">
+            <Heading size="md"> Teachers</Heading>
+          </Box>
+          <Spacer />
+          <ButtonGroup gap="2">
             <Button colorScheme="teal" onClick={handleCreate}>
               Create Teacher
             </Button>
-          </GridItem>
-        </Grid>
+          </ButtonGroup>
+        </Flex>
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />

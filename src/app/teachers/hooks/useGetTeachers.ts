@@ -13,7 +13,9 @@ const useGetTeachers = (schoolId: string, params: IQueryParams) => {
     keepPreviousData: true
   })
 
+  console.log('data', data?.meta)
   const meta = metaConverter(data?.meta)
+  console.log('meta', meta)
   return {
     teachers: data?.data,
     meta,
