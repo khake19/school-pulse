@@ -1,10 +1,7 @@
 import Select, { Options } from 'react-select'
 import { useFormContext, Controller } from 'react-hook-form'
 
-interface Option {
-  label: string
-  value: string
-}
+import { Option } from '~/types/select'
 
 interface IBasicSelectProps {
   placeholder?: string

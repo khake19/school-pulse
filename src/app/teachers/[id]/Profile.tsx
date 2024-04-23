@@ -1,41 +1,29 @@
-import { FormErrorMessage, FormLabel, FormControl, Input, Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Text, Divider, Heading } from '@chakra-ui/react'
+import { FormProvider, useForm } from 'react-hook-form'
+import schema, { TTeacherFormInput } from '../schema/teachers'
+import { zodResolver } from '@hookform/resolvers/zod'
+import ProfileForm from './ProfileForm'
 
 const Profile = () => {
-  return (
-    <form>
-      <SimpleGrid columns={2} spacing={5} width={700}>
-        <Box flex="1">
-          <FormControl id="first_name" mb={4}>
-            <FormLabel htmlFor="first_name">
-              <Text as="b">First name</Text>
-            </FormLabel>
-            <Input />
-            <FormErrorMessage>{/* <FormErrorMessage>First name is required.</FormErrorMessage> */}</FormErrorMessage>
-          </FormControl>
+  const methods = useForm<TTeacherFormInput>({
+    resolver: zodResolver(schema)
+  })
 
-          <FormControl id="email" mb={4}>
-            <FormLabel htmlFor="email">
-              <Text as="b">Email</Text>
-            </FormLabel>
-            <Input />
-            <FormErrorMessage>
-              <FormErrorMessage>Email is required.</FormErrorMessage>
-            </FormErrorMessage>
-          </FormControl>
-        </Box>
-        <Box flex="2">
-          <FormControl id="last_name" mb={4}>
-            <FormLabel htmlFor="last_name">
-              <Text as="b">Last Name</Text>
-            </FormLabel>
-            <Input />
-            <FormErrorMessage>
-              <FormErrorMessage>Last name is required.</FormErrorMessage>
-            </FormErrorMessage>
-          </FormControl>
-        </Box>
-      </SimpleGrid>
-    </form>
+  return (
+    <Box>
+      <Box marginBottom={10}>
+        <Heading as="h4" size="md" pt={5}>
+          Profile
+        </Heading>
+        <Text pt={2} pb={5}>
+          Update your personal info and photo here.
+        </Text>
+        <Divider />
+      </Box>
+      <FormProvider {...methods}>
+        <ProfileForm />
+      </FormProvider>
+    </Box>
   )
 }
 

@@ -1,11 +1,7 @@
 import Select from '~/components/Select'
+import { Option } from '~/types/select'
 
 import useGetPositions from '../../hooks/useGetPositions'
-
-interface Option {
-  label: string
-  value: string
-}
 
 const PositionSelect = () => {
   const { positions = [] } = useGetPositions()
