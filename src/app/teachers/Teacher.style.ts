@@ -6,6 +6,7 @@ const TeachersStyle = {
     background-color: #ffff;
     width: 100%;
     margin: 1px 0;
+    padding: 30px;
   `,
   header: css`
     margin: 10px 20px;

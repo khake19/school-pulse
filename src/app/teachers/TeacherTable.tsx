@@ -17,7 +17,7 @@ interface ITeacherTableProps {
 }
 
 const TeacherTable = (props: ITeacherTableProps) => {
-  const { handleUpdate, handleDelete } = props
+  const { handleDelete } = props
   const [currentPage, setCurrentPage] = useState(1)
 
   const defaultParams = {
