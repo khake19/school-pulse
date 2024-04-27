@@ -11,7 +11,7 @@ export interface IResponseMeta {
 }
 
 export interface IArrayResponse<T> {
-  data: readonly T[]
+  data: T[]
   meta: IResponseMeta
 }
 

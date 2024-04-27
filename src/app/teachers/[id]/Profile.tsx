@@ -3,8 +3,12 @@ import { FormProvider, useForm } from 'react-hook-form'
 import schema, { TTeacherFormInput } from '../schema/teachers'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ProfileForm from './ProfileForm'
+import { TTeacher } from '../types/teachers'
 
-const Profile = () => {
+interface IProfileProps {
+  teacher: TTeacher
+}
+const Profile = (props: IProfileProps) => {
   const methods = useForm<TTeacherFormInput>({
     resolver: zodResolver(schema)
   })

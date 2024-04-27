@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Box, Button, ButtonGroup, Flex, Grid, GridItem, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Flex, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import TeacherFormModal from './TeacherFormModal'
@@ -12,10 +12,6 @@ const TeacherList = () => {
   const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
 
-  const handleUpdate = (teacherId: string) => {
-    onFormModalOpen()
-    setTeacherId(teacherId)
-  }
   const handleCreate = () => {
     onFormModalOpen()
     setTeacherId('')
@@ -41,9 +37,9 @@ const TeacherList = () => {
           </ButtonGroup>
         </Flex>
       </Box>
-      <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
+      <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <TeacherTable handleUpdate={handleUpdate} handleDelete={handleDelete} />
+      <TeacherTable handleDelete={handleDelete} />
     </Box>
   )
 }

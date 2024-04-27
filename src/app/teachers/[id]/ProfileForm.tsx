@@ -1,17 +1,9 @@
 import { FormErrorMessage, FormLabel, FormControl, Input, Box, SimpleGrid, Text } from '@chakra-ui/react'
 
-import PositionSelect from '../component/PositionSelect'
 import Select from '~/components/Select'
-import { Gender } from '~/constant/gender'
+import { Option } from '~/types/select'
 
-type Gender = 'male' | 'female'
-
-type Option = {
-  [G in Gender]: {
-    label: Capitalize<G>
-    value: G
-  }
-}[keyof typeof Gender]
+import PositionSelect from '../component/PositionSelect'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },

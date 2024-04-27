@@ -1,9 +1,11 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading } from '@chakra-ui/react'
+
 import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
+import useTeacherDetails from './hooks/useTeacherDetails'
 
 const TeacherDetails = () => {
-  //handle id validity
+  const { teacher } = useTeacherDetails()
 
   return (
     <Box css={TeachersStyle.main}>
@@ -20,7 +22,7 @@ const TeacherDetails = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Profile />
+            <Profile teacher={teacher} />
           </TabPanel>
           <TabPanel>
             <p>twos!</p>

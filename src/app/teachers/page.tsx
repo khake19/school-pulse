@@ -9,11 +9,7 @@ interface IParamsProps {
 }
 
 const Teachers = ({ searchParams }: IParamsProps) => {
-  return (
-    <Layout>
-      <TeacherList />
-    </Layout>
-  )
+  return <TeacherList />
 }
 
 export default Teachers
