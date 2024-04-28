@@ -4,6 +4,8 @@ import Select from '~/components/Select'
 import { Option } from '~/types/select'
 
 import PositionSelect from '../component/PositionSelect'
+import { useFormContext } from 'react-hook-form'
+import { TTeacherFormInput } from '../schema/teachers'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },
@@ -11,29 +13,31 @@ const options: Option[] = [
 ]
 
 const ProfileForm = () => {
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<TTeacherFormInput>()
+
   return (
     <form>
       <SimpleGrid columns={2} spacing={5} width={700}>
         <Box flex="1">
-          <FormControl id="first_name" mb={4}>
-            <FormLabel htmlFor="first_name">
-              <Text fontSize="sm">First name</Text>
-            </FormLabel>
-            <Input />
-            <FormErrorMessage></FormErrorMessage>
-          </FormControl>
-
-          <FormControl id="email" mb={4}>
-            <FormLabel htmlFor="email">
-              <Text fontSize="sm">Email</Text>
-            </FormLabel>
-            <Input />
+          <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>
+            <FormLabel htmlFor="firstName">First name</FormLabel>
+            <Input {...register('firstName')} />
             <FormErrorMessage>
-              <FormErrorMessage>Email is required.</FormErrorMessage>
+              {errors.firstName && <FormErrorMessage>First name is required.</FormErrorMessage>}
             </FormErrorMessage>
           </FormControl>
-          <FormControl id="employee_number" mb={4}>
-            <FormLabel htmlFor="employee_number">
+          <FormControl id="email" isInvalid={!!errors.email} mb={4}>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input {...register('email')} />
+            <FormErrorMessage>
+              {errors.email && <FormErrorMessage>Email is required.</FormErrorMessage>}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl id="employeeNumber" mb={4}>
+            <FormLabel htmlFor="employeeNumber">
               <Text fontSize="sm">Employee Number</Text>
             </FormLabel>
             <Input />
@@ -52,13 +56,11 @@ const ProfileForm = () => {
           </FormControl>
         </Box>
         <Box flex="2">
-          <FormControl id="last_name" mb={4}>
-            <FormLabel htmlFor="last_name">
-              <Text fontSize="sm">Last Name</Text>
-            </FormLabel>
-            <Input />
+          <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>
+            <FormLabel htmlFor="firstName">Last name</FormLabel>
+            <Input {...register('firstName')} />
             <FormErrorMessage>
-              <FormErrorMessage>Last name is required.</FormErrorMessage>
+              {errors.firstName && <FormErrorMessage>Last name is required.</FormErrorMessage>}
             </FormErrorMessage>
           </FormControl>
           <FormControl id="position" mb={4}>
@@ -66,6 +68,9 @@ const ProfileForm = () => {
               <Text fontSize="sm">Position</Text>
             </FormLabel>
             <PositionSelect />
+            <FormErrorMessage>
+              {errors.position && <FormErrorMessage>Position is required.</FormErrorMessage>}
+            </FormErrorMessage>
           </FormControl>
           <FormControl id="remarks" mb={4}>
             <FormLabel htmlFor="remarks">

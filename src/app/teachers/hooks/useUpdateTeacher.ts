@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
-import { TTeacherFormInput } from '../schema/teachers'
 import useAlert from '~/hooks/useAlert'
 import getErrorMessage from '~/utils/error'
+import { TTeacherFormInput } from '../types/teachers'
 
 interface IUpdateTeacherProps {
   schoolId: string

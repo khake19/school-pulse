@@ -1,5 +1,7 @@
 import { IBase } from '~/types/base'
-import { SnakeToCamelCaseNested } from '~/types/helpers'
+import { NestedTransform } from '~/types/helpers'
+import teacherSchema from '../schema/teachers'
+import { z } from 'zod'
 
 export interface ITeacherResponse extends IBase {
   email: string
@@ -14,4 +16,6 @@ export interface IPositionResponse extends IBase {
   type: string
 }
 
-export type TTeacher = SnakeToCamelCaseNested<ITeacherResponse>
+export type TTeacherFormInput = z.infer<typeof teacherSchema>
+export type TTeacherData = NestedTransform<ITeacherResponse, 'camel'>
+export type TTeacherPayload = NestedTransform<TTeacherFormInput, 'snake'>

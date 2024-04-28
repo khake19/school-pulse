@@ -29,29 +29,26 @@ const TeacherTable = (props: ITeacherTableProps) => {
   const columnHelper = createColumnHelper<TTeacher>()
 
   const columns: ColumnDef<TTeacher, string>[] = [
-    columnHelper.accessor(
-      (row) => `${capitalizeFirstLetter(row.firstName) ?? ''} ${capitalizeFirstLetter(row.lastName) ?? ''}`,
-      {
-        id: 'fullName',
-        cell: (info) => (
-          <Link href={`teachers/${info.row.original.id}`} key="teacher">
-            <Box display="flex" alignItems="center">
-              <Avatar size="md" src="https://robohash.org/sam" mr={2} />
-              <Box>
-                <Text fontSize="sm" fontWeight="600">
-                  {info.getValue()}
-                </Text>
-                <Text fontSize="xs" color="gray.500">
-                  {capitalizeFirstLetter(info.row.original.position.name)}
-                </Text>
-              </Box>
+    columnHelper.accessor((row) => `${capitalizeFirstLetter(row.firstName)} ${capitalizeFirstLetter(row.lastName)}`, {
+      id: 'fullName',
+      cell: (info) => (
+        <Link href={`teachers/${info.row.original.id}`} key="teacher">
+          <Box display="flex" alignItems="center">
+            <Avatar size="md" src="https://robohash.org/sam" mr={2} />
+            <Box>
+              <Text fontSize="sm" fontWeight="600">
+                {info.getValue()}
+              </Text>
+              <Text fontSize="xs" color="gray.500">
+                {capitalizeFirstLetter(info.row.original.position.name)}
+              </Text>
             </Box>
-          </Link>
-        ),
-        header: () => '',
-        footer: (info) => info.column.id
-      }
-    ),
+          </Box>
+        </Link>
+      ),
+      header: () => '',
+      footer: (info) => info.column.id
+    }),
     columnHelper.display({
       id: 'actions',
       cell: (props) => (

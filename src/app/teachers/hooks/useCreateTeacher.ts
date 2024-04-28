@@ -1,14 +1,15 @@
 import { useMutation } from '@tanstack/react-query'
 import teacherService from '../services/teacher.service'
-import { TTeacherFormInput } from '../schema/teachers'
 import useAlert from '~/hooks/useAlert'
 import getErrorMessage from '~/utils/error'
+import { TTeacherFormInput } from '../types/teachers'
+import { teacherFormToPayload } from '../helpers/converter'
 
 const useCreateTeacher = (options?: object) => {
-  const { mutateAsync } = useMutation(
-    ({ id, data }: { id: string; data: TTeacherFormInput }) => teacherService.createTeacher(id, data),
-    options
-  )
+  const { mutateAsync } = useMutation(({ id, data }: { id: string; data: TTeacherFormInput }) => {
+    const payload = teacherFormToPayload(data)
+    return teacherService.createTeacher(id, payload)
+  }, options)
   const alert = useAlert()
 
   const createTeacher = async (id: string, data: TTeacherFormInput) => {

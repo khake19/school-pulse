@@ -1,7 +1,6 @@
 import { get, post, put, remove } from '~/utils/http'
-import { ITeacherResponse } from '../types/teachers'
+import { ITeacherResponse, TTeacherFormInput, TTeacherPayload } from '../types/teachers'
 import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
-import { TTeacherFormInput } from '../schema/teachers'
 
 const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacherResponse>> => {
   const result = await get<IArrayResponse<ITeacherResponse>>(
@@ -10,7 +9,7 @@ const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IAr
   return result
 }
 
-const createTeacher = async (schoolId: string, body: TTeacherFormInput) => {
+const createTeacher = async (schoolId: string, body: TTeacherPayload) => {
   const result = await post(`api/schools/${schoolId}/teachers`, { teacher: body })
   return result
 }

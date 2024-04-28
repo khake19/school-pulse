@@ -12,18 +12,18 @@ const TeacherForm = () => {
 
   return (
     <form>
-      <FormControl id="first_name" isInvalid={!!errors.first_name} mb={4}>
-        <FormLabel htmlFor="first_name">First name</FormLabel>
-        <Input {...register('first_name')} />
+      <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>
+        <FormLabel htmlFor="firstName">First name</FormLabel>
+        <Input {...register('firstName')} />
         <FormErrorMessage>
-          {errors.first_name && <FormErrorMessage>First name is required.</FormErrorMessage>}
+          {errors.firstName && <FormErrorMessage>First name is required.</FormErrorMessage>}
         </FormErrorMessage>
       </FormControl>
-      <FormControl id="last_name" isInvalid={!!errors.last_name} mb={4}>
-        <FormLabel htmlFor="last_name">Last name</FormLabel>
-        <Input {...register('last_name')} />
+      <FormControl id="lastName" isInvalid={!!errors.lastName} mb={4}>
+        <FormLabel htmlFor="lastName">Last name</FormLabel>
+        <Input {...register('lastName')} />
         <FormErrorMessage>
-          {errors.last_name && <FormErrorMessage>Last name is required.</FormErrorMessage>}
+          {errors.lastName && <FormErrorMessage>Last name is required.</FormErrorMessage>}
         </FormErrorMessage>
       </FormControl>
       <FormControl id="email" isInvalid={!!errors.email} mb={4}>

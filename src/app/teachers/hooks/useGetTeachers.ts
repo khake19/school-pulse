@@ -3,7 +3,7 @@ import { IQueryParams } from '~/types/http'
 import metaConverter from '~/helpers/metaConverter'
 
 import teacherService from '../services/teacher.service'
-import { teacherDetailsConverter } from '../helpers/converter'
+import { teacherResponseToData } from '../helpers/converter'
 
 const useGetTeachers = (schoolId: string, params: IQueryParams) => {
   const { page } = params
@@ -14,7 +14,7 @@ const useGetTeachers = (schoolId: string, params: IQueryParams) => {
     keepPreviousData: true
   })
 
-  const teachers = data?.data ? data?.data.map((teacher) => teacherDetailsConverter(teacher)) : []
+  const teachers = data?.data ? data?.data.map((teacher) => teacherResponseToData(teacher)) : []
   const meta = metaConverter(data?.meta)
   return {
     teachers,
