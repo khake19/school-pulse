@@ -16,6 +16,7 @@ const useGetTeachers = (schoolId: string, params: IQueryParams) => {
 
   const teachers = data?.data ? data?.data.map((teacher) => teacherResponseToData(teacher)) : []
   const meta = metaConverter(data?.meta)
+
   return {
     teachers,
     meta,

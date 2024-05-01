@@ -4,7 +4,7 @@ import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@
 import Image from 'next/image'
 
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import { TTeacher } from './types/teachers'
+import { TTeacherData } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
@@ -26,9 +26,9 @@ const TeacherTable = (props: ITeacherTableProps) => {
   const school = useCurrentSchool((state) => state.school)
   const { teachers, meta } = useGetTeachers(school.id, defaultParams)
 
-  const columnHelper = createColumnHelper<TTeacher>()
+  const columnHelper = createColumnHelper<TTeacherData>()
 
-  const columns: ColumnDef<TTeacher, string>[] = [
+  const columns: ColumnDef<TTeacherData, string>[] = [
     columnHelper.accessor((row) => `${capitalizeFirstLetter(row.firstName)} ${capitalizeFirstLetter(row.lastName)}`, {
       id: 'fullName',
       cell: (info) => (

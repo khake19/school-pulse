@@ -1,8 +1,8 @@
 import { FormErrorMessage, FormLabel, FormControl, Input } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
-import { TTeacherFormInput } from './schema/teachers'
 import PositionSelect from './component/PositionSelect'
+import { TTeacherFormInput } from './types/teachers'
 
 const TeacherForm = () => {
   const {

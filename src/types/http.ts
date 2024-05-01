@@ -5,9 +5,9 @@ export interface IResponse<T> {
 export interface IResponseMeta {
   current_offset: number
   current_page: number
-  page_size: number
-  total_count: number
-  total_pages: number
+  pages: number
+  size: number
+  total: number
 }
 
 export interface IArrayResponse<T> {

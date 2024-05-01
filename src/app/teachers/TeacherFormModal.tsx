@@ -9,9 +9,10 @@ import useCreateTeacher from './hooks/useCreateTeacher'
 import useAlert from '~/hooks/useAlert'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
-import schema, { TTeacherFormInput } from './schema/teachers'
+import schema from './schema/teachers'
 import TeacherForm from './TeacherForm'
 import TeachersMessage from './constant/teachers'
+import { TTeacherFormInput } from './types/teachers'
 
 interface ITeacherFormModalProps {
   isOpen: boolean
