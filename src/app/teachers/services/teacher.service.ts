@@ -1,5 +1,5 @@
 import { get, post, put, remove } from '~/utils/http'
-import { ITeacherResponse, TTeacherFormInput, TTeacherPayload } from '../types/teachers'
+import { ITeacherResponse, TTeacherPayload } from '../types/teachers'
 import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
 
 const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacherResponse>> => {
@@ -10,7 +10,7 @@ const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IAr
 }
 
 const createTeacher = async (schoolId: string, body: TTeacherPayload) => {
-  const result = await post(`api/schools/${schoolId}/teachers`, { teacher: body })
+  const result = await post(`/api/schools/${schoolId}/teachers`, { teacher: body })
   return result
 }
 
@@ -19,13 +19,13 @@ const getTeacher = async (schoolId: string, teacherId: string): Promise<IRespons
   return result
 }
 
-const updateTeacher = async (schoolId: string, teacherId: string, body: TTeacherFormInput) => {
-  const result = await put(`api/schools/${schoolId}/teachers/${teacherId}`, { teacher: body })
+const updateTeacher = async (schoolId: string, teacherId: string, body: TTeacherPayload) => {
+  const result = await put(`/api/schools/${schoolId}/teachers/${teacherId}`, { teacher: body })
   return result
 }
 
 const removeTeacher = async (schoolId: string, teacherId: string) => {
-  const result = await remove(`api/schools/${schoolId}/teachers/${teacherId}`)
+  const result = await remove(`/api/schools/${schoolId}/teachers/${teacherId}`)
   return result
 }
 

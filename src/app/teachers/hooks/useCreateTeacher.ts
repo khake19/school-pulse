@@ -3,11 +3,11 @@ import teacherService from '../services/teacher.service'
 import useAlert from '~/hooks/useAlert'
 import getErrorMessage from '~/utils/error'
 import { TTeacherFormInput } from '../types/teachers'
-import { teacherFormToPayload } from '../helpers/converter'
+import { teacherCreateFormToPayload } from '../helpers/converter'
 
 const useCreateTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(({ id, data }: { id: string; data: TTeacherFormInput }) => {
-    const payload = teacherFormToPayload(data)
+    const payload = teacherCreateFormToPayload(data)
     return teacherService.createTeacher(id, payload)
   }, options)
   const alert = useAlert()

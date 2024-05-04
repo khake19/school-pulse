@@ -5,7 +5,7 @@ import { Option } from '~/types/select'
 
 import PositionSelect from '../component/PositionSelect'
 import { useFormContext } from 'react-hook-form'
-import { TTeacherFormInput } from '../schema/teachers'
+import { TTeacherFormInput } from '../types/teachers'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },
@@ -56,9 +56,9 @@ const ProfileForm = () => {
           </FormControl>
         </Box>
         <Box flex="2">
-          <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>
-            <FormLabel htmlFor="firstName">Last name</FormLabel>
-            <Input {...register('firstName')} />
+          <FormControl id="lastName" isInvalid={!!errors.lastName} mb={4}>
+            <FormLabel htmlFor="lastName">Last name</FormLabel>
+            <Input {...register('lastName')} />
             <FormErrorMessage>
               {errors.firstName && <FormErrorMessage>Last name is required.</FormErrorMessage>}
             </FormErrorMessage>

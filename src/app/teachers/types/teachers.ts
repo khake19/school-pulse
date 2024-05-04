@@ -8,6 +8,9 @@ export interface ITeacherResponse extends IBase {
   first_name: string
   last_name: string
   position: IPositionResponse
+  gender: string
+  employee_number: string
+  remarks: string
 }
 
 export interface IPositionResponse extends IBase {
