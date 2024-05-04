@@ -40,7 +40,7 @@ const ProfileForm = () => {
             <FormLabel htmlFor="employeeNumber">
               <Text fontSize="sm">Employee Number</Text>
             </FormLabel>
-            <Input />
+            <Input {...register('employeeNumber')} />
             <FormErrorMessage>
               <FormErrorMessage>Last name is required.</FormErrorMessage>
             </FormErrorMessage>
@@ -76,7 +76,7 @@ const ProfileForm = () => {
             <FormLabel htmlFor="remarks">
               <Text fontSize="sm">Remarks</Text>
             </FormLabel>
-            <Input />
+            <Input {...register('remarks')} />
             <FormErrorMessage>
               <FormErrorMessage>Remarks is required.</FormErrorMessage>
             </FormErrorMessage>
