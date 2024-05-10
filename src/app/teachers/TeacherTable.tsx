@@ -7,7 +7,6 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { TTeacherData } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
-import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import TableWrapper from '~/components/Table/TableWrapper'
 import Link from 'next/link'
 
@@ -23,8 +22,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
     page: currentPage.toString()
   }
 
-  const school = useCurrentSchool((state) => state.school)
-  const { teachers, meta } = useGetTeachers(school.id, defaultParams)
+  const { teachers, meta } = useGetTeachers(defaultParams)
 
   const columnHelper = createColumnHelper<TTeacherData>()
 
