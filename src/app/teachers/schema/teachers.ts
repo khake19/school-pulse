@@ -7,7 +7,8 @@ const teacherSchema = z.object({
   email: z.string().min(1, { message: 'Required' }),
   employeeNumber: z.string().optional(),
   remarks: z.string().optional(),
-  gender: z.string().optional()
+  gender: z.string().optional(),
+  avatar: z.any().optional()
 })
 
 export default teacherSchema

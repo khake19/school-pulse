@@ -1,10 +1,5 @@
-const defaultOptions = {
-  headers: { 'Content-Type': 'application/json' }
-}
-
 const http = async (endpoint: string, options: object = {}): Promise<Response> => {
-  const response: Response = await fetch(process.env.NEXT_PUBLIC_CLIENT_URL + endpoint, {
-    ...defaultOptions,
+  const response: Response = await fetch(endpoint, {
     ...options
   })
   if (!response.ok) {
@@ -29,10 +24,10 @@ const post = async <T, P extends object>(endpoint: string, params: P): Promise<T
   return response.json()
 }
 
-const put = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
+const put = async <T, P extends FormData>(endpoint: string, params: P): Promise<T> => {
   const options = {
     method: 'put',
-    body: JSON.stringify(params)
+    body: params
   }
 
   const response = await http(endpoint, options)
