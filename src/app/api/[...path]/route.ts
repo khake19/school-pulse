@@ -48,14 +48,14 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
 }
 
 export async function PUT(request: NextRequest, { params }: IPathProps) {
-  const body = await request.json()
+  const formData = await request.formData()
+  // const body = await request.json()
   const token = request.cookies.get('token')?.value
 
   const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/' + params.path.join('/'), {
     method: 'put',
-    body: JSON.stringify(body),
+    body: formData,
     headers: {
-      'Content-Type': 'application/json',
       authorization: 'Bearer ' + token
     }
   })
