@@ -24,7 +24,8 @@ const Profile = (props: IProfileProps) => {
     email: teacher.email,
     gender: teacher.gender,
     remarks: teacher.remarks,
-    employeeNumber: teacher.employeeNumber
+    employeeNumber: teacher.employeeNumber,
+    avatar: teacher.avatar
   }
 
   const methods = useForm<TTeacherFormInput>({

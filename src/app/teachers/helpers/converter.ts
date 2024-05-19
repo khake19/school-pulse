@@ -14,7 +14,8 @@ export const teacherResponseToData = (teacher: ITeacherResponse | undefined): TT
       name: teacher?.position?.name ?? '',
       salaryGrade: teacher?.position?.salary_grade ?? '',
       type: teacher?.position?.type ?? ''
-    }
+    },
+    avatar: teacher?.avatar ?? ''
   }
 }
 

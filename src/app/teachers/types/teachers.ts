@@ -11,6 +11,7 @@ export interface ITeacherResponse extends IBase {
   gender: string
   employee_number: string
   remarks: string
+  avatar: string
 }
 
 export interface IPositionResponse extends IBase {

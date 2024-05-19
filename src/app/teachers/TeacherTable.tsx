@@ -32,7 +32,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
       cell: (info) => (
         <Link href={`teachers/${info.row.original.id}`} key="teacher">
           <Box display="flex" alignItems="center">
-            <Avatar size="md" src="https://robohash.org/sam" mr={2} />
+            <Avatar size="md" src={process.env.NEXT_PUBLIC_SERVER_URL + info.row.original.avatar} mr={2} />
             <Box>
               <Text fontSize="sm" fontWeight="600">
                 {info.getValue()}
