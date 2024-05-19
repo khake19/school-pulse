@@ -48,7 +48,6 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
 }
 
 export async function PUT(request: NextRequest, { params }: IPathProps) {
-  console.log('requrest', request.headers)
   const formData = await request.formData()
   // const body = await request.json()
   const token = request.cookies.get('token')?.value
@@ -57,7 +56,6 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
     method: 'put',
     body: formData,
     headers: {
-      'Content-Type': 'multipart/form-data',
       authorization: 'Bearer ' + token
     }
   })

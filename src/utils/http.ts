@@ -24,7 +24,7 @@ const post = async <T, P extends object>(endpoint: string, params: P): Promise<T
   return response.json()
 }
 
-const put = async <T, P extends FormData>(endpoint: string, params: P): Promise<T> => {
+const put = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
   const options = {
     method: 'put',
     body: params
