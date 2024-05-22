@@ -20,9 +20,5 @@ const theme = extendTheme({
 })
 
 export const Base: Story = {
-  render: () => (
-    <ChakraProvider theme={theme}>
-      <Calendar />
-    </ChakraProvider>
-  )
+  render: () => <ChakraProvider theme={theme}>{/* <Calendar /> */}</ChakraProvider>
 }

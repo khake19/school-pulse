@@ -14,7 +14,8 @@ export const teacherResponseToData = (teacher: ITeacherResponse | undefined): TT
       name: teacher?.position?.name ?? '',
       salaryGrade: teacher?.position?.salary_grade ?? '',
       type: teacher?.position?.type ?? ''
-    }
+    },
+    avatar: teacher?.avatar ?? ''
   }
 }
 
@@ -27,14 +28,16 @@ export const teacherCreateFormToPayload = (form: TTeacherFormInput): TTeacherPay
   }
 }
 
-export const teacherUpdateFormToPayload = (form: TTeacherFormInput): TTeacherPayload => {
-  return {
-    email: form.email,
-    first_name: form.firstName,
-    last_name: form.lastName,
-    position: form.position,
-    gender: form.gender,
-    employee_number: form.employeeNumber,
-    remarks: form.remarks
-  }
+export const teacherUpdateFormToPayload = (form: TTeacherFormInput) => {
+  const data = new FormData()
+  data.append('techer[email]', form.email)
+  data.append('teacher[first_name]', form.firstName)
+  data.append('teacher[last_name]', form.lastName)
+  data.append('teacher[position]', form.position)
+  data.append('teacher[gender]', form.gender ?? '')
+  data.append('teacher[employee_number]', form.employeeNumber ?? '')
+  data.append('teacher[remarks]', form.remarks ?? '')
+  data.append('teacher[avatar]', form.avatar)
+
+  return data
 }

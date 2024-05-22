@@ -2,6 +2,7 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading } from '@chakra-u
 
 import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
+import Document from './Document'
 import useTeacherDetails from './hooks/useTeacherDetails'
 
 const TeacherDetails = () => {
@@ -25,7 +26,7 @@ const TeacherDetails = () => {
             <Profile teacher={teacher} />
           </TabPanel>
           <TabPanel>
-            <p>twos!</p>
+            <Document teacher={teacher} />
           </TabPanel>
           <TabPanel>
             <p>three!</p>

@@ -6,6 +6,7 @@ import { Option } from '~/types/select'
 import PositionSelect from '../component/PositionSelect'
 import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
+import ProfileAvatar from './ProfileAvatar'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },
@@ -20,6 +21,7 @@ const ProfileForm = () => {
 
   return (
     <form>
+      <ProfileAvatar />
       <SimpleGrid columns={2} spacing={5} width={700}>
         <Box flex="1">
           <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>

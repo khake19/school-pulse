@@ -26,7 +26,7 @@ export const Base: Story = {
   },
   render: (args) => (
     <ChakraProvider theme={theme}>
-      <Sidebar {...args} setSideBarOpen={() => {}} />
+      <Sidebar {...args} setSideBarOpen={() => undefined} />
     </ChakraProvider>
   )
 }
@@ -37,7 +37,7 @@ export const Close: Story = {
   },
   render: (args) => (
     <ChakraProvider theme={theme}>
-      <Sidebar {...args} setSideBarOpen={() => {}} />
+      <Sidebar {...args} setSideBarOpen={() => undefined} />
     </ChakraProvider>
   )
 }
