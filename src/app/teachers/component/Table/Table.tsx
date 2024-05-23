@@ -2,16 +2,19 @@ import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 
+import { useTableContext, useTableDispatchContext } from './TableProvider'
+
 interface TableProps<T> {
-  defaultData: T[]
   columns: ColumnDef<T, any>[]
 }
 
 const Table = <T extends object>(props: TableProps<T>) => {
-  const { defaultData = [], columns = [] } = props
+  const { columns = [] } = props
+
+  const context = useTableContext()
 
   const table = useReactTable({
-    data: defaultData,
+    data: context.data,
     columns,
     getCoreRowModel: getCoreRowModel()
   })

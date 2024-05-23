@@ -13,6 +13,7 @@ const useGetTeachers = (params: IQueryParams) => {
   const { data, status, error, isFetching } = useQuery({
     queryKey: ['users', page],
     queryFn: () => teacherService.allTeachers(school.id, params),
+    enabled: !!school?.id,
     keepPreviousData: true
   })
 
