@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
+// import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import '@fontsource/raleway/400.css'
 import '@fontsource/open-sans/700.css'
@@ -18,7 +18,7 @@ const Providers = ({ children }: React.PropsWithChildren) => {
     <CacheProvider>
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={client}>
-          <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+          {children}
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ChakraProvider>

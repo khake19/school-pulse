@@ -12,10 +12,10 @@ const ProfileAvatar = () => {
     formState: { errors }
   } = useFormContext<TTeacherFormInput>()
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [selectedImage, setSelectedImage] = useState()
+  const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined)
   const { ref, ...rest } = register('avatar')
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0])
       setValue('avatar', e.target.files[0])
