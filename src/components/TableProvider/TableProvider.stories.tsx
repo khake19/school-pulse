@@ -4,6 +4,7 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react'
 import Table from './Table'
 import TableProvider from './TableProvider'
 import { createColumnHelper } from '@tanstack/react-table'
+import TablePagination from './TablePagination'
 
 const meta: Meta<typeof Table> = {
   title: 'School Pulse/TableProvider',
@@ -92,8 +93,13 @@ const columns = [
 export const Base: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
-      <TableProvider defaultData={defaultData}>
+      <TableProvider
+        defaultData={defaultData}
+        pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}
+        setCurrentPage={() => 0}
+      >
         <Table columns={columns} />
+        <TablePagination />
       </TableProvider>
     </ChakraProvider>
   )

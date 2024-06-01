@@ -2,7 +2,7 @@ import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Table as TTable, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 
-import { useTableContext, useTableDispatchContext } from './TableProvider'
+import { useTableContext } from './TableProvider'
 
 interface TableProps<T> {
   columns: ColumnDef<T, any>[]

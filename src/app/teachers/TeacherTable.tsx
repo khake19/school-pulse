@@ -7,8 +7,8 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { TTeacherData } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
-import TableWrapper from '~/components/Table/TableWrapper'
 import Link from 'next/link'
+import TableWrapper from '~/components/Table/TableWrapper'
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void
@@ -18,9 +18,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
   const { handleDelete } = props
   const [currentPage, setCurrentPage] = useState(1)
 
-  const defaultParams = {
-    page: currentPage.toString()
-  }
+  const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
 
   const { teachers, meta } = useGetTeachers(defaultParams)
 
@@ -65,7 +63,6 @@ const TeacherTable = (props: ITeacherTableProps) => {
       )
     })
   ]
-
   return <TableWrapper data={teachers ?? []} pagination={meta} columns={columns} setCurrentPage={setCurrentPage} />
 }
 
