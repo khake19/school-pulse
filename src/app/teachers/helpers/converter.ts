@@ -30,7 +30,7 @@ export const teacherCreateFormToPayload = (form: TTeacherFormInput): TTeacherPay
 
 export const teacherUpdateFormToPayload = (form: TTeacherFormInput) => {
   const data = new FormData()
-  data.append('techer[email]', form.email)
+  data.append('teacher[email]', form.email)
   data.append('teacher[first_name]', form.firstName)
   data.append('teacher[last_name]', form.lastName)
   data.append('teacher[position]', form.position)

@@ -1,6 +1,7 @@
-import { Box, Text, Divider, Heading } from '@chakra-ui/react'
+import { Box, Text, Divider, Heading, Flex, Spacer, ButtonGroup, Button, useDisclosure } from '@chakra-ui/react'
 import { TTeacherData } from '../types/teachers'
 import DocumentTable from './DocumentTable'
+import DocumentFormModal from './DocumentFormModal'
 
 interface IDocumentProps {
   teacher: TTeacherData
@@ -38,16 +39,32 @@ const Document = (props: IDocumentProps) => {
     }
   ]
 
+  const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+
+  const handleCreate = () => {
+    onFormModalOpen()
+  }
+
   return (
     <Box>
       <Box marginBottom={10}>
-        <Heading as="h4" size="md" pt={5}>
-          Documents
-        </Heading>
-        <Text pt={2} pb={5}>
-          Upload your government files.
-        </Text>
-        <Divider />
+        <Flex minWidth="max-content" alignItems="center" gap="2">
+          <Box p="2">
+            <Heading as="h4" size="md" pt={5}>
+              Documents
+            </Heading>
+            <Text pt={2} pb={5}>
+              Upload your government files.
+            </Text>
+          </Box>
+          <Spacer />
+          <ButtonGroup gap="2">
+            <Button colorScheme="teal" onClick={handleCreate}>
+              Add Documents
+            </Button>
+          </ButtonGroup>
+        </Flex>
+        <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
         <DocumentTable documents={documents} />
       </Box>
     </Box>

@@ -33,28 +33,51 @@ export async function GET(request: NextRequest, { params }: IPathProps) {
 }
 
 export async function POST(request: NextRequest, { params }: IPathProps) {
-  const body = await request.json()
   const token = request.cookies.get('token')?.value
+  const contentType = request.headers.get('Content-Type')
 
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/'), {
+  const headers: HeadersInit = {
+    authorization: `Bearer ${token}`
+  }
+
+  let body: BodyInit
+
+  if (contentType?.includes('multipart/form-data')) {
+    body = await request.formData()
+  } else {
+    body = JSON.stringify(await request.json())
+    headers['Content-Type'] = 'application/json'
+  }
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/${params.path.join('/')}`, {
     method: 'post',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: 'Bearer ' + token
-    }
+    body,
+    headers
   })
-  return handleResponse(data)
+
+  return handleResponse(response)
 }
 
 export async function PUT(request: NextRequest, { params }: IPathProps) {
-  const formData = await request.formData()
-  // const body = await request.json()
   const token = request.cookies.get('token')?.value
+  const contentType = request.headers.get('Content-Type')
+
+  const headers: HeadersInit = {
+    authorization: `Bearer ${token}`
+  }
+
+  let body: BodyInit
+
+  if (contentType?.includes('multipart/form-data')) {
+    body = await request.formData()
+  } else {
+    body = JSON.stringify(await request.json())
+    headers['Content-Type'] = 'application/json'
+  }
 
   const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/'), {
     method: 'put',
-    body: formData,
+    body,
     headers: {
       authorization: 'Bearer ' + token
     }

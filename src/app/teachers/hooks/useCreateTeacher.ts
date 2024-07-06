@@ -10,8 +10,8 @@ const useCreateTeacher = (options?: object) => {
     const payload = teacherCreateFormToPayload(data)
     return teacherService.createTeacher(id, payload)
   }, options)
-  const alert = useAlert()
 
+  const alert = useAlert()
   const createTeacher = async (id: string, data: TTeacherFormInput) => {
     try {
       await mutateAsync({ id, data })

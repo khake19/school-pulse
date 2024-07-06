@@ -1,5 +1,5 @@
-import { Box, Center, Flex, Grid, GridItem, IconButton, Img, Progress, Text } from '@chakra-ui/react'
-import React, { useCallback, useMemo, useState } from 'react'
+import { Box, Center, Flex, Grid, GridItem, IconButton, Img, Text } from '@chakra-ui/react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import Image from 'next/image'
 
@@ -28,33 +28,37 @@ const acceptStyle = {
 }
 
 const rejectStyle = {
-  borderColor: '#ff1744'
+  borderColor: 'red'
 }
 
-interface StyledDropzoneProps {
-  onFilesChange?: (files: File[]) => void;
+interface IDropzoneProps {
+  onFilesChange?: (files: File[] | undefined) => void
+  value: FileWithPreview[]
 }
 
 interface FileWithPreview extends File {
-  preview: string;
+  preview: string
 }
 
-const StyledDropzone = (props: StyledDropzoneProps) => {
-  const [files, setFiles] = useState<FileWithPreview[]>([])
+const Dropzone = (props: IDropzoneProps) => {
+  const [files, setFiles] = useState<FileWithPreview[]>(props.value)
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const filesWithPreview = acceptedFiles.map((file) =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })
-    ) as FileWithPreview[];
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const filesWithPreview = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      ) as FileWithPreview[]
 
-    setFiles(filesWithPreview);
+      setFiles(filesWithPreview)
 
-    if (props.onFilesChange) {
-      props.onFilesChange(filesWithPreview);
-    }
-  }, [props]);
+      if (props.onFilesChange) {
+        props.onFilesChange(filesWithPreview)
+      }
+    },
+    [props]
+  )
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
     onDrop,
@@ -62,7 +66,7 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
       'image/jpeg': [],
       'image/png': []
     },
-    minSize:0,
+    minSize: 0,
     maxSize: 5242880,
     multiple: false
   })
@@ -75,6 +79,13 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
       ...(isDragReject ? rejectStyle : {})
     }),
     [isFocused, isDragAccept, isDragReject]
+  )
+
+  useEffect(
+    () => () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview))
+    },
+    [files]
   )
 
   return (
@@ -92,6 +103,7 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
           Maximum size: 5 MB
         </GridItem>
       </Grid>
+
       {files.map((file) => (
         <Box bgColor="gray.100" borderRadius={5} padding={2} position="relative" key={file.lastModified}>
           <Flex>
@@ -101,7 +113,7 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
             <Box>
               <Text fontSize={10}>{file.name}</Text>
               <Text fontSize={8} color="gray.500">
-              {(file.size / 100000).toFixed(2)} MB
+                {(file.size / 100000).toFixed(2)} MB
               </Text>
             </Box>
           </Flex>
@@ -113,8 +125,13 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
             icon={<Img src="/icons/x-circle.svg" width={18} />}
             aria-label="Close"
             onClick={() => {
-              setFiles((prevFiles) => prevFiles.filter((f) => f !== file));
-              URL.revokeObjectURL(file.preview);
+              setFiles((prevFiles) => prevFiles.filter((f) => f !== file))
+
+              URL.revokeObjectURL(file.preview)
+
+              if (props.onFilesChange) {
+                props.onFilesChange(undefined)
+              }
             }}
           />
         </Box>
@@ -123,4 +140,4 @@ const StyledDropzone = (props: StyledDropzoneProps) => {
   )
 }
 
-export default StyledDropzone
+export default Dropzone

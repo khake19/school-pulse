@@ -32,7 +32,7 @@ const TeacherList = () => {
           <Spacer />
           <ButtonGroup gap="2">
             <Button colorScheme="teal" onClick={handleCreate}>
-              Create Teacher
+              Add Teacher
             </Button>
           </ButtonGroup>
         </Flex>

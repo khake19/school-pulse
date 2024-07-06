@@ -13,13 +13,9 @@ import schema from './schema/teachers'
 import TeacherForm from './TeacherForm'
 import TeachersMessage from './constant/teachers'
 import { TTeacherFormInput } from './types/teachers'
+import IFormModal from '~/types/formModal'
 
-interface ITeacherFormModalProps {
-  isOpen: boolean
-  onClose: () => void
-}
-
-const TeacherFormModal = (props: ITeacherFormModalProps) => {
+const TeacherFormModal = (props: IFormModal) => {
   const { isOpen, onClose } = props
 
   const school = useCurrentSchool((state) => state.school)
