@@ -1,11 +1,9 @@
-import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
 import { useFormContext, Controller } from 'react-hook-form'
 import FileUpload from '~/components/FileUpload/FileUpload'
 
 const DocumentForm = () => {
   const {
     control,
-    register,
     formState: { errors }
   } = useFormContext()
   return (

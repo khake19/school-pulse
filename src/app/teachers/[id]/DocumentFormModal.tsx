@@ -10,8 +10,12 @@ import DocumentsMessage from './constant/documents'
 import useAlert from '~/hooks/useAlert'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
-const DocumentFormModal = (props: IFormModal) => {
-  const { isOpen, onClose } = props
+interface IDocumentFormModalProps extends IFormModal {
+  teacherId: string
+}
+
+const DocumentFormModal = (props: IDocumentFormModalProps) => {
+  const { isOpen, onClose, teacherId } = props
   const school = useCurrentSchool((state) => state.school)
 
   const methods = useForm<TDocumentFormInput>({
@@ -30,7 +34,7 @@ const DocumentFormModal = (props: IFormModal) => {
   })
 
   const handleCreateDocument = () => {
-    handleSubmit((data) => createDocument(school.id, data))()
+    handleSubmit((data) => createDocument(school.id, teacherId, data))()
     reset()
   }
 

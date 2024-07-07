@@ -64,7 +64,7 @@ const Document = (props: IDocumentProps) => {
             </Button>
           </ButtonGroup>
         </Flex>
-        <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
+        <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacher.id} />
         <DocumentTable documents={documents} />
       </Box>
     </Box>
