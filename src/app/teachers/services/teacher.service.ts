@@ -10,7 +10,7 @@ const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IAr
 }
 
 const createTeacher = async (schoolId: string, body: TTeacherPayload) => {
-  const result = await post(`/api/schools/${schoolId}/teachers`, { teacher: body })
+  const result = await post(`/api/schools/${schoolId}/teachers`, JSON.stringify({ teacher: body }))
   return result
 }
 

@@ -41,7 +41,6 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
   }
 
   let body: BodyInit
-
   if (contentType?.includes('multipart/form-data')) {
     body = await request.formData()
   } else {
@@ -87,6 +86,7 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
 
 export async function DELETE(request: NextRequest, { params }: IPathProps) {
   const token = request.cookies.get('token')?.value
+
   const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/'), {
     method: 'delete',
     headers: {

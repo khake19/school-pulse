@@ -1,8 +1,8 @@
 import { post } from '~/utils/http'
 import { ILoginParams, ILoginResponse } from '../types/login'
 
-const login = async (params: ILoginParams): Promise<ILoginResponse> => {
-  const result = await post<ILoginResponse, ILoginParams>('/api/login', params)
+const login = async (params: ILoginParams) => {
+  const result = await post('/api/login', JSON.stringify(params))
   return result
 }
 
