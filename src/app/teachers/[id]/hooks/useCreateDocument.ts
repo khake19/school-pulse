@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { TDocumentFormInput } from '../schema/documents'
-import documentService from '../services/document.server'
+import documentService from '../services/document.service'
 import useAlert from '~/hooks/useAlert'
 import getErrorMessage from '~/utils/error'
 import { documentCreateFormToPayload } from '../helpers/converter'

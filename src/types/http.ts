@@ -2,20 +2,18 @@ export interface IResponse<T> {
   data: T
 }
 
-export interface IResponseMeta {
-  current_offset: number
-  current_page: number
-  pages: number
-  size: number
-  total: number
-}
+type MetaDataFieldsResponse = 'current_offset' | 'current_page' | 'pages' | 'size' | 'total'
+export type TResponseMeta = Record<MetaDataFieldsResponse, number>
 
 export interface IArrayResponse<T> {
   data: T[]
-  meta: IResponseMeta
+  meta: TResponseMeta
 }
 
 export interface IQueryParams {
   page?: string
   pageSize?: string
 }
+
+type MetaDataFields = 'offset' | 'page' | 'size' | 'total' | 'pages'
+export type TMetaData = Record<MetaDataFields, number>

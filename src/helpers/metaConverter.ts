@@ -1,6 +1,6 @@
-import { IResponseMeta } from '~/types/http'
+import { TResponseMeta } from '~/types/http'
 
-const metaConverter = (meta: IResponseMeta | undefined) => {
+const metaConverter = (meta: TResponseMeta | undefined) => {
   return {
     offset: meta?.current_offset ?? 0,
     page: meta?.current_page ?? 0,

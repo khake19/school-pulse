@@ -3,10 +3,10 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading } from '@chakra-u
 import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
 import Document from './Document'
-import useTeacherDetails from './hooks/useTeacherDetails'
+import useGetTeacherDetails from './hooks/useGetTeacherDetails'
 
 const TeacherDetails = () => {
-  const { teacher } = useTeacherDetails()
+  const { teacher } = useGetTeacherDetails()
 
   return (
     <Box css={TeachersStyle.main}>

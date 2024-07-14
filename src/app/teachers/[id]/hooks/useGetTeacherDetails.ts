@@ -4,7 +4,7 @@ import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useGetTeacher from '../../hooks/useGetTeacher'
 import { HttpStatus } from '~/constant/http'
 
-const useTeacherDetails = () => {
+const useGetTeacherDetails = () => {
   const { id } = useParams()
   const school = useCurrentSchool((state) => state.school)
   const { teacher, isFetching, status } = useGetTeacher(school.id, id as string)
@@ -18,4 +18,4 @@ const useTeacherDetails = () => {
   return { teacher, isFetching }
 }
 
-export default useTeacherDetails
+export default useGetTeacherDetails

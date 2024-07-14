@@ -29,11 +29,14 @@ const DocumentForm = () => {
           control={control}
           defaultValue={[]}
         />
+        <FormErrorMessage>
+          {errors.file && <FormErrorMessage fontSize={11}>File is required.</FormErrorMessage>}
+        </FormErrorMessage>
       </FormControl>
       <FormControl id="documentType" mb={4} isInvalid={!!errors.documentType}>
         <Select options={options} name="documentType" placeholder="Select a document type" />
         <FormErrorMessage>
-          {errors.documentType && <FormErrorMessage>Document type is required.</FormErrorMessage>}
+          {errors.documentType && <FormErrorMessage fontSize={11}>Document type is required.</FormErrorMessage>}
         </FormErrorMessage>
       </FormControl>
     </form>

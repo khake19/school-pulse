@@ -2,12 +2,18 @@ import { Box, Text, Divider, Heading, Flex, Spacer, ButtonGroup, Button, useDisc
 import { TTeacherData } from '../types/teachers'
 import DocumentTable from './DocumentTable'
 import DocumentFormModal from './DocumentFormModal'
+import useGetDocuments from './hooks/useGetDocument'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 interface IDocumentProps {
   teacher: TTeacherData
 }
+
 const Document = (props: IDocumentProps) => {
   const { teacher } = props
+
+  const school = useCurrentSchool((state) => state.school)
+  const { data } = useGetDocuments(school.id)
 
   const documents = [
     {
