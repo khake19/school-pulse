@@ -15,7 +15,7 @@ const DocumentTable = (props: any) => {
         <Box display="flex" alignItems="center">
           <Box>
             <Text fontSize="sm" fontWeight="500">
-              {props.row.original.fileName}
+              {props.row.original.file}
             </Text>
             <Text fontSize="xs" color="gray.500">
               {props.row.original.size} KB | {props.row.original.type}
@@ -24,26 +24,6 @@ const DocumentTable = (props: any) => {
         </Box>
       ),
       header: () => 'Filename',
-      footer: (info) => info.column.id
-    }),
-    columnHelper.display({
-      id: 'uploadedBy',
-      cell: (props) => {
-        return (
-          <Box display="flex" alignItems="center">
-            <Avatar size="sm" src={process.env.NEXT_PUBLIC_SERVER_URL + props.row.original.avatar} mr={2} />
-            <Box>
-              <Text fontSize="sm" fontWeight="500">
-                {props.row.original.uploadedBy}
-              </Text>
-              <Text fontSize="xs" color="gray.500">
-                {props.row.original.email}
-              </Text>
-            </Box>
-          </Box>
-        )
-      },
-      header: () => 'Uploaded By',
       footer: (info) => info.column.id
     }),
     columnHelper.accessor((row) => `${row.lastModified}`, {

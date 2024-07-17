@@ -36,7 +36,6 @@ const SidebarItem = ({ icon, title, name = '/', href, isSidebarOpen }: ISidebarI
           <Text
             ml={5}
             display={isSidebarOpen ? 'none' : 'flex'}
-            fontSize="14px"
             fontWeight={500}
             color={active || isOpen ? 'teal.500' : 'gray.500'}
           >

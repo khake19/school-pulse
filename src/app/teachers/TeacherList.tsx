@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Box, Button, ButtonGroup, Flex, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Flex, Heading, Spacer, useDisclosure, Text } from '@chakra-ui/react'
 
 import TeachersStyle from './Teacher.style'
 import TeacherFormModal from './TeacherFormModal'
@@ -32,7 +32,7 @@ const TeacherList = () => {
           <Spacer />
           <ButtonGroup gap="2">
             <Button colorScheme="teal" onClick={handleCreate}>
-              Add Teacher
+              <Text>Add Teacher</Text>
             </Button>
           </ButtonGroup>
         </Flex>

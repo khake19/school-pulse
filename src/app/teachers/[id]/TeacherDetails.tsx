@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading } from '@chakra-ui/react'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading, Text } from '@chakra-ui/react'
 
 import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
@@ -17,9 +17,12 @@ const TeacherDetails = () => {
       </Box>
       <Tabs position="relative" colorScheme="teal">
         <TabList>
-          <Tab>Profile</Tab>
-          <Tab>Documents</Tab>
-          <Tab>Settings</Tab>
+          <Tab>
+            <Text>Profile</Text>
+          </Tab>
+          <Tab>
+            <Text>Documents</Text>
+          </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -27,9 +30,6 @@ const TeacherDetails = () => {
           </TabPanel>
           <TabPanel>
             <Document teacher={teacher} />
-          </TabPanel>
-          <TabPanel>
-            <p>three!</p>
           </TabPanel>
         </TabPanels>
       </Tabs>

@@ -5,6 +5,16 @@ export const colors = {
   tertiary: '',
   ancillary: '',
 
+  //https://colorhunt.co/palette/0a26471442722052952c74b3
+  brand: {
+    50: '#E6FFFA',
+    100: '#B2F5EA',
+    200: '#81E6D9',
+    300: '#4FD1C5',
+    400: '#38B2AC',
+    500: '#319795'
+  },
+
   // Complimentary
   orange: '',
   gold: '',
@@ -49,4 +59,30 @@ export const typography = {
     bolod: 700
   },
   size: {}
+}
+
+export const components = {
+  Button: {
+    baseStyle: {
+      borderRadius: 'none'
+    }
+  },
+  Text: {
+    baseStyle: {
+      fontSize: 'sm'
+    }
+  }
+}
+
+export const fontSizes = {
+  xs: '10px',
+  sm: '12px',
+  md: '14px',
+  lg: '16px',
+  xl: '18px',
+  '2xl': '24px',
+  '3xl': '28px',
+  '4xl': '36px',
+  '5xl': '48px',
+  '6xl': '64px'
 }

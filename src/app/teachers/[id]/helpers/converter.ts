@@ -23,7 +23,10 @@ export const documentResponseToData = (
     documents?.data.map((document) => ({
       id: document.id,
       file: document.file,
-      documentType: document.document_type
+      documentType: document.document_type,
+      lastModified: 'June 1, 2024',
+      size: 1000,
+      type: 'docx'
     })) ?? []
 
   const meta = metaConverter(documents?.meta)
