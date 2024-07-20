@@ -17,7 +17,7 @@ const Layout = (props: ILayoutProps) => {
 
   const { isSidebarOpen, setSideBarOpen } = usePreference()
   return (
-    <Flex direction="column" align="stretch" justify="flex-start">
+    <Flex direction="column" align="stretch" justify="flex-start" minHeight="100dvh">
       <Header schools={schools} />
       <Flex direction="row" align="stretch" justify="flex-start" flex="1" bg="#F9F9F9">
         <Sidebar isSidebarOpen={isSidebarOpen} setSideBarOpen={setSideBarOpen} />

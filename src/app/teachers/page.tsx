@@ -1,4 +1,3 @@
-import Layout from '~/components/Layout'
 import TeacherList from './TeacherList'
 
 interface IParamsProps {
