@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { IPagination } from '~/components/Table/types/pagination'
 
 const PaginationSummary = (props: IPagination) => {
@@ -8,7 +8,9 @@ const PaginationSummary = (props: IPagination) => {
 
   return (
     <Box p="6">
-      Showing {firstItemNumber} to {lastItemNumber} of {total} entries
+      <Text>
+        Showing {firstItemNumber} to {lastItemNumber} of {total} entries
+      </Text>
     </Box>
   )
 }

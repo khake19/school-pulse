@@ -1,6 +1,8 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect } from 'react'
+import { Dispatch, ReactNode, createContext, useContext, useEffect } from 'react'
 import { useImmerReducer } from 'use-immer'
 import { IPagination } from '~/components/Table/types/pagination'
+import TableisLoading from './TableLoading'
+import TableEmpty from './TableEmpty'
 
 // Contexts
 export const TableContext = createContext<ITableState<any>>({
@@ -9,7 +11,7 @@ export const TableContext = createContext<ITableState<any>>({
 })
 
 export const TableDispatchContext = createContext<{
-  dispatch: React.Dispatch<any>
+  dispatch: Dispatch<any>
 }>({ dispatch: () => null })
 
 export const useTableContext = () => useContext(TableContext)
@@ -19,8 +21,8 @@ export const useTableDispatchContext = () => useContext(TableDispatchContext)
 export const ActionKind = {
   getPagination: 'GET_PAGINATION',
   getData: 'GET_DATA',
-  setPage: 'SET_PAGE',
   setData: 'SET_DATA',
+  setPage: 'SET_PAGE',
   setPagination: 'SET_PAGINATION'
 } as const
 
@@ -33,11 +35,10 @@ type TTableAction =
 interface ITableState<T> {
   data: T[]
   pagination: IPagination
+  isLoading?: boolean
 }
 
-// Reducer
 const tableReducer = <T extends object>(draft: ITableState<T>, action: TTableAction) => {
-  console.log('Reducer action:', action)
   switch (action.type) {
     case ActionKind.setPage:
       draft.pagination.page = action.payload
@@ -49,7 +50,6 @@ const tableReducer = <T extends object>(draft: ITableState<T>, action: TTableAct
       draft.pagination = action.payload
       break
   }
-  console.log('Reducer state:', draft)
 }
 
 // Provider Component
@@ -57,14 +57,14 @@ interface ITableProviderProps<T> {
   children: ReactNode
   defaultData: T[]
   pagination?: IPagination
-  setCurrentPage: Dispatch<SetStateAction<number>>
+  isLoading?: boolean
 }
 
 const TableProvider = <T extends object>({
   children,
   defaultData = [],
   pagination = { offset: 0, page: 0, size: 0, total: 0, pages: 0 },
-  setCurrentPage
+  isLoading = false
 }: ITableProviderProps<T>) => {
   const [tableState, dispatch] = useImmerReducer<ITableState<T>, TTableAction>(tableReducer, {
     data: defaultData,
@@ -72,21 +72,20 @@ const TableProvider = <T extends object>({
   })
 
   useEffect(() => {
-    console.log('Effect: defaultData or pagination changed')
     dispatch({ type: ActionKind.setData, payload: defaultData })
-    dispatch({ type: ActionKind.setPagination, payload: pagination })
-  }, [defaultData, pagination, dispatch])
-
-  console.log('TableProvider', tableState.pagination.page)
+  }, [defaultData, dispatch])
 
   useEffect(() => {
-    console.log('Effect: tableState.pagination.page changed', tableState.pagination.page)
-    setCurrentPage(tableState.pagination.page)
-  }, [tableState.pagination.page, setCurrentPage])
+    dispatch({ type: ActionKind.setPagination, payload: pagination })
+  }, [pagination, dispatch])
 
   return (
     <TableContext.Provider value={tableState}>
-      <TableDispatchContext.Provider value={{ dispatch }}>{children}</TableDispatchContext.Provider>
+      <TableDispatchContext.Provider value={{ dispatch }}>
+        {tableState.data.length > 0 && !isLoading && children}
+        {tableState.data.length === 0 && !isLoading && <TableEmpty />}
+        {isLoading && <TableisLoading />}
+      </TableDispatchContext.Provider>
     </TableContext.Provider>
   )
 }

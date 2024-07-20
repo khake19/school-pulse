@@ -11,10 +11,10 @@ interface TableProps<T> {
 const Table = <T extends object>(props: TableProps<T>) => {
   const { columns = [] } = props
 
-  const context = useTableContext()
+  const { data } = useTableContext()
 
   const table = useReactTable({
-    data: context.data,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel()
   })

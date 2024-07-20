@@ -8,15 +8,15 @@ const StyledPagination = chakra(ReactPaginate, {
     listStyle: 'none',
     outline: 'none',
     flexDirection: 'row',
+    fontSize: 'sm',
     li: {
       marginRight: '5px',
       a: {
-        borderRadius: '0.2rem',
         padding: '0.5rem 0.9rem',
         border: 'solid 1px #f0f0f0',
         cursor: 'pointer',
         outline: 'none',
-        backgrondColor: '#47ccde',
+        backgrondColor: 'brand.500',
         color: 'darken(#f0f0f0, 45%)',
         textDecoration: 'none',
         transition: 'all 0.3s ease',
@@ -24,17 +24,16 @@ const StyledPagination = chakra(ReactPaginate, {
       },
       '&:hover': {
         a: {
-          borderRadius: '0.2rem',
-          backgroundColor: '#1d1f20',
-          border: 'solid 1px #1d1f20',
+          backgroundColor: 'brand.500',
+          border: 'solid 1px brand.600',
           color: 'white'
         }
       }
     },
     '.active': {
       a: {
-        backgroundColor: '#1d1f20',
-        border: 'solid 1px #1d1f20',
+        backgroundColor: 'brand.500',
+        border: 'solid 1px brand.500',
         color: 'white'
       }
     }
