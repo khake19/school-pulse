@@ -4,7 +4,11 @@ import Pagination from './Pagination/Pagination'
 import PaginationSummary from './Pagination/PaginationSummary'
 import { ActionKind, useTableContext, useTableDispatchContext } from './TableProvider'
 
-const TablePagination = () => {
+interface ITablePaginationProps {
+  setCurrentPage: (page: number) => void
+}
+const TablePagination = (props: ITablePaginationProps) => {
+  const { setCurrentPage } = props
   const data = useTableContext()
   const { dispatch } = useTableDispatchContext()
 
@@ -19,7 +23,10 @@ const TablePagination = () => {
       <Box p="4">
         <Pagination
           pageCount={pages ?? 0}
-          handlePage={(selected) => dispatch({ type: ActionKind.setPage, payload: selected })}
+          handlePage={(selected) => {
+            setCurrentPage(selected)
+            dispatch({ type: ActionKind.setPage, payload: selected })
+          }}
         />
       </Box>
     </Flex>

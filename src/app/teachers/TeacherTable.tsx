@@ -8,7 +8,9 @@ import { TTeacherData } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
 import Link from 'next/link'
-import TableWrapper from '~/components/Table/TableWrapper'
+import TableProvider from '~/components/TableProvider/TableProvider'
+import TablePagination from '~/components/TableProvider/TablePagination'
+import Table from '~/components/TableProvider/Table'
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void
@@ -20,7 +22,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
 
   const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
 
-  const { teachers, meta } = useGetTeachers(defaultParams)
+  const { teachers, meta, isLoading } = useGetTeachers(defaultParams)
 
   const columnHelper = createColumnHelper<TTeacherData>()
 
@@ -63,7 +65,13 @@ const TeacherTable = (props: ITeacherTableProps) => {
       )
     })
   ]
-  return <TableWrapper data={teachers ?? []} pagination={meta} columns={columns} setCurrentPage={setCurrentPage} />
+
+  return (
+    <TableProvider defaultData={teachers ?? []} pagination={meta} isLoading={isLoading}>
+      <Table columns={columns} />
+      <TablePagination setCurrentPage={setCurrentPage} />
+    </TableProvider>
+  )
 }
 
 export default TeacherTable

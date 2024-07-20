@@ -1,3 +1,8 @@
+import '@fontsource/roboto'
+import '@fontsource/inter'
+
+export const fonts = { heading: `'Roboto', sans-serif`, body: `'Inter', sans-serif` }
+
 export const colors = {
   // Official color palette
   primary: '#B9EDDD', // coral

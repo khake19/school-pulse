@@ -93,13 +93,9 @@ const columns = [
 export const Base: Story = {
   render: () => (
     <ChakraProvider theme={theme}>
-      <TableProvider
-        defaultData={defaultData}
-        pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}
-        setCurrentPage={() => 0}
-      >
+      <TableProvider defaultData={defaultData} pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}>
         <Table columns={columns} />
-        <TablePagination />
+        <TablePagination setCurrentPage={() => 0} />
       </TableProvider>
     </ChakraProvider>
   )
