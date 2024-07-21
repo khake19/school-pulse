@@ -7,7 +7,7 @@ import { HttpStatus } from '~/constant/http'
 const useGetTeacherDetails = () => {
   const { id } = useParams()
   const school = useCurrentSchool((state) => state.school)
-  const { teacher, isFetching, status } = useGetTeacher(school.id, id as string)
+  const { teacher, isFetching, status } = useGetTeacher(school?.id, id as string)
 
   useEffect(() => {
     if (!isFetching && status === HttpStatus.error) {

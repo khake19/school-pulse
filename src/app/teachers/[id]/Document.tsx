@@ -13,7 +13,7 @@ const Document = (props: IDocumentProps) => {
   const { teacher } = props
 
   const school = useCurrentSchool((state) => state.school)
-  const { data } = useGetDocuments(school.id)
+  const { data } = useGetDocuments(school?.id)
 
   const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
 
