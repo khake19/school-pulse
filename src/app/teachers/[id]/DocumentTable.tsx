@@ -1,41 +1,34 @@
-import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
 
 import TableWrapper from '~/components/Table/TableWrapper'
+import { TDocumentData } from './types/documents'
 
-const DocumentTable = (props: any) => {
+interface IDocumentTableProps {
+  documents: TDocumentData[]
+}
+
+const DocumentTable = (props: IDocumentTableProps) => {
   const { documents } = props
-  const columnHelper = createColumnHelper<any>()
+  const columnHelper = createColumnHelper<TDocumentData>()
 
-  const columns: ColumnDef<any, string>[] = [
+  const columns: ColumnDef<TDocumentData, string>[] = [
     columnHelper.display({
       id: 'fileName',
       cell: (props) => (
         <Box display="flex" alignItems="center">
           <Box>
             <Text fontSize="sm" fontWeight="500">
-              {props.row.original.file}
+              {props.row.original.documentType}
             </Text>
             <Text fontSize="xs" color="gray.500">
-              {props.row.original.size} KB | {props.row.original.type}
+              {props.row.original.size} KB | {props.row.original.contentType}
             </Text>
           </Box>
         </Box>
       ),
       header: () => 'Filename',
-      footer: (info) => info.column.id
-    }),
-    columnHelper.accessor((row) => `${row.lastModified}`, {
-      id: 'lastModified',
-      cell: (info) => (
-        <Box>
-          <Text fontSize="sm" fontWeight="500" color="gray.600">
-            {info.getValue()}
-          </Text>
-        </Box>
-      ),
-      header: () => 'Last Modified',
       footer: (info) => info.column.id
     }),
     columnHelper.display({
