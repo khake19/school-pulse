@@ -7,7 +7,7 @@ interface IParamsProps {
   }
 }
 
-const Teachers = ({ searchParams }: IParamsProps) => {
+const Teachers = () => {
   return <TeacherList />
 }
 

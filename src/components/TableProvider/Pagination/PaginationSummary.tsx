@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react'
-import { IPagination } from '~/components/Table/types/pagination'
+import { IPagination } from '~/components/TableProvider/types/pagination'
 
 const PaginationSummary = (props: IPagination) => {
   const { offset, page, size, total, pages } = props

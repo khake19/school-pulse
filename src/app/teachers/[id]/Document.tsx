@@ -2,8 +2,6 @@ import { Box, Text, Heading, Flex, Spacer, ButtonGroup, Button, useDisclosure } 
 import { TTeacherData } from '../types/teachers'
 import DocumentTable from './DocumentTable'
 import DocumentFormModal from './DocumentFormModal'
-import useGetDocuments from './hooks/useGetDocument'
-import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import DocumentDeleteModal from './DocumentDeleteModal'
 import { useState } from 'react'
 
@@ -13,9 +11,6 @@ interface IDocumentProps {
 
 const Document = (props: IDocumentProps) => {
   const { teacher } = props
-
-  const school = useCurrentSchool((state) => state.school)
-  const { data } = useGetDocuments(school?.id)
 
   const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
   const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
@@ -51,7 +46,7 @@ const Document = (props: IDocumentProps) => {
         </Flex>
         <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacher.id} />
         <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
-        <DocumentTable documents={data.data} handleDelete={handleDelete} />
+        <DocumentTable handleDelete={handleDelete} />
       </Box>
     </Box>
   )

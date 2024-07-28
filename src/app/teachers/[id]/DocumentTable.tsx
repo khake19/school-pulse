@@ -1,18 +1,23 @@
 import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
-
-import TableWrapper from '~/components/Table/TableWrapper'
 import { TDocumentData } from './types/documents'
+import TableProvider from '~/components/TableProvider/TableProvider'
+import Table from '~/components/TableProvider/Table'
+import useGetDocuments from './hooks/useGetDocument'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+// import useQueryParams from '~/hooks/useQueryParams'
 
 interface IDocumentTableProps {
-  documents: TDocumentData[]
   handleDelete: (id: string) => void
 }
 
 const DocumentTable = (props: IDocumentTableProps) => {
-  const { documents, handleDelete } = props
+  const { handleDelete } = props
   const columnHelper = createColumnHelper<TDocumentData>()
+
+  const school = useCurrentSchool((state) => state.school)
+  const { data: documents, meta, isLoading } = useGetDocuments(school?.id)
 
   const columns: ColumnDef<TDocumentData, string>[] = [
     columnHelper.display({
@@ -57,12 +62,9 @@ const DocumentTable = (props: IDocumentTableProps) => {
   ]
 
   return (
-    <TableWrapper
-      data={documents ?? []}
-      pagination={{ offset: 0, page: 0, size: 0, total: 0, pages: 0 }}
-      columns={columns}
-      setCurrentPage={() => {}}
-    />
+    <TableProvider defaultData={documents ?? []} pagination={meta} isLoading={isLoading}>
+      <Table columns={columns} />
+    </TableProvider>
   )
 }
 

@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, createContext, useContext, useEffect } from 'react'
 import { useImmerReducer } from 'use-immer'
-import { IPagination } from '~/components/Table/types/pagination'
+import { IPagination } from '~/components/TableProvider/types/pagination'
 import TableisLoading from './TableLoading'
 import TableEmpty from './TableEmpty'
 
