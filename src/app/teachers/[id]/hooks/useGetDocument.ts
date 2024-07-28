@@ -7,7 +7,7 @@ import { documentResponseToData } from '../helpers/converter'
 
 const useGetDocuments = (schoolId: string, filters?: IDocumentFilters) => {
   const { data, status, error, isFetching } = useQuery<IArrayResponse<IDocumentResponse>, Error>({
-    queryKey: ['users', filters],
+    queryKey: ['documents', filters],
     queryFn: () => documentService.getDocuments(schoolId, filters),
     enabled: !!schoolId,
     keepPreviousData: true

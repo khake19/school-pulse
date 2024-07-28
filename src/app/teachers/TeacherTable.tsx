@@ -57,7 +57,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
             </MenuButton>
             <MenuList>
               <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
-                Delete
+                <Text>Delete</Text>
               </MenuItem>
             </MenuList>
           </Menu>

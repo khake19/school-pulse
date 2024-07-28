@@ -2,33 +2,33 @@ import { Button, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AlertModal from '~/components/Alert/AlertModal/AlertModal'
-import useDeleteTeacher from './hooks/useDeleteTeacher'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
-import TeachersMessage from './constant/teachers'
+import DocumentMessage from './constant/documents'
 import useAlert from '~/hooks/useAlert'
+import useDeleteDocument from './hooks/useDeleteDocument'
 
-interface ITeacherDeleteModalProps {
+interface IDocumentDeleteModalProps {
   isOpen: boolean
   onClose: () => void
-  teacherId: string
+  documentId: string
 }
-const TeacherDeleteModal = (props: ITeacherDeleteModalProps) => {
-  const { isOpen, onClose, teacherId } = props
+const DocumentDeleteModal = (props: IDocumentDeleteModalProps) => {
+  const { isOpen, onClose, documentId } = props
   const school = useCurrentSchool((state) => state.school)
   const cancelRef = React.useRef(null)
   const alert = useAlert()
   const queryClient = useQueryClient()
 
-  const { deleteTeacher } = useDeleteTeacher({
+  const { deleteDocument } = useDeleteDocument({
     onSuccess: async () => {
-      alert.success(TeachersMessage.deleted)
-      queryClient.invalidateQueries(['users'])
+      alert.success(DocumentMessage.deleted)
+      queryClient.invalidateQueries(['documents'])
       onClose()
     }
   })
 
-  const handleDeleteTeacher = () => {
-    deleteTeacher(school.id, teacherId)
+  const handleDeleteDocument = () => {
+    deleteDocument(school.id, documentId)
   }
 
   const actions = (
@@ -36,7 +36,7 @@ const TeacherDeleteModal = (props: ITeacherDeleteModalProps) => {
       <Button ref={cancelRef} onClick={onClose}>
         <Text>No</Text>
       </Button>
-      <Button colorScheme="teal" ml={3} onClick={handleDeleteTeacher}>
+      <Button colorScheme="teal" ml={3} onClick={handleDeleteDocument}>
         <Text>Yes</Text>
       </Button>
     </>
@@ -45,11 +45,11 @@ const TeacherDeleteModal = (props: ITeacherDeleteModalProps) => {
     <AlertModal
       isOpen={isOpen}
       onClose={onClose}
-      label="Delete Teacher"
-      description="Are you sure you want to delete this teacher?"
+      label="Delete Document"
+      description="Are you sure you want to delete this document?"
       actions={actions}
     />
   )
 }
 
-export default TeacherDeleteModal
+export default DocumentDeleteModal

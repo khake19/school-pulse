@@ -1,6 +1,6 @@
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
 
 import BasicModal from '~/components/Modal'
@@ -44,7 +44,7 @@ const TeacherFormModal = (props: IFormModal) => {
 
   const createActions = (
     <Button onClick={handleCreateTeacher} mt={4} colorScheme="teal" type="submit">
-      Submit
+      <Text>Submit</Text>
     </Button>
   )
 

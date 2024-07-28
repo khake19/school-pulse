@@ -1,9 +1,11 @@
-import { Box, Text, Divider, Heading, Flex, Spacer, ButtonGroup, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Text, Heading, Flex, Spacer, ButtonGroup, Button, useDisclosure } from '@chakra-ui/react'
 import { TTeacherData } from '../types/teachers'
 import DocumentTable from './DocumentTable'
 import DocumentFormModal from './DocumentFormModal'
 import useGetDocuments from './hooks/useGetDocument'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import DocumentDeleteModal from './DocumentDeleteModal'
+import { useState } from 'react'
 
 interface IDocumentProps {
   teacher: TTeacherData
@@ -16,9 +18,16 @@ const Document = (props: IDocumentProps) => {
   const { data } = useGetDocuments(school?.id)
 
   const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+  const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
+  const [documentId, setDocumentId] = useState('')
 
   const handleCreate = () => {
     onFormModalOpen()
+  }
+
+  const handleDelete = (documentId: string) => {
+    onAlertModalOpen()
+    setDocumentId(documentId)
   }
 
   return (
@@ -35,13 +44,14 @@ const Document = (props: IDocumentProps) => {
           </Box>
           <Spacer />
           <ButtonGroup gap="2">
-            <Button onClick={handleCreate}>
+            <Button onClick={handleCreate} bg="brand.400" color="white">
               <Text>Add Documents</Text>
             </Button>
           </ButtonGroup>
         </Flex>
         <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacher.id} />
-        <DocumentTable documents={data.data} />
+        <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
+        <DocumentTable documents={data.data} handleDelete={handleDelete} />
       </Box>
     </Box>
   )

@@ -34,7 +34,7 @@ const put = async <T, P extends object>(endpoint: string, params: P): Promise<T>
   return response.json()
 }
 
-const remove = async <T>(endpoint: string) => {
+const remove = async (endpoint: string) => {
   const options = {
     method: 'delete'
   }

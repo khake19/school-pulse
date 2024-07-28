@@ -23,6 +23,18 @@ const BasicSelect = (props: IBasicSelectProps) => {
           options={options}
           value={options.find((c) => c.value === field.value)}
           onChange={(val) => field.onChange(val?.value)}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              fontSize: '10px'
+            }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+              ...styles,
+              fontSize: '10px',
+              backgroundColor: isDisabled ? undefined : isSelected ? '#38B2AC' : isFocused ? '#38B2AC' : undefined,
+              color: isDisabled ? '#ccc' : isSelected ? 'white' : 'black'
+            })
+          }}
         />
       )}
       name={name}

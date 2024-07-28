@@ -18,18 +18,18 @@ const TeacherDetails = () => {
       <Tabs position="relative" colorScheme="teal">
         <TabList>
           <Tab>
-            <Text>Profile</Text>
+            <Text>Documents</Text>
           </Tab>
           <Tab>
-            <Text>Documents</Text>
+            <Text>Profile</Text>
           </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Profile teacher={teacher} />
+            <Document teacher={teacher} />
           </TabPanel>
           <TabPanel>
-            <Document teacher={teacher} />
+            <Profile teacher={teacher} />
           </TabPanel>
         </TabPanels>
       </Tabs>

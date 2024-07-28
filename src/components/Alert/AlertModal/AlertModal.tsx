@@ -5,7 +5,8 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  AlertDialogCloseButton
+  AlertDialogCloseButton,
+  Text
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -32,10 +33,19 @@ const AlertModal = (props: IAlertModalProps) => {
       <AlertDialogOverlay />
 
       <AlertDialogContent>
-        <AlertDialogHeader>{label}</AlertDialogHeader>
+        <AlertDialogHeader>
+          <Text>{label}</Text>
+        </AlertDialogHeader>
         <AlertDialogCloseButton />
-        <AlertDialogBody>{description}</AlertDialogBody>
-        {actions && <AlertDialogFooter> {actions} </AlertDialogFooter>}
+        <AlertDialogBody>
+          <Text>{description}</Text>
+        </AlertDialogBody>
+        {actions && (
+          <AlertDialogFooter>
+            {' '}
+            <Text>{actions}</Text>
+          </AlertDialogFooter>
+        )}
       </AlertDialogContent>
     </AlertDialog>
   )

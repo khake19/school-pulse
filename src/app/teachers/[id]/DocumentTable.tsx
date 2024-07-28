@@ -7,10 +7,11 @@ import { TDocumentData } from './types/documents'
 
 interface IDocumentTableProps {
   documents: TDocumentData[]
+  handleDelete: (id: string) => void
 }
 
 const DocumentTable = (props: IDocumentTableProps) => {
-  const { documents } = props
+  const { documents, handleDelete } = props
   const columnHelper = createColumnHelper<TDocumentData>()
 
   const columns: ColumnDef<TDocumentData, string>[] = [
@@ -40,11 +41,13 @@ const DocumentTable = (props: IDocumentTableProps) => {
               <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
             </MenuButton>
             <MenuList>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => undefined}>
-                Open in browser
+              <MenuItem sx={{ _hover: { bg: 'primary' } }}>
+                <a href={process.env.NEXT_PUBLIC_SERVER_URL + props.row.original.path} target="_blank" rel="noreferrer">
+                  <Text>Open in browser</Text>
+                </a>
               </MenuItem>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => undefined}>
-                Delete
+              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
+                <Text>Delete</Text>
               </MenuItem>
             </MenuList>
           </Menu>
