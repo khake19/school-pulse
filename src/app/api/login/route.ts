@@ -3,23 +3,20 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request, { params }: any) {
   const body = await request.json()
 
-  console.log('process.env.NEXT_PUBLIC_CLIENT_URL', process.env.NEXT_PUBLIC_CLIENT_URL)
-  console.log('process.env.NEXT_PUBLIC_SERVER_URL', process.env.NEXT_PUBLIC_SERVER_URL)
-  const prodEnv = 'https://school-pulse-api.fly.dev'
-  const data = await fetch(prodEnv + '/api/auth/sign_in', {
-    method: 'post',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+  // const data = await fetch(process.env.SERVER_URL + '/api/auth/sign_in', {
+  //   method: 'post',
+  //   body: JSON.stringify(body),
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   }
+  // })
 
-  const { id, email, token } = await data.json()
+  // const { id, email, token } = await data.json()
 
   const response = NextResponse.json(
     {
-      id,
-      email
+      id: 1,
+      email: 'test@schoolpulse.com'
     },
     { status: 200 }
   )
@@ -27,7 +24,7 @@ export async function POST(request: Request, { params }: any) {
   // Then set a cookie
   response.cookies.set({
     name: 'token',
-    value: token,
+    value: 'tokenGSTls',
     httpOnly: true
   })
   return response

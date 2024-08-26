@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, { params }: IPathProps) {
   const searchParams = request.nextUrl.searchParams
   const queryParams = new URLSearchParams(searchParams)
 
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/') + '?' + queryParams, {
+  const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/') + '?' + queryParams, {
     headers: {
       'Content-Type': 'application/json',
       authorization: 'Bearer ' + token
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
     headers['Content-Type'] = 'application/json'
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/${params.path.join('/')}`, {
+  const response = await fetch(`${process.env.SERVER_URL}/api/${params.path.join('/')}`, {
     method: 'post',
     body,
     headers
@@ -74,7 +74,7 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
     headers['Content-Type'] = 'application/json'
   }
 
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/'), {
+  const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/'), {
     method: 'put',
     body,
     headers: {
@@ -87,7 +87,7 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
 export async function DELETE(request: NextRequest, { params }: IPathProps) {
   const token = request.cookies.get('token')?.value
 
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/' + params.path.join('/'), {
+  const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/'), {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json',

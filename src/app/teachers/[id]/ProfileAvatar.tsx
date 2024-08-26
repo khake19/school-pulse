@@ -33,7 +33,7 @@ const ProfileAvatar = () => {
         <Avatar
           size="xl"
           name="Segun Adebayo"
-          src={selectedImage ? URL.createObjectURL(selectedImage) : process.env.NEXT_PUBLIC_SERVER_URL + avatar}
+          src={selectedImage ? URL.createObjectURL(selectedImage) : process.env.SERVER_URL + avatar}
           onClick={handleClick}
         />
         <Box>
