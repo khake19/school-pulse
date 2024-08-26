@@ -3,7 +3,10 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request, { params }: any) {
   const body = await request.json()
 
-  const data = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/auth/sign_in', {
+  console.log('process.env.NEXT_PUBLIC_CLIENT_URL', process.env.NEXT_PUBLIC_CLIENT_URL)
+  console.log('process.env.NEXT_PUBLIC_SERVER_URL', process.env.NEXT_PUBLIC_SERVER_URL)
+  const prodEnv = 'https://school-pulse-api.fly.dev'
+  const data = await fetch(prodEnv + '/api/auth/sign_in', {
     method: 'post',
     body: JSON.stringify(body),
     headers: {
