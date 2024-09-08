@@ -2,10 +2,7 @@ import { post } from '~/utils/http'
 import { ILoginParams } from '../types/login'
 
 const login = async (params: ILoginParams) => {
-  const result = await post(
-    'https://school-pulse-ausx-pyrc64j9y-khake19s-projects.vercel.app/api/login',
-    JSON.stringify(params)
-  )
+  const result = await post('api/login', JSON.stringify(params))
   return result
 }
 
