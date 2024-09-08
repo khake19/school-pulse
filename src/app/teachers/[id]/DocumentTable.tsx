@@ -47,7 +47,7 @@ const DocumentTable = (props: IDocumentTableProps) => {
             </MenuButton>
             <MenuList>
               <MenuItem sx={{ _hover: { bg: 'primary' } }}>
-                <a href={process.env.SERVER_URL + props.row.original.path} target="_blank" rel="noreferrer">
+                <a href={process.env.NEXT_PUBLIC_SERVER_URL + props.row.original.path} target="_blank" rel="noreferrer">
                   <Text>Open in browser</Text>
                 </a>
               </MenuItem>
