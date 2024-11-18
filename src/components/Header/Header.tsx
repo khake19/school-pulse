@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react'
 import { TriangleDownIcon } from '@chakra-ui/icons'
 import HeaderStyle from './Header.style'
@@ -13,6 +14,7 @@ const Header = (props: THeaderProps) => {
   const { schools = [] } = props
   const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
   const [selectedSchoolName, setSelectedSchoolName] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
     if (!school?.id) {
@@ -26,6 +28,7 @@ const Header = (props: THeaderProps) => {
   const handleClick = (selectedSchool: ISchool) => {
     setSchool(selectedSchool)
     setSelectedSchoolName(selectedSchool.name)
+    router.push('/')
   }
   return (
     <Box css={HeaderStyle.header} zIndex={100} color="gray.600">

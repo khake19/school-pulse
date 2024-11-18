@@ -6,7 +6,7 @@ export const fonts = { heading: `'Roboto', sans-serif`, body: `'Inter', sans-ser
 export const colors = {
   // Official color palette
   primary: '#B9EDDD', // coral
-  secondary: '', // ocean
+  secondary: '#87CBB9', // ocean
   tertiary: '',
   ancillary: '',
 
