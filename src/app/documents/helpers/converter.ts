@@ -12,7 +12,6 @@ interface IDocumentResponseToData {
 
 export const documentCreateFormToPayload = (form: TDocumentFormInput) => {
   const data = new FormData()
-  console.log('hello', form)
   data.append('document[file]', form.file[0])
   data.append('document[teacher_id]', form.teacherId)
   data.append('document[document_type]', form.documentType.toString())

@@ -27,7 +27,7 @@ export const documentResponseToData = (
       documentType: document.document_type,
       size: document.size,
       contentType: document.content_type,
-      createdAt: document.created_at,
+      createdAt: document.inserted_at,
       updatedAt: document.updated_at
     })) ?? []
 

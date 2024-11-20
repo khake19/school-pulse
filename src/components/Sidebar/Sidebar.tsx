@@ -26,7 +26,7 @@ const Sidebar = (props: SidebarProps) => {
         </Flex>
         <Item icon="home" title="Dashboard" href="" isSidebarOpen={isSidebarOpen} />
         <Item icon="bar-chart-2" title="Report" href="/reports" isSidebarOpen={isSidebarOpen} />
-        <Item icon="bar-chart-2" title="Documents" name="/documents" href="/documents" isSidebarOpen={isSidebarOpen} />
+        <Item icon="file" title="Documents" name="/documents" href="/documents" isSidebarOpen={isSidebarOpen} />
         <Item icon="users" title="Teachers" name="/teachers" href="/teachers" isSidebarOpen={isSidebarOpen} />
         <Item icon="calendar" title="Leaves" name="leaves" href="/leaves" isSidebarOpen={isSidebarOpen} />
       </Flex>

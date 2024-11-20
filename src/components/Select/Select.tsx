@@ -1,18 +1,16 @@
-import Select, { GroupBase, Props, StylesConfig } from 'react-select'
+import Select, { ActionMeta, GroupBase, Props, StylesConfig } from 'react-select'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useToken } from '@chakra-ui/react'
+import { Option } from '~/types/select'
 
-const BasicSelect = <Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
+const BasicSelect = <IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
   props: Props<Option, IsMulti, Group>
 ) => {
-  const { control, watch } = useFormContext()
+  const { control } = useFormContext()
   const [teal300, black300] = useToken('colors', ['teal.300', 'black.300'])
   const [sm] = useToken('fontSizes', ['sm'])
 
-  const selectedValue = watch(props.name)
-  const selectedOption = props.options?.filter((option: Props) => option.value === selectedValue)
-
-  const colourStyles: StylesConfig<Option> = {
+  const colourStyles: StylesConfig<Option, IsMulti, Group> = {
     control: (baseStyles) => ({
       ...baseStyles,
       fontSize: sm
@@ -32,8 +30,8 @@ const BasicSelect = <Option, IsMulti extends boolean = false, Group extends Grou
           {...field}
           {...props}
           styles={colourStyles}
-          value={selectedOption || null}
-          onChange={(selectedOption: Props) => field.onChange(selectedOption?.value)}
+          value={props.options?.filter((option:  Option) => option.value === field.value)}
+          onChange={(selectedOption: Option | null, actionMeta: ActionMeta<Option>) => field.onChange(selectedOption?.value)}
         />
       )}
       name={props.name}
