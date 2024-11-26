@@ -1,6 +1,5 @@
-import { Options } from 'react-select'
 import teacherService from '~/app/teachers/services/teacher.service'
-import Select from '~/components/Select'
+import SelectForm from '~/components/Select/form/SelectForm'
 import useInfiniteScroll from '~/hooks/useInfiniteScroll'
 import { Option } from '~/types/select'
 
@@ -10,7 +9,7 @@ const TeacherSelect = () => {
   const options: Option[] | undefined = fetchedData?.map((data) => ({ label: data.first_name + ' ' + data.last_name, value: data.id }))
 
   return (
-    <Select
+    <SelectForm
       options={options}
       name="teacherId"
       placeholder="Select a teacher"

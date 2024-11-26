@@ -1,12 +1,12 @@
 import { useFormContext, Controller } from 'react-hook-form'
 import { FormErrorMessage, FormControl } from '@chakra-ui/react'
 
-import Select from '~/components/Select'
 import { Option } from '~/types/select'
 
 import FileUpload from '~/components/FileUpload/FileUpload'
 import { TDocumentFormInput } from './schema/documents'
 import TeacherSelect from './component/TeacherSelect'
+import SelectForm from '~/components/Select/form/SelectForm'
 
 const options: Option[] = [
   { label: 'TIN', value: 1 },
@@ -41,7 +41,7 @@ const DocumentForm = () => {
         </FormErrorMessage>
       </FormControl>
       <FormControl id="documentType" mb={4} isInvalid={!!errors.documentType}>
-        <Select options={options} name="documentType" placeholder="Select a document type" />
+        <SelectForm options={options} name="documentType" placeholder="Select a document type" />
         <FormErrorMessage>
           {errors.documentType && <FormErrorMessage fontSize="sm">Document type is required.</FormErrorMessage>}
         </FormErrorMessage>
