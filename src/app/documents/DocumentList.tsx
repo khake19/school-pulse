@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import { Box, Button, ButtonGroup, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 

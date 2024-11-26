@@ -30,8 +30,10 @@ const BasicSelect = <IsMulti extends boolean = false, Group extends GroupBase<Op
           {...field}
           {...props}
           styles={colourStyles}
-          value={props.options?.filter((option:  Option) => option.value === field.value)}
-          onChange={(selectedOption: Option | null, actionMeta: ActionMeta<Option>) => field.onChange(selectedOption?.value)}
+          value={props.options?.filter((option: Option) => option.value === field.value)}
+          onChange={(selectedOption: Option | null, actionMeta: ActionMeta<Option>) =>
+            field.onChange(selectedOption?.value)
+          }
         />
       )}
       name={props.name}

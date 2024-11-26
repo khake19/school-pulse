@@ -6,7 +6,10 @@ import { Option } from '~/types/select'
 const TeacherSelect = () => {
   const { handleScrollToBottom, fetchedData } = useInfiniteScroll(['teachers'], teacherService.allTeachers)
 
-  const options: Option[] | undefined = fetchedData?.map((data) => ({ label: data.first_name + ' ' + data.last_name, value: data.id }))
+  const options: Option[] | undefined = fetchedData?.map((data) => ({
+    label: data.first_name + ' ' + data.last_name,
+    value: data.id
+  }))
 
   return (
     <SelectForm
