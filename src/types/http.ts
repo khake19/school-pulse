@@ -12,7 +12,8 @@ export interface IArrayResponse<T> {
 
 export interface IQueryParams {
   page?: string
-  pageSize?: string
+  offset?: string
+  limit?: string
 }
 
 type MetaDataFields = 'offset' | 'page' | 'size' | 'total' | 'pages'

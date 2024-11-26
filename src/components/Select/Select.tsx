@@ -1,43 +1,42 @@
-import Select, { Options } from 'react-select'
+import Select, { ActionMeta, GroupBase, Props, StylesConfig } from 'react-select'
 import { useFormContext, Controller } from 'react-hook-form'
-
+import { useToken } from '@chakra-ui/react'
 import { Option } from '~/types/select'
 
-interface IBasicSelectProps {
-  placeholder?: string
-  options: Options<Option>
-  name: string
-}
-
-const BasicSelect = (props: IBasicSelectProps) => {
-  const { placeholder, options, name } = props
-
+const BasicSelect = <IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
+  props: Props<Option, IsMulti, Group>
+) => {
   const { control } = useFormContext()
+  const [teal300, black300] = useToken('colors', ['teal.300', 'black.300'])
+  const [sm] = useToken('fontSizes', ['sm'])
+
+  const colourStyles: StylesConfig<Option, IsMulti, Group> = {
+    control: (baseStyles) => ({
+      ...baseStyles,
+      fontSize: sm
+    }),
+    option: (styles, { isDisabled, isFocused, isSelected }) => ({
+      ...styles,
+      fontSize: sm,
+      backgroundColor: isDisabled ? undefined : isSelected ? teal300 : isFocused ? teal300 : undefined,
+      color: black300
+    })
+  }
 
   return (
     <Controller
       render={({ field }) => (
         <Select
           {...field}
-          placeholder={placeholder}
-          options={options}
-          value={options.find((c) => c.value === field.value)}
-          onChange={(val) => field.onChange(val?.value)}
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              fontSize: '10px'
-            }),
-            option: (styles, { isDisabled, isFocused, isSelected }) => ({
-              ...styles,
-              fontSize: '10px',
-              backgroundColor: isDisabled ? undefined : isSelected ? '#38B2AC' : isFocused ? '#38B2AC' : undefined,
-              color: isDisabled ? '#ccc' : isSelected ? 'white' : 'black'
-            })
-          }}
+          {...props}
+          styles={colourStyles}
+          value={props.options?.filter((option: Option) => option.value === field.value)}
+          onChange={(selectedOption: Option | null, actionMeta: ActionMeta<Option>) =>
+            field.onChange(selectedOption?.value)
+          }
         />
       )}
-      name={name}
+      name={props.name}
       control={control}
     />
   )

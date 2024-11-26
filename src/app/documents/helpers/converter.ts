@@ -1,16 +1,19 @@
 import { IArrayResponse, TMetaData } from '~/types/http'
-import { TDocumentFormInput } from '../schema/documents'
 import { IDocumentResponse, TDocumentData } from '../types/documents'
 import metaConverter from '~/helpers/metaConverter'
+import { format, parseISO } from 'date-fns'
+import { DateTime } from '~/constant/date'
+import { TDocumentFormInput } from '../schema/documents'
 
 interface IDocumentResponseToData {
   data: TDocumentData[]
   meta: TMetaData
 }
-export const documentCreateFormToPayload = (teacherId: string, form: TDocumentFormInput) => {
+
+export const documentCreateFormToPayload = (form: TDocumentFormInput) => {
   const data = new FormData()
   data.append('document[file]', form.file[0])
-  data.append('document[teacher_id]', teacherId)
+  data.append('document[teacher_id]', form.teacherId)
   data.append('document[document_type]', form.documentType.toString())
 
   return data
@@ -27,8 +30,14 @@ export const documentResponseToData = (
       documentType: document.document_type,
       size: document.size,
       contentType: document.content_type,
-      createdAt: document.inserted_at,
-      updatedAt: document.updated_at
+      insertedAt: format(parseISO(document.inserted_at ?? ''), DateTime.format),
+      updatedAt: format(parseISO(document.updated_at ?? ''), DateTime.format),
+      user: {
+        email: document.user.email,
+        firstName: document.user.first_name,
+        lastName: document.user.last_name,
+        avatar: document.user.avatar
+      }
     })) ?? []
 
   const meta = metaConverter(documents?.meta)

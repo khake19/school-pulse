@@ -1,4 +1,4 @@
 export interface Option {
-  label: string
-  value: string | number
+  readonly label: string
+  readonly value: string | number
 }

@@ -9,20 +9,17 @@ import '@fontsource/open-sans/700.css'
 
 import theme from '../theme'
 import { ChakraProvider } from '@chakra-ui/react'
-import { CacheProvider } from '@chakra-ui/next-js'
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   const [client] = React.useState(new QueryClient())
 
   return (
-    <CacheProvider>
-      <ChakraProvider theme={theme}>
-        <QueryClientProvider client={client}>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ChakraProvider>
-    </CacheProvider>
+    <ChakraProvider theme={theme}>
+      <QueryClientProvider client={client}>
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ChakraProvider>
   )
 }
 
