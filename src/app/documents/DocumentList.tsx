@@ -3,21 +3,31 @@ import { Box, Button, ButtonGroup, Flex, Heading, Spacer, Text, useDisclosure } 
 
 import DocumentTable from './DocumentTable'
 import DocumentStyle from './Document.style'
-import useGetDocuments from './hooks/useGetDocuments'
-import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import DocumentFormModal from './DocumentFormModal'
 import DocumentDeleteModal from '../teachers/[id]/DocumentDeleteModal'
+import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import useGetDocuments from './hooks/useGetDocuments'
 
-const DocumentList = () => {
+interface IDocumentListProps {
+  teacherId?: string
+}
+
+const DocumentList = (props: IDocumentListProps) => {
+  const { teacherId = '' } = props
+
   const [currentPage, setCurrentPage] = useState(1)
+  const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
+  const school = useCurrentSchool((state) => state.school)
+
+  const {
+    data: documents,
+    meta,
+    isLoading
+  } = useGetDocuments(school?.id, { ...defaultParams, ...(teacherId && { teacher_id: teacherId }) })
+
   const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
   const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [documentId, setDocumentId] = useState('')
-
-  const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
-
-  const school = useCurrentSchool((state) => state.school)
-  const { data: documents, meta, isLoading } = useGetDocuments(school?.id, defaultParams)
 
   const handleCreate = () => {
     onFormModalOpen()
@@ -29,7 +39,7 @@ const DocumentList = () => {
   }
 
   return (
-    <Box css={DocumentStyle.main}>
+    <Box>
       <Box css={DocumentStyle.header}>
         <Flex minWidth="max-content" alignItems="center" gap="2">
           <Box p="2">
@@ -43,7 +53,7 @@ const DocumentList = () => {
           </ButtonGroup>
         </Flex>
       </Box>
-      <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
+      <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
       <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
       <DocumentTable
         handleDelete={handleDelete}
@@ -51,6 +61,7 @@ const DocumentList = () => {
         pagination={meta}
         isLoading={isLoading}
         setCurrentPage={setCurrentPage}
+        showFullName={!teacherId}
       />
     </Box>
   )

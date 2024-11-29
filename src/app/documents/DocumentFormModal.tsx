@@ -55,7 +55,7 @@ const DocumentFormModal = (props: IDocumentFormModalProps) => {
   return (
     <BasicModal title="Add Document" actions={createActions} isOpen={isOpen} onClose={onClose}>
       <FormProvider {...methods}>
-        <DocumentForm />
+        <DocumentForm showTeachers={!teacherId} />
       </FormProvider>
     </BasicModal>
   )

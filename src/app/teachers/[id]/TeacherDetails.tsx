@@ -4,10 +4,10 @@ import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
 import Document from './Document'
 import useGetTeacherDetails from './hooks/useGetTeacherDetails'
+import DocumentList from '~/app/documents/DocumentList'
 
 const TeacherDetails = () => {
   const { teacher } = useGetTeacherDetails()
-
   return (
     <Box css={TeachersStyle.main}>
       <Box marginBottom={5}>
@@ -26,7 +26,7 @@ const TeacherDetails = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Document teacher={teacher} />
+            <DocumentList teacherId={teacher.id} />
           </TabPanel>
           <TabPanel>
             <Profile teacher={teacher} />

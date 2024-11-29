@@ -8,6 +8,10 @@ import { TDocumentFormInput } from './schema/documents'
 import TeacherSelect from './component/TeacherSelect'
 import SelectForm from '~/components/Select/form/SelectForm'
 
+interface IDocumentForm {
+  showTeachers: boolean
+}
+
 const options: Option[] = [
   { label: 'TIN', value: 1 },
   { label: 'BIR', value: 2 },
@@ -15,7 +19,9 @@ const options: Option[] = [
   { label: 'SSS', value: 4 }
 ]
 
-const DocumentForm = () => {
+const DocumentForm = (props: IDocumentForm) => {
+  const { showTeachers } = props
+
   const {
     control,
     formState: { errors }
@@ -34,12 +40,14 @@ const DocumentForm = () => {
           {errors.file && <FormErrorMessage fontSize="sm">File is required.</FormErrorMessage>}
         </FormErrorMessage>
       </FormControl>
-      <FormControl id="teacherId" mb={4} isInvalid={!!errors.teacherId}>
-        <TeacherSelect />
-        <FormErrorMessage>
-          {errors.teacherId && <FormErrorMessage fontSize="sm">Teacher is required.</FormErrorMessage>}
-        </FormErrorMessage>
-      </FormControl>
+      {showTeachers && (
+        <FormControl id="teacherId" mb={4} isInvalid={!!errors.teacherId}>
+          <TeacherSelect />
+          <FormErrorMessage>
+            {errors.teacherId && <FormErrorMessage fontSize="sm">Teacher is required.</FormErrorMessage>}
+          </FormErrorMessage>
+        </FormControl>
+      )}
       <FormControl id="documentType" mb={4} isInvalid={!!errors.documentType}>
         <SelectForm options={options} name="documentType" placeholder="Select a document type" />
         <FormErrorMessage>

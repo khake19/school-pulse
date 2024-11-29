@@ -14,10 +14,11 @@ interface IDocumentTableProps {
   pagination: IPagination
   isLoading: boolean
   setCurrentPage: (page: number) => void
+  showFullName: boolean
 }
 
 const DocumentTable = (props: IDocumentTableProps) => {
-  const { handleDelete, customColumns, data, pagination, isLoading, setCurrentPage } = props
+  const { handleDelete, customColumns, data, pagination, isLoading, setCurrentPage, showFullName } = props
   const columnHelper = createColumnHelper<TDocumentData>()
 
   const defaultColumns: ColumnDef<TDocumentData, string>[] = [
@@ -93,6 +94,9 @@ const DocumentTable = (props: IDocumentTableProps) => {
     })
   ]
 
+  // Filter out the 'profile' column if showTeachers is false
+  const filteredColumns = showFullName ? defaultColumns : defaultColumns.filter((col) => col.id !== 'profile')
+
   const mergeColumns = (
     defaultCols: ColumnDef<TDocumentData, string>[],
     customCols?: ColumnDef<TDocumentData, string>[]
@@ -114,7 +118,7 @@ const DocumentTable = (props: IDocumentTableProps) => {
     return mergedColumns
   }
 
-  const columns = mergeColumns(defaultColumns, customColumns)
+  const columns = mergeColumns(filteredColumns, customColumns)
 
   return (
     <TableProvider defaultData={data} pagination={pagination} isLoading={isLoading}>
