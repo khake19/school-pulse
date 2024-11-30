@@ -2,7 +2,6 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading, Text } from '@ch
 
 import TeachersStyle from '../Teacher.style'
 import Profile from './Profile'
-import Document from './Document'
 import useGetTeacherDetails from './hooks/useGetTeacherDetails'
 import DocumentList from '~/app/documents/DocumentList'
 

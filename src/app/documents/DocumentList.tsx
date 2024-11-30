@@ -4,7 +4,7 @@ import { Box, Button, ButtonGroup, Flex, Heading, Spacer, Text, useDisclosure } 
 import DocumentTable from './DocumentTable'
 import DocumentStyle from './Document.style'
 import DocumentFormModal from './DocumentFormModal'
-import DocumentDeleteModal from '../teachers/[id]/DocumentDeleteModal'
+import DocumentDeleteModal from './DocumentDeleteModal'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useGetDocuments from './hooks/useGetDocuments'
 
