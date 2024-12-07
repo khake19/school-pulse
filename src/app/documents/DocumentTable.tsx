@@ -80,8 +80,8 @@ const DocumentTable = (props: IDocumentTableProps) => {
             </MenuButton>
             <MenuList>
               <MenuItem sx={{ _hover: { bg: 'primary' } }}>
-                <a href={process.env.NEXT_PUBLIC_SERVER_URL + props.row.original.path} target="_blank" rel="noreferrer">
-                  <Text>Open in browser</Text>
+                <a href={props.row.original.path} target="_blank" rel="noreferrer">
+                  <Text>Download</Text>
                 </a>
               </MenuItem>
               <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
