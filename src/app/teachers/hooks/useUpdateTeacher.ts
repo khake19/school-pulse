@@ -3,7 +3,7 @@ import teacherService from '../services/teacher.service'
 import useAlert from '~/hooks/useAlert'
 import getErrorMessage from '~/utils/error'
 import { TTeacherFormInput } from '../types/teachers'
-import { teacherUpdateFormToPayload } from '../helpers/converter'
+import { teacherFormToPayload } from '../helpers/converter'
 
 interface IUpdateTeacherProps {
   schoolId: string
@@ -13,7 +13,7 @@ interface IUpdateTeacherProps {
 
 const useUpdateTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(({ schoolId, teacherId, data }: IUpdateTeacherProps) => {
-    const payload = teacherUpdateFormToPayload(data)
+    const payload = teacherFormToPayload(data)
     return teacherService.updateTeacher(schoolId, teacherId, payload)
   }, options)
   const alert = useAlert()

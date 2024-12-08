@@ -1,12 +1,12 @@
 import { FormErrorMessage, FormLabel, FormControl, Input, Box, SimpleGrid, Text } from '@chakra-ui/react'
 
-import Select from '~/components/Select'
 import { Option } from '~/types/select'
 
 import PositionSelect from '../component/PositionSelect'
 import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
 import ProfileAvatar from './ProfileAvatar'
+import SelectForm from '~/components/Select/form/SelectForm'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },
@@ -51,7 +51,7 @@ const ProfileForm = () => {
             <FormLabel htmlFor="gender">
               <Text fontSize="sm">Gender</Text>
             </FormLabel>
-            <Select options={options} name="gender" placeholder="Select a gender" />
+            <SelectForm options={options} name="gender" placeholder="Select a gender" />
             <FormErrorMessage>
               <FormErrorMessage>Gender is required.</FormErrorMessage>
             </FormErrorMessage>

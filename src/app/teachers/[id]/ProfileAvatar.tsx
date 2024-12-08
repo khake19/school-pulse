@@ -4,7 +4,12 @@ import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
 import { useRef, useState } from 'react'
 
-const ProfileAvatar = () => {
+interface IProfileAvatarProps {
+  size?: string
+  name?: string
+}
+const ProfileAvatar = (props: IProfileAvatarProps) => {
+  const { size, name } = props
   const {
     register,
     setValue,
@@ -31,9 +36,9 @@ const ProfileAvatar = () => {
     <FormControl id="avatar" isInvalid={!!errors.avatar} mb={4}>
       <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap" marginBottom={5}>
         <Avatar
-          size="xl"
-          name="Segun Adebayo"
-          src={selectedImage ? URL.createObjectURL(selectedImage) : process.env.SERVER_URL + avatar}
+          size={size}
+          name={name}
+          src={selectedImage ? URL.createObjectURL(selectedImage) : (avatar as string)}
           onClick={handleClick}
         />
         <Box>

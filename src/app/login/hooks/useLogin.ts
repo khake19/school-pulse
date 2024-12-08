@@ -9,9 +9,7 @@ const useLogin = (options?: object) => {
   const login = async (params: ILoginParams) => {
     try {
       await mutateAsync(params)
-    } catch (error) {
-      console.log('error', error)
-    }
+    } catch (error) {}
   }
 
   if (isSuccess) {

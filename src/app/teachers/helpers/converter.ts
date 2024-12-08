@@ -19,16 +19,7 @@ export const teacherResponseToData = (teacher: ITeacherResponse | undefined): TT
   }
 }
 
-export const teacherCreateFormToPayload = (form: TTeacherFormInput): TTeacherPayload => {
-  return {
-    email: form.email,
-    first_name: form.firstName,
-    last_name: form.lastName,
-    position: form.position
-  }
-}
-
-export const teacherUpdateFormToPayload = (form: TTeacherFormInput) => {
+export const teacherFormToPayload = (form: TTeacherFormInput): FormData => {
   const data = new FormData()
   data.append('teacher[email]', form.email)
   data.append('teacher[first_name]', form.firstName)
@@ -38,6 +29,5 @@ export const teacherUpdateFormToPayload = (form: TTeacherFormInput) => {
   data.append('teacher[employee_number]', form.employeeNumber ?? '')
   data.append('teacher[remarks]', form.remarks ?? '')
   data.append('teacher[avatar]', form.avatar)
-
   return data
 }

@@ -1,14 +1,15 @@
+import { zfd } from 'zod-form-data'
 import { z } from 'zod'
 
-const teacherSchema = z.object({
-  firstName: z.string().min(1, { message: 'Required' }),
-  lastName: z.string().min(1, { message: 'Required' }),
-  position: z.string().min(1, { message: 'Required' }),
-  email: z.string().min(1, { message: 'Required' }),
-  employeeNumber: z.string().optional(),
-  remarks: z.string().optional(),
-  gender: z.string().optional(),
-  avatar: z.any().optional()
+const teacherSchema = zfd.formData({
+  firstName: zfd.text(),
+  lastName: zfd.text(),
+  position: zfd.text(),
+  email: zfd.text(),
+  employeeNumber: zfd.text().optional(),
+  remarks: zfd.text().optional(),
+  gender: zfd.text().optional(),
+  avatar: zfd.file(z.union([z.instanceof(File), z.string()]))
 })
 
 export default teacherSchema
