@@ -1,4 +1,4 @@
-import Select, { ActionMeta, GroupBase, Props, StylesConfig } from 'react-select'
+import Select, { GroupBase, Props, StylesConfig } from 'react-select'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useToken } from '@chakra-ui/react'
 import { Option } from '~/types/select'
@@ -31,9 +31,7 @@ const BasicSelect = <IsMulti extends boolean = false, Group extends GroupBase<Op
           {...props}
           styles={colourStyles}
           value={props.options?.filter((option: Option) => option.value === field.value)}
-          onChange={(selectedOption: Option | null, actionMeta: ActionMeta<Option>) =>
-            field.onChange(selectedOption?.value)
-          }
+          onChange={(selectedOption: Option | null) => field.onChange(selectedOption?.value)}
         />
       )}
       name={props.name}

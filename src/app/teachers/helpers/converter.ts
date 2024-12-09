@@ -1,4 +1,4 @@
-import { ITeacherResponse, TTeacherData, TTeacherFormInput, TTeacherPayload } from '../types/teachers'
+import { ITeacherResponse, TTeacherData, TTeacherFormInput } from '../types/teachers'
 
 export const teacherResponseToData = (teacher: ITeacherResponse | undefined): TTeacherData => {
   return {

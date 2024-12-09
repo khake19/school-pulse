@@ -1,5 +1,5 @@
 import { get, post, put, remove } from '~/utils/http'
-import { ITeacherResponse, TTeacherPayload } from '../types/teachers'
+import { ITeacherResponse } from '../types/teachers'
 import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
 
 const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacherResponse>> => {

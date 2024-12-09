@@ -14,7 +14,7 @@ const get = async <T>(endpoint: string, options: object = {}): Promise<T> => {
   return response.json()
 }
 
-const post = async <T, P extends object>(endpoint: string, params: P): Promise<T> => {
+const post = async <T, P>(endpoint: string, params: P): Promise<T> => {
   const options = {
     method: 'post',
     body: params
