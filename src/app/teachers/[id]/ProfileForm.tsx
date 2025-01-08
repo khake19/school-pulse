@@ -1,4 +1,4 @@
-import { FormErrorMessage, FormLabel, FormControl, Input, Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Fieldset, Input, Box, SimpleGrid } from '@chakra-ui/react'
 
 import { Option } from '~/types/select'
 
@@ -7,6 +7,7 @@ import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
 import ProfileAvatar from './ProfileAvatar'
 import SelectForm from '~/components/Select/form/SelectForm'
+import { Field } from '~/components/ui/field'
 
 const options: Option[] = [
   { label: 'Male', value: 'male' },
@@ -20,72 +21,42 @@ const ProfileForm = () => {
   } = useFormContext<TTeacherFormInput>()
 
   return (
-    <form>
-      <ProfileAvatar />
-      <SimpleGrid columns={2} spacing={5} width={700}>
-        <Box flex="1">
-          <FormControl id="firstName" isInvalid={!!errors.firstName} mb={4}>
-            <FormLabel htmlFor="firstName">First name</FormLabel>
-            <Input {...register('firstName')} />
-            <FormErrorMessage>
-              {errors.firstName && <FormErrorMessage>First name is required.</FormErrorMessage>}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="email" isInvalid={!!errors.email} mb={4}>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <Input {...register('email')} />
-            <FormErrorMessage>
-              {errors.email && <FormErrorMessage>Email is required.</FormErrorMessage>}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="employeeNumber" mb={4}>
-            <FormLabel htmlFor="employeeNumber">
-              <Text fontSize="sm">Employee Number</Text>
-            </FormLabel>
-            <Input {...register('employeeNumber')} />
-            <FormErrorMessage>
-              <FormErrorMessage>Last name is required.</FormErrorMessage>
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="gender" mb={4}>
-            <FormLabel htmlFor="gender">
-              <Text fontSize="sm">Gender</Text>
-            </FormLabel>
-            <SelectForm options={options} name="gender" placeholder="Select a gender" />
-            <FormErrorMessage>
-              <FormErrorMessage>Gender is required.</FormErrorMessage>
-            </FormErrorMessage>
-          </FormControl>
-        </Box>
-        <Box flex="2">
-          <FormControl id="lastName" isInvalid={!!errors.lastName} mb={4}>
-            <FormLabel htmlFor="lastName">Last name</FormLabel>
-            <Input {...register('lastName')} />
-            <FormErrorMessage>
-              {errors.firstName && <FormErrorMessage>Last name is required.</FormErrorMessage>}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="position" mb={4}>
-            <FormLabel htmlFor="position">
-              <Text fontSize="sm">Position</Text>
-            </FormLabel>
-            <PositionSelect />
-            <FormErrorMessage>
-              {errors.position && <FormErrorMessage>Position is required.</FormErrorMessage>}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl id="remarks" mb={4}>
-            <FormLabel htmlFor="remarks">
-              <Text fontSize="sm">Remarks</Text>
-            </FormLabel>
-            <Input {...register('remarks')} />
-            <FormErrorMessage>
-              <FormErrorMessage>Remarks is required.</FormErrorMessage>
-            </FormErrorMessage>
-          </FormControl>
-        </Box>
-      </SimpleGrid>
-    </form>
+    <Fieldset.Root size="lg" maxW="md">
+      <Fieldset.Content>
+        <ProfileAvatar />
+        <SimpleGrid columns={2} width={700} gap={2}>
+          <Box flex="1">
+            <Field label="First name" invalid={!!errors.firstName} errorText="First name is required.">
+              <Input {...register('firstName')} />
+            </Field>
+            <Field label="Email address" invalid={!!errors.email} errorText="Email is required.">
+              <Input {...register('email')} type="email" />
+            </Field>
+            <Field label="Employee Number">
+              <Input {...register('employeeNumber')} />
+            </Field>
+            <Field label="Gender" invalid={!!errors.gender} errorText="Gender is required.">
+              <Box width="100%">
+                <SelectForm options={options} name="gender" placeholder="Select a gender" />
+              </Box>
+            </Field>
+          </Box>
+          <Box flex="2">
+            <Field label="Last name" invalid={!!errors.lastName} errorText="Last name is required.">
+              <Input {...register('lastName')} />
+            </Field>
+            <Field label="Position" invalid={!!errors.position} errorText="Position is required.">
+              <Box width="100%">
+                <PositionSelect />
+              </Box>
+            </Field>
+            <Field label="Remarks" invalid={!!errors.remarks} errorText="Remarks is required.">
+              <Input {...register('remarks')} />
+            </Field>
+          </Box>
+        </SimpleGrid>
+      </Fieldset.Content>
+    </Fieldset.Root>
   )
 }
 

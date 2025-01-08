@@ -1,4 +1,4 @@
-import { Box, Text, Divider, Heading, Button } from '@chakra-ui/react'
+import { Box, Text, Heading, Button } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import schema from '../schema/teachers'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,6 +9,7 @@ import TeachersMessage from '../constant/teachers'
 import useAlert from '~/hooks/useAlert'
 import { useQueryClient } from '@tanstack/react-query'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
+import { header, main } from '../Teacher.style'
 
 interface IProfileProps {
   teacher: TTeacherData
@@ -51,7 +52,7 @@ const Profile = (props: IProfileProps) => {
   }
 
   return (
-    <Box>
+    <Box css={header}>
       <Box marginBottom={10}>
         <Heading as="h4" size="md" pt={5}>
           Profile
@@ -59,11 +60,10 @@ const Profile = (props: IProfileProps) => {
         <Text pt={2} pb={5}>
           Update your personal info and photo here.
         </Text>
-        <Divider />
       </Box>
       <FormProvider {...methods}>
         <ProfileForm />
-        <Button onClick={handleUpdateTeacher} mt={4} colorScheme="teal" type="submit">
+        <Button onClick={handleUpdateTeacher} mt={4} colorPalette="teal" type="submit">
           <Text>Update</Text>
         </Button>
       </FormProvider>

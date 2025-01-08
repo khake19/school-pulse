@@ -11,7 +11,7 @@ const TeacherLoading = () => {
       flexDirection="column"
       width="100%"
     >
-      <Spinner size="md" thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" mb={4} />
+      <Spinner size="md" color="blue.500" mb={4} />
       <Text fontSize="xl" color="gray.700">
         Loading, please wait...
       </Text>
