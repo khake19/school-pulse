@@ -147,6 +147,7 @@ export const PaginationNextTrigger = React.forwardRef<HTMLButtonElement, ChakraP
 
 export const PaginationItems = (props: React.HTMLAttributes<HTMLElement>) => {
   return (
+    // @ts-expect-error ChakraPagination.Context returns ReactNode, which isn't a valid JSX element
     <ChakraPagination.Context>
       {({ pages }) =>
         pages.map((page, index) => {

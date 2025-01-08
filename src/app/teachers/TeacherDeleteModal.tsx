@@ -1,4 +1,4 @@
-import { Button, Text } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import React from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AlertModal from '~/components/Alert/AlertModal/AlertModal'

@@ -23,7 +23,7 @@ const Header = (props: THeaderProps) => {
     } else if (school && school.name !== selectedSchoolName) {
       setSelectedSchoolName(school.name)
     }
-  }, [school, schools])
+  }, [school, schools, selectedSchoolName, setSchool])
 
   const handleClick = (selectedSchool: ISchool) => {
     setSchool(selectedSchool)

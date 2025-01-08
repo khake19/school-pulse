@@ -1,6 +1,4 @@
 import React from 'react'
-
-import { Button } from '~/components/ui/button'
 import {
   DialogBody,
   DialogCloseTrigger,
@@ -21,10 +19,9 @@ interface IAlertModalProps {
 
 const AlertModal = (props: IAlertModalProps) => {
   const { isOpen, onClose, label, description, actions } = props
-  const cancelRef = React.useRef(null)
 
   return (
-    <DialogRoot open={isOpen} onOpenChange={(e) => onClose()}>
+    <DialogRoot open={isOpen} onOpenChange={() => onClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{label}</DialogTitle>

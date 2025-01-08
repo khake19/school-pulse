@@ -10,6 +10,7 @@ export interface TooltipProps extends ChakraTooltip.RootProps {
   disabled?: boolean
 }
 
+// @ts-expect-error Tooltip returns ReactNode, which isn't a valid JSX element
 export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(function Tooltip(props, ref) {
   const { showArrow, children, disabled, portalled, content, contentProps, portalRef, ...rest } = props
 

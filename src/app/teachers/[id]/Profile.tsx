@@ -9,7 +9,7 @@ import TeachersMessage from '../constant/teachers'
 import useAlert from '~/hooks/useAlert'
 import { useQueryClient } from '@tanstack/react-query'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
-import { header, main } from '../Teacher.style'
+import { header } from '../Teacher.style'
 
 interface IProfileProps {
   teacher: TTeacherData

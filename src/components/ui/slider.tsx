@@ -41,6 +41,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(function Sli
 function SliderThumbs(props: { value?: number[] }) {
   const { value } = props
   return (
+    // @ts-expect-error For returns ReactNode, which isn't a valid JSX element
     <For each={value}>
       {(_, index) => (
         <ChakraSlider.Thumb key={index} index={index}>

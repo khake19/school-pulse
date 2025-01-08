@@ -1,5 +1,5 @@
 import { useFormContext, Controller } from 'react-hook-form'
-import { Box, Fieldset, NativeSelectRoot, Stack } from '@chakra-ui/react'
+import { Box, Fieldset, Stack } from '@chakra-ui/react'
 import { Field } from '~/components/ui/field'
 
 import { Option } from '~/types/select'
