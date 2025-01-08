@@ -1,7 +1,7 @@
 import '@fontsource/roboto'
 import '@fontsource/inter'
 
-export const fonts = { heading: `'Roboto', sans-serif`, body: `'Inter', sans-serif` }
+export const fonts = { heading: { value: `'Roboto', sans-serif` }, body: { value: `'Inter', sans-serif` } }
 
 export const colors = {
   // Official color palette
@@ -61,7 +61,7 @@ export const background = {}
 export const typography = {
   weight: {
     regular: 400,
-    bolod: 700
+    bold: 700
   },
   size: {}
 }
@@ -80,14 +80,14 @@ export const components = {
 }
 
 export const fontSizes = {
-  xs: '10px',
-  sm: '12px',
-  md: '14px',
-  lg: '16px',
-  xl: '18px',
-  '2xl': '24px',
-  '3xl': '28px',
-  '4xl': '36px',
-  '5xl': '48px',
-  '6xl': '64px'
+  xs: { value: '10px' },
+  sm: { value: '12px' },
+  md: { value: '14px' },
+  lg: { value: '16px' },
+  xl: { value: '18px' },
+  '2xl': { value: '24px' },
+  '3xl': { value: '28px' },
+  '4xl': { value: '36px' },
+  '5xl': { value: '48px' },
+  '6xl': { value: '64px' }
 }

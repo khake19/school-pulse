@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Box, Flex, Spacer, Button, Menu, MenuButton, MenuList, MenuItem, Text } from '@chakra-ui/react'
-import { TriangleDownIcon } from '@chakra-ui/icons'
+import { Box, Flex, Button } from '@chakra-ui/react'
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '~/components/ui/menu'
 import HeaderStyle from './Header.style'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import { ISchool } from '../../app/schools/types/schools'
@@ -17,13 +17,13 @@ const Header = (props: THeaderProps) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!school?.id) {
+    if (!school?.id && schools.length > 0 && school !== schools[0]) {
       setSchool(schools[0])
       setSelectedSchoolName(schools[0]?.name)
-    } else {
+    } else if (school && school.name !== selectedSchoolName) {
       setSelectedSchoolName(school.name)
     }
-  }, [school, schools, setSchool])
+  }, [school, schools, selectedSchoolName, setSchool])
 
   const handleClick = (selectedSchool: ISchool) => {
     setSchool(selectedSchool)
@@ -34,37 +34,26 @@ const Header = (props: THeaderProps) => {
     <Box css={HeaderStyle.header} zIndex={100} color="gray.600">
       <Flex h="60px" alignItems="center" justifyContent="space-between">
         <Box>
-          <Menu>
-            <MenuButton
-              as={Button}
-              css={HeaderStyle.menuButton}
-              bg="#B9EDDD"
-              _hover={{ bg: '#87CBB9' }}
-              _active={{ bg: '#87CBB9' }}
-              data-testid="school-menu"
-            >
-              <Flex direction="row">
-                <Text marginRight="12px" fontSize="md" fontWeight="500">
-                  {selectedSchoolName}
-                </Text>
-                <Spacer />
-                <TriangleDownIcon />
-              </Flex>
-            </MenuButton>
-            <MenuList width="300px">
+          <MenuRoot>
+            <MenuTrigger asChild bg="teal.200">
+              <Button variant="solid" size="sm" css={HeaderStyle.menuButton}>
+                {selectedSchoolName}
+              </Button>
+            </MenuTrigger>
+            <MenuContent>
               {schools.map(({ id, name }) => (
                 <MenuItem
+                  value="school"
                   key={id}
-                  minH="48px"
-                  _hover={{ bg: '#87CBB9' }}
-                  bg={selectedSchoolName === name ? '#87CBB9' : ''}
                   onClick={() => handleClick({ id: id, name: name })}
+                  _hover={{ bg: 'teal.200' }}
+                  bg={selectedSchoolName === name ? 'teal.200' : ''}
                 >
-                  <Text>{name}</Text>
+                  {name}
                 </MenuItem>
               ))}
-            </MenuList>
-          </Menu>
+            </MenuContent>
+          </MenuRoot>
         </Box>
       </Flex>
     </Box>

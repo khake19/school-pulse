@@ -1,6 +1,7 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading, Text } from '@chakra-ui/react'
+// import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Heading, Text } from '@chakra-ui/react'
+import { Box, Tabs, Heading } from '@chakra-ui/react'
 
-import TeachersStyle from '../Teacher.style'
+import { main } from '../Teacher.style'
 import Profile from './Profile'
 import useGetTeacherDetails from './hooks/useGetTeacherDetails'
 import DocumentList from '~/app/documents/DocumentList'
@@ -8,30 +9,24 @@ import DocumentList from '~/app/documents/DocumentList'
 const TeacherDetails = () => {
   const { teacher } = useGetTeacherDetails()
   return (
-    <Box css={TeachersStyle.main}>
+    <Box css={main}>
       <Box marginBottom={5}>
         <Heading as="h4" size="md">
           Teacher Details
         </Heading>
       </Box>
-      <Tabs position="relative" colorScheme="teal">
-        <TabList>
-          <Tab>
-            <Text>Documents</Text>
-          </Tab>
-          <Tab>
-            <Text>Profile</Text>
-          </Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <DocumentList teacherId={teacher.id} />
-          </TabPanel>
-          <TabPanel>
-            <Profile teacher={teacher} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <Tabs.Root defaultValue="documents">
+        <Tabs.List colorPalette="teal">
+          <Tabs.Trigger value="documents">Documents</Tabs.Trigger>
+          <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="documents">
+          <DocumentList teacherId={teacher.id} />
+        </Tabs.Content>
+        <Tabs.Content value="profile">
+          <Profile teacher={teacher} />
+        </Tabs.Content>
+      </Tabs.Root>
     </Box>
   )
 }

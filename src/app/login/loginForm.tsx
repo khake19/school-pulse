@@ -1,26 +1,13 @@
 'use client'
 
-import {
-  Alert,
-  AlertIcon,
-  AlertDescription,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Stack,
-  Image,
-  FormErrorMessage,
-  FormHelperText
-} from '@chakra-ui/react'
+import { Button, Flex, Heading, Input, Stack, Image, Fieldset } from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import schema, { TLoginSchema } from './schema/login'
 import useLogin from './hooks/useLogin'
+import { Field } from '~/components/ui/field'
 
 const LoginForm = () => {
   const {
@@ -31,37 +18,23 @@ const LoginForm = () => {
     resolver: zodResolver(schema)
   })
 
-  const { login, isError } = useLogin()
+  const { login } = useLogin()
 
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
-        <Stack spacing={4} w={'full'} maxW={'md'}>
-          {isError && (
-            <Alert status="error">
-              <AlertIcon />
-              <AlertDescription>Incorrect email or password</AlertDescription>
-            </Alert>
-          )}
+        <Stack gap={4} w={'full'} maxW={'md'}>
           <Heading fontSize="2xl">Sign in to your accounts</Heading>
           <form onSubmit={handleSubmit((data) => login(data))}>
-            <FormControl id="email" isInvalid={!!errors.email} mb={4}>
-              <FormLabel>Email</FormLabel>
-              <Input {...register('email')} />
-              <FormErrorMessage>
-                {!errors.email ? (
-                  <FormHelperText>Enter the email you'd like to login.</FormHelperText>
-                ) : (
-                  <FormErrorMessage>Email is required.</FormErrorMessage>
-                )}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl id="password" isInvalid={!!errors.password} mb={4}>
-              <FormLabel>Password</FormLabel>
-              <Input type="password" {...register('password')} />
-              {errors.password && <FormErrorMessage>Password is required.</FormErrorMessage>}
-            </FormControl>
-            <Button colorScheme={'teal'} variant={'solid'} type="submit">
+            <Fieldset.Root size="lg" maxW="md">
+              <Field label="Email address" invalid={!!errors.email} errorText="Email is required.">
+                <Input {...register('email')} type="email" />
+              </Field>
+              <Field label="Password" invalid={!!errors.password} errorText="Password is required.">
+                <Input {...register('password')} type="password" />
+              </Field>
+            </Fieldset.Root>
+            <Button colorPalette="teal" variant="solid" type="submit" mt={4}>
               Sign in
             </Button>
           </form>

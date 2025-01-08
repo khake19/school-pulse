@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 
 import Table from './Table'
 import TableProvider from './TableProvider'
@@ -14,13 +14,6 @@ const meta: Meta<typeof Table> = {
 
 export default meta
 type Story = StoryObj<typeof Table>
-
-const theme = extendTheme({
-  fonts: {
-    heading: `'Open Sans', sans-serif`,
-    body: `'Raleway', sans-serif`
-  }
-})
 
 type Person = {
   firstName: string
@@ -92,7 +85,7 @@ const columns = [
 ]
 export const Base: Story = {
   render: () => (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider value={defaultSystem}>
       <TableProvider defaultData={defaultData} pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}>
         <Table columns={columns} />
         <TablePagination setCurrentPage={() => 0} />

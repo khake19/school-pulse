@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Avatar, Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
@@ -11,6 +11,9 @@ import Link from 'next/link'
 import TableProvider from '~/components/TableProvider/TableProvider'
 import TablePagination from '~/components/TableProvider/TablePagination'
 import Table from '~/components/TableProvider/Table'
+import { Avatar } from '~/components/ui/avatar'
+import { MenuContent, MenuRoot, MenuTrigger, MenuItem } from '~/components/ui/menu'
+import { Button } from '~/components/ui/button'
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void
@@ -32,7 +35,14 @@ const TeacherTable = (props: ITeacherTableProps) => {
       cell: (info) => (
         <Link href={`teachers/${info.row.original.id}`} key="teacher">
           <Box display="flex" alignItems="center">
-            <Avatar size="md" src={info.row.original.avatar} mr={2} />
+            <Avatar
+              size="xl"
+              name={info.getValue()}
+              variant="subtle"
+              src={info.row.original.avatar}
+              mr={2}
+              colorPalette="red"
+            />
             <Box>
               <Text fontSize="sm" fontWeight="600">
                 {info.getValue()}
@@ -51,16 +61,22 @@ const TeacherTable = (props: ITeacherTableProps) => {
       id: 'actions',
       cell: (props) => (
         <Flex flexDir="column" alignItems="flex-end">
-          <Menu>
-            <MenuButton>
-              <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
-            </MenuButton>
-            <MenuList>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
-                <Text>Delete</Text>
+          <MenuRoot>
+            <MenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
+              </Button>
+            </MenuTrigger>
+            <MenuContent>
+              <MenuItem
+                css={{ _hover: { bg: 'primary' } }}
+                onClick={() => handleDelete(props.row.original.id)}
+                value="delete"
+              >
+                Delete
               </MenuItem>
-            </MenuList>
-          </Menu>
+            </MenuContent>
+          </MenuRoot>
         </Flex>
       )
     })

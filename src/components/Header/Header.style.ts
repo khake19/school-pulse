@@ -14,6 +14,7 @@ const HeaderStyle = {
   menuButton: css`
     height: 45px;
     min-width: 300px;
+    padding: 4px;
   `
 }
 

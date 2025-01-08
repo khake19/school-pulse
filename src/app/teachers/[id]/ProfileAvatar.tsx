@@ -1,11 +1,13 @@
-import { FormControl, Input, Box, Text, Avatar, Heading, Flex } from '@chakra-ui/react'
+import { Input, Box, Text, Heading, Flex } from '@chakra-ui/react'
 
 import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
 import { useRef, useState } from 'react'
+import { Avatar, AvatarProps } from '~/components/ui/avatar'
+import { Field } from '~/components/ui/field'
 
 interface IProfileAvatarProps {
-  size?: string
+  size?: AvatarProps
   name?: string
 }
 const ProfileAvatar = (props: IProfileAvatarProps) => {
@@ -33,7 +35,7 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
   const avatar = getValues('avatar')
 
   return (
-    <FormControl id="avatar" isInvalid={!!errors.avatar} mb={4}>
+    <Field invalid={!!errors.avatar} errorText="Image is required.">
       <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap" marginBottom={5}>
         <Avatar
           size={size}
@@ -62,7 +64,7 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
           />
         </Box>
       </Flex>
-    </FormControl>
+    </Field>
   )
 }
 

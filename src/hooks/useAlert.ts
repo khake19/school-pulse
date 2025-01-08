@@ -18,11 +18,18 @@ const useAlert = () => {
     const errorMessage = JSON.parse(error).errors
     const fields = Object.keys(errorMessage)
 
-    for (const field of fields) {
-      toast.error(capitalizeFirstLetter(field + ' ' + errorMessage[field]), {
+    if (typeof errorMessage === 'string') {
+      toast.error(capitalizeFirstLetter(errorMessage), {
         ...defaultOptions,
         ...options
       })
+    } else {
+      for (const field of fields) {
+        toast.error(capitalizeFirstLetter(field + ' ' + errorMessage[field]), {
+          ...defaultOptions,
+          ...options
+        })
+      }
     }
   }
 

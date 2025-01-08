@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Flex, Text, Link, useDisclosure } from '@chakra-ui/react'
+import { Flex, Text, Link as ChakraLink, useDisclosure } from '@chakra-ui/react'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -15,34 +15,35 @@ interface ISidebarItemProps {
 }
 
 const SidebarItem = ({ icon, title, name = '/', href, isSidebarOpen }: ISidebarItemProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   const pathname = usePathname()
 
   const active = pathname === href
-  const iconActive = isOpen || active ? '-active' : ''
+  const iconActive = open || active ? '-active' : ''
 
   return (
     <Flex
       mt="10px"
       flexDir="column"
       w="100%"
-      alignItems={isSidebarOpen ? 'center' : 'flex-start'}
+      alignItems={isSidebarOpen ? 'flex-start' : 'center'}
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
     >
-      <Link p="8px 10px" _hover={{ textDecor: 'none' }} as={NextLink} href={name}>
-        <Flex>
-          <Image src={`/icons/${icon}${iconActive}.svg`} height={0} width={21} alt="sidebar-icon" />
+      <ChakraLink asChild p="8px 10px" _hover={{ textDecor: 'none' }} _focus={{ outline: 'none' }}>
+        <NextLink href={name}>
+          <Image src={`/icons/${icon}${iconActive}.svg`} height={21} width={21} alt="sidebar-icon" />
           <Text
             ml={5}
-            display={isSidebarOpen ? 'none' : 'flex'}
+            display={isSidebarOpen ? 'flex' : 'none'}
             fontWeight={500}
-            color={active || isOpen ? 'teal.500' : 'gray.500'}
+            fontSize={14}
+            color={active || open ? 'teal.500' : 'gray.500'}
           >
             {title}
           </Text>
-        </Flex>
-      </Link>
+        </NextLink>
+      </ChakraLink>
     </Flex>
   )
 }

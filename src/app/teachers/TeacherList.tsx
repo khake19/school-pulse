@@ -1,15 +1,15 @@
 'use client'
 import { useState } from 'react'
-import { Box, Button, ButtonGroup, Flex, Heading, Spacer, useDisclosure, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Spacer, useDisclosure, Text, Group } from '@chakra-ui/react'
 
-import TeachersStyle from './Teacher.style'
+import { main, header } from './Teacher.style'
 import TeacherFormModal from './TeacherFormModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
 import TeacherTable from './TeacherTable'
 
 const TeacherList = () => {
-  const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
-  const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
+  const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+  const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
 
   const handleCreate = () => {
@@ -23,18 +23,18 @@ const TeacherList = () => {
   }
 
   return (
-    <Box css={TeachersStyle.main}>
-      <Box css={TeachersStyle.header}>
+    <Box css={main}>
+      <Box css={header}>
         <Flex minWidth="max-content" alignItems="center" gap="2">
           <Box p="2">
-            <Heading size="md"> Teachers</Heading>
+            <Heading size="xl"> Teachers</Heading>
           </Box>
           <Spacer />
-          <ButtonGroup gap="2">
-            <Button colorScheme="teal" onClick={handleCreate}>
+          <Group gap="2">
+            <Button colorPalette="teal" onClick={handleCreate}>
               <Text>Add Teacher</Text>
             </Button>
-          </ButtonGroup>
+          </Group>
         </Flex>
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
