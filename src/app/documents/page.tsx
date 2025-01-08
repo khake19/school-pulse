@@ -1,11 +1,11 @@
 'use client'
 import { Box } from '@chakra-ui/react'
 import DocumentList from './DocumentList'
-import DocumentStyle from './Document.style'
+import { main } from './Document.style'
 
 const Teachers = () => {
   return (
-    <Box css={DocumentStyle.main}>
+    <Box css={main}>
       <DocumentList />
     </Box>
   )

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Box, Button, ButtonGroup, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Group, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
 
 import DocumentTable from './DocumentTable'
-import DocumentStyle from './Document.style'
+import { header } from './Document.style'
 import DocumentFormModal from './DocumentFormModal'
 import DocumentDeleteModal from './DocumentDeleteModal'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
@@ -25,8 +25,8 @@ const DocumentList = (props: IDocumentListProps) => {
     isLoading
   } = useGetDocuments(school?.id, { ...defaultParams, ...(teacherId && { teacher_id: teacherId }) })
 
-  const { isOpen: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
-  const { isOpen: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
+  const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+  const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [documentId, setDocumentId] = useState('')
 
   const handleCreate = () => {
@@ -39,18 +39,16 @@ const DocumentList = (props: IDocumentListProps) => {
   }
 
   return (
-    <Box>
-      <Box css={DocumentStyle.header}>
+    <Box css={header}>
+      <Box>
         <Flex minWidth="max-content" alignItems="center" gap="2">
-          <Box p="2">
-            <Heading size="md">Documents</Heading>
-          </Box>
+          <Heading size="md">Documents</Heading>
           <Spacer />
-          <ButtonGroup gap="2">
-            <Button onClick={handleCreate} bg="brand.400" color="white">
+          <Group gap="2">
+            <Button onClick={handleCreate} bg="teal" color="white">
               <Text>Add Document</Text>
             </Button>
-          </ButtonGroup>
+          </Group>
         </Flex>
       </Box>
       <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />

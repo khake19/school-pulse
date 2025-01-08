@@ -1,5 +1,6 @@
 import { useFormContext, Controller } from 'react-hook-form'
-import { FormErrorMessage, FormControl } from '@chakra-ui/react'
+import { Box, Fieldset, NativeSelectRoot, Stack } from '@chakra-ui/react'
+import { Field } from '~/components/ui/field'
 
 import { Option } from '~/types/select'
 
@@ -28,33 +29,35 @@ const DocumentForm = (props: IDocumentForm) => {
   } = useFormContext<TDocumentFormInput>()
 
   return (
-    <form>
-      <FormControl id="file" mb={4} isInvalid={!!errors.file}>
-        <Controller
-          render={({ field: { onChange, value } }) => <FileUpload onFilesChange={onChange} value={value as any} />}
-          name="file"
-          control={control}
-          defaultValue={[]}
-        />
-        <FormErrorMessage>
-          {errors.file && <FormErrorMessage fontSize="sm">File is required.</FormErrorMessage>}
-        </FormErrorMessage>
-      </FormControl>
-      {showTeachers && (
-        <FormControl id="teacherId" mb={4} isInvalid={!!errors.teacherId}>
-          <TeacherSelect />
-          <FormErrorMessage>
-            {errors.teacherId && <FormErrorMessage fontSize="sm">Teacher is required.</FormErrorMessage>}
-          </FormErrorMessage>
-        </FormControl>
-      )}
-      <FormControl id="documentType" mb={4} isInvalid={!!errors.documentType}>
-        <SelectForm options={options} name="documentType" placeholder="Select a document type" />
-        <FormErrorMessage>
-          {errors.documentType && <FormErrorMessage fontSize="sm">Document type is required.</FormErrorMessage>}
-        </FormErrorMessage>
-      </FormControl>
-    </form>
+    <Fieldset.Root size="lg" maxW="md">
+      <Stack>
+        <Fieldset.HelperText>Please provide a document details below.</Fieldset.HelperText>
+      </Stack>
+      <Fieldset.Content>
+        <Field invalid={!!errors.file} errorText="File is required.">
+          <Box width="100%">
+            <Controller
+              render={({ field: { onChange, value } }) => <FileUpload onFilesChange={onChange} value={value as any} />}
+              name="file"
+              control={control}
+              defaultValue={[]}
+            />
+          </Box>
+        </Field>
+        {showTeachers && (
+          <Field label="Teacher" invalid={!!errors.teacherId} errorText="Teacher is required.">
+            <Box width="100%">
+              <TeacherSelect />
+            </Box>
+          </Field>
+        )}
+        <Field label="Document type" invalid={!!errors.file} errorText="Document type is required.">
+          <Box width="100%">
+            <SelectForm options={options} name="documentType" placeholder="Select a document type" />
+          </Box>
+        </Field>
+      </Fieldset.Content>
+    </Fieldset.Root>
   )
 }
 export default DocumentForm

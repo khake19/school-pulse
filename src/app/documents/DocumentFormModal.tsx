@@ -47,7 +47,7 @@ const DocumentFormModal = (props: IDocumentFormModalProps) => {
   }, [teacherId, setValue])
 
   const createActions = (
-    <Button onClick={handleCreateDocument} mt={4} bg="brand.300" type="submit" variant="outline">
+    <Button onClick={handleCreateDocument} bg="teal" type="submit" variant="outline" color="#FFFF">
       <Text>Submit</Text>
     </Button>
   )

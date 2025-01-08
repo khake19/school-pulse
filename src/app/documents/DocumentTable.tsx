@@ -1,4 +1,5 @@
-import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
+import { MenuContent, MenuRoot, MenuTrigger, MenuItem } from '~/components/ui/menu'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
 import { TDocumentData } from './types/documents'
@@ -74,21 +75,25 @@ const DocumentTable = (props: IDocumentTableProps) => {
       id: 'actions',
       cell: (props) => (
         <Flex flexDir="column" alignItems="flex-end">
-          <Menu>
-            <MenuButton>
+          <MenuRoot>
+            <MenuTrigger>
               <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
-            </MenuButton>
-            <MenuList>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }}>
+            </MenuTrigger>
+            <MenuContent>
+              <MenuItem css={{ _hover: { bg: 'primary' } }} value="download">
                 <a href={props.row.original.path} target="_blank" rel="noreferrer">
                   <Text>Download</Text>
                 </a>
               </MenuItem>
-              <MenuItem sx={{ _hover: { bg: 'primary' } }} onClick={() => handleDelete(props.row.original.id)}>
+              <MenuItem
+                css={{ _hover: { bg: 'primary' } }}
+                onClick={() => handleDelete(props.row.original.id)}
+                value="delete"
+              >
                 <Text>Delete</Text>
               </MenuItem>
-            </MenuList>
-          </Menu>
+            </MenuContent>
+          </MenuRoot>
         </Flex>
       )
     })
