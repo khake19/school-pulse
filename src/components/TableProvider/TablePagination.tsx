@@ -1,8 +1,7 @@
-import { Box, Flex, Spacer } from '@chakra-ui/react'
-
-import Pagination from './Pagination/Pagination'
+import { Box, Flex, HStack, Spacer } from '@chakra-ui/react'
 import PaginationSummary from './Pagination/PaginationSummary'
 import { ActionKind, useTableContext, useTableDispatchContext } from './TableProvider'
+import { PaginationItems, PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot } from '../ui/pagination'
 
 interface ITablePaginationProps {
   setCurrentPage: (page: number) => void
@@ -21,13 +20,21 @@ const TablePagination = (props: ITablePaginationProps) => {
       <PaginationSummary offset={offset} page={page} size={size} total={total} pages={pages} />
       <Spacer />
       <Box p="4">
-        <Pagination
-          pageCount={pages ?? 0}
-          handlePage={(selected) => {
-            setCurrentPage(selected)
-            dispatch({ type: ActionKind.setPage, payload: selected })
+        <PaginationRoot
+          page={page}
+          count={pages}
+          pageSize={size}
+          onPageChange={(e) => {
+            setCurrentPage(e.page)
+            dispatch({ type: ActionKind.setPage, payload: e.page })
           }}
-        />
+        >
+          <HStack>
+            <PaginationPrevTrigger />
+            <PaginationItems />
+            <PaginationNextTrigger />
+          </HStack>
+        </PaginationRoot>
       </Box>
     </Flex>
   )

@@ -1,14 +1,15 @@
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  AlertDialogCloseButton,
-  Text
-} from '@chakra-ui/react'
 import React from 'react'
+
+import { Button } from '~/components/ui/button'
+import {
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
+  DialogTitle
+} from '~/components/ui/dialog'
 
 interface IAlertModalProps {
   isOpen: boolean
@@ -23,31 +24,19 @@ const AlertModal = (props: IAlertModalProps) => {
   const cancelRef = React.useRef(null)
 
   return (
-    <AlertDialog
-      motionPreset="slideInBottom"
-      leastDestructiveRef={cancelRef}
-      onClose={onClose}
-      isOpen={isOpen}
-      isCentered
-    >
-      <AlertDialogOverlay />
-
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <Text>{label}</Text>
-        </AlertDialogHeader>
-        <AlertDialogCloseButton />
-        <AlertDialogBody>
-          <Text>{description}</Text>
-        </AlertDialogBody>
-        {actions && (
-          <AlertDialogFooter>
-            {' '}
-            <Text>{actions}</Text>
-          </AlertDialogFooter>
-        )}
-      </AlertDialogContent>
-    </AlertDialog>
+    <DialogRoot open={isOpen} onOpenChange={(e) => onClose()}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{label}</DialogTitle>
+          <DialogCloseTrigger />
+        </DialogHeader>
+        <DialogBody>
+          <p>{description}</p>
+        </DialogBody>
+        {actions && <DialogFooter>{actions}</DialogFooter>}
+        <DialogCloseTrigger />
+      </DialogContent>
+    </DialogRoot>
   )
 }
 

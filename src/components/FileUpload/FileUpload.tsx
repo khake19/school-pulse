@@ -1,4 +1,5 @@
-import { Box, Center, Flex, Grid, GridItem, IconButton, Img, Text } from '@chakra-ui/react'
+import { Box, Center, Flex, Grid, GridItem, IconButton, Text } from '@chakra-ui/react'
+
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import Image from 'next/image'
@@ -92,7 +93,7 @@ const Dropzone = (props: IDropzoneProps) => {
     <Box className="container">
       <Box {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <Image src={`/icons/file-arrow-up.svg`} height={0} width={40} alt="file-arrow-up" />
+        <Image src={`/icons/file-arrow-up.svg`} height={40} width={40} alt="file-arrow-up" />
         <Text color="#000" fontSize={10} pt={3}>
           Drag and Drop file here or Choose file
         </Text>
@@ -108,7 +109,7 @@ const Dropzone = (props: IDropzoneProps) => {
         <Box bgColor="gray.100" borderRadius={5} padding={2} position="relative" key={file.lastModified}>
           <Flex>
             <Center mr={2}>
-              <Img src="/icons/file.svg" width={18} />
+              <Image src="/icons/file.svg" width={18} height={18} alt="icon-file" />
             </Center>
             <Box>
               <Text fontSize={10}>{file.name}</Text>
@@ -122,8 +123,8 @@ const Dropzone = (props: IDropzoneProps) => {
             top="1"
             right="2"
             size="sm"
-            icon={<Img src="/icons/x-circle.svg" width={18} />}
             aria-label="Close"
+            variant="ghost"
             onClick={() => {
               setFiles((prevFiles) => prevFiles.filter((f) => f !== file))
 
@@ -133,7 +134,9 @@ const Dropzone = (props: IDropzoneProps) => {
                 props.onFilesChange(undefined)
               }
             }}
-          />
+          >
+            <Image src="/icons/x-circle.svg" width={18} height={18} alt="icon-x-circle" />
+          </IconButton>
         </Box>
       ))}
     </Box>

@@ -2,7 +2,7 @@ type ErrorWithMessage = {
   message: string
 }
 
-const isErrorWithMessage = (error: unknown): error is ErrorWithMessage => {
+const isErrorWithMessage = (error: unknown): boolean => {
   return (
     typeof error === 'object' &&
     error !== null &&
@@ -12,7 +12,7 @@ const isErrorWithMessage = (error: unknown): error is ErrorWithMessage => {
 }
 
 const toErrorWithMessage = (maybeError: unknown): ErrorWithMessage => {
-  if (isErrorWithMessage(maybeError)) return maybeError
+  if (isErrorWithMessage(maybeError)) return maybeError as ErrorWithMessage
 
   try {
     return new Error(JSON.stringify(maybeError))
