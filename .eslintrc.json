@@ -5,5 +5,5 @@
     "prettier",
     "plugin:storybook/recommended"
   ],
-  "rules": { "react/no-unescaped-entities": 0 }
+  "rules": { "react/no-unescaped-entities": 0,  "@typescript-eslint/no-empty-interface": "off" }
 }
