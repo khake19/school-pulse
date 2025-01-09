@@ -23,7 +23,8 @@ export const ActionKind = {
   getData: 'GET_DATA',
   setData: 'SET_DATA',
   setPage: 'SET_PAGE',
-  setPagination: 'SET_PAGINATION'
+  setPagination: 'SET_PAGINATION',
+  setLoading: 'SET_LOADING'
 } as const
 
 type TTableAction =
@@ -31,6 +32,7 @@ type TTableAction =
   | { type: typeof ActionKind.setData; payload: any[] }
   | { type: typeof ActionKind.setPage; payload: number }
   | { type: typeof ActionKind.setPagination; payload: IPagination }
+  | { type: typeof ActionKind.setLoading; payload: boolean }
 
 interface ITableState<T> {
   data: T[]
@@ -49,6 +51,9 @@ const tableReducer = <T extends object>(draft: ITableState<T>, action: TTableAct
     case ActionKind.setPagination:
       draft.pagination = action.payload
       break
+    case ActionKind.setLoading:
+      draft.isLoading = action.payload
+      break
   }
 }
 
@@ -57,7 +62,7 @@ interface ITableProviderProps<T> {
   children: ReactNode
   defaultData: T[]
   pagination?: IPagination
-  isLoading?: boolean
+  isLoading: boolean
 }
 
 const TableProvider = <T extends object>({
@@ -68,7 +73,8 @@ const TableProvider = <T extends object>({
 }: ITableProviderProps<T>) => {
   const [tableState, dispatch] = useImmerReducer<ITableState<T>, TTableAction>(tableReducer, {
     data: defaultData,
-    pagination
+    pagination,
+    isLoading
   })
 
   useEffect(() => {
@@ -79,12 +85,15 @@ const TableProvider = <T extends object>({
     dispatch({ type: ActionKind.setPagination, payload: pagination })
   }, [pagination, dispatch])
 
+  useEffect(() => {
+    dispatch({ type: ActionKind.setLoading, payload: isLoading })
+  }, [isLoading, dispatch])
+
   return (
     <TableContext.Provider value={tableState}>
       <TableDispatchContext.Provider value={{ dispatch }}>
-        {tableState.data.length > 0 && !isLoading && children}
+        {(tableState.data.length > 0 || isLoading) && children}
         {tableState.data.length === 0 && !isLoading && <TableEmpty />}
-        {isLoading && <TableisLoading />}
       </TableDispatchContext.Provider>
     </TableContext.Provider>
   )
