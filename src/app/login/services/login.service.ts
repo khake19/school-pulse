@@ -1,12 +1,16 @@
-import { post } from '~/utils/http'
+import { post, get } from '~/utils/http'
 import { ILoginParams } from '../types/login'
 
 const login = async (params: ILoginParams) => {
-  console.log('params', JSON.stringify(params))
   const result = await post('api/login', JSON.stringify(params))
   return result
 }
 
-const loginService = { login }
+const logout = async (options: object) => {
+  const result = await get(process.env.SERVER_URL + '/api/auth/sign_out', options)
+  return result
+}
+
+const loginService = { login, logout }
 
 export default loginService

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import schoolService from '../services/school.service'
+import { useMemo } from 'react'
 
 const useGetSchools = () => {
   const { data, status, error, isFetching } = useQuery({
@@ -7,8 +8,9 @@ const useGetSchools = () => {
     queryFn: schoolService.all
   })
 
+  const schools = useMemo(() => data?.data, [data])
   return {
-    schools: data?.data,
+    schools,
     status,
     error,
     isFetching

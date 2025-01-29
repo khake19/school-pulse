@@ -34,10 +34,10 @@ const DocumentDeleteModal = (props: IDocumentDeleteModalProps) => {
   const actions = (
     <>
       <Button ref={cancelRef} onClick={onClose} variant="outline">
-        <Text>No</Text>
+        <Text>Cancel</Text>
       </Button>
-      <Button colorPalette="teal" ml={3} onClick={handleDeleteDocument}>
-        <Text>Yes</Text>
+      <Button bg="bg.success" ml={1} onClick={handleDeleteDocument}>
+        <Text>Delete</Text>
       </Button>
     </>
   )

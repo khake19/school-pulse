@@ -36,8 +36,8 @@ const TeacherDeleteModal = (props: ITeacherDeleteModalProps) => {
       <Button ref={cancelRef} onClick={onClose} variant="outline">
         Cancel
       </Button>
-      <Button colorPalette="teal" ml={3} onClick={handleDeleteTeacher}>
-        Yes
+      <Button colorPalette="teal" ml={1} onClick={handleDeleteTeacher}>
+        Delete
       </Button>
     </>
   )

@@ -14,10 +14,10 @@ const get = async <T>(endpoint: string, options: object = {}): Promise<T> => {
   return response.json()
 }
 
-const post = async <T, P>(endpoint: string, params: P): Promise<T> => {
+const post = async <T, P>(endpoint: string, params?: P): Promise<T> => {
   const options = {
     method: 'post',
-    body: params
+    body: params ?? null
   }
 
   const response = await http(endpoint, options)

@@ -11,7 +11,7 @@ interface IProfileAvatarProps {
   name?: string
 }
 const ProfileAvatar = (props: IProfileAvatarProps) => {
-  const { size, name } = props
+  const { size, name = undefined } = props
   const {
     register,
     setValue,
@@ -32,8 +32,7 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
   const handleClick = () => {
     fileInputRef?.current?.click()
   }
-  const avatar = getValues('avatar')
-
+  const avatar = getValues('avatar') || undefined
   return (
     <Field invalid={!!errors.avatar} errorText="Image is required.">
       <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap" marginBottom={5}>

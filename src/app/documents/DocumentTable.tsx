@@ -7,6 +7,7 @@ import TableProvider from '~/components/TableProvider/TableProvider'
 import Table from '~/components/TableProvider/Table'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TablePagination from '~/components/TableProvider/TablePagination'
+import { PhotoView } from 'react-photo-view'
 
 interface IDocumentTableProps {
   handleDelete: (id: string) => void
@@ -25,34 +26,58 @@ const DocumentTable = (props: IDocumentTableProps) => {
   const defaultColumns: ColumnDef<TDocumentData, string>[] = [
     columnHelper.display({
       id: 'fileName',
-      cell: (props) => (
-        <Box display="flex" alignItems="center">
-          <Box>
-            <Text fontSize="sm" fontWeight="500">
-              {props.row.original.documentType}
-            </Text>
-            <Text fontSize="xs" color="gray.500">
-              {props.row.original.size} KB | {props.row.original.contentType}
-            </Text>
-          </Box>
-        </Box>
-      ),
+      cell: (props) => {
+        return (
+          <PhotoView src={props.row.original.path}>
+            <Box display="flex" alignItems="center">
+              <Box>
+                <Text fontSize="sm" fontWeight="500">
+                  {props.row.original.documentType}
+                </Text>
+                <Text fontSize="xs" color="gray.500">
+                  {props.row.original.size} KB | {props.row.original.contentType}
+                </Text>
+              </Box>
+            </Box>
+          </PhotoView>
+        )
+      },
       header: () => 'Filename',
+      footer: (info) => info.column.id
+    }),
+    columnHelper.display({
+      id: 'datePeriod',
+      cell: (props) => {
+        return (
+          <PhotoView src={props.row.original.path}>
+            <Box display="flex" alignItems="center">
+              <Box>
+                <Text fontSize="sm" fontWeight="500">
+                  {props.row.original.datePeriod}
+                </Text>
+              </Box>
+            </Box>
+          </PhotoView>
+        )
+      },
+      header: () => 'Date Period',
       footer: (info) => info.column.id
     }),
     columnHelper.display({
       id: 'profile',
       cell: (props) => (
-        <Box display="flex" alignItems="center">
-          <Box>
-            <Text fontSize="sm" fontWeight="500">
-              {props.row.original.user.firstName} {props.row.original.user.lastName}
-            </Text>
-            <Text fontSize="xs" color="gray.500">
-              {props.row.original.user.email}
-            </Text>
+        <PhotoView src={props.row.original.path}>
+          <Box display="flex" alignItems="center">
+            <Box>
+              <Text fontSize="sm" fontWeight="500">
+                {props.row.original.user.firstName} {props.row.original.user.lastName}
+              </Text>
+              <Text fontSize="xs" color="gray.500">
+                {props.row.original.user.email}
+              </Text>
+            </Box>
           </Box>
-        </Box>
+        </PhotoView>
       ),
       header: () => 'Teacher',
       footer: (info) => info.column.id
@@ -60,15 +85,17 @@ const DocumentTable = (props: IDocumentTableProps) => {
     columnHelper.display({
       id: 'createdAt',
       cell: (props) => (
-        <Box display="flex" alignItems="center">
-          <Box>
-            <Text fontSize="sm" fontWeight="500">
-              {props.row.original.insertedAt}
-            </Text>
+        <PhotoView src={props.row.original.path}>
+          <Box display="flex" alignItems="center">
+            <Box>
+              <Text fontSize="sm" fontWeight="500">
+                {props.row.original.insertedAt}
+              </Text>
+            </Box>
           </Box>
-        </Box>
+        </PhotoView>
       ),
-      header: () => 'Created At',
+      header: () => 'Created at',
       footer: (info) => info.column.id
     }),
     columnHelper.display({

@@ -12,9 +12,7 @@ const TeacherLoading = () => {
       width="100%"
     >
       <Spinner size="md" color="blue.500" mb={4} />
-      <Text fontSize="xl" color="gray.700">
-        Loading, please wait...
-      </Text>
+      <Text fontSize="xl">Loading, please wait...</Text>
     </Box>
   )
 }

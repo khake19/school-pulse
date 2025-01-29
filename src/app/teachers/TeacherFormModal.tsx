@@ -49,7 +49,13 @@ const TeacherFormModal = (props: IFormModal) => {
   )
 
   return (
-    <BasicModal title={`Create Teacher`} actions={createActions} isOpen={isOpen} onClose={onClose}>
+    <BasicModal
+      title={`Create Teacher`}
+      actions={createActions}
+      isOpen={isOpen}
+      onClose={onClose}
+      scrollBehavior="inside"
+    >
       <FormProvider {...methods}>
         <TeacherForm />
       </FormProvider>

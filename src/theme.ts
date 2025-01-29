@@ -7,6 +7,14 @@ const theme = createSystem(defaultConfig, {
     tokens: {
       fonts: fonts,
       fontSizes: fontSizes
+    },
+    semanticTokens: {
+      colors: {
+        bg: {
+          danger: { value: '{colors.red.500}' },
+          success: { value: '{colors.teal.500}' }
+        }
+      }
     }
   }
 })

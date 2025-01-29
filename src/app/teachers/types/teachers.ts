@@ -6,18 +6,26 @@ import { z } from 'zod'
 export interface ITeacherResponse extends IBase {
   email: string
   first_name: string
+  middle_name: string
   last_name: string
   position: IPositionResponse
   gender: string
   employee_number: string
   remarks: string
   avatar: string
+  philhealth: string
+  gsis: string
+  pagibig: string
+  tin: string
+  plantilla: string
+  date_hired: string
 }
 
-export interface IPositionResponse extends IBase {
+export interface IPositionResponse {
   name: string
   salary_grade: string
   type: string
+  id: number
 }
 
 export type TTeacherFormInput = z.infer<typeof teacherSchema>

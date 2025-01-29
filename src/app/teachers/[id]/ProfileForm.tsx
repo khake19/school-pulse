@@ -1,6 +1,4 @@
-import { Fieldset, Input, Box, SimpleGrid } from '@chakra-ui/react'
-
-import { Option } from '~/types/select'
+import { Fieldset, Input, Box, SimpleGrid, Textarea } from '@chakra-ui/react'
 
 import PositionSelect from '../component/PositionSelect'
 import { useFormContext } from 'react-hook-form'
@@ -8,11 +6,7 @@ import { TTeacherFormInput } from '../types/teachers'
 import ProfileAvatar from './ProfileAvatar'
 import SelectForm from '~/components/Select/form/SelectForm'
 import { Field } from '~/components/ui/field'
-
-const options: Option[] = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' }
-]
+import PatternFormatField from '~/components/NumberFormat/PatternFormatField'
 
 const ProfileForm = () => {
   const {
@@ -26,32 +20,70 @@ const ProfileForm = () => {
         <ProfileAvatar />
         <SimpleGrid columns={2} width={700} gap={2}>
           <Box flex="1">
-            <Field label="First name" invalid={!!errors.firstName} errorText="First name is required.">
+            <Field label="First name" invalid={!!errors.firstName} errorText={errors.firstName?.message} mb={4}>
               <Input {...register('firstName')} />
             </Field>
-            <Field label="Email address" invalid={!!errors.email} errorText="Email is required.">
-              <Input {...register('email')} type="email" />
+            <Field label="Last name" invalid={!!errors.lastName} errorText={errors.lastName?.message} mb={4}>
+              <Input {...register('lastName')} />
             </Field>
-            <Field label="Employee Number">
-              <Input {...register('employeeNumber')} />
+            <Field
+              label="Employee Number"
+              invalid={!!errors.employeeNumber}
+              errorText={errors.employeeNumber?.message}
+              mb={4}
+            >
+              <PatternFormatField name="employeeNumber" format="#######" />
             </Field>
-            <Field label="Gender" invalid={!!errors.gender} errorText="Gender is required.">
+            <Field label="Gender" invalid={!!errors.gender} errorText={errors.gender?.message} mb={4}>
               <Box width="100%">
-                <SelectForm options={options} name="gender" placeholder="Select a gender" />
+                <SelectForm
+                  options={[
+                    { label: 'Male', value: 'male' },
+                    { label: 'Female', value: 'female' }
+                  ]}
+                  name="gender"
+                  placeholder="Select a gender"
+                />
               </Box>
+            </Field>
+            <Field
+              label="Philhealth Number"
+              invalid={!!errors.philhealth}
+              errorText={errors.philhealth?.message}
+              mb={4}
+            >
+              <PatternFormatField name="philhealth" format="##-#########-#" />
+            </Field>
+            <Field label="Pag Ibig" invalid={!!errors.pagibig} errorText={errors.pagibig?.message} mb={4}>
+              <PatternFormatField name="pagibig" format="####-####-####" />
+            </Field>
+            <Field label="Plantilla" invalid={!!errors.plantilla} errorText={errors.plantilla?.message}>
+              <Input {...register('plantilla')} />
             </Field>
           </Box>
           <Box flex="2">
-            <Field label="Last name" invalid={!!errors.lastName} errorText="Last name is required.">
-              <Input {...register('lastName')} />
+            <Field label="Middle name" invalid={!!errors.middleName} errorText={errors.middleName?.message} mb={4}>
+              <Input {...register('middleName')} />
             </Field>
-            <Field label="Position" invalid={!!errors.position} errorText="Position is required.">
+            <Field label="Email address" invalid={!!errors.email} errorText={errors.email?.message} mb={4}>
+              <Input {...register('email')} type="email" />
+            </Field>
+            <Field label="Position" invalid={!!errors.position} errorText={errors.position?.message} mb={4}>
               <Box width="100%">
                 <PositionSelect />
               </Box>
             </Field>
-            <Field label="Remarks" invalid={!!errors.remarks} errorText="Remarks is required.">
-              <Input {...register('remarks')} />
+            <Field label="Date Hired" invalid={!!errors.dateHired} errorText={errors.dateHired?.message} mb={4}>
+              <Input {...register('dateHired')} type="date" />
+            </Field>
+            <Field label="GSIS" invalid={!!errors.gsis} errorText={errors.gsis?.message} mb={4}>
+              <PatternFormatField name="gsis" format="##########" />
+            </Field>
+            <Field label="Tax Identification Number" invalid={!!errors.tin} errorText={errors.tin?.message} mb={4}>
+              <PatternFormatField name="tin" format="###-###-###-####" />
+            </Field>
+            <Field label="Remarks" invalid={!!errors.remarks} errorText={errors.remarks?.message} mb={4}>
+              <Textarea {...register('remarks')} />
             </Field>
           </Box>
         </SimpleGrid>

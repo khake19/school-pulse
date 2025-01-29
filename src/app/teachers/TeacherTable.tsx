@@ -58,6 +58,21 @@ const TeacherTable = (props: ITeacherTableProps) => {
       footer: (info) => info.column.id
     }),
     columnHelper.display({
+      id: 'employeeNumber',
+      cell: (props) => (
+        <Box display="flex" alignItems="center">
+          <Box>
+            <Text fontSize="sm" fontWeight="600">
+              {props.row.original.employeeNumber}
+            </Text>
+            <Text fontSize="xs" color="gray.500">
+              Employee Number
+            </Text>
+          </Box>
+        </Box>
+      )
+    }),
+    columnHelper.display({
       id: 'actions',
       cell: (props) => (
         <Flex flexDir="column" alignItems="flex-end">

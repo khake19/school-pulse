@@ -2,7 +2,10 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  productionBrowserSourceMaps: true
+  productionBrowserSourceMaps: true,
+  experimental: {
+    serverActions: true
+  }
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

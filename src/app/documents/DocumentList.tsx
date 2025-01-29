@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Button, Group, Flex, Heading, Spacer, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, useDisclosure } from '@chakra-ui/react'
 
 import DocumentTable from './DocumentTable'
 import { header } from './Document.style'
@@ -25,13 +25,8 @@ const DocumentList = (props: IDocumentListProps) => {
     isLoading
   } = useGetDocuments(school?.id, { ...defaultParams, ...(teacherId && { teacher_id: teacherId }) })
 
-  const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [documentId, setDocumentId] = useState('')
-
-  const handleCreate = () => {
-    onFormModalOpen()
-  }
 
   const handleDelete = (documentId: string) => {
     onAlertModalOpen()
@@ -40,18 +35,7 @@ const DocumentList = (props: IDocumentListProps) => {
 
   return (
     <Box css={header}>
-      <Box>
-        <Flex minWidth="max-content" alignItems="center" gap="2">
-          <Heading size="md">Documents</Heading>
-          <Spacer />
-          <Group gap="2">
-            <Button onClick={handleCreate} bg="teal" color="white">
-              <Text>Add Document</Text>
-            </Button>
-          </Group>
-        </Flex>
-      </Box>
-      <DocumentFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} teacherId={teacherId} />
+      <DocumentFormModal teacherId={teacherId} />
       <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
       <DocumentTable
         handleDelete={handleDelete}

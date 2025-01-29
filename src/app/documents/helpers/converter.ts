@@ -1,7 +1,7 @@
 import { IArrayResponse, TMetaData } from '~/types/http'
 import { IDocumentResponse, TDocumentData } from '../types/documents'
 import metaConverter from '~/helpers/metaConverter'
-import { format, parseISO } from 'date-fns'
+import { format, parse, parseISO } from 'date-fns'
 import { DateTime } from '~/constant/date'
 import { TDocumentFormInput } from '../schema/documents'
 
@@ -15,6 +15,7 @@ export const documentCreateFormToPayload = (form: TDocumentFormInput) => {
   data.append('document[file]', form.file[0])
   data.append('document[teacher_id]', form.teacherId)
   data.append('document[document_type]', form.documentType.toString())
+  data.append('document[date_period]', form.datePeriod)
 
   return data
 }
@@ -32,6 +33,7 @@ export const documentResponseToData = (
       contentType: document.content_type,
       insertedAt: format(parseISO(document.inserted_at ?? ''), DateTime.format),
       updatedAt: format(parseISO(document.updated_at ?? ''), DateTime.format),
+      datePeriod: format(parse(document.date_period, 'yyyy-MM', new Date()), DateTime.month),
       user: {
         email: document.user.email,
         firstName: document.user.first_name,

@@ -7,6 +7,7 @@ export interface IDocumentResponse extends IBase {
   document_type: number
   size: number
   content_type: string
+  date_period: string
   user: {
     email: string
     first_name: string

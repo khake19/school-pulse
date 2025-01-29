@@ -1,5 +1,5 @@
 import { useFormContext, Controller } from 'react-hook-form'
-import { Box, Fieldset, Stack } from '@chakra-ui/react'
+import { Box, Fieldset, Input, Stack } from '@chakra-ui/react'
 import { Field } from '~/components/ui/field'
 
 import { Option } from '~/types/select'
@@ -13,17 +13,13 @@ interface IDocumentForm {
   showTeachers: boolean
 }
 
-const options: Option[] = [
-  { label: 'TIN', value: 1 },
-  { label: 'BIR', value: 2 },
-  { label: 'Passport', value: 3 },
-  { label: 'SSS', value: 4 }
-]
+const options: Option[] = [{ label: 'DTR', value: 1 }]
 
 const DocumentForm = (props: IDocumentForm) => {
   const { showTeachers } = props
 
   const {
+    register,
     control,
     formState: { errors }
   } = useFormContext<TDocumentFormInput>()
@@ -34,10 +30,10 @@ const DocumentForm = (props: IDocumentForm) => {
         <Fieldset.HelperText>Please provide a document details below.</Fieldset.HelperText>
       </Stack>
       <Fieldset.Content>
-        <Field invalid={!!errors.file} errorText="File is required.">
+        <Field invalid={!!errors.file} errorText={errors.file?.message}>
           <Box width="100%">
             <Controller
-              render={({ field: { onChange, value } }) => <FileUpload onFilesChange={onChange} value={value as any} />}
+              render={({ field: { onChange, value } }) => <FileUpload onFilesChange={onChange} value={value} />}
               name="file"
               control={control}
               defaultValue={[]}
@@ -45,16 +41,20 @@ const DocumentForm = (props: IDocumentForm) => {
           </Box>
         </Field>
         {showTeachers && (
-          <Field label="Teacher" invalid={!!errors.teacherId} errorText="Teacher is required.">
+          <Field label="Teacher" invalid={!!errors.teacherId} errorText={errors.teacherId?.message}>
             <Box width="100%">
               <TeacherSelect />
             </Box>
           </Field>
         )}
-        <Field label="Document type" invalid={!!errors.file} errorText="Document type is required.">
+        <Field label="Document type" invalid={!!errors.file} errorText={errors.file?.message}>
           <Box width="100%">
             <SelectForm options={options} name="documentType" placeholder="Select a document type" />
           </Box>
+        </Field>
+
+        <Field label="Date Period" invalid={!!errors.datePeriod} errorText={errors.datePeriod?.message}>
+          <Input {...register('datePeriod')} type="month" />
         </Field>
       </Fieldset.Content>
     </Fieldset.Root>

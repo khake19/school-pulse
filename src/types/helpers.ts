@@ -13,3 +13,7 @@ export type NestedTransform<T, U> = T extends object
         : never]: NestedTransform<T[K], U>
     }
   : T
+
+export type WithFormDataPrefix<Prefix extends string, T> = {
+  [K in keyof T as `${Prefix}$[${string & K}]`]: T[K]
+}

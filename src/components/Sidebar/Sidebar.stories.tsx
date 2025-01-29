@@ -17,7 +17,7 @@ export const Base: Story = {
   args: {
     isSidebarOpen: false
   },
-  render: (args) => (
+  render: () => (
     <ChakraProvider value={defaultSystem}>
       <Sidebar />
     </ChakraProvider>

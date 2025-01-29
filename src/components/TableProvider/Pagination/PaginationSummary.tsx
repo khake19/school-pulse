@@ -8,7 +8,7 @@ const PaginationSummary = (props: IPagination) => {
 
   return (
     <Box p="6">
-      <Text>
+      <Text fontSize="md">
         Showing {firstItemNumber} to {lastItemNumber} of {total} entries
       </Text>
     </Box>

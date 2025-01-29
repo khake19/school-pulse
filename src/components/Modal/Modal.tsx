@@ -10,20 +10,20 @@ import {
 } from '~/components/ui/dialog'
 import React from 'react'
 import { Button } from '../ui/button'
+import { DialogRootProps } from '@chakra-ui/react'
 
-interface IBasicModalProps {
+interface IBasicModalProps extends DialogRootProps {
   title: string
-  children: React.ReactNode
   actions: React.ReactNode
   isOpen: boolean
   onClose: () => void
 }
 
 const BasicModal = (props: IBasicModalProps) => {
-  const { children, title, actions, isOpen, onClose } = props
+  const { children, title, actions, isOpen, onClose, ...rest } = props
 
   return (
-    <DialogRoot lazyMount open={isOpen} onOpenChange={onClose}>
+    <DialogRoot lazyMount open={isOpen} onOpenChange={onClose} {...rest}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

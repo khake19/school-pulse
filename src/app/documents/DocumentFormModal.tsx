@@ -1,4 +1,6 @@
-import { Button } from '@chakra-ui/react'
+import { memo, useEffect } from 'react'
+
+import { Box, Button, Flex, Group, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Text } from '@chakra-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -6,19 +8,17 @@ import BasicModal from '~/components/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import DocumentForm from './DocumentForm'
 import documentSchema, { TDocumentFormInput } from './schema/documents'
-import IFormModal from '~/types/formModal'
 import DocumentsMessage from './constant/documents'
 import useAlert from '~/hooks/useAlert'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useCreateDocument from './hooks/useCreateDocument'
-import { useEffect } from 'react'
 
-interface IDocumentFormModalProps extends IFormModal {
+interface IDocumentFormModalProps {
   teacherId?: string
 }
 
-const DocumentFormModal = (props: IDocumentFormModalProps) => {
-  const { isOpen, onClose, teacherId } = props
+const DocumentFormModal = memo((props: IDocumentFormModalProps) => {
+  const { teacherId } = props
   const school = useCurrentSchool((state) => state.school)
   const queryClient = useQueryClient()
 
@@ -29,14 +29,20 @@ const DocumentFormModal = (props: IDocumentFormModalProps) => {
   const alert = useAlert()
   const { handleSubmit, reset, setValue } = methods
 
+  const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
+
   const { createDocument } = useCreateDocument({
     onSuccess: async () => {
       queryClient.invalidateQueries(['documents'])
       alert.success(DocumentsMessage.created)
       reset()
-      onClose()
+      onFormModalClose()
     }
   })
+
+  const handleCreate = () => {
+    onFormModalOpen()
+  }
 
   const handleCreateDocument = () => {
     handleSubmit((data) => createDocument(school.id, data))()
@@ -53,12 +59,27 @@ const DocumentFormModal = (props: IDocumentFormModalProps) => {
   )
 
   return (
-    <BasicModal title="Add Document" actions={createActions} isOpen={isOpen} onClose={onClose}>
-      <FormProvider {...methods}>
-        <DocumentForm showTeachers={!teacherId} />
-      </FormProvider>
-    </BasicModal>
+    <Box>
+      <Box>
+        <Flex minWidth="max-content" alignItems="center" gap="2">
+          <Heading size="xl">Documents</Heading>
+          <Spacer />
+          <Group gap="2">
+            <Button onClick={handleCreate} colorPalette="teal" color="white">
+              <Text>Add Document</Text>
+            </Button>
+          </Group>
+        </Flex>
+      </Box>
+      <BasicModal title="Add Document" actions={createActions} isOpen={isFormModalOpen} onClose={onFormModalClose}>
+        <FormProvider {...methods}>
+          <DocumentForm showTeachers={!teacherId} />
+        </FormProvider>
+      </BasicModal>
+    </Box>
   )
-}
+})
+
+DocumentFormModal.displayName = 'DocumentFormModal'
 
 export default DocumentFormModal

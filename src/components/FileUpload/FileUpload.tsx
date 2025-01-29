@@ -34,15 +34,15 @@ const rejectStyle = {
 
 interface IDropzoneProps {
   onFilesChange?: (files: File[] | undefined) => void
-  value: IFileWithPreview[]
+  value: File[]
 }
 
-interface IFileWithPreview extends File {
+export interface IFileWithPreview extends File {
   preview: string
 }
 
 const Dropzone = (props: IDropzoneProps) => {
-  const [files, setFiles] = useState<IFileWithPreview[]>(props.value)
+  const [files, setFiles] = useState<IFileWithPreview[]>(props.value as IFileWithPreview[])
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -50,7 +50,7 @@ const Dropzone = (props: IDropzoneProps) => {
         Object.assign(file, {
           preview: URL.createObjectURL(file)
         })
-      ) as IFileWithPreview[]
+      )
 
       setFiles(filesWithPreview)
 
