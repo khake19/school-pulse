@@ -37,6 +37,7 @@ export const documentResponseToData = (
       user: {
         email: document.user.email,
         firstName: document.user.first_name,
+        middleName: document.user.middle_name,
         lastName: document.user.last_name,
         avatar: document.user.avatar
       }

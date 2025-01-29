@@ -8,10 +8,10 @@ export interface ITeacherResponse extends IBase {
   first_name: string
   middle_name: string
   last_name: string
+  suffix?: string
   position: IPositionResponse
   gender: string
   employee_number: string
-  remarks: string
   avatar: string
   philhealth: string
   gsis: string
@@ -19,6 +19,7 @@ export interface ITeacherResponse extends IBase {
   tin: string
   plantilla: string
   date_hired: string
+  date_promotion: string
 }
 
 export interface IPositionResponse {

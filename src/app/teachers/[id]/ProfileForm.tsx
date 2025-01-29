@@ -1,4 +1,4 @@
-import { Fieldset, Input, Box, SimpleGrid, Textarea } from '@chakra-ui/react'
+import { Fieldset, Input, Box, SimpleGrid } from '@chakra-ui/react'
 
 import PositionSelect from '../component/PositionSelect'
 import { useFormContext } from 'react-hook-form'
@@ -46,6 +46,9 @@ const ProfileForm = () => {
                 />
               </Box>
             </Field>
+            <Field label="Date Hired" invalid={!!errors.dateHired} errorText={errors.dateHired?.message} mb={4}>
+              <Input {...register('dateHired')} type="date" />
+            </Field>
             <Field
               label="Philhealth Number"
               invalid={!!errors.philhealth}
@@ -65,6 +68,9 @@ const ProfileForm = () => {
             <Field label="Middle name" invalid={!!errors.middleName} errorText={errors.middleName?.message} mb={4}>
               <Input {...register('middleName')} />
             </Field>
+            <Field label="Suffix" invalid={!!errors.suffix} errorText={errors.suffix?.message} mb={4}>
+              <Input {...register('suffix')} />
+            </Field>
             <Field label="Email address" invalid={!!errors.email} errorText={errors.email?.message} mb={4}>
               <Input {...register('email')} type="email" />
             </Field>
@@ -73,17 +79,19 @@ const ProfileForm = () => {
                 <PositionSelect />
               </Box>
             </Field>
-            <Field label="Date Hired" invalid={!!errors.dateHired} errorText={errors.dateHired?.message} mb={4}>
-              <Input {...register('dateHired')} type="date" />
+            <Field
+              label="Date of Promotion"
+              invalid={!!errors.datePromotion}
+              errorText={errors.datePromotion?.message}
+              mb={4}
+            >
+              <Input {...register('datePromotion')} type="date" />
             </Field>
             <Field label="GSIS" invalid={!!errors.gsis} errorText={errors.gsis?.message} mb={4}>
               <PatternFormatField name="gsis" format="##########" />
             </Field>
             <Field label="Tax Identification Number" invalid={!!errors.tin} errorText={errors.tin?.message} mb={4}>
               <PatternFormatField name="tin" format="###-###-###-####" />
-            </Field>
-            <Field label="Remarks" invalid={!!errors.remarks} errorText={errors.remarks?.message} mb={4}>
-              <Textarea {...register('remarks')} />
             </Field>
           </Box>
         </SimpleGrid>

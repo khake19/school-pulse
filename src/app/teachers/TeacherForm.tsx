@@ -1,4 +1,4 @@
-import { Box, Fieldset, Input, Stack, Textarea } from '@chakra-ui/react'
+import { Box, Fieldset, Input, Stack } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
 import PositionSelect from './component/PositionSelect'
@@ -30,6 +30,9 @@ const TeacherForm = () => {
         <Field label="Last name" invalid={!!errors.lastName} errorText={errors.lastName?.message}>
           <Input {...register('lastName')} />
         </Field>
+        <Field label="Suffix" invalid={!!errors.suffix} errorText={errors.suffix?.message}>
+          <Input {...register('suffix')} />
+        </Field>
         <Field label="Email address" invalid={!!errors.email} errorText={errors.email?.message}>
           <Input {...register('email')} type="email" />
         </Field>
@@ -50,11 +53,11 @@ const TeacherForm = () => {
             />
           </Box>
         </Field>
-        <Field label="Remarks" invalid={!!errors.remarks} errorText={errors.remarks?.message}>
-          <Textarea {...register('remarks')} placeholder="Remarks..." />
-        </Field>
         <Field label="Date Hired" invalid={!!errors.dateHired} errorText={errors.dateHired?.message}>
           <Input {...register('dateHired')} type="date" />
+        </Field>
+        <Field label="Date of Promotion" invalid={!!errors.datePromotion} errorText={errors.datePromotion?.message}>
+          <Input {...register('datePromotion')} type="date" />
         </Field>
         <Field label="Employee Number" invalid={!!errors.employeeNumber} errorText={errors.employeeNumber?.message}>
           <PatternFormatField name="employeeNumber" format="#######" />

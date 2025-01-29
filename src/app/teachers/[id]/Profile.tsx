@@ -22,10 +22,10 @@ const Profile = (props: IProfileProps) => {
     firstName: teacher.firstName,
     middleName: teacher.middleName,
     lastName: teacher.lastName,
+    suffix: teacher?.suffix,
     position: teacher.position.id,
     email: teacher.email,
     gender: teacher.gender,
-    remarks: teacher.remarks,
     employeeNumber: teacher.employeeNumber,
     avatar: teacher.avatar,
     gsis: teacher.gsis,
@@ -33,7 +33,8 @@ const Profile = (props: IProfileProps) => {
     pagibig: teacher.pagibig,
     tin: teacher.tin,
     plantilla: teacher.plantilla,
-    dateHired: teacher.dateHired
+    dateHired: teacher.dateHired,
+    datePromotion: teacher.datePromotion
   }
 
   const methods = useForm<TTeacherFormInput>({
