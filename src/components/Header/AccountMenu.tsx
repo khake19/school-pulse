@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Box, Text } from '@chakra-ui/react'
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '../ui/menu'
 import { Avatar } from '../ui/avatar'
@@ -9,19 +10,21 @@ import useCurrentUser from '~/app/auth/hooks/useCurrentUser'
 
 const AccountMenu = () => {
   const { currentUser } = useCurrentUser()
+
+  const memoizedUser = useMemo(() => currentUser, [currentUser])
   return (
     <Box>
       <MenuRoot>
         <MenuTrigger asChild>
           <Button variant="plain" size="sm">
             <Avatar
-              src={currentUser.avatar || undefined}
+              src={memoizedUser.avatar || undefined}
               boxSize="35px"
               borderRadius="full"
-              name={currentUser.firstName + ' ' + currentUser.lastName}
+              name={memoizedUser.firstName + ' ' + memoizedUser.lastName}
             />{' '}
             <Text>
-              {currentUser.firstName} {currentUser.lastName}
+              {memoizedUser.firstName} {memoizedUser.lastName}
             </Text>
             <LuChevronDown />
           </Button>

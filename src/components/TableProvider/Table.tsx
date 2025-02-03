@@ -13,7 +13,6 @@ const BasicTable = <T extends object>(props: TableProps<T>) => {
   const { columns = [] } = props
 
   const { data, isLoading } = useTableContext()
-
   const table = useReactTable({
     data,
     columns,

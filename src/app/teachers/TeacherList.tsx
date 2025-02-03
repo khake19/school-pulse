@@ -6,11 +6,15 @@ import { main, header } from './Teacher.style'
 import TeacherFormModal from './TeacherFormModal'
 import TeacherDeleteModal from './TeacherDeleteModal'
 import TeacherTable from './TeacherTable'
+import SearchInput from '~/components/Search/SearchInput'
+import useFilterSearch from '~/hooks/useFilterSearch'
 
 const TeacherList = () => {
   const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
+
+  const { filterSearch, handleSearchValue } = useFilterSearch()
 
   const handleCreate = () => {
     onFormModalOpen()
@@ -39,7 +43,14 @@ const TeacherList = () => {
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <TeacherTable handleDelete={handleDelete} />
+      <Flex direction="row" borderRadius="md" gap={4}>
+        <Box flex="1" p={4} borderRadius="md">
+          <SearchInput handleSearchValue={handleSearchValue} width="50%" />
+        </Box>
+        <Box flex="1" p={4} borderRadius="md"></Box>
+      </Flex>
+
+      <TeacherTable handleDelete={handleDelete} filterSearch={filterSearch} />
     </Box>
   )
 }

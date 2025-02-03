@@ -17,15 +17,14 @@ import { Button } from '~/components/ui/button'
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void
+  filterSearch: string
 }
 
 const TeacherTable = (props: ITeacherTableProps) => {
-  const { handleDelete } = props
+  const { handleDelete, filterSearch } = props
   const [currentPage, setCurrentPage] = useState(1)
-
   const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
-
-  const { teachers, meta, isLoading } = useGetTeachers(defaultParams)
+  const { teachers, meta, isLoading } = useGetTeachers({ ...defaultParams, filterSearch })
 
   const columnHelper = createColumnHelper<TTeacherData>()
 

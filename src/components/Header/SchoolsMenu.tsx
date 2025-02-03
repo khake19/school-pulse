@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Box, Button } from '@chakra-ui/react'
 
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from '~/components/ui/menu'
@@ -9,6 +9,8 @@ import useGetSchools from '~/app/schools/hooks/useSchool'
 const SchoolsMenu = () => {
   const { schools = [] } = useGetSchools()
   const { handleSelectedSchool, selectedSchool } = useSelectedSchool(schools)
+  const memoizedSchools = useMemo(() => schools, [schools])
+
   return (
     <Box>
       <MenuRoot>
@@ -18,7 +20,7 @@ const SchoolsMenu = () => {
           </Button>
         </MenuTrigger>
         <MenuContent>
-          {schools.map(({ id, name }) => (
+          {memoizedSchools.map(({ id, name }) => (
             <MenuItem
               value="school"
               key={id}

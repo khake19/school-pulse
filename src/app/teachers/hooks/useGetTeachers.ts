@@ -12,7 +12,7 @@ const useGetTeachers = (params: IQueryParams) => {
   const school = useCurrentSchool((state) => state.school)
 
   const { data, status, error } = useQuery({
-    queryKey: ['users', page],
+    queryKey: ['users', params],
     queryFn: () => teacherService.allTeachers(school.id, params),
     enabled: !!school?.id,
     keepPreviousData: true
