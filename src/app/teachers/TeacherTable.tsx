@@ -83,9 +83,7 @@ const TeacherTable = (props: ITeacherTableProps) => {
         <Flex flexDir="column" alignItems="flex-end">
           <MenuRoot>
             <MenuTrigger asChild>
-              <Button variant="outline" size="sm">
-                <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
-              </Button>
+              <Image src={`/icons/dots-three.svg`} height={0} width={21} alt="action-icon" />
             </MenuTrigger>
             <MenuContent>
               <MenuItem

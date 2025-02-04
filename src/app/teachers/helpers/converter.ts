@@ -45,5 +45,6 @@ export const teacherFormToPayload = (form: TTeacherFormInput): FormData => {
   data.append('teacher[plantilla]', form.plantilla ?? '')
   data.append('teacher[date_hired]', form.dateHired ?? '')
   data.append('teacher[date_promotion]', form.datePromotion ?? '')
+
   return data
 }

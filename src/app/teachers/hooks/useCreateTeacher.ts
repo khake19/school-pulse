@@ -8,7 +8,6 @@ import { teacherFormToPayload } from '../helpers/converter'
 const useCreateTeacher = (options?: object) => {
   const { mutateAsync } = useMutation(({ id, data }: { id: string; data: TTeacherFormInput }) => {
     const payload = teacherFormToPayload(data)
-    console.log('payload', payload)
     return teacherService.createTeacher(id, payload)
   }, options)
 
