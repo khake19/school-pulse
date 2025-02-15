@@ -34,7 +34,7 @@ const LoginForm = () => {
                 <Input {...register('password')} type="password" />
               </Field>
             </Fieldset.Root>
-            <Button colorPalette="teal" variant="solid" type="submit" mt={4}>
+            <Button bg="brand.500" variant="solid" type="submit" mt={4}>
               Sign in
             </Button>
           </form>

@@ -13,7 +13,6 @@ import TablePagination from '~/components/TableProvider/TablePagination'
 import Table from '~/components/TableProvider/Table'
 import { Avatar } from '~/components/ui/avatar'
 import { MenuContent, MenuRoot, MenuTrigger, MenuItem } from '~/components/ui/menu'
-import { Button } from '~/components/ui/button'
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void

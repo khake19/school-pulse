@@ -47,7 +47,7 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
           <Text fontSize="xs" mb={2}>
             PNG, JPG to 5mb
           </Text>
-          <Text fontSize="xs" onClick={handleClick} color="teal">
+          <Text fontSize="xs" onClick={handleClick} color="brand.400">
             Change
           </Text>
           <Input

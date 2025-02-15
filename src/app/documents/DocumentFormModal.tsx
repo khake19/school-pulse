@@ -53,7 +53,7 @@ const DocumentFormModal = memo((props: IDocumentFormModalProps) => {
   }, [teacherId, setValue])
 
   const createActions = (
-    <Button onClick={handleCreateDocument} bg="teal" type="submit" variant="outline" color="#FFFF">
+    <Button onClick={handleCreateDocument} bg="brand" type="submit" variant="outline" color="#FFFF">
       <Text>Submit</Text>
     </Button>
   )
@@ -65,7 +65,7 @@ const DocumentFormModal = memo((props: IDocumentFormModalProps) => {
           <Heading size="xl">Documents</Heading>
           <Spacer />
           <Group gap="2">
-            <Button onClick={handleCreate} colorPalette="teal" color="white">
+            <Button onClick={handleCreate} bg="brand.500" color="white">
               <Text>Add Document</Text>
             </Button>
           </Group>

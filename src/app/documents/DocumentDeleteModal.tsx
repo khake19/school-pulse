@@ -36,7 +36,7 @@ const DocumentDeleteModal = (props: IDocumentDeleteModalProps) => {
       <Button ref={cancelRef} onClick={onClose} variant="outline">
         <Text>Cancel</Text>
       </Button>
-      <Button bg="bg.success" ml={1} onClick={handleDeleteDocument}>
+      <Button bg="button.danger" ml={1} onClick={handleDeleteDocument}>
         <Text>Delete</Text>
       </Button>
     </>

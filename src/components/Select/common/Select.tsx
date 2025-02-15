@@ -4,7 +4,7 @@ import { useToken } from '@chakra-ui/react'
 const BasicSelect = <Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
   props: Props<Option, IsMulti, Group>
 ) => {
-  const [teal300, black300] = useToken('colors', ['teal.300', 'black.300'])
+  const [brand300, black300] = useToken('colors', ['brand.300', 'black.300'])
   const [sm] = useToken('fontSizes', ['sm'])
 
   const colourStyles: StylesConfig<Option, IsMulti, Group> = {
@@ -15,7 +15,7 @@ const BasicSelect = <Option, IsMulti extends boolean = false, Group extends Grou
     option: (styles, { isDisabled, isFocused, isSelected }) => ({
       ...styles,
       fontSize: sm,
-      backgroundColor: isDisabled ? undefined : isSelected ? teal300 : isFocused ? teal300 : undefined,
+      backgroundColor: isDisabled ? undefined : isSelected ? brand300 : isFocused ? brand300 : undefined,
       color: black300
     })
   }

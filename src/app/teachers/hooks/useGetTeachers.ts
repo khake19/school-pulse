@@ -8,7 +8,6 @@ import { teacherResponseToData } from '../helpers/converter'
 import { HttpStatus } from '~/constant/http'
 
 const useGetTeachers = (params: IQueryParams) => {
-  const { page } = params
   const school = useCurrentSchool((state) => state.school)
 
   const { data, status, error } = useQuery({

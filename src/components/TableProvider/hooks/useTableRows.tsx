@@ -23,7 +23,7 @@ const useTableRows = <T extends object>(
   const rows = isLoading
     ? loadingRow
     : table.getRowModel().rows.map((row) => (
-        <Table.Row key={row.id} _hover={{ bg: 'teal.100' }}>
+        <Table.Row key={row.id} _hover={{ bg: 'brand.100' }}>
           {row.getVisibleCells().map((cell) => (
             <Table.Cell key={cell.id} css={{ padding: '5px 14px' }}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}

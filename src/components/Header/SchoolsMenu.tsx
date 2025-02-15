@@ -14,7 +14,7 @@ const SchoolsMenu = () => {
   return (
     <Box>
       <MenuRoot>
-        <MenuTrigger asChild bg="teal.200">
+        <MenuTrigger asChild bg="brand.200">
           <Button variant="solid" size="sm" css={HeaderStyle.menuButton}>
             {selectedSchool}
           </Button>
@@ -25,8 +25,9 @@ const SchoolsMenu = () => {
               value="school"
               key={id}
               onClick={() => handleSelectedSchool({ id, name })}
-              _hover={{ bg: 'teal.200' }}
-              bg={selectedSchool === name ? 'teal.200' : ''}
+              _hover={{ bg: 'brand.200' }}
+              bg={selectedSchool === name ? 'brand.200' : ''}
+              minWidth={290}
             >
               {name}
             </MenuItem>

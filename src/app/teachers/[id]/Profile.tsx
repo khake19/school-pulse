@@ -71,7 +71,7 @@ const Profile = (props: IProfileProps) => {
       </Box>
       <FormProvider {...methods}>
         <ProfileForm />
-        <Button onClick={handleUpdateTeacher} mt={4} colorPalette="teal" type="submit">
+        <Button onClick={handleUpdateTeacher} mt={4} bg="brand.500" type="submit">
           <Text>Update</Text>
         </Button>
       </FormProvider>

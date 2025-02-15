@@ -25,7 +25,6 @@ const SearchInput = (props: ISearchInputProps) => {
     <HStack gap="10" width={width}>
       <InputGroup flex="1" startElement={<LuSearch />}>
         <Input
-          borderColor="gray.500"
           placeholder={placeholder}
           onChange={(e) => {
             setText(e.target.value)

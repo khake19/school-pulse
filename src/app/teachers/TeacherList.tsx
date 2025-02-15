@@ -35,7 +35,7 @@ const TeacherList = () => {
           </Box>
           <Spacer />
           <Group gap="2">
-            <Button colorPalette="teal" onClick={handleCreate}>
+            <Button bg="brand.500" onClick={handleCreate}>
               <Text>Add Teacher</Text>
             </Button>
           </Group>

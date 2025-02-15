@@ -1,16 +1,19 @@
 import { createSystem, defaultConfig } from '@chakra-ui/react'
 
-import { fonts, fontSizes } from '~/theme/base'
+import { fonts, fontSizes, brand } from '~/theme/base'
 
 const theme = createSystem(defaultConfig, {
   theme: {
     tokens: {
       fonts: fonts,
-      fontSizes: fontSizes
+      fontSizes: fontSizes,
+      colors: {
+        brand
+      }
     },
     semanticTokens: {
       colors: {
-        bg: {
+        button: {
           danger: { value: '{colors.red.500}' },
           success: { value: '{colors.teal.500}' }
         }

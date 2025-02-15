@@ -16,7 +16,7 @@ const TeacherDetails = () => {
         </Heading>
       </Box>
       <Tabs.Root defaultValue="documents">
-        <Tabs.List colorPalette="teal">
+        <Tabs.List>
           <Tabs.Trigger value="documents">Documents</Tabs.Trigger>
           <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
         </Tabs.List>

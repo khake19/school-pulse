@@ -11,14 +11,6 @@ export const colors = {
   ancillary: '',
 
   //https://colorhunt.co/palette/0a26471442722052952c74b3
-  brand: {
-    50: '#E6FFFA',
-    100: '#B2F5EA',
-    200: '#81E6D9',
-    300: '#4FD1C5',
-    400: '#38B2AC',
-    500: '#319795'
-  },
 
   // Complimentary
   orange: '',
@@ -90,4 +82,17 @@ export const fontSizes = {
   '4xl': { value: '36px' },
   '5xl': { value: '48px' },
   '6xl': { value: '64px' }
+}
+
+export const brand = {
+  50: { value: '#E6FFFA' },
+  100: { value: '#B2F5EA' },
+  200: { value: '#81E6D9' },
+  300: { value: '#4FD1C5' },
+  400: { value: '#38B2AC' },
+  500: { value: '#319795' },
+  600: { value: '#319795' },
+  700: { value: '#319795' },
+  800: { value: '#319795' },
+  900: { value: '#319795' }
 }
