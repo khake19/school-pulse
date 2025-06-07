@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import { Calendar, dateFnsLocalizer, Views, Event, DateRange, SlotInfo } from 'react-big-calendar'
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
-import startOfWeek from 'date-fns/startOfWeek'
-import getDay from 'date-fns/getDay'
-import enUS from 'date-fns/locale/en-US'
+import { useCallback, useState } from 'react'
+import { Calendar, dateFnsLocalizer, Views, Event, DateRange, SlotInfo, View } from 'react-big-calendar'
+import { format } from 'date-fns/format'
+import { parse } from 'date-fns/parse'
+import { startOfWeek } from 'date-fns/startOfWeek'
+import { getDay } from 'date-fns/getDay'
+import { enUS } from 'date-fns/locale/en-US'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import { useToken } from '@chakra-ui/react'
 
 const locales = {
   'en-US': enUS
@@ -24,15 +25,22 @@ interface IBaseCalendarProps {
   events: Event[]
   handleSelectSlot: (slot: SlotInfo) => void
   handleSelectEvent: (event: Event) => void
+  handleRangeChange: (range: DateRange | Date[]) => void
 }
 
 const BaseCalendar = (props: IBaseCalendarProps) => {
-  const { events = [], handleSelectEvent, handleSelectSlot } = props
+  const { events = [], handleSelectEvent, handleSelectSlot, handleRangeChange } = props
   const [date, setDate] = useState(new Date())
+  const [view, setView] = useState<View>(Views.MONTH)
+  const [brand500] = useToken('colors', ['brand.500'])
+
+  const onView = useCallback((newView: View) => setView(newView), [setView])
 
   return (
     <Calendar
-      views={[Views.MONTH]}
+      views={[Views.MONTH, Views.DAY]}
+      onView={onView}
+      view={view}
       localizer={localizer}
       date={date}
       events={events}
@@ -45,6 +53,13 @@ const BaseCalendar = (props: IBaseCalendarProps) => {
         setDate(new Date(date))
       }}
       style={{ height: '100%' }}
+      eventPropGetter={(event) => ({
+        style: {
+          backgroundColor: brand500
+        }
+      })}
+      onRangeChange={handleRangeChange}
+      onShowMore={() => console.log('hello')}
     />
   )
 }

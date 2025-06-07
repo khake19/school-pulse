@@ -12,14 +12,16 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { DialogRootProps } from '@chakra-ui/react'
 
-interface IBasicModalProps extends DialogRootProps {
-  title: string
-  actions: React.ReactNode
+export interface IModalRootProps {
   isOpen: boolean
   onClose: () => void
 }
+interface IBaseModalProps extends DialogRootProps, IModalRootProps {
+  title: string
+  actions: React.ReactNode
+}
 
-const BasicModal = (props: IBasicModalProps) => {
+const BaseModal = (props: IBaseModalProps) => {
   const { children, title, actions, isOpen, onClose, ...rest } = props
 
   return (
@@ -43,4 +45,4 @@ const BasicModal = (props: IBasicModalProps) => {
   )
 }
 
-export default BasicModal
+export default BaseModal

@@ -53,7 +53,6 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
     body,
     headers
   })
-
   return handleResponse(response)
 }
 

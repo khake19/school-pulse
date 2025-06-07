@@ -7,12 +7,9 @@ import SelectForm from '~/components/Select/form/SelectForm'
 import Leaves from '~/constant/leave'
 import TeacherSelect from '../documents/component/TeacherSelect'
 import { TLeaveFormInput } from './schema/leave'
-import { format } from 'date-fns'
 
-interface IDocumentForm {
+interface ILeaveForm {
   showTeachers: boolean
-  startDate: Date | undefined
-  endDate: Date | undefined
 }
 
 const options: Option[] = [
@@ -21,8 +18,8 @@ const options: Option[] = [
   { label: Leaves.regular, value: 'regular' }
 ]
 
-const DocumentForm = (props: IDocumentForm) => {
-  const { showTeachers, startDate, endDate } = props
+const LeaveForm = (props: ILeaveForm) => {
+  const { showTeachers } = props
 
   const {
     register,
@@ -33,11 +30,14 @@ const DocumentForm = (props: IDocumentForm) => {
     <Fieldset.Root size="lg" maxW="md">
       <Flex width="100%" height="50px" gap={2}>
         <Box flex="1">
-          <Box>From:</Box> {format(startDate ?? new Date(), 'MMMM d, yyyy')}
+          <Field label="From" invalid={!!errors.startAt} errorText={errors.startAt?.message}>
+            <Input {...register('startAt')} type="date" />
+          </Field>
         </Box>
         <Box flex="1">
-          <Box>To:</Box>
-          {format(endDate ?? new Date(), 'MMMM d, yyyy')}
+          <Field label="To" invalid={!!errors.endAt} errorText={errors.endAt?.message}>
+            <Input {...register('endAt')} type="date" />
+          </Field>
         </Box>
       </Flex>
       {showTeachers && (
@@ -59,4 +59,4 @@ const DocumentForm = (props: IDocumentForm) => {
     </Fieldset.Root>
   )
 }
-export default DocumentForm
+export default LeaveForm
