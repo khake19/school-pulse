@@ -53,24 +53,22 @@ const DocumentFormModal = memo((props: IDocumentFormModalProps) => {
   }, [teacherId, setValue])
 
   const createActions = (
-    <Button onClick={handleCreateDocument} bg="brand" type="submit" variant="outline" color="#FFFF">
+    <Button onClick={handleCreateDocument} bg="brand.500" type="submit" variant="outline" color="#FFFF">
       <Text>Submit</Text>
     </Button>
   )
 
   return (
     <Box>
-      <Box>
-        <Flex minWidth="max-content" alignItems="center" gap="2">
-          <Heading size="xl">Documents</Heading>
-          <Spacer />
-          <Group gap="2">
-            <Button onClick={handleCreate} bg="brand.500" color="white">
-              <Text>Add Document</Text>
-            </Button>
-          </Group>
-        </Flex>
-      </Box>
+      <Flex minWidth="max-content" alignItems="center" gap="2">
+        <Heading size="xl">Documents</Heading>
+        <Spacer />
+        <Group gap="2">
+          <Button onClick={handleCreate} bg="brand.500" color="white">
+            <Text>Add Document</Text>
+          </Button>
+        </Group>
+      </Flex>
       <BasicModal title="Add Document" actions={createActions} isOpen={isFormModalOpen} onClose={onFormModalClose}>
         <FormProvider {...methods}>
           <DocumentForm showTeachers={!teacherId} />

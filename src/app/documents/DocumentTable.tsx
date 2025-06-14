@@ -7,7 +7,7 @@ import TableProvider from '~/components/TableProvider/TableProvider'
 import Table from '~/components/TableProvider/Table'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TablePagination from '~/components/TableProvider/TablePagination'
-import { PhotoView } from 'react-photo-view'
+import { PhotoProvider, PhotoView } from 'react-photo-view'
 
 interface IDocumentTableProps {
   handleDelete: (id: string) => void
@@ -28,18 +28,20 @@ const DocumentTable = (props: IDocumentTableProps) => {
       id: 'fileName',
       cell: (props) => {
         return (
-          <PhotoView src={props.row.original.path}>
-            <Box display="flex" alignItems="center">
-              <Box>
-                <Text fontSize="sm" fontWeight="500">
-                  {props.row.original.documentType}
-                </Text>
-                <Text fontSize="xs" color="gray.500">
-                  {props.row.original.size} KB | {props.row.original.contentType}
-                </Text>
+          <PhotoProvider maskOpacity={0.5}>
+            <PhotoView src={props.row.original.path}>
+              <Box display="flex" alignItems="center">
+                <Box>
+                  <Text fontSize="sm" fontWeight="500">
+                    {props.row.original.documentType}
+                  </Text>
+                  <Text fontSize="xs" color="gray.500">
+                    {props.row.original.size} KB | {props.row.original.contentType}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-          </PhotoView>
+            </PhotoView>
+          </PhotoProvider>
         )
       },
       header: () => 'Filename',
@@ -49,15 +51,13 @@ const DocumentTable = (props: IDocumentTableProps) => {
       id: 'datePeriod',
       cell: (props) => {
         return (
-          <PhotoView src={props.row.original.path}>
-            <Box display="flex" alignItems="center">
-              <Box>
-                <Text fontSize="sm" fontWeight="500">
-                  {props.row.original.datePeriod}
-                </Text>
-              </Box>
+          <Box display="flex" alignItems="center">
+            <Box>
+              <Text fontSize="sm" fontWeight="500">
+                {props.row.original.datePeriod}
+              </Text>
             </Box>
-          </PhotoView>
+          </Box>
         )
       },
       header: () => 'Date Period',
@@ -66,18 +66,16 @@ const DocumentTable = (props: IDocumentTableProps) => {
     columnHelper.display({
       id: 'profile',
       cell: (props) => (
-        <PhotoView src={props.row.original.path}>
-          <Box display="flex" alignItems="center">
-            <Box>
-              <Text fontSize="sm" fontWeight="500">
-                {props.row.original.user.firstName} {props.row.original.user.lastName}
-              </Text>
-              <Text fontSize="xs" color="gray.500">
-                {props.row.original.user.email}
-              </Text>
-            </Box>
+        <Box display="flex" alignItems="center">
+          <Box>
+            <Text fontSize="sm" fontWeight="500">
+              {props.row.original.user.firstName} {props.row.original.user.lastName}
+            </Text>
+            <Text fontSize="xs" color="gray.500">
+              {props.row.original.user.email}
+            </Text>
           </Box>
-        </PhotoView>
+        </Box>
       ),
       header: () => 'Teacher',
       footer: (info) => info.column.id
@@ -85,15 +83,11 @@ const DocumentTable = (props: IDocumentTableProps) => {
     columnHelper.display({
       id: 'createdAt',
       cell: (props) => (
-        <PhotoView src={props.row.original.path}>
-          <Box display="flex" alignItems="center">
-            <Box>
-              <Text fontSize="sm" fontWeight="500">
-                {props.row.original.insertedAt}
-              </Text>
-            </Box>
-          </Box>
-        </PhotoView>
+        <Box display="flex" alignItems="center">
+          <Text fontSize="sm" fontWeight="500">
+            {props.row.original.insertedAt}
+          </Text>
+        </Box>
       ),
       header: () => 'Created at',
       footer: (info) => info.column.id

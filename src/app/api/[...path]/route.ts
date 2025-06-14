@@ -53,7 +53,6 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
     body,
     headers
   })
-
   return handleResponse(response)
 }
 
@@ -77,9 +76,7 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
   const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/'), {
     method: 'put',
     body,
-    headers: {
-      authorization: 'Bearer ' + token
-    }
+    headers
   })
   return handleResponse(data)
 }

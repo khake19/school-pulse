@@ -12,15 +12,18 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { DialogRootProps } from '@chakra-ui/react'
 
-interface IBasicModalProps extends DialogRootProps {
-  title: string
-  actions: React.ReactNode
+export interface IModalRootProps {
   isOpen: boolean
   onClose: () => void
 }
+interface IBaseModalProps extends DialogRootProps, IModalRootProps {
+  title: string
+  actions?: React.ReactNode
+  footerActions?: React.ReactNode // improve this component
+}
 
-const BasicModal = (props: IBasicModalProps) => {
-  const { children, title, actions, isOpen, onClose, ...rest } = props
+const BaseModal = (props: IBaseModalProps) => {
+  const { children, title, actions, footerActions, isOpen, onClose, ...rest } = props
 
   return (
     <DialogRoot lazyMount open={isOpen} onOpenChange={onClose} {...rest}>
@@ -37,10 +40,11 @@ const BasicModal = (props: IBasicModalProps) => {
             {actions}
           </DialogFooter>
         )}
+        {footerActions}
         <DialogCloseTrigger />
       </DialogContent>
     </DialogRoot>
   )
 }
 
-export default BasicModal
+export default BaseModal
