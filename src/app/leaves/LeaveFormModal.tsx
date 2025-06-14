@@ -4,6 +4,7 @@ import { Box, Button, DialogActionTrigger, DialogFooter, Flex, Heading, Spacer, 
 import { FormProvider, useForm } from 'react-hook-form'
 import { Text } from '@chakra-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
+import dynamic from 'next/dynamic'
 import BasicModal from '~/components/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
@@ -15,7 +16,12 @@ import LeaveMessage from './constant/message'
 import { IModalRootProps } from '~/components/Modal/Modal'
 import { ILeaveEventData } from './types/leaves'
 import useUpdateLeave from './hooks/useUpdateLeave'
-import LeaveDeleteModal from './DeleteLeaveModal'
+
+// Lazy load the delete modal
+const LeaveDeleteModal = dynamic(() => import('./DeleteLeaveModal'), {
+  ssr: false,
+  loading: () => null
+})
 
 interface ILeaveFormModalProps extends IModalRootProps {
   teacherId?: string

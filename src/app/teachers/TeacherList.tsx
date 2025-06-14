@@ -1,13 +1,23 @@
 'use client'
 import { useState } from 'react'
 import { Box, Button, Flex, Heading, Spacer, useDisclosure, Text, Group } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 
 import { main, header } from './Teacher.style'
-import TeacherFormModal from './TeacherFormModal'
-import TeacherDeleteModal from './TeacherDeleteModal'
 import TeacherTable from './TeacherTable'
 import SearchInput from '~/components/Search/SearchInput'
 import useFilterSearch from '~/hooks/useFilterSearch'
+
+// Lazy load modals
+const TeacherFormModal = dynamic(() => import('./TeacherFormModal'), {
+  ssr: false,
+  loading: () => null
+})
+
+const TeacherDeleteModal = dynamic(() => import('./TeacherDeleteModal'), {
+  ssr: false,
+  loading: () => null
+})
 
 const TeacherList = () => {
   const { open: isFormModalOpen, onClose: onFormModalClose, onOpen: onFormModalOpen } = useDisclosure()

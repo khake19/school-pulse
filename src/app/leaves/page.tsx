@@ -5,7 +5,6 @@ import { DateRange, Event, SlotInfo } from 'react-big-calendar'
 import { useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import Layout from '~/components/Layout'
-import LeaveFormModal from './LeaveFormModal'
 import useGetLeaves from './hooks/useGetLeaves'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useSlotEvent from './hooks/useSlotEvent'
@@ -15,6 +14,12 @@ import CalendarSkeleton from '~/components/Calendar/CalendarSkeleton'
 const Calendar = dynamic(() => import('~/components/Calendar/Calendar'), {
   ssr: false, // Disable server-side rendering
   loading: () => <CalendarSkeleton />
+})
+
+// Lazy load the leave form modal
+const LeaveFormModal = dynamic(() => import('./LeaveFormModal'), {
+  ssr: false,
+  loading: () => null // No loading state needed for modals
 })
 
 export default function Page() {
