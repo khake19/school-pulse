@@ -3,19 +3,6 @@ import { useImmerReducer } from 'use-immer'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TableEmpty from './TableEmpty'
 
-// Contexts
-export const TableContext = createContext<ITableState<any>>({
-  data: [],
-  pagination: { offset: 0, page: 0, size: 0, total: 0, pages: 0 }
-})
-
-export const TableDispatchContext = createContext<{
-  dispatch: Dispatch<any>
-}>({ dispatch: () => null })
-
-export const useTableContext = () => useContext(TableContext)
-export const useTableDispatchContext = () => useContext(TableDispatchContext)
-
 // Action Types
 export const ActionKind = {
   getPagination: 'GET_PAGINATION',
@@ -26,20 +13,43 @@ export const ActionKind = {
   setLoading: 'SET_LOADING'
 } as const
 
-type TTableAction =
+type TTableAction<T = unknown> =
   | { type: typeof ActionKind.getData | typeof ActionKind.getPagination }
-  | { type: typeof ActionKind.setData; payload: any[] }
+  | { type: typeof ActionKind.setData; payload: T[] }
   | { type: typeof ActionKind.setPage; payload: number }
   | { type: typeof ActionKind.setPagination; payload: IPagination }
   | { type: typeof ActionKind.setLoading; payload: boolean }
 
-interface ITableState<T> {
+interface ITableState<T = unknown> {
   data: T[]
   pagination: IPagination
   isLoading?: boolean
 }
 
-const tableReducer = <T extends object>(draft: ITableState<T>, action: TTableAction) => {
+export const TableContext = createContext<ITableState<unknown> | null>(null)
+
+export const TableDispatchContext = createContext<{
+  dispatch: Dispatch<TTableAction<unknown>>
+} | null>(null)
+
+// Custom hooks for consuming contexts with proper type safety
+export const useTableContext = <T = unknown,>(): ITableState<T> => {
+  const context = useContext(TableContext)
+  if (!context) {
+    throw new Error('useTableContext must be used within a TableProvider')
+  }
+  return context as ITableState<T>
+}
+
+export const useTableDispatchContext = <T = unknown,>() => {
+  const context = useContext(TableDispatchContext)
+  if (!context) {
+    throw new Error('useTableDispatchContext must be used within a TableProvider')
+  }
+  return context as { dispatch: Dispatch<TTableAction<T>> }
+}
+
+const tableReducer = (draft: ITableState<unknown>, action: TTableAction<unknown>) => {
   switch (action.type) {
     case ActionKind.setPage:
       draft.pagination.page = action.payload
@@ -57,20 +67,20 @@ const tableReducer = <T extends object>(draft: ITableState<T>, action: TTableAct
 }
 
 // Provider Component
-interface ITableProviderProps<T> {
+interface ITableProviderProps<T = unknown> {
   children: ReactNode
   defaultData: T[]
   pagination?: IPagination
   isLoading: boolean
 }
 
-const TableProvider = <T extends object>({
+const TableProvider = <T = unknown,>({
   children,
   defaultData = [],
   pagination = { offset: 0, page: 0, size: 0, total: 0, pages: 0 },
   isLoading = false
 }: ITableProviderProps<T>) => {
-  const [tableState, dispatch] = useImmerReducer<ITableState<T>, TTableAction>(tableReducer, {
+  const [tableState, dispatch] = useImmerReducer(tableReducer, {
     data: defaultData,
     pagination,
     isLoading

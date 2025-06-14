@@ -54,7 +54,6 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
     onSuccess: async () => {
       queryClient.invalidateQueries(['leaves'])
       alert.success(LeaveMessage.created)
-      reset()
       onClose()
     }
   })
@@ -63,7 +62,6 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
     onSuccess: async () => {
       queryClient.invalidateQueries(['leaves'])
       alert.success(LeaveMessage.updated)
-      reset()
       onClose()
     }
   })

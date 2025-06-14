@@ -3,7 +3,7 @@ import { post, get, put, remove } from '~/utils/http'
 import { ILeaveResponse, TLeavePayload } from '../types/leaves'
 import { IResponse } from '~/types/http'
 
-const createLeave = async (schoolId: string, body: any): Promise<IResponse<ILeaveResponse>> => {
+const createLeave = async (schoolId: string, body: TLeavePayload): Promise<IResponse<ILeaveResponse>> => {
   const result = await post<IResponse<ILeaveResponse>, string>(`/api/schools/${schoolId}/leaves`, JSON.stringify(body))
   return result
 }

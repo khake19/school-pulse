@@ -12,7 +12,7 @@ interface TableProps<T> {
 const BasicTable = <T extends object>(props: TableProps<T>) => {
   const { columns = [] } = props
 
-  const { data, isLoading } = useTableContext()
+  const { data, isLoading } = useTableContext<T>()
   const table = useReactTable({
     data,
     columns,
