@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, memo, useEffect } from 'react'
 import { Calendar, dateFnsLocalizer, Views, Event, DateRange, SlotInfo, View } from 'react-big-calendar'
 import { format } from 'date-fns/format'
 import { parse } from 'date-fns/parse'
@@ -28,40 +28,70 @@ interface IBaseCalendarProps {
   handleRangeChange: (range: DateRange | Date[]) => void
 }
 
-const BaseCalendar = (props: IBaseCalendarProps) => {
-  const { events = [], handleSelectEvent, handleSelectSlot, handleRangeChange } = props
-  const [date, setDate] = useState(new Date())
-  const [view, setView] = useState<View>(Views.MONTH)
-  const [brand500] = useToken('colors', ['brand.500'])
+const BaseCalendar = memo(
+  (props: IBaseCalendarProps) => {
+    const { events = [], handleSelectEvent, handleSelectSlot, handleRangeChange } = props
+    const [date, setDate] = useState(new Date())
+    const [view, setView] = useState<View>(Views.MONTH)
+    const [brand500] = useToken('colors', ['brand.500'])
 
-  const onView = useCallback((newView: View) => setView(newView), [setView])
+    const onView = useCallback((newView: View) => setView(newView), [setView])
 
-  return (
-    <Calendar
-      views={[Views.MONTH, Views.DAY]}
-      onView={onView}
-      view={view}
-      localizer={localizer}
-      date={date}
-      events={events}
-      startAccessor="start"
-      endAccessor="end"
-      onSelectEvent={handleSelectEvent}
-      onSelectSlot={handleSelectSlot}
-      selectable
-      onNavigate={(date) => {
-        setDate(new Date(date))
-      }}
-      style={{ height: '100%' }}
-      eventPropGetter={(event) => ({
+    const onNavigate = useCallback((date: Date) => {
+      setDate(new Date(date))
+    }, [])
+
+    const eventPropGetter = useCallback(
+      (event: Event) => ({
         style: {
           backgroundColor: brand500
         }
-      })}
-      onRangeChange={handleRangeChange}
-      onShowMore={() => console.log('hello')}
-    />
-  )
-}
+      }),
+      [brand500]
+    )
+
+    const onShowMore = useCallback(() => console.log('hello'), [])
+
+    return (
+      <Calendar
+        views={[Views.MONTH, Views.DAY]}
+        onView={onView}
+        view={view}
+        localizer={localizer}
+        date={date}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        onSelectEvent={handleSelectEvent}
+        onSelectSlot={handleSelectSlot}
+        selectable
+        onNavigate={onNavigate}
+        style={{ height: '100%' }}
+        eventPropGetter={eventPropGetter}
+        onRangeChange={handleRangeChange}
+        onShowMore={onShowMore}
+      />
+    )
+  },
+  (prevProps, nextProps) => {
+    // Custom comparison function to prevent unnecessary re-renders
+    const eventsChanged =
+      prevProps.events.length !== nextProps.events.length ||
+      prevProps.events.some((event, index) => {
+        const nextEvent = nextProps.events[index]
+        return (
+          !nextEvent ||
+          event.start?.getTime() !== nextEvent.start?.getTime() ||
+          event.end?.getTime() !== nextEvent.end?.getTime() ||
+          event.title !== nextEvent.title
+        )
+      })
+
+    // Only re-render if events actually changed
+    return !eventsChanged
+  }
+)
+
+BaseCalendar.displayName = 'BaseCalendar'
 
 export default BaseCalendar

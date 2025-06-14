@@ -1,14 +1,21 @@
 'use client'
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, Suspense } from 'react'
 import { DateRange, Event, SlotInfo } from 'react-big-calendar'
 import { useSearchParams } from 'next/navigation'
-import Calendar from '~/components/Calendar/Calendar'
+import dynamic from 'next/dynamic'
 import Layout from '~/components/Layout'
 import LeaveFormModal from './LeaveFormModal'
 import useGetLeaves from './hooks/useGetLeaves'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useSlotEvent from './hooks/useSlotEvent'
+import CalendarSkeleton from '~/components/Calendar/CalendarSkeleton'
+
+// Dynamic import with client-side only rendering
+const Calendar = dynamic(() => import('~/components/Calendar/Calendar'), {
+  ssr: false, // Disable server-side rendering
+  loading: () => <CalendarSkeleton />
+})
 
 export default function Page() {
   const searchParams = useSearchParams()
