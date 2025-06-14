@@ -9,6 +9,7 @@ import useGetLeaves from './hooks/useGetLeaves'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useSlotEvent from './hooks/useSlotEvent'
 import { setDate } from 'date-fns'
+import LeaveDeleteModal from './DeleteLeaveModal'
 
 interface ILeavesProps {
   teacherId?: string

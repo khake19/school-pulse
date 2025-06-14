@@ -18,11 +18,12 @@ export interface IModalRootProps {
 }
 interface IBaseModalProps extends DialogRootProps, IModalRootProps {
   title: string
-  actions: React.ReactNode
+  actions?: React.ReactNode
+  footerActions?: React.ReactNode // improve this component
 }
 
 const BaseModal = (props: IBaseModalProps) => {
-  const { children, title, actions, isOpen, onClose, ...rest } = props
+  const { children, title, actions, footerActions, isOpen, onClose, ...rest } = props
 
   return (
     <DialogRoot lazyMount open={isOpen} onOpenChange={onClose} {...rest}>
@@ -39,6 +40,7 @@ const BaseModal = (props: IBaseModalProps) => {
             {actions}
           </DialogFooter>
         )}
+        {footerActions}
         <DialogCloseTrigger />
       </DialogContent>
     </DialogRoot>

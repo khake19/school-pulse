@@ -1,13 +1,13 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useCallback } from 'react'
 
-import { Box, Button, Flex, Heading, Spacer } from '@chakra-ui/react'
+import { Box, Button, DialogActionTrigger, DialogFooter, Flex, Heading, Spacer, useDisclosure } from '@chakra-ui/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Text } from '@chakra-ui/react'
 import { useQueryClient } from '@tanstack/react-query'
 import BasicModal from '~/components/Modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
-import leaveSchema, { TLeaveFormInput } from './schema/leave'
+import leaveSchema, { TLeaveFormInput, TUpdateLeaveFormInput, updateLeaveSchema } from './schema/leave'
 import LeaveForm from './LeaveForm'
 import useAlert from '~/hooks/useAlert'
 import useCreateLeave from './hooks/useCreateLeave'
@@ -15,6 +15,8 @@ import LeaveMessage from './constant/message'
 import { IModalRootProps } from '~/components/Modal/Modal'
 import { ILeaveEventData } from './types/leaves'
 import useUpdateLeave from './hooks/useUpdateLeave'
+import useDeleteLeave from './hooks/useDeleteLeave'
+import LeaveDeleteModal from './DeleteLeaveModal'
 
 interface ILeaveFormModalProps extends IModalRootProps {
   teacherId?: string
@@ -27,17 +29,20 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
   const school = useCurrentSchool((state) => state.school)
   const queryClient = useQueryClient()
 
-  const methods = useForm<TLeaveFormInput>({
-    resolver: zodResolver(leaveSchema)
+  const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
+  
+
+  const methods = useForm<TUpdateLeaveFormInput | TLeaveFormInput>({
+    resolver: zodResolver(editMode ? updateLeaveSchema : leaveSchema)
   })
 
   const alert = useAlert()
-  const { handleSubmit, reset, setValue } = methods
+  const { handleSubmit, reset } = methods
 
   useEffect(() => {
     if (leave) {
       reset({
-        id: leave.id,
+        id: leave?.id,
         startAt: leave.start,
         endAt: leave.end,
         remarks: leave?.remarks,
@@ -65,24 +70,52 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
     }
   })
 
-  const handleCreateLeave = () => {
+  const { deleteLeave } = useDeleteLeave({
+    onSuccess: async () => {
+      queryClient.invalidateQueries(['leaves'])
+      alert.success(LeaveMessage.deleted)
+      reset()
+      onClose()
+    }
+  })
+
+  const handleCreateLeave = useCallback(() => {
     handleSubmit((data) => createLeave(school.id, data))()
-  }
+  }, [handleSubmit, createLeave, school.id])
 
-  const handleUpdateLeave = () => {
-    handleSubmit((data) => updateLeave(school.id, data.id, data))()
-  }
+  const handleUpdateLeave = useCallback(() => {
+    handleSubmit((data) => {
+      if ('id' in data) {
+        updateLeave(school.id, data)
+      }
+    })()
+  }, [handleSubmit, updateLeave, school.id])
 
-  const createActions = (
-    <Button onClick={handleCreateLeave} bg="brand.500" type="submit" variant="outline" color="#FFFF">
-      <Text>Create</Text>
-    </Button>
-  )
+  const handleDeleteLeave = useCallback(() => {
+    onAlertModalOpen()
+  }, [onAlertModalOpen])
 
-  const updateActions = (
-    <Button onClick={handleUpdateLeave} bg="brand.500" type="submit" variant="outline" color="#FFFF">
-      <Text>Update</Text>
-    </Button>
+  const FooterComponent = (
+    <DialogFooter>
+      {editMode && (
+        <Button onClick={handleDeleteLeave} bg="button.danger" type="submit" variant="outline" color="#FFFF">
+          <Text>Delete</Text>
+        </Button>
+      )}
+      <Spacer />
+      <DialogActionTrigger asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogActionTrigger>
+      {editMode ? (
+        <Button onClick={handleUpdateLeave} bg="brand.500" type="submit" variant="outline" color="#FFFF">
+          <Text>Update</Text>
+        </Button>
+      ) : (
+        <Button onClick={handleCreateLeave} bg="brand.500" type="submit" variant="outline" color="#FFFF">
+          <Text>Create</Text>
+        </Button>
+      )}
+    </DialogFooter>
   )
 
   return (
@@ -91,11 +124,17 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
         <Heading size="xl">Leaves</Heading>
         <Spacer />
       </Flex>
+      <LeaveDeleteModal 
+        isOpen={isAlertModalOpen} 
+        onClose={onAlertModalClose} 
+        leaveId={leave?.id || ''} 
+        onSuccess={onClose}
+      />
       <BasicModal
         title={editMode ? 'Update Leave' : 'Add Leave'}
-        actions={editMode ? updateActions : createActions}
         isOpen={isOpen}
         onClose={onClose}
+        footerActions={FooterComponent}
       >
         <FormProvider {...methods}>
           <LeaveForm showTeachers={!teacherId} />
