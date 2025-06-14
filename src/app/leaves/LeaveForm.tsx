@@ -47,9 +47,9 @@ const LeaveForm = (props: ILeaveForm) => {
           </Box>
         </Field>
       )}
-      <Field label="Leave type" invalid={!!errors.leaveType} errorText={errors.leaveType?.message}>
+      <Field label="Leave type" invalid={!!errors.type} errorText={errors.type?.message}>
         <Box width="100%">
-          <SelectForm options={options} name="leaveType" placeholder="Select a document type" />
+          <SelectForm options={options} name="type" placeholder="Select a document type" />
         </Box>
       </Field>
 

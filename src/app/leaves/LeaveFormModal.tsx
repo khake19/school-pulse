@@ -15,7 +15,6 @@ import LeaveMessage from './constant/message'
 import { IModalRootProps } from '~/components/Modal/Modal'
 import { ILeaveEventData } from './types/leaves'
 import useUpdateLeave from './hooks/useUpdateLeave'
-import useDeleteLeave from './hooks/useDeleteLeave'
 import LeaveDeleteModal from './DeleteLeaveModal'
 
 interface ILeaveFormModalProps extends IModalRootProps {
@@ -30,7 +29,6 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
   const queryClient = useQueryClient()
 
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
-  
 
   const methods = useForm<TUpdateLeaveFormInput | TLeaveFormInput>({
     resolver: zodResolver(editMode ? updateLeaveSchema : leaveSchema)
@@ -47,7 +45,7 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
         endAt: leave.end,
         remarks: leave?.remarks,
         teacherId: leave?.teacherId,
-        leaveType: leave?.type
+        type: leave?.type
       })
     }
   }, [leave])
@@ -65,15 +63,6 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
     onSuccess: async () => {
       queryClient.invalidateQueries(['leaves'])
       alert.success(LeaveMessage.updated)
-      reset()
-      onClose()
-    }
-  })
-
-  const { deleteLeave } = useDeleteLeave({
-    onSuccess: async () => {
-      queryClient.invalidateQueries(['leaves'])
-      alert.success(LeaveMessage.deleted)
       reset()
       onClose()
     }
@@ -124,10 +113,10 @@ const LeaveFormModal = memo((props: ILeaveFormModalProps) => {
         <Heading size="xl">Leaves</Heading>
         <Spacer />
       </Flex>
-      <LeaveDeleteModal 
-        isOpen={isAlertModalOpen} 
-        onClose={onAlertModalClose} 
-        leaveId={leave?.id || ''} 
+      <LeaveDeleteModal
+        isOpen={isAlertModalOpen}
+        onClose={onAlertModalClose}
+        leaveId={leave?.id || ''}
         onSuccess={onClose}
       />
       <BasicModal

@@ -2,21 +2,17 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { useCallback, useState } from 'react'
 import { DateRange, Event, SlotInfo } from 'react-big-calendar'
+import { useSearchParams } from 'next/navigation'
 import Calendar from '~/components/Calendar/Calendar'
 import Layout from '~/components/Layout'
 import LeaveFormModal from './LeaveFormModal'
 import useGetLeaves from './hooks/useGetLeaves'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 import useSlotEvent from './hooks/useSlotEvent'
-import { setDate } from 'date-fns'
-import LeaveDeleteModal from './DeleteLeaveModal'
 
-interface ILeavesProps {
-  teacherId?: string
-}
-
-export default function Page(props: ILeavesProps) {
-  const { teacherId = '' } = props
+export default function Page() {
+  const searchParams = useSearchParams()
+  const teacherId = searchParams.get('teacherId') || ''
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [dateRange, setDateRange] = useState<Date[] | DateRange>()
 

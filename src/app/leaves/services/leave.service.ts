@@ -1,10 +1,9 @@
 import { IArrayResponse, IQueryParams } from '~/types/http'
 import { post, get, put, remove } from '~/utils/http'
-import { ILeaveResponse } from '../types/leaves'
+import { ILeaveResponse, TLeavePayload } from '../types/leaves'
 import { IResponse } from '~/types/http'
-import { TLeaveFormInput, TUpdateLeaveFormInput } from '../schema/leave'
 
-const createLeave = async (schoolId: string, body: TLeaveFormInput) => {
+const createLeave = async (schoolId: string, body: any): Promise<IResponse<ILeaveResponse>> => {
   const result = await post<IResponse<ILeaveResponse>, string>(`/api/schools/${schoolId}/leaves`, JSON.stringify(body))
   return result
 }
@@ -16,7 +15,11 @@ const getLeaves = async (schoolId: string, params?: IQueryParams): Promise<IArra
   return result
 }
 
-const updateLeave = async (schoolId: string, leaveId: string, body: TUpdateLeaveFormInput): Promise<IResponse<ILeaveResponse>> => {
+const updateLeave = async (
+  schoolId: string,
+  leaveId: string,
+  body: TLeavePayload
+): Promise<IResponse<ILeaveResponse>> => {
   const result = await put<IResponse<ILeaveResponse>, any>(
     `/api/schools/${schoolId}/leaves/${leaveId}`,
     JSON.stringify(body)

@@ -1,14 +1,14 @@
 import { IArrayResponse } from '~/types/http'
-import { TLeaveFormInput } from '../schema/leave'
+import { TLeaveFormInput, TLeavePayload } from '../schema/leave'
 import { ILeaveResponse } from '../types/leaves'
 import { format, parseISO } from 'date-fns'
 import { DateTime } from '~/constant/date'
 
-export const leaveFormToPayload = (form: TLeaveFormInput) => {
+export const leaveFormToPayload = (form: TLeaveFormInput): TLeavePayload => {
   return {
     teacher_id: form.teacherId,
     remarks: form.remarks,
-    type: form.leaveType,
+    type: form.type,
     start_at: format(new Date(form.startAt) ?? new Date(), DateTime.dashDateTimeFormat),
     end_at: format(new Date(form.endAt) ?? new Date(), DateTime.dashDateTimeFormat)
   }
