@@ -1,32 +1,24 @@
-import { useQuery } from '@tanstack/react-query'
+import usePaginatedQuery from '~/hooks/usePaginatedQuery'
 import { IQueryParams } from '~/types/http'
-import metaConverter from '~/helpers/metaConverter'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 import teacherService from '../services/teacher.service'
 import { teacherResponseToData } from '../helpers/converter'
-import { HttpStatus } from '~/constant/http'
+import { ITeacherResponse, TTeacherData } from '../types/teachers'
 
-const useGetTeachers = (params: IQueryParams) => {
+const useGetTeachers = (params: Omit<IQueryParams, 'page'>) => {
   const school = useCurrentSchool((state) => state.school)
 
-  const { data, status, error } = useQuery({
-    queryKey: ['users', params],
-    queryFn: () => teacherService.allTeachers(school.id, params),
+  const result = usePaginatedQuery<ITeacherResponse, unknown, TTeacherData>({
+    queryKey: ['users'],
+    queryFn: (queryParams) => teacherService.allTeachers(school.id, { ...queryParams, ...params }),
     enabled: !!school?.id,
-    keepPreviousData: true
+    transformData: (data) => data.map((teacher) => teacherResponseToData(teacher))
   })
 
-  const teachers = data?.data ? data?.data.map((teacher) => teacherResponseToData(teacher)) : []
-  const meta = metaConverter(data?.meta)
-  const isLoading = status === HttpStatus.loading
-
   return {
-    teachers,
-    meta,
-    status,
-    error,
-    isLoading
+    ...result,
+    teachers: result.data
   }
 }
 

@@ -24,16 +24,14 @@ interface IDocumentListProps {
 
 const DocumentList = (props: IDocumentListProps) => {
   const { teacherId = '' } = props
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
   const school = useCurrentSchool((state) => state.school)
 
   const {
     data: documents,
     meta,
-    isLoading
-  } = useGetDocuments(school?.id, { ...defaultParams, ...(teacherId && { teacher_id: teacherId }) })
+    isLoading,
+    setCurrentPage
+  } = useGetDocuments(school?.id, { ...(teacherId && { teacher_id: teacherId }) })
 
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [documentId, setDocumentId] = useState('')

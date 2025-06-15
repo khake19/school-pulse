@@ -20,29 +20,29 @@ export const documentCreateFormToPayload = (form: TDocumentFormInput) => {
   return data
 }
 
+export const documentToData = (document: IDocumentResponse): TDocumentData => ({
+  id: document.id,
+  filename: document.filename,
+  path: document.path,
+  documentType: document.document_type,
+  size: document.size,
+  contentType: document.content_type,
+  insertedAt: format(parseISO(document.inserted_at ?? ''), DateTime.format),
+  updatedAt: format(parseISO(document.updated_at ?? ''), DateTime.format),
+  datePeriod: format(parse(document.date_period, 'yyyy-MM', new Date()), DateTime.month),
+  user: {
+    email: document.user.email,
+    firstName: document.user.first_name,
+    middleName: document.user.middle_name,
+    lastName: document.user.last_name,
+    avatar: document.user.avatar
+  }
+})
+
 export const documentResponseToData = (
   documents: IArrayResponse<IDocumentResponse> | undefined
 ): IDocumentResponseToData => {
-  const data =
-    documents?.data.map((document) => ({
-      id: document.id,
-      filename: document.filename,
-      path: document.path,
-      documentType: document.document_type,
-      size: document.size,
-      contentType: document.content_type,
-      insertedAt: format(parseISO(document.inserted_at ?? ''), DateTime.format),
-      updatedAt: format(parseISO(document.updated_at ?? ''), DateTime.format),
-      datePeriod: format(parse(document.date_period, 'yyyy-MM', new Date()), DateTime.month),
-      user: {
-        email: document.user.email,
-        firstName: document.user.first_name,
-        middleName: document.user.middle_name,
-        lastName: document.user.last_name,
-        avatar: document.user.avatar
-      }
-    })) ?? []
-
+  const data = documents?.data.map(documentToData) ?? []
   const meta = metaConverter(documents?.meta)
 
   return { data, meta }

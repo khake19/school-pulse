@@ -1,30 +1,23 @@
-import { useQuery } from '@tanstack/react-query'
+import usePaginatedQuery from '~/hooks/usePaginatedQuery'
 import documentService from '../services/document.service'
-import { IDocumentResponse } from '../types/documents'
-import { IArrayResponse } from '~/types/http'
+import { IDocumentResponse, TDocumentData } from '../types/documents'
 import { IDocumentFilters } from '../types/filters'
-import { documentResponseToData } from '../helpers/converter'
-import metaConverter from '~/helpers/metaConverter'
-import { HttpStatus } from '~/constant/http'
+import { documentToData } from '../helpers/converter'
 
-const useGetDocuments = (schoolId: string, filters?: IDocumentFilters) => {
-  const { data, status, error } = useQuery<IArrayResponse<IDocumentResponse>, Error>({
-    queryKey: ['documents', filters],
-    queryFn: () => documentService.getDocuments(schoolId, filters),
+const useGetDocuments = (schoolId: string, filters?: Omit<IDocumentFilters, 'page'>) => {
+  const result = usePaginatedQuery<IDocumentResponse, unknown, TDocumentData>({
+    queryKey: ['documents'],
+    queryFn: async (queryParams) => {
+      const res = await documentService.getDocuments(schoolId, { ...queryParams, ...filters })
+      return res
+    },
     enabled: !!schoolId,
-    keepPreviousData: true
+    transformData: (data) => data.map(documentToData)
   })
 
-  const documents = documentResponseToData(data)
-  const meta = metaConverter(data?.meta)
-  const isLoading = status === HttpStatus.loading
-
   return {
-    data: documents.data,
-    meta,
-    status,
-    error,
-    isLoading
+    ...result,
+    data: result.data
   }
 }
 

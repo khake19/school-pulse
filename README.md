@@ -48,3 +48,14 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+Area of Improvement:
+
+1. Mutation Hook Repetition
+2. Data Transformation Repetition
+3. Form Modal Pattern Repetition
+4. Service Layer Could Be More Generic
+5. Abstract form modal pattern
+6. Consider generic CRUD service
+7. Add more comprehensive error boundaries
+8. Consider adding a state management pattern for complex forms

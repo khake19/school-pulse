@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -21,9 +20,7 @@ interface ITeacherTableProps {
 
 const TeacherTable = (props: ITeacherTableProps) => {
   const { handleDelete, filterSearch } = props
-  const [currentPage, setCurrentPage] = useState(1)
-  const defaultParams = currentPage === 0 ? {} : { page: currentPage.toString() }
-  const { teachers, meta, isLoading } = useGetTeachers({ ...defaultParams, filterSearch })
+  const { teachers, meta, isLoading, setCurrentPage } = useGetTeachers({ filterSearch })
 
   const columnHelper = createColumnHelper<TTeacherData>()
 
