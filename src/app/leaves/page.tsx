@@ -1,6 +1,6 @@
 'use client'
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { useCallback, useState, Suspense } from 'react'
+import { useCallback, useState } from 'react'
 import { DateRange, Event, SlotInfo } from 'react-big-calendar'
 import { useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'

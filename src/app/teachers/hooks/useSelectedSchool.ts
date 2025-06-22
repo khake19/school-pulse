@@ -1,10 +1,11 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import { ISchool } from '~/app/schools/types/schools'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
 const useSelectedSchool = (schools: ISchool[]) => {
-  const [school, setSchool] = useCurrentSchool((state) => [state.school, state.setSchool])
+  const [school, setSchool] = useCurrentSchool(useShallow((state) => [state.school, state.setSchool]))
   const [selectedSchool, setSelectedSchool] = useState('')
   const router = useRouter()
 

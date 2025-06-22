@@ -1,12 +1,13 @@
 'use client'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Box, Button, Flex, Heading, Spacer, useDisclosure, Text, Group } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
+import { useShallow } from 'zustand/react/shallow'
 
 import { main, header } from './Teacher.style'
 import TeacherTable from './TeacherTable'
 import SearchInput from '~/components/Search/SearchInput'
-import useFilterSearch from '~/hooks/useFilterSearch'
+import useFilterStore from './hooks/useFilterStore'
 
 // Lazy load modals
 const TeacherFormModal = dynamic(() => import('./TeacherFormModal'), {
@@ -24,12 +25,22 @@ const TeacherList = () => {
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
   const [teacherId, setTeacherId] = useState('')
 
-  const { filterSearch, handleSearchValue } = useFilterSearch()
+  // Only subscribe to the specific part of the store we need
+  const setTeacherFilters = useFilterStore(useShallow((state) => state.teachers.setFilters))
+
+  const filters = useFilterStore((state) => state.teachers.filters)
 
   const handleCreate = () => {
     onFormModalOpen()
     setTeacherId('')
   }
+
+  const handleSearchValue = useCallback(
+    (value: string) => {
+      setTeacherFilters({ filters: { search: value } })
+    },
+    [setTeacherFilters]
+  )
 
   const handleDelete = (teacherId: string) => {
     onAlertModalOpen()
@@ -60,7 +71,7 @@ const TeacherList = () => {
         <Box flex="1" p={4} borderRadius="md"></Box>
       </Flex>
 
-      <TeacherTable handleDelete={handleDelete} filterSearch={filterSearch} />
+      <TeacherTable handleDelete={handleDelete} filterSearch={filters.search} />
     </Box>
   )
 }

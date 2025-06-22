@@ -59,3 +59,22 @@ Area of Improvement:
 6. Consider generic CRUD service
 7. Add more comprehensive error boundaries
 8. Consider adding a state management pattern for complex forms
+
+Filter Architecture
+
+1. User visits /teachers
+2. Types "john" in search → Debounced API call
+3. Selects "Science" position → URL updates
+4. FilterBar appears showing active filters
+5. User can clear individual filters or all
+6. User bookmarks the page → Saves current filters
+7. User shares URL → Others see same filtered view
+8. User clicks Back → Returns to previous filter state
+
+   getModuleFilters,
+   setFilter,
+   setFilters,
+   clearFilter,
+   clearAllFilters,
+   hasActiveFilters,
+   getActiveFilterCount

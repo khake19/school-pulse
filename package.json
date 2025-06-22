@@ -19,6 +19,7 @@
   "dependencies": {
     "@chakra-ui/next-js": "^2.4.2",
     "@chakra-ui/react": "^3.2.3",
+    "@dhmk/zustand-lens": "^5.0.0",
     "@emotion/react": "^11.14.0",
     "@fontsource/inter": "^5.0.19",
     "@fontsource/open-sans": "^4.5.14",
@@ -59,7 +60,7 @@
     "use-immer": "^0.9.0",
     "zod": "^3.22.2",
     "zod-form-data": "^2.0.2",
-    "zustand": "^4.3.8"
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@chakra-ui/cli": "^3.2.3",

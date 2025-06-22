@@ -3,8 +3,11 @@ import { IDocumentResponse } from '../types/documents'
 import { get, post, remove } from '~/utils/http'
 
 const getDocuments = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<IDocumentResponse>> => {
+  const queryParams = params
+    ? Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== undefined))
+    : {}
   const result = await get<IArrayResponse<IDocumentResponse>>(
-    `/api/schools/${schoolId}/documents?` + new URLSearchParams({ ...params })
+    `/api/schools/${schoolId}/documents?` + new URLSearchParams(queryParams)
   )
   return result
 }

@@ -3,8 +3,12 @@ import { ITeacherResponse } from '../types/teachers'
 import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
 
 const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacherResponse>> => {
+  const queryParams = params
+    ? Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== undefined))
+    : {}
+
   const result = await get<IArrayResponse<ITeacherResponse>>(
-    `/api/schools/${schoolId}/teachers?` + new URLSearchParams({ ...params })
+    `/api/schools/${schoolId}/teachers?` + new URLSearchParams(queryParams)
   )
   return result
 }
