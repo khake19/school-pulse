@@ -1,8 +1,16 @@
 import { get, post, put, remove } from '~/utils/http'
 import { ITeacherResponse } from '../types/teachers'
-import { IResponse, IQueryParams, IArrayResponse } from '~/types/http'
+import { IResponse, IArrayResponse, IQueryParams } from '~/types/http'
 
-const allTeachers = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ITeacherResponse>> => {
+const allTeachers = async (schoolId: string, params?: string): Promise<IArrayResponse<ITeacherResponse>> => {
+  const result = await get<IArrayResponse<ITeacherResponse>>(`/api/schools/${schoolId}/teachers?` + params)
+  return result
+}
+
+const allInfiniteTeachers = async (
+  schoolId: string,
+  params?: IQueryParams
+): Promise<IArrayResponse<ITeacherResponse>> => {
   const queryParams = params
     ? Object.fromEntries(Object.entries(params).filter(([_, value]) => value !== undefined))
     : {}
@@ -40,6 +48,6 @@ const removeTeacher = async (schoolId: string, teacherId: string) => {
   return result
 }
 
-const teacherService = { allTeachers, createTeacher, getTeacher, updateTeacher, removeTeacher }
+const teacherService = { allTeachers, createTeacher, getTeacher, updateTeacher, removeTeacher, allInfiniteTeachers }
 
 export default teacherService

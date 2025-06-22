@@ -4,7 +4,7 @@ import useInfiniteScroll from '~/hooks/useInfiniteScroll'
 import { Option } from '~/types/select'
 
 const TeacherSelect = () => {
-  const { handleScrollToBottom, fetchedData } = useInfiniteScroll(['teachers'], teacherService.allTeachers)
+  const { handleScrollToBottom, fetchedData } = useInfiniteScroll(['teachers'], teacherService.allInfiniteTeachers)
 
   const options: Option[] | undefined = fetchedData?.map((data) => ({
     label: data.first_name + ' ' + data.last_name,

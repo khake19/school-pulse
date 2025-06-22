@@ -1,4 +1,4 @@
-import { IArrayResponse, IQueryParams } from '~/types/http'
+import { IArrayResponse } from '~/types/http'
 import { post, get, put, remove } from '~/utils/http'
 import { ILeaveResponse, TLeavePayload } from '../types/leaves'
 import { IResponse } from '~/types/http'
@@ -8,10 +8,8 @@ const createLeave = async (schoolId: string, body: TLeavePayload): Promise<IResp
   return result
 }
 
-const getLeaves = async (schoolId: string, params?: IQueryParams): Promise<IArrayResponse<ILeaveResponse>> => {
-  const result = await get<IArrayResponse<ILeaveResponse>>(
-    `/api/schools/${schoolId}/leaves?` + new URLSearchParams({ ...params })
-  )
+const getLeaves = async (schoolId: string, params?: string): Promise<IArrayResponse<ILeaveResponse>> => {
+  const result = await get<IArrayResponse<ILeaveResponse>>(`/api/schools/${schoolId}/leaves?` + params)
   return result
 }
 

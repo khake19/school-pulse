@@ -6,6 +6,7 @@ import teacherService from '../services/teacher.service'
 import { teacherResponseToData } from '../helpers/converter'
 import { ITeacherResponse, TTeacherData } from '../types/teachers'
 import { useMemo } from 'react'
+import sanitizeQueryParams from '~/helpers/sanitizeQueryParams'
 
 const useGetTeachers = (params: Omit<IQueryParams, 'page'>) => {
   const school = useCurrentSchool((state) => state.school)
@@ -13,7 +14,11 @@ const useGetTeachers = (params: Omit<IQueryParams, 'page'>) => {
 
   const result = usePaginatedQuery<ITeacherResponse, unknown, TTeacherData>({
     queryKey: ['users', school?.id, stableParams],
-    queryFn: (queryParams) => teacherService.allTeachers(school.id, { ...queryParams, ...params }),
+    queryFn: async (queryParams) => {
+      const sanitizedParams = sanitizeQueryParams({ ...queryParams, ...params })
+      const queryString = new URLSearchParams(sanitizedParams as Record<string, string>).toString()
+      return teacherService.allTeachers(school.id, queryString)
+    },
     enabled: !!school?.id,
     transformData: (data) => data.map((teacher) => teacherResponseToData(teacher))
   })

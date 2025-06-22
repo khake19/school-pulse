@@ -7,12 +7,17 @@ import { ILeaveResponse } from '../types/leaves'
 import { ILeaveFilters } from '../types/filters'
 import { leaveResponseToData } from '../helpers/converter'
 import filtersToPayload from '../helpers/filter'
+import sanitizeQueryParams from '~/helpers/sanitizeQueryParams'
 
 const useGetLeaves = (schoolId: string, filters?: ILeaveFilters) => {
   const leaveFilters = filtersToPayload(filters)
   const { data, status, error } = useQuery<IArrayResponse<ILeaveResponse>, Error>({
     queryKey: ['leaves', filters],
-    queryFn: () => leaveService.getLeaves(schoolId, leaveFilters),
+    queryFn: async (queryParams) => {
+      const sanitizedParams = sanitizeQueryParams({ ...queryParams, ...leaveFilters })
+      const queryString = new URLSearchParams(sanitizedParams).toString()
+      return leaveService.getLeaves(schoolId, queryString)
+    },
     enabled: !!schoolId,
     keepPreviousData: true
   })
