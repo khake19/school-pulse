@@ -8,6 +8,7 @@ import { main, header } from './Teacher.style'
 import TeacherTable from './TeacherTable'
 import SearchInput from '~/components/Search/SearchInput'
 import useFilterStore from './hooks/useFilterStore'
+import PositionSelect from './component/PositionSelect/PositionSelect'
 
 // Lazy load modals
 const TeacherFormModal = dynamic(() => import('./TeacherFormModal'), {
@@ -37,7 +38,7 @@ const TeacherList = () => {
 
   const handleSearchValue = useCallback(
     (value: string) => {
-      setTeacherFilters({ filters: { search: value } })
+      setTeacherFilters({ search: value })
     },
     [setTeacherFilters]
   )
@@ -64,14 +65,21 @@ const TeacherList = () => {
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <Flex direction="row" borderRadius="md" gap={4}>
-        <Box flex="1" p={4} borderRadius="md">
-          <SearchInput handleSearchValue={handleSearchValue} width="50%" />
-        </Box>
-        <Box flex="1" p={4} borderRadius="md"></Box>
-      </Flex>
-
-      <TeacherTable handleDelete={handleDelete} filterSearch={filters.search} />
+      <Box w="50%" mt={4}>
+        <Flex gap={2}>
+          <Box flex="1">
+            <SearchInput handleSearchValue={handleSearchValue} width="100%" value={filters?.search || ''} />
+          </Box>
+          <Box flex="1">
+            <PositionSelect
+              isForm={false}
+              value={filters?.position || ''}
+              onChange={(value) => setTeacherFilters({ position: value })}
+            />
+          </Box>
+        </Flex>
+      </Box>
+      <TeacherTable handleDelete={handleDelete} />
     </Box>
   )
 }

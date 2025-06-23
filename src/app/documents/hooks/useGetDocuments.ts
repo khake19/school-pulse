@@ -7,7 +7,7 @@ import sanitizeQueryParams from '~/helpers/sanitizeQueryParams'
 
 const useGetDocuments = (schoolId: string, filters?: Omit<IDocumentFilters, 'page'>) => {
   const result = usePaginatedQuery<IDocumentResponse, unknown, TDocumentData>({
-    queryKey: ['documents'],
+    queryKey: ['documents', JSON.stringify(filters)],
     queryFn: async (queryParams) => {
       const sanitizedParams = sanitizeQueryParams({ ...queryParams, ...filters })
       const queryString = new URLSearchParams(sanitizedParams as Record<string, string>).toString()

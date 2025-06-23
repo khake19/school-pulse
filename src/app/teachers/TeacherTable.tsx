@@ -15,13 +15,12 @@ import { MenuContent, MenuRoot, MenuTrigger, MenuItem } from '~/components/ui/me
 
 interface ITeacherTableProps {
   handleDelete: (id: string) => void
-  filterSearch?: string
 }
 
 const TeacherTable = (props: ITeacherTableProps) => {
-  const { handleDelete, filterSearch } = props
+  const { handleDelete } = props
 
-  const { teachers, meta, isLoading, setCurrentPage } = useGetTeachers({ filterSearch })
+  const { teachers, meta, isLoading, setCurrentPage } = useGetTeachers()
 
   const columnHelper = createColumnHelper<TTeacherData>()
 
