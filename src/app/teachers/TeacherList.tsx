@@ -3,7 +3,6 @@ import { useState, useCallback } from 'react'
 import { Box, Button, Flex, Heading, Spacer, useDisclosure, Text, Group } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useShallow } from 'zustand/react/shallow'
-
 import { main, header } from './Teacher.style'
 import TeacherTable from './TeacherTable'
 import SearchInput from '~/components/Search/SearchInput'
