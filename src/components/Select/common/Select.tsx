@@ -20,7 +20,7 @@ const BasicSelect = <Option, IsMulti extends boolean = false, Group extends Grou
     })
   }
 
-  return <Select {...props} styles={colourStyles} isClearable={true} />
+  return <Select {...props} styles={colourStyles} />
 }
 
 export default BasicSelect

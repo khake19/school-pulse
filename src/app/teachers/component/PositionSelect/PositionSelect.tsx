@@ -24,7 +24,7 @@ const PositionSelect = forwardRef<unknown, PositionSelectProps>(
       onChange,
       isForm = true,
       isDisabled = false,
-      isClearable = false,
+      isClearable = true,
       ...props
     },
     ref

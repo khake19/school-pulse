@@ -73,7 +73,7 @@ const TeacherList = () => {
             <PositionSelect
               isForm={false}
               value={filters?.position || ''}
-              onChange={(value) => setTeacherFilters({ position: value })}
+              onChange={(value) => setTeacherFilters({ position: value.toString() })}
             />
           </Box>
         </Flex>

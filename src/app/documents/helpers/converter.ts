@@ -4,6 +4,7 @@ import metaConverter from '~/helpers/metaConverter'
 import { format, parse, parseISO } from 'date-fns'
 import { DateTime } from '~/constant/date'
 import { TDocumentFormInput } from '../schema/documents'
+import { IFilterProps } from '../hooks/useFilterStore'
 
 interface IDocumentResponseToData {
   data: TDocumentData[]
@@ -46,4 +47,10 @@ export const documentResponseToData = (
   const meta = metaConverter(documents?.meta)
 
   return { data, meta }
+}
+
+export const filtersToQueryParams = (params: IFilterProps | null) => {
+  return {
+    teacher_id: params?.teacherId ?? ''
+  }
 }
