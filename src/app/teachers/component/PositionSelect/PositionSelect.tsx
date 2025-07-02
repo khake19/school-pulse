@@ -53,7 +53,7 @@ const PositionSelect = forwardRef<unknown, PositionSelectProps>(
         ref={ref}
         options={options}
         placeholder={placeholder}
-        value={options.find((option) => option.value === value)}
+        value={options.find((option) => option.value === Number(value))}
         onChange={(selectedOption: Option | null) => onChange?.(selectedOption?.value || '')}
         isDisabled={isDisabled}
         isClearable={isClearable}

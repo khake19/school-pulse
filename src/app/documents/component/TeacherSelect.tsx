@@ -59,6 +59,7 @@ const TeacherSelect = forwardRef<unknown, ITeacherSelectProps>(
         value={options.find((option) => option.value === value)}
         onChange={(selectedOption: Option | null) => onChange?.(selectedOption?.value || '')}
         isDisabled={isDisabled}
+        onMenuScrollToBottom={handleScrollToBottom}
         isClearable={isClearable}
         {...props}
       />

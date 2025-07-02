@@ -10,14 +10,14 @@ interface ISearchInputProps extends InputProps {
 }
 
 const SearchInput = (props: ISearchInputProps) => {
-  const { placeholder = 'Search ', handleSearchValue, width = 'full' } = props
-  const [text, setText] = useState('')
+  const { placeholder = 'Search ', handleSearchValue, width = 'full', value: defaultValue } = props
+  const [text, setText] = useState(defaultValue || '')
   const [value] = useDebounce(text, 1000)
 
   // Call handleDebounceValue only when value changes
   useEffect(() => {
     if (handleSearchValue) {
-      handleSearchValue(value)
+      handleSearchValue(value.toString())
     }
   }, [value, handleSearchValue])
 
@@ -29,6 +29,7 @@ const SearchInput = (props: ISearchInputProps) => {
           onChange={(e) => {
             setText(e.target.value)
           }}
+          value={text}
         />
       </InputGroup>
     </HStack>

@@ -29,6 +29,7 @@ const DocumentList = (props: IDocumentListProps) => {
   const { teacherId = '' } = props
   const school = useCurrentSchool((state) => state.school)
   const setTeacherFilters = useFilterStore(useShallow((state) => state.documents.setFilters))
+  const filters = useFilterStore(useShallow((state) => state.documents.filters))
   const { data: documents, meta, isLoading, setCurrentPage } = useGetDocuments(school?.id)
 
   const { open: isAlertModalOpen, onClose: onAlertModalClose, onOpen: onAlertModalOpen } = useDisclosure()
@@ -46,7 +47,11 @@ const DocumentList = (props: IDocumentListProps) => {
       <Box w="50%" mt={4}>
         <Flex gap={2}>
           <Box flex="1">
-            <TeacherSelect isForm={false} onChange={(value) => setTeacherFilters({ teacherId: value.toString() })} />
+            <TeacherSelect
+              isForm={false}
+              onChange={(value) => setTeacherFilters({ teacherId: value.toString() })}
+              value={filters?.teacherId}
+            />
           </Box>
           <Box flex="1"></Box>
         </Flex>

@@ -67,7 +67,7 @@ const TeacherList = () => {
       <Box w="50%" mt={4}>
         <Flex gap={2}>
           <Box flex="1">
-            <SearchInput handleSearchValue={handleSearchValue} width="100%" value={filters?.search || ''} />
+            <SearchInput handleSearchValue={handleSearchValue} width="100%" value={filters?.search} />
           </Box>
           <Box flex="1">
             <PositionSelect

@@ -43,7 +43,7 @@ const TeacherFormModal = (props: IFormModal) => {
   }
 
   const createActions = (
-    <Button onClick={handleCreateTeacher} colorPalette="brand" type="submit">
+    <Button onClick={handleCreateTeacher} bg="brand.500" type="submit">
       <Text>Submit</Text>
     </Button>
   )
