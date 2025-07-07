@@ -1,15 +1,13 @@
 import usePaginatedQuery from '~/hooks/usePaginatedQuery'
-import documentService from '../services/document.service'
-import { IDocumentResponse, TDocumentData } from '../types/documents'
-import { documentToData, filtersToQueryParams } from '../helpers/converter'
+import documentService from '~/app/documents/services/document.service'
+import { IDocumentResponse, TDocumentData } from '~/app/documents/types/documents'
+import { documentToData, filtersToQueryParams } from '~/app/documents/helpers/converter'
 import sanitizeQueryParams from '~/helpers/sanitizeQueryParams'
-import useFilterStore from './useFilterStore'
 
-const useGetDocuments = (schoolId: string) => {
-  const filters = useFilterStore((state) => state.documents.filters)
-  const filterQuery = filtersToQueryParams(filters)
+const useGetDocuments = (schoolId: string, teacherId: string) => {
+  const filterQuery = filtersToQueryParams({ teacherId })
   const result = usePaginatedQuery<IDocumentResponse, unknown, TDocumentData>({
-    queryKey: ['documents', JSON.stringify(filters)],
+    queryKey: ['teacher-documents', teacherId, schoolId],
     queryFn: async (queryParams) => {
       const sanitizedParams = sanitizeQueryParams({ ...queryParams, ...filterQuery })
       const queryString = new URLSearchParams(sanitizedParams).toString()

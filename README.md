@@ -1,80 +1,106 @@
-## Getting Started
+# 🏫 SchoolPulse (Frontend)
 
-Enter the values in the `.env.development.sample`, `.env.staging.sample`, `.env.production.sample` files to be used for each environments.
+SchoolPulse is a school information system designed to manage teachers, students, and classroom data with a clean, modern UI. Built with React and Chakra UI, it’s focused on ease of use, fast filtering, and real-time feedback.
 
-## Using Docker and Makefile
+## ✨ Features
 
-### Development environment - for doing testing
+- 🔍 Teacher listing with search, filters, and pagination
+- ➕ Add, edit, and delete teachers
+- ⚙️ Zustand + zustand-lens state management
+- ⚛️ Fully responsive Chakra UI layout
+- 🔒 Authentication and role-based access
+- 📦 API integration with the SchoolPulse backend
+- 📄 Dynamic table filtering system
+- 🧪 (Planned) Feature: Form validation + UX polish (loading states, error toasts)
+
+## 🧱 Tech Stack
+
+| Tech                       | Purpose                     |
+| -------------------------- | --------------------------- |
+| **React (App Router)**     | Frontend framework          |
+| **Next.js**                | Routing & build system      |
+| **TypeScript**             | Type safety                 |
+| **Zustand + zustand-lens** | Global state management     |
+| **Chakra UI**              | Component styling & layout  |
+| **React Hook Form**        | Form handling               |
+| **Zod**                    | Schema validation & parsing |
+
+## 🧑‍💻 Folder Structure (Simplified)
 
 ```
-make build-development
-make start-development
+src/
+├── components/         # Shared and page-specific UI components
+├── hooks/              # Custom React hooks
+├── modules/            # Feature-based modules (e.g. teachers/)
+├── stores/             # Zustand global state
+├── services/           # API services
+├── utils/              # Helpers and utility functions
+├── app/                # App Router pages and layout
+│   ├── api/            # Next.js API route handlers (backend endpoints)
+│   ├── documents/      # Document-related pages and components
+│   ├── teachers/       # Teacher-related pages and components
+│   └── ...             # Other feature pages
+└── styles/             # Theme and global style definitions (if any)
 ```
 
-Open http://localhost:3001
+**Folder Descriptions:**
 
-### Staging environment - for doing UAT testing
+- **app/**: Main entry point for Next.js App Router. Contains all route segments, layouts, and API endpoints.
+- **components/**: Shared, reusable UI components used across multiple pages or modules.
+- **hooks/**: Custom React hooks for encapsulating logic like data fetching, modal state, etc.
+- **modules/**: Domain-driven feature folders, each with their own components, types, and helpers.
+- **stores/**: Zustand store definitions and slices for global state management.
+- **services/**: Functions for communicating with backend APIs (REST, GraphQL, etc.).
+- **utils/**: Utility functions and helpers that are not domain-specific.
+- **styles/**: Theme and global style definitions (if using Chakra UI or styled-components).
 
-```
-make build-staging
-make start-staging
-```
+> 💡 _The project follows a modular and scalable architecture, inspired by real production standards._
 
-Open http://localhost:3002
-
-### Production environment - for users
-
-```
-make build-production
-make start-production
-```
-
-Open http://localhost:3003
-
-## Running Locally
-
-First, run the development server:
+## 🚀 Getting Started
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/khake19/school-pulse.git
+
+# 2. Install dependencies
+cd school-pulse
+npm install
+
+# 3. Setup environment variables
+# Create .env file based on .env.example
+
+# 4. Start dev server
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📸 Screenshots
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+> (Add screenshots here showing the teacher list, filters, modals, etc.)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 📚 Planned Improvements
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [ ] Add loading spinners + toast feedback for forms
+- [ ] Improve table UX and responsive handling
+- [ ] Add test seed data for demo
+- [ ] Create user onboarding flow
 
-Area of Improvement:
+## 🧠 Design Decisions
 
-1. Mutation Hook Repetition
-2. Data Transformation Repetition
-3. Form Modal Pattern Repetition
-4. Service Layer Could Be More Generic
-5. Abstract form modal pattern
-6. Consider generic CRUD service
-7. Add more comprehensive error boundaries
-8. Consider adding a state management pattern for complex forms
+- Zustand was chosen for its simplicity, with `zustand-lens` used to allow modular state access and better scalability.
+- Chakra UI was used for a consistent and accessible design system.
+- Code is organized per domain/module for better separation and onboarding.
 
-Filter Architecture
+## ⚙️ Requirements
 
-1. User visits /teachers
-2. Types "john" in search → Debounced API call
-3. Selects "Science" position → URL updates
-4. FilterBar appears showing active filters
-5. User can clear individual filters or all
-6. User bookmarks the page → Saves current filters
-7. User shares URL → Others see same filtered view
-8. User clicks Back → Returns to previous filter state
+- Node.js v18+ (recommended)
+- npm or yarn
 
-   getModuleFilters,
-   setFilter,
-   setFilters,
-   clearFilter,
-   clearAllFilters,
-   hasActiveFilters,
-   getActiveFilterCount
+## 👨‍🔧 Developer Notes
+
+This app is part of a larger system:
+
+- Backend repo: [school_pulse_api](https://github.com/khake19/school_pulse_api)
+
+## 📝 License
+
+MIT

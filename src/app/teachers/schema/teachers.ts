@@ -1,5 +1,6 @@
 import { zfd } from 'zod-form-data'
 import { z } from 'zod'
+const fileType = typeof File !== 'undefined' ? z.instanceof(File) : z.any()
 
 const teacherSchema = zfd.formData({
   firstName: zfd.text(),
@@ -10,7 +11,7 @@ const teacherSchema = zfd.formData({
   email: zfd.text(),
   employeeNumber: zfd.text(z.string().length(7).optional()),
   gender: zfd.text().optional(),
-  avatar: zfd.file(z.union([z.instanceof(File), z.string()])),
+  avatar: zfd.file(z.union([fileType, z.string()])),
   dateHired: zfd.text(z.string().optional()),
   datePromotion: zfd.text(z.string().optional()),
   philhealth: zfd.text(z.string().length(12).optional()),

@@ -4,7 +4,7 @@ import { Box, Tabs, Heading } from '@chakra-ui/react'
 import { main } from '../Teacher.style'
 import Profile from './Profile'
 import useGetTeacherDetails from './hooks/useGetTeacherDetails'
-import DocumentList from '~/app/documents/DocumentList'
+import DocumentList from './DocumentList'
 
 const TeacherDetails = () => {
   const { teacher } = useGetTeacherDetails()
