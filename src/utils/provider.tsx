@@ -1,14 +1,17 @@
 'use client'
 import React from 'react'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ChakraProvider } from '@chakra-ui/react'
-import { PhotoProvider } from 'react-photo-view'
+import dynamic from 'next/dynamic'
 import theme from '../theme'
 
 import '@fontsource/raleway/400.css'
 import '@fontsource/open-sans/700.css'
-import 'react-photo-view/dist/react-photo-view.css'
+
+const ReactQueryDevtools =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(() => import('@tanstack/react-query-devtools').then((mod) => mod.ReactQueryDevtools), { ssr: false })
+    : () => null
 
 const Providers = ({ children }: React.PropsWithChildren) => {
   const [client] = React.useState(new QueryClient())
@@ -16,7 +19,7 @@ const Providers = ({ children }: React.PropsWithChildren) => {
   return (
     <ChakraProvider value={theme}>
       <QueryClientProvider client={client}>
-        <PhotoProvider maskOpacity={0.5}>{children}</PhotoProvider>
+        {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>

@@ -49,8 +49,10 @@ export const documentResponseToData = (
   return { data, meta }
 }
 
-export const filtersToQueryParams = (params: IFilterProps | null) => {
-  return {
-    teacher_id: params?.teacherId ?? ''
+export const filtersToQueryParams = (filters: IFilterProps | null) => {
+  const params: Record<string, string | string[]> = {}
+  if (filters?.teachers && filters.teachers.length > 0) {
+    params['teacher_id'] = filters.teachers
   }
+  return params
 }

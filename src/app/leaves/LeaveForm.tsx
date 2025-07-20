@@ -5,7 +5,7 @@ import { Field } from '~/components/ui/field'
 import { Option } from '~/types/select'
 import SelectForm from '~/components/Select/form/SelectForm'
 import Leaves from '~/constant/leave'
-import TeacherSelect from '../documents/component/TeacherSelect'
+import TeacherSelectForm from '../documents/component/TeacherSelectForm'
 import { TLeaveFormInput } from './schema/leave'
 
 interface ILeaveForm {
@@ -43,7 +43,7 @@ const LeaveForm = (props: ILeaveForm) => {
       {showTeachers && (
         <Field label="Teacher" invalid={!!errors.teacherId} errorText={errors.teacherId?.message}>
           <Box width="100%">
-            <TeacherSelect />
+            <TeacherSelectForm />
           </Box>
         </Field>
       )}

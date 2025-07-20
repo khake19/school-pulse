@@ -2,17 +2,19 @@ import usePaginatedQuery from '~/hooks/usePaginatedQuery'
 import documentService from '../services/document.service'
 import { IDocumentResponse, TDocumentData } from '../types/documents'
 import { documentToData, filtersToQueryParams } from '../helpers/converter'
-import sanitizeQueryParams from '~/helpers/sanitizeQueryParams'
+
 import useFilterStore from './useFilterStore'
+import { buildQueryParams } from '~/utils/queryParamBuilder'
 
 const useGetDocuments = (schoolId: string) => {
   const filters = useFilterStore((state) => state.documents.filters)
-  const filterQuery = filtersToQueryParams(filters)
+
   const result = usePaginatedQuery<IDocumentResponse, unknown, TDocumentData>({
-    queryKey: ['documents', JSON.stringify(filters)],
+    queryKey: ['documents', schoolId, { filters }],
     queryFn: async (queryParams) => {
-      const sanitizedParams = sanitizeQueryParams({ ...queryParams, ...filterQuery })
-      const queryString = new URLSearchParams(sanitizedParams).toString()
+      const filterQuery = filtersToQueryParams(filters)
+      const queryString = buildQueryParams({ ...filterQuery, ...queryParams })
+
       const res = await documentService.getDocuments(schoolId, queryString)
       return res
     },

@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { IArrayResponse, IQueryParams } from '~/types/http'
 import useCurrentSchool from '~/stores/current-school/useCurrentSchool'
 
-const RECORDS_PER_PAGE = '3'
+const RECORDS_PER_PAGE = '25'
 
 const useInfiniteScroll = <T, K extends IQueryParams>(
   queryKey: QueryKey,
@@ -19,6 +19,7 @@ const useInfiniteScroll = <T, K extends IQueryParams>(
       return queryFn(school.id, defaultParams)
     },
     {
+      enabled: !!school.id,
       getNextPageParam: (lastPage, allPages): number | undefined => {
         if (!lastPage || !lastPage.meta) return undefined
 

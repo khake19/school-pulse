@@ -6,7 +6,7 @@ import { Option } from '~/types/select'
 
 import FileUpload from '~/components/FileUpload/FileUpload'
 import { TDocumentFormInput } from './schema/documents'
-import TeacherSelect from './component/TeacherSelect'
+import TeacherSelectForm from './component/TeacherSelectForm'
 import SelectForm from '~/components/Select/form/SelectForm'
 
 interface IDocumentForm {
@@ -43,7 +43,7 @@ const DocumentForm = (props: IDocumentForm) => {
         {showTeachers && (
           <Field label="Teacher" invalid={!!errors.teacherId} errorText={errors.teacherId?.message}>
             <Box width="100%">
-              <TeacherSelect />
+              <TeacherSelectForm />
             </Box>
           </Field>
         )}

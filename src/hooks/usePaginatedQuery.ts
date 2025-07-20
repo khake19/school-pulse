@@ -6,7 +6,7 @@ import { HttpStatus } from '~/constant/http'
 
 interface IUsePaginatedQueryOptions<TData, TError = unknown, TTransformed = TData>
   extends Omit<UseQueryOptions<IArrayResponse<TData>, TError>, 'queryKey' | 'queryFn'> {
-  queryKey: string[]
+  queryKey: unknown[]
   queryFn: (params: IQueryParams) => Promise<IArrayResponse<TData>>
   transformData?: (data: TData[]) => TTransformed[]
 }

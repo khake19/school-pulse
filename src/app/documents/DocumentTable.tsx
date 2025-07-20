@@ -7,7 +7,8 @@ import TableProvider from '~/components/TableProvider/TableProvider'
 import Table from '~/components/TableProvider/Table'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TablePagination from '~/components/TableProvider/TablePagination'
-import { PhotoProvider, PhotoView } from 'react-photo-view'
+import 'react-photo-view/dist/react-photo-view.css'
+import dynamic from 'next/dynamic'
 
 interface IDocumentTableProps {
   handleDelete: (id: string) => void
@@ -27,6 +28,9 @@ const DocumentTable = (props: IDocumentTableProps) => {
     columnHelper.display({
       id: 'fileName',
       cell: (props) => {
+        const PhotoProvider = dynamic(() => import('react-photo-view').then((mod) => mod.PhotoProvider), { ssr: false })
+        const PhotoView = dynamic(() => import('react-photo-view').then((mod) => mod.PhotoView), { ssr: false })
+
         return (
           <PhotoProvider maskOpacity={0.5}>
             <PhotoView src={props.row.original.path}>

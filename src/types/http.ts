@@ -15,7 +15,7 @@ export interface IQueryParams {
   offset?: string
   limit?: string
   filterSearch?: string
-  filters?: Record<string, any>
+  filters?: Record<string, unknown>
 }
 
 type MetaDataFields = 'offset' | 'page' | 'size' | 'total' | 'pages'
