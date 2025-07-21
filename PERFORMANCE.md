@@ -69,19 +69,20 @@ import AddTeacherModal from '@/components/modals/AddTeacherModal'
 
 // After
 const AddTeacherModal = dynamic(() => import('@/components/modals/AddTeacherModal'), {
-  ssr: false,
+  ssr: false
 })
+```
 
 # 🧪 Measurable Impact
 
 ## 📦 Bundle size savings by route
 
-| Route          | Before Gzipped | After Gzipped | Reduction               |
-|----------------|----------------|---------------|--------------------------|
-| Documents      | 295 kB         | 243 kB        | ↓ 52 kB (**17.6%**)      |
-| Teachers       | 273 kB         | 233 kB        | ↓ 40 kB (**14.7%**)      |
-| Teachers/[id]  | 310 kB         | 278 kB        | ↓ 32 kB (**10.3%**)      |
-| Leave          | 311 kB         | 184 kB        | ↓ 127 kB (**40.8%**) ✅  |
+| Route         | Before Gzipped | After Gzipped | Reduction               |
+| ------------- | -------------- | ------------- | ----------------------- |
+| Documents     | 295 kB         | 243 kB        | ↓ 52 kB (**17.6%**)     |
+| Teachers      | 273 kB         | 233 kB        | ↓ 40 kB (**14.7%**)     |
+| Teachers/[id] | 310 kB         | 278 kB        | ↓ 32 kB (**10.3%**)     |
+| Leave         | 311 kB         | 184 kB        | ↓ 127 kB (**40.8%**) ✅ |
 
 📌 **Savings ranged from 32–127 kB**, depending on how many modals were bundled in the route.
 
@@ -90,23 +91,26 @@ const AddTeacherModal = dynamic(() => import('@/components/modals/AddTeacherModa
 ## ⚙️ Optimization 2: Replacing `react-select` with Downshift
 
 ### 🧠 Problem
+
 `react-select` was the **largest single library** in the Documents and Teachers bundles.
 Its features were **overkill** for the app’s simple dropdown use case.
 
 ### 💡 Solution
+
 Replaced `react-select` with **Downshift** — a lightweight, headless UI utility — to retain full control while trimming bundle size.
 
 ### 📉 Measurable Impact
 
 **Library size impact**:
+
 - Dropped `react-select` from **#1** to **#5** in the bundle analyzer rank.
 - Saved **~34 kB** across key routes.
 
 **Detailed reduction**:
 
-| Route     | Before Gzipped | After Gzipped | Reduction              |
-|-----------|----------------|---------------|-------------------------|
-| Documents | 243 kB         | 215 kB        | ↓ 28 kB (**11.5%**)     |
+| Route     | Before Gzipped | After Gzipped | Reduction           |
+| --------- | -------------- | ------------- | ------------------- |
+| Documents | 243 kB         | 215 kB        | ↓ 28 kB (**11.5%**) |
 
 ---
 
@@ -114,12 +118,11 @@ Replaced `react-select` with **Downshift** — a lightweight, headless UI utilit
 
 ## 📊 Total Bundle Size Reduction
 
-| Optimization     | Affected Routes                         | Total Before Gzipped | Total After Gzipped | Total Reduction | % Reduction |
-|------------------|-----------------------------------------|-----------------------|----------------------|------------------|-------------|
-| Optimization 1   | Documents, Teachers, Teachers/[id], Leave | 1,189 kB              | 938 kB               | **251 kB**       | **21.1%**    |
-| Optimization 2   | Documents                               | 243 kB                | 215 kB               | **28 kB**        | **11.5%**    |
-| **Combined**     | All routes                              | *1,432 kB*            | *1,153 kB*           | **279 kB**       | **19.5%**    |
-
+| Optimization   | Affected Routes                           | Total Before Gzipped | Total After Gzipped | Total Reduction | % Reduction |
+| -------------- | ----------------------------------------- | -------------------- | ------------------- | --------------- | ----------- |
+| Optimization 1 | Documents, Teachers, Teachers/[id], Leave | 1,189 kB             | 938 kB              | **251 kB**      | **21.1%**   |
+| Optimization 2 | Documents                                 | 243 kB               | 215 kB              | **28 kB**       | **11.5%**   |
+| **Combined**   | All routes                                | _1,432 kB_           | _1,153 kB_          | **279 kB**      | **19.5%**   |
 
 ## 💡 Lessons Learned
 
@@ -127,4 +130,7 @@ Replaced `react-select` with **Downshift** — a lightweight, headless UI utilit
 - 🎯 Avoid **overpowered libraries** like `react-select` when lightweight options (e.g. Downshift) are enough.
 - 📉 Regular use of **bundle analyzers** and **route-specific audits** is key to **performance sustainability**.
 - 🧼 Refactors like **scoping shared providers** and **splitting dynamic features** encourage better architecture and **long-term maintainability**.
+
+```
+
 ```
