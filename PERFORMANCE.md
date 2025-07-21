@@ -21,7 +21,6 @@ This document summarizes frontend optimization efforts focused on:
 - Reducing JavaScript bundle size per route
 - Improving perceived and actual performance metrics
 - Applying best practices for modular and dynamic UI loading
-
 ---
 
 ## 📊 Initial Performance Metrics
@@ -29,26 +28,21 @@ This document summarizes frontend optimization efforts focused on:
 ### 🔹 First Load JavaScript Size
 
 > Baseline size of JS required to load initial page
-
-![First Load JS](docs/images/Screenshot_375.png)
+<img width="822" height="276" alt="Screenshot_375" src="https://github.com/user-attachments/assets/8e202e86-b303-4efd-8a2a-ec578460d192" />
 
 ---
+
 
 ### 🔹 Bundle Analyzer (Initial)
 
-![Analyzer](docs/images/Screenshot_376.png)
-
----
-
-### 🔹 Route-Specific: Documents
-
-![Documents Route](docs/images/Screenshot_374.png)
+<img width="1919" height="947" alt="Screenshot_376" src="https://github.com/user-attachments/assets/a44a890a-6090-4656-9926-eace5526506d" />
 
 ---
 
 ### 🔹 Lighthouse Baseline
 
-![Lighthouse](docs/images/Screenshot_367.png)
+<img width="973" height="734" alt="Screenshot_367" src="https://github.com/user-attachments/assets/d8fafd52-781c-41da-973c-7503a3d716a1" />
+
 
 ---
 
@@ -75,6 +69,8 @@ const AddTeacherModal = dynamic(() => import('@/components/modals/AddTeacherModa
 
 # 🧪 Measurable Impact
 
+<img width="1107" height="487" alt="Screenshot_365" src="https://github.com/user-attachments/assets/ad85ed0f-5c78-4d3f-ab28-41ff814202a2" />
+
 ## 📦 Bundle size savings by route
 
 | Route         | Before Gzipped | After Gzipped | Reduction               |
@@ -95,6 +91,9 @@ const AddTeacherModal = dynamic(() => import('@/components/modals/AddTeacherModa
 `react-select` was the **largest single library** in the Documents and Teachers bundles.
 Its features were **overkill** for the app’s simple dropdown use case.
 
+<img width="1919" height="956" alt="Screenshot_370" src="https://github.com/user-attachments/assets/8ff9b302-e13f-4c02-992b-1a107b450586" />
+
+
 ### 💡 Solution
 
 Replaced `react-select` with **Downshift** — a lightweight, headless UI utility — to retain full control while trimming bundle size.
@@ -103,10 +102,15 @@ Replaced `react-select` with **Downshift** — a lightweight, headless UI utilit
 
 **Library size impact**:
 
+<img width="1918" height="990" alt="Screenshot_373" src="https://github.com/user-attachments/assets/c8ec4258-733f-445b-8cdc-f793ab84cd5f" />
+
 - Dropped `react-select` from **#1** to **#5** in the bundle analyzer rank.
-- Saved **~34 kB** across key routes.
+- Saved **~28 kB** across key routes.
 
 **Detailed reduction**:
+
+<img width="647" height="320" alt="Screenshot_371" src="https://github.com/user-attachments/assets/85e98116-2522-457d-aef6-0844ad5aceb2" />
+
 
 | Route     | Before Gzipped | After Gzipped | Reduction           |
 | --------- | -------------- | ------------- | ------------------- |
