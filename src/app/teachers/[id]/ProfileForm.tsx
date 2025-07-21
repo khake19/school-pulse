@@ -1,6 +1,6 @@
 import { Fieldset, Input, Box, SimpleGrid } from '@chakra-ui/react'
 
-import PositionSelect from '../component/PositionSelect'
+import PositionSelectForm from '../component/PositionSelectForm'
 import { useFormContext } from 'react-hook-form'
 import { TTeacherFormInput } from '../types/teachers'
 import ProfileAvatar from './ProfileAvatar'
@@ -76,7 +76,7 @@ const ProfileForm = () => {
             </Field>
             <Field label="Position" invalid={!!errors.position} errorText={errors.position?.message} mb={4}>
               <Box width="100%">
-                <PositionSelect />
+                <PositionSelectForm />
               </Box>
             </Field>
             <Field

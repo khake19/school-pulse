@@ -1,4 +1,5 @@
 import { TTeacherFormInput, ITeacherResponse, TTeacherData } from '../types/teachers'
+import { IFilterProps } from '../hooks/useFilterStore'
 
 export const teacherResponseToData = (teacher: ITeacherResponse | undefined): TTeacherData => {
   return {
@@ -47,4 +48,12 @@ export const teacherFormToPayload = (form: TTeacherFormInput): FormData => {
   data.append('teacher[date_promotion]', form.datePromotion ?? '')
 
   return data
+}
+
+export const filtersToQueryParams = (filters: IFilterProps | null) => {
+  const params: Record<string, string | string[]> = {}
+  if (filters?.positions && filters.positions.length > 0) {
+    params['position_id'] = filters.positions
+  }
+  return params
 }
