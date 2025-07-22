@@ -1,7 +1,7 @@
 import { Box, Fieldset, Input, Stack } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 
-import PositionSelect from './component/PositionSelect'
+import PositionSelectForm from './component/PositionSelectForm'
 import { TTeacherFormInput } from './types/teachers'
 import ProfileAvatar from './[id]/ProfileAvatar'
 import { Field } from '~/components/ui/field'
@@ -38,7 +38,7 @@ const TeacherForm = () => {
         </Field>
         <Field label="Position" invalid={!!errors.position} errorText={errors.position?.message}>
           <Box width="100%">
-            <PositionSelect />
+            <PositionSelectForm />
           </Box>
         </Field>
         <Field label="Gender" invalid={!!errors.gender} errorText={errors.gender?.message}>

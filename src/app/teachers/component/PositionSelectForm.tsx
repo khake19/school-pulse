@@ -1,28 +1,25 @@
 import { forwardRef, Ref } from 'react'
 import { Option } from '~/types/select'
 
-import useGetPositions from '../../hooks/useGetPositions'
+import useGetPositions from '../hooks/useGetPositions'
 import SelectForm from '~/components/Select/form/SelectForm'
-import CommonSelect from '~/components/Select/common/Select'
 
-interface PositionSelectProps {
+interface PositionSelectFormProps {
   name?: string
   placeholder?: string
   value?: string | number
   onChange?: (value: string | number) => void
-  isForm?: boolean
   isDisabled?: boolean
   isClearable?: boolean
 }
 
-const PositionSelect = forwardRef<unknown, PositionSelectProps>(
+const PositionSelectForm = forwardRef<unknown, PositionSelectFormProps>(
   (
     {
       name = 'position',
       placeholder = 'Select a position',
       value,
       onChange,
-      isForm = true,
       isDisabled = false,
       isClearable = true,
       ...props
@@ -35,26 +32,11 @@ const PositionSelect = forwardRef<unknown, PositionSelectProps>(
       value: position.id
     }))
 
-    if (isForm) {
-      return (
-        <SelectForm
-          options={options}
-          name={name}
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          isClearable={isClearable}
-          {...props}
-        />
-      )
-    }
-
     return (
-      <CommonSelect
-        ref={ref}
+      <SelectForm
         options={options}
+        name={name}
         placeholder={placeholder}
-        value={options.find((option) => option.value === Number(value))}
-        onChange={(selectedOption: Option | null) => onChange?.(selectedOption?.value || '')}
         isDisabled={isDisabled}
         isClearable={isClearable}
         {...props}
@@ -63,6 +45,6 @@ const PositionSelect = forwardRef<unknown, PositionSelectProps>(
   }
 )
 
-PositionSelect.displayName = 'PositionSelect'
+PositionSelectForm.displayName = 'PositionSelectForm'
 
-export default PositionSelect
+export default PositionSelectForm

@@ -7,7 +7,7 @@ import { main, header } from './Teacher.style'
 import TeacherTable from './TeacherTable'
 import SearchInput from '~/components/Search/SearchInput'
 import useFilterStore from './hooks/useFilterStore'
-import PositionSelect from './component/PositionSelect/PositionSelect'
+import PositionSelectFilter from './component/PositionSelectFilter'
 
 // Lazy load modals
 const TeacherFormModal = dynamic(() => import('./TeacherFormModal'), {
@@ -70,10 +70,9 @@ const TeacherList = () => {
             <SearchInput handleSearchValue={handleSearchValue} width="100%" value={filters?.search} />
           </Box>
           <Box flex="1">
-            <PositionSelect
-              isForm={false}
-              value={filters?.position || ''}
-              onChange={(value) => setTeacherFilters({ position: value.toString() })}
+            <PositionSelectFilter
+              selectedPositionIds={filters?.positions || []}
+              onChange={(positions) => setTeacherFilters({ positions: positions.map((position) => position.value) })}
             />
           </Box>
         </Flex>
