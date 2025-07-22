@@ -1,19 +1,42 @@
 # 🏫 SchoolPulse
 
-SchoolPulse is a school information system designed to manage teachers, students, and classroom data with a clean, modern UI. Built with React and Chakra UI, it’s focused on ease of use, fast filtering, and real-time feedback.
+SchoolPulse is a school information system designed to manage teachers and Officer Administrator data with a clean, modern UI. Built with React and Chakra UI, it’s focused on ease of use, fast filtering, and real-time feedback.
 
 > This project is a work in progress. Focus so far has been on clean architecture and working components — additional features like the dashboard summary are actively being developed.
 
 ## ✨ Features
 
-- 🔍 Teacher listing with search, filters, and pagination
-- ➕ Add, edit, and delete teachers
-- ⚙️ Zustand + zustand-lens state management
-- ⚛️ Fully responsive Chakra UI layout
-- 🔒 Authentication and role-based access
-- 📦 API integration with the SchoolPulse backend
-- 📄 Dynamic table filtering system
-- 🧪 (Planned) Feature: Form validation + UX polish (loading states, error toasts)
+### 🔐 Authentication & Role-Based Access
+Secure login system for admin users with protected routes.
+
+### 📋 Teacher Management
+View, add, edit, and delete teachers with real-time updates and form validation.
+
+### 📄 Document Management
+Upload and preview teacher documents (e.g., DTRs) with JPEG support.
+
+### 🧾 Form Handling with Validation
+Robust forms using React Hook Form and Zod for schema-based validation.
+
+### 🔍 Advanced Table Filtering
+Search, filter, and paginate teacher records with dynamic query handling.
+
+### 📦 Performance Optimizations
+- Lazy-loaded modal components with `next/dynamic`  
+- Replaced `react-select` with lightweight Downshift  
+- Reduced JS bundle size by up to **40% per route**  
+- Bundle analysis tracked via `PERFORMANCE.md`
+
+[Read the full performance breakdown →](./PERFORMANCE.md)
+
+### ⚛️ Responsive UI with Chakra UI
+Clean, accessible, and mobile-friendly interface using Chakra UI components.
+
+### ⚙️ Modular State Management
+Global state powered by Zustand with zustand-lens for scalable access patterns.
+
+### 🧰 Domain-Based Code Structure
+Feature-first architecture with clear module separation for maintainability.
 
 ## 🧱 Tech Stack
 
