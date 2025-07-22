@@ -107,9 +107,11 @@ npm install
 npm run dev
 ```
 
-## 📸 Screenshots
+## 📽 Demo Video
 
-> (Add screenshots here showing the teacher list, filters, modals, etc.)
+Watch a quick demo on Loom:  
+[▶️ SchoolPulse Walkthrough](https://www.loom.com/share/d7b8d714631c475a82581080719a5d8a?sid=fadc10eb-7939-4f00-bb09-8f6fdc254747)
+
 
 ## 📚 Planned Improvements
 
