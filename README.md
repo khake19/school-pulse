@@ -83,8 +83,6 @@ npm run dev
 
 - [ ] Add loading spinners + toast feedback for forms
 - [ ] Improve table UX and responsive handling
-- [ ] Add test seed data for demo
-- [ ] Create user onboarding flow
 
 ## 🧠 Design Decisions
 
