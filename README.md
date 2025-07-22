@@ -2,6 +2,8 @@
 
 SchoolPulse is a school information system designed to manage teachers, students, and classroom data with a clean, modern UI. Built with React and Chakra UI, it’s focused on ease of use, fast filtering, and real-time feedback.
 
+> This project is a work in progress. Focus so far has been on clean architecture and working components — additional features like the dashboard summary are actively being developed.
+
 ## ✨ Features
 
 - 🔍 Teacher listing with search, filters, and pagination
