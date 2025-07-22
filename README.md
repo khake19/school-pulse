@@ -1,4 +1,4 @@
-# 🏫 SchoolPulse (Frontend)
+# 🏫 SchoolPulse
 
 SchoolPulse is a school information system designed to manage teachers, students, and classroom data with a clean, modern UI. Built with React and Chakra UI, it’s focused on ease of use, fast filtering, and real-time feedback.
 
@@ -57,6 +57,15 @@ src/
 - **styles/**: Theme and global style definitions (if using Chakra UI or styled-components).
 
 > 💡 _The project follows a modular and scalable architecture, inspired by real production standards._
+
+## 🧪 Live Demo
+
+🌐 [https://school-pulse-git-main-khake19s-projects.vercel.app](https://school-pulse-git-main-khake19s-projects.vercel.app)
+
+**Login Credentials:**
+
+- Email: `test@schoolpulse.com`
+- Password: `password123`
 
 ## 🚀 Getting Started
 
