@@ -41,8 +41,7 @@ This document summarizes frontend optimization efforts focused on:
 
 ### 🔹 Lighthouse Baseline
 
-<img width="973" height="734" alt="Screenshot_367" src="https://github.com/user-attachments/assets/d8fafd52-781c-41da-973c-7503a3d716a1" />
-
+<img width="929" height="619" alt="Screenshot_384" src="https://github.com/user-attachments/assets/bd6bd42c-e94f-4ee2-afa2-ab8d3c334ea7" />
 
 ---
 
