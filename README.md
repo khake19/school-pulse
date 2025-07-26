@@ -7,35 +7,44 @@ SchoolPulse is a school information system designed to manage teachers and Offic
 ## ✨ Features
 
 ### 🔐 Authentication & Role-Based Access
+
 Secure login system for admin users with protected routes.
 
 ### 📋 Teacher Management
+
 View, add, edit, and delete teachers with real-time updates and form validation.
 
 ### 📄 Document Management
+
 Upload and preview teacher documents (e.g., DTRs) with JPEG support.
 
 ### 🧾 Form Handling with Validation
+
 Robust forms using React Hook Form and Zod for schema-based validation.
 
 ### 🔍 Advanced Table Filtering
+
 Search, filter, and paginate teacher records with dynamic query handling.
 
 ### 📦 Performance Optimizations
-- Lazy-loaded modal components with `next/dynamic`  
-- Replaced `react-select` with lightweight Downshift  
-- Reduced JS bundle size by up to **40% per route**  
+
+- Lazy-loaded modal components with `next/dynamic`
+- Replaced `react-select` with lightweight Downshift
+- Reduced JS bundle size by up to **40% per route**
 - Bundle analysis tracked via `PERFORMANCE.md`
 
 [Read the full performance breakdown →](./PERFORMANCE.md)
 
 ### ⚛️ Responsive UI with Chakra UI
+
 Clean, accessible, and mobile-friendly interface using Chakra UI components.
 
 ### ⚙️ Modular State Management
+
 Global state powered by Zustand with zustand-lens for scalable access patterns.
 
 ### 🧰 Domain-Based Code Structure
+
 Feature-first architecture with clear module separation for maintainability.
 
 ## 🧱 Tech Stack
@@ -111,7 +120,6 @@ npm run dev
 
 Watch a quick demo on Loom:  
 [▶️ SchoolPulse Walkthrough](https://www.loom.com/share/d7b8d714631c475a82581080719a5d8a?sid=fadc10eb-7939-4f00-bb09-8f6fdc254747)
-
 
 ## 📚 Planned Improvements
 

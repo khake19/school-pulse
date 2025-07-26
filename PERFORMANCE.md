@@ -21,6 +21,7 @@ This document summarizes frontend optimization efforts focused on:
 - Reducing JavaScript bundle size per route
 - Improving perceived and actual performance metrics
 - Applying best practices for modular and dynamic UI loading
+
 ---
 
 ## 📊 Initial Performance Metrics
@@ -28,10 +29,9 @@ This document summarizes frontend optimization efforts focused on:
 ### 🔹 First Load JavaScript Size
 
 > Baseline size of JS required to load initial page
-<img width="822" height="276" alt="Screenshot_375" src="https://github.com/user-attachments/assets/8e202e86-b303-4efd-8a2a-ec578460d192" />
+> <img width="822" height="276" alt="Screenshot_375" src="https://github.com/user-attachments/assets/8e202e86-b303-4efd-8a2a-ec578460d192" />
 
 ---
-
 
 ### 🔹 Bundle Analyzer (Initial)
 
@@ -92,7 +92,6 @@ Its features were **overkill** for the app’s simple dropdown use case.
 
 <img width="1919" height="956" alt="Screenshot_370" src="https://github.com/user-attachments/assets/8ff9b302-e13f-4c02-992b-1a107b450586" />
 
-
 ### 💡 Solution
 
 Replaced `react-select` with **Downshift** — a lightweight, headless UI utility — to retain full control while trimming bundle size.
@@ -109,7 +108,6 @@ Replaced `react-select` with **Downshift** — a lightweight, headless UI utilit
 **Detailed reduction**:
 
 <img width="647" height="320" alt="Screenshot_371" src="https://github.com/user-attachments/assets/85e98116-2522-457d-aef6-0844ad5aceb2" />
-
 
 | Route     | Before Gzipped | After Gzipped | Reduction           |
 | --------- | -------------- | ------------- | ------------------- |
