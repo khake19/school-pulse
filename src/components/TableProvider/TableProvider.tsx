@@ -5,40 +5,43 @@ import TableEmpty from './TableEmpty'
 
 // Action Types
 export const ActionKind = {
-  getPagination: 'GET_PAGINATION',
-  getData: 'GET_DATA',
-  setData: 'SET_DATA',
-  setPage: 'SET_PAGE',
-  setPagination: 'SET_PAGINATION',
-  setLoading: 'SET_LOADING'
+  toggleRow: 'TOGGLE_ROW'
 } as const
 
-type TTableAction<T = unknown> =
-  | { type: typeof ActionKind.getData | typeof ActionKind.getPagination }
-  | { type: typeof ActionKind.setData; payload: T[] }
-  | { type: typeof ActionKind.setPage; payload: number }
-  | { type: typeof ActionKind.setPagination; payload: IPagination }
-  | { type: typeof ActionKind.setLoading; payload: boolean }
+type TTableAction<T = unknown> = { type: typeof ActionKind.toggleRow; payload: boolean }
 
-interface ITableState<T = unknown> {
+interface ITableDataState<T = unknown> {
   data: T[]
   pagination: IPagination
-  isLoading?: boolean
+  isLoading: boolean
 }
 
-export const TableContext = createContext<ITableState<unknown> | null>(null)
+interface ITableReducerState<T> {
+  isToggled: boolean
+}
+
+export const TableReducerContext = createContext<ITableReducerState<unknown> | null>(null)
+export const TableDataContext = createContext<ITableDataState<unknown> | null>(null)
 
 export const TableDispatchContext = createContext<{
   dispatch: Dispatch<TTableAction<unknown>>
 } | null>(null)
 
 // Custom hooks for consuming contexts with proper type safety
-export const useTableContext = <T = unknown,>(): ITableState<T> => {
-  const context = useContext(TableContext)
+export const useTableReducerContext = <T = unknown,>(): ITableReducerState<T> => {
+  const context = useContext(TableReducerContext)
   if (!context) {
-    throw new Error('useTableContext must be used within a TableProvider')
+    throw new Error('useTableReducerContext must be used within a TableProvider')
   }
-  return context as ITableState<T>
+  return context as ITableReducerState<T>
+}
+
+export const useTableDataContext = <T = unknown,>(): ITableDataState<T> => {
+  const context = useContext(TableDataContext)
+  if (!context) {
+    throw new Error('useTableDataContext must be used within a TableProvider')
+  }
+  return context as ITableDataState<T>
 }
 
 export const useTableDispatchContext = <T = unknown,>() => {
@@ -49,19 +52,10 @@ export const useTableDispatchContext = <T = unknown,>() => {
   return context as { dispatch: Dispatch<TTableAction<T>> }
 }
 
-const tableReducer = (draft: ITableState<unknown>, action: TTableAction<unknown>) => {
+const tableReducer = (draft: ITableReducerState<unknown>, action: TTableAction<unknown>) => {
   switch (action.type) {
-    case ActionKind.setPage:
-      draft.pagination.page = action.payload
-      break
-    case ActionKind.setData:
-      draft.data = action.payload
-      break
-    case ActionKind.setPagination:
-      draft.pagination = action.payload
-      break
-    case ActionKind.setLoading:
-      draft.isLoading = action.payload
+    case ActionKind.toggleRow:
+      draft.isToggled = action.payload
       break
   }
 }
@@ -80,31 +74,17 @@ const TableProvider = <T = unknown,>({
   pagination = { offset: 0, page: 0, size: 0, total: 0, pages: 0 },
   isLoading = false
 }: ITableProviderProps<T>) => {
-  const [tableState, dispatch] = useImmerReducer(tableReducer, {
-    data: defaultData,
-    pagination,
-    isLoading
-  })
-
-  useEffect(() => {
-    dispatch({ type: ActionKind.setData, payload: defaultData })
-  }, [defaultData, dispatch])
-
-  useEffect(() => {
-    dispatch({ type: ActionKind.setPagination, payload: pagination })
-  }, [pagination, dispatch])
-
-  useEffect(() => {
-    dispatch({ type: ActionKind.setLoading, payload: isLoading })
-  }, [isLoading, dispatch])
+  const [tableReducerState, dispatch] = useImmerReducer(tableReducer, { isToggled: false })
 
   return (
-    <TableContext.Provider value={tableState}>
-      <TableDispatchContext.Provider value={{ dispatch }}>
-        {(tableState.data.length > 0 || isLoading) && children}
-        {tableState.data.length === 0 && !isLoading && <TableEmpty />}
-      </TableDispatchContext.Provider>
-    </TableContext.Provider>
+    <TableDataContext.Provider value={{ data: defaultData, pagination, isLoading }}>
+      <TableReducerContext.Provider value={tableReducerState}>
+        <TableDispatchContext.Provider value={{ dispatch }}>
+          {(defaultData.length > 0 || isLoading) && children}
+          {defaultData.length === 0 && !isLoading && <TableEmpty />}
+        </TableDispatchContext.Provider>
+      </TableReducerContext.Provider>
+    </TableDataContext.Provider>
   )
 }
 
