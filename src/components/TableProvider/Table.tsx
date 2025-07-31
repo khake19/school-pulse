@@ -2,7 +2,7 @@ import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Stack, Table } from '@chakra-ui/react'
 
-import { useTableContext } from './TableProvider'
+import { useTableDataContext } from './TableProvider'
 import useTableRows from './hooks/useTableRows'
 
 interface TableProps<T> {
@@ -12,7 +12,7 @@ interface TableProps<T> {
 const BasicTable = <T extends object>(props: TableProps<T>) => {
   const { columns = [] } = props
 
-  const { data, isLoading } = useTableContext<T>()
+  const { data, isLoading } = useTableDataContext<T>()
   const table = useReactTable({
     data,
     columns,

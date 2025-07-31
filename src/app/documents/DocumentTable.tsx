@@ -151,9 +151,9 @@ const DocumentTable = (props: IDocumentTableProps) => {
   const columns = mergeColumns(filteredColumns, customColumns)
 
   return (
-    <TableProvider defaultData={data} pagination={pagination} isLoading={isLoading}>
+    <TableProvider defaultData={data} pagination={pagination} isLoading={isLoading} onPageChange={setCurrentPage}>
       <Table columns={columns} />
-      <TablePagination setCurrentPage={setCurrentPage} />
+      <TablePagination />
     </TableProvider>
   )
 }

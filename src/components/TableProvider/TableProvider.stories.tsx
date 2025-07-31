@@ -90,9 +90,10 @@ export const Base: Story = {
         defaultData={defaultData}
         pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}
         isLoading
+        onPageChange={() => 0}
       >
         <Table columns={columns} />
-        <TablePagination setCurrentPage={() => 0} />
+        <TablePagination />
       </TableProvider>
     </ChakraProvider>
   )
