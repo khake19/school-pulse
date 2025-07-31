@@ -97,9 +97,9 @@ const TeacherTable = (props: ITeacherTableProps) => {
   ]
 
   return (
-    <TableProvider defaultData={teachers ?? []} pagination={meta} isLoading={isLoading}>
+    <TableProvider defaultData={teachers ?? []} pagination={meta} isLoading={isLoading} onPageChange={setCurrentPage}>
       <Table columns={columns} />
-      <TablePagination setCurrentPage={setCurrentPage} />
+      <TablePagination />
     </TableProvider>
   )
 }
