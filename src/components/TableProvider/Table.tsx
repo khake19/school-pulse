@@ -1,8 +1,7 @@
-import * as React from 'react'
 import { flexRender, getCoreRowModel, useReactTable, ColumnDef } from '@tanstack/react-table'
 import { Stack, Table } from '@chakra-ui/react'
 
-import { useTableDataContext } from './TableProvider'
+import { useTableDataContext } from './TableWrapper'
 import useTableRows from './hooks/useTableRows'
 
 interface TableProps<T> {
@@ -22,13 +21,13 @@ const BasicTable = <T extends object>(props: TableProps<T>) => {
   const rows = useTableRows(isLoading, table, columns)
 
   return (
-    <Stack height="calc(100vh - 270px)" width="100%" minHeight={300} maxHeight="100vh">
-      <Table.Root>
+    <Stack width="100%" maxHeight="100vh" shadow="md" borderRadius="md">
+      <Table.Root size="md">
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <Table.ColumnHeader key={header.id}>
+                <Table.ColumnHeader key={header.id} borderRadius="md">
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </Table.ColumnHeader>
               ))}

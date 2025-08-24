@@ -7,6 +7,11 @@ export interface ICurrentUserResponse extends IBase {
   last_name: string
   gender: string
   avatar: string
+  role: {
+    id: string
+    name: string
+    description: string
+  }
 }
 
 export type TCurrentUserData = NestedTransform<ICurrentUserResponse, 'camel'>

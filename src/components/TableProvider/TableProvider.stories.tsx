@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 
 import Table from './Table'
-import TableProvider from './TableProvider'
+import TableWrapper from './TableWrapper'
 import { createColumnHelper } from '@tanstack/react-table'
 import TablePagination from './TablePagination'
 
 const meta: Meta<typeof Table> = {
-  title: 'School Pulse/TableProvider',
+  title: 'School Pulse/TableWrapper',
   component: Table,
   tags: ['autodocs']
 }
@@ -86,7 +86,7 @@ const columns = [
 export const Base: Story = {
   render: () => (
     <ChakraProvider value={defaultSystem}>
-      <TableProvider
+      <TableWrapper
         defaultData={defaultData}
         pagination={{ offset: 0, page: 1, size: 3, total: 0, pages: 3 }}
         isLoading
@@ -94,7 +94,7 @@ export const Base: Story = {
       >
         <Table columns={columns} />
         <TablePagination />
-      </TableProvider>
+      </TableWrapper>
     </ChakraProvider>
   )
 }

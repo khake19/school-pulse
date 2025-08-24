@@ -1,16 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import schoolService from '../services/school.service'
-import { useMemo } from 'react'
-
 const useGetSchools = () => {
   const { data, status, error, isFetching } = useQuery({
     queryKey: ['schools'],
-    queryFn: schoolService.all
+    queryFn: schoolService.all,
+    refetchOnWindowFocus: false // schools data barely changes so its better not to fetch on every refocus in page
   })
 
-  const schools = useMemo(() => data?.data, [data])
   return {
-    schools,
+    schools: data?.data,
     status,
     error,
     isFetching

@@ -1,6 +1,6 @@
 import { Box, Flex, HStack, Spacer } from '@chakra-ui/react'
 import PaginationSummary from './Pagination/PaginationSummary'
-import { useTableDataContext, useTableDispatchContext } from './TableProvider'
+import { useTableDataContext, useTableDispatchContext } from './TableWrapper'
 import { PaginationItems, PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot } from '../ui/pagination'
 
 const TablePagination = () => {

@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { IQueryParams, IArrayResponse } from '~/types/http'
 import metaConverter from '~/helpers/metaConverter'
 import { HttpStatus } from '~/constant/http'
@@ -39,23 +39,26 @@ const usePaginatedQuery = <TData, TError = unknown, TTransformed = TData>(
 
   const { data, status, error } = queryResult
 
-  const transformedData = data?.data
-    ? transformData
-      ? transformData(data.data)
-      : (data.data as unknown as TTransformed[])
-    : []
-  const meta = metaConverter(data?.meta)
+  const transformedData = useMemo(() => {
+    if (!data?.data) return []
+    return transformData ? transformData(data.data) : (data.data as unknown as TTransformed[])
+  }, [data?.data, transformData])
+
+  const meta = useMemo(() => metaConverter(data?.meta), [data?.meta])
   const isLoading = status === HttpStatus.loading
 
-  return {
-    data: transformedData,
-    meta,
-    status,
-    error,
-    isLoading,
-    currentPage,
-    setCurrentPage
-  }
+  return useMemo(
+    () => ({
+      data: transformedData,
+      meta,
+      status,
+      error,
+      isLoading,
+      currentPage,
+      setCurrentPage
+    }),
+    [transformedData, meta, status, error, isLoading, currentPage, setCurrentPage]
+  )
 }
 
 export default usePaginatedQuery

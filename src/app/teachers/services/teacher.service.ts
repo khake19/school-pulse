@@ -48,6 +48,19 @@ const removeTeacher = async (schoolId: string, teacherId: string) => {
   return result
 }
 
-const teacherService = { allTeachers, createTeacher, getTeacher, updateTeacher, removeTeacher, allInfiniteTeachers }
+const countAllTeachers = async (): Promise<IResponse<{ count: number }>> => {
+  const result = await get<IResponse<{ count: number }>>('/api/teachers/count')
+  return result
+}
+
+const teacherService = {
+  allTeachers,
+  createTeacher,
+  getTeacher,
+  updateTeacher,
+  removeTeacher,
+  allInfiniteTeachers,
+  countAllTeachers
+}
 
 export default teacherService

@@ -7,7 +7,7 @@ import { TTeacherData } from './types/teachers'
 import { capitalizeFirstLetter } from '~/utils/string'
 import useGetTeachers from './hooks/useGetTeachers'
 import Link from 'next/link'
-import TableProvider from '~/components/TableProvider/TableProvider'
+import TableWrapper from '~/components/TableProvider/TableWrapper'
 import TablePagination from '~/components/TableProvider/TablePagination'
 import Table from '~/components/TableProvider/Table'
 import { Avatar } from '~/components/ui/avatar'
@@ -97,10 +97,10 @@ const TeacherTable = (props: ITeacherTableProps) => {
   ]
 
   return (
-    <TableProvider defaultData={teachers ?? []} pagination={meta} isLoading={isLoading} onPageChange={setCurrentPage}>
+    <TableWrapper defaultData={teachers ?? []} pagination={meta} isLoading={isLoading} onPageChange={setCurrentPage}>
       <Table columns={columns} />
       <TablePagination />
-    </TableProvider>
+    </TableWrapper>
   )
 }
 
