@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, createContext, useContext, useEffect } from 'react'
+import { ReactNode, createContext, useContext, useMemo } from 'react'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TableEmpty from './TableEmpty'
 
@@ -33,7 +33,7 @@ export const useTableDispatchContext = () => {
 }
 
 // Provider Component
-interface ITableProviderProps<T = unknown> {
+interface ITableWrapperProps<T = unknown> {
   children: ReactNode
   defaultData: T[]
   pagination?: IPagination
@@ -41,15 +41,17 @@ interface ITableProviderProps<T = unknown> {
   onPageChange: (newPage: number) => void
 }
 
-const TableProvider = <T = unknown,>({
+const TableWrapper = <T = unknown,>({
   children,
   defaultData = [],
   pagination = { offset: 0, page: 0, size: 0, total: 0, pages: 0 },
   isLoading = false,
   onPageChange
-}: ITableProviderProps<T>) => {
+}: ITableWrapperProps<T>) => {
+  const dataValue = useMemo(() => ({ data: defaultData, pagination, isLoading }), [defaultData, pagination, isLoading])
+
   return (
-    <TableDataContext.Provider value={{ data: defaultData, pagination, isLoading }}>
+    <TableDataContext.Provider value={dataValue}>
       <TableDispatchContext.Provider value={{ onPageChange }}>
         {(defaultData.length > 0 || isLoading) && children}
         {defaultData.length === 0 && !isLoading && <TableEmpty />}
@@ -58,4 +60,4 @@ const TableProvider = <T = unknown,>({
   )
 }
 
-export default TableProvider
+export default TableWrapper

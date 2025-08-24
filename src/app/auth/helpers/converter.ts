@@ -1,3 +1,4 @@
+import { current } from 'immer'
 import { ICurrentUserResponse, TCurrentUserData } from '../types/auth'
 
 export const currentUserResponseToData = (currentUser: ICurrentUserResponse | undefined): TCurrentUserData => {
@@ -7,6 +8,11 @@ export const currentUserResponseToData = (currentUser: ICurrentUserResponse | un
     firstName: currentUser?.first_name ?? '',
     lastName: currentUser?.last_name ?? '',
     gender: currentUser?.gender ?? '',
-    avatar: currentUser?.avatar ?? ''
+    avatar: currentUser?.avatar ?? '',
+    role: {
+      id: currentUser?.role.id ?? '',
+      name: currentUser?.role.name ?? '',
+      description: currentUser?.role.description ?? ''
+    }
   }
 }

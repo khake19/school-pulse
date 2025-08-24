@@ -8,7 +8,8 @@ const useCurrentUser = () => {
   const { data, status, error, isFetching } = useQuery<IResponse<ICurrentUserResponse>>({
     queryKey: ['me'],
     queryFn: () => authService.currentUser(),
-    keepPreviousData: true
+    keepPreviousData: true,
+    refetchOnWindowFocus: false // user data barely changes so its better not to fetch on page refocus
   })
 
   const currentUser = currentUserResponseToData(data?.data)

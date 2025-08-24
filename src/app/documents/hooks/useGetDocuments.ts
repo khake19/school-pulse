@@ -5,6 +5,7 @@ import { documentToData, filtersToQueryParams } from '../helpers/converter'
 
 import useFilterStore from './useFilterStore'
 import { buildQueryParams } from '~/utils/queryParamBuilder'
+import { useCallback } from 'react'
 
 const useGetDocuments = (schoolId: string) => {
   const filters = useFilterStore((state) => state.documents.filters)
@@ -19,13 +20,10 @@ const useGetDocuments = (schoolId: string) => {
       return res
     },
     enabled: !!schoolId,
-    transformData: (data) => data.map(documentToData)
+    transformData: useCallback((data: IDocumentResponse[]) => data.map(documentToData), [])
   })
 
-  return {
-    ...result,
-    data: result.data
-  }
+  return result
 }
 
 export default useGetDocuments

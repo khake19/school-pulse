@@ -1,18 +1,12 @@
 import { get } from '~/utils/http'
-import { ISchool } from '../types/schools'
 import { IArrayResponse, IResponse } from '~/types/http'
-import { ISchoolSummariesResponse } from '~/app/dashboard/types/dashboard'
+import { ISchoolSummariesResponse } from '../types/dashboard'
 
 interface ISchoolMetricsResponse {
   schools: number
   teachers: number
   documents: number
   leaves: number
-}
-
-const all = async (): Promise<IArrayResponse<ISchool>> => {
-  const result = await get<IArrayResponse<ISchool>>('/api/schools')
-  return result
 }
 
 const schoolMetrics = async (schoolId: string): Promise<IResponse<ISchoolMetricsResponse>> => {
@@ -26,11 +20,11 @@ const allSchoolsMetrics = async (): Promise<IResponse<ISchoolMetricsResponse>> =
 }
 
 const allSchoolsSummaries = async (params?: string): Promise<IArrayResponse<ISchoolSummariesResponse>> => {
-  const url = `/api/schools/summaries?${params}`
+  const url = `/api/schools/summaries${params}`
   const result = await get<IArrayResponse<ISchoolSummariesResponse>>(url)
   return result
 }
 
-const teacherService = { all, schoolMetrics, allSchoolsMetrics, allSchoolsSummaries }
+const teacherService = { schoolMetrics, allSchoolsMetrics, allSchoolsSummaries }
 
 export default teacherService

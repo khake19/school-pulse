@@ -1,4 +1,4 @@
-import { IArrayResponse, IQueryParams } from '~/types/http'
+import { IArrayResponse, IResponse } from '~/types/http'
 import { IDocumentResponse } from '../types/documents'
 import { get, post, remove } from '~/utils/http'
 
@@ -17,6 +17,11 @@ const deleteDocument = async (schoolId: string, documentId: string) => {
   return result
 }
 
-const documentService = { getDocuments, createDocument, deleteDocument }
+const countAllDocuments = async (): Promise<IResponse<{ count: number }>> => {
+  const result = await get<IResponse<{ count: number }>>('/api/documents/count')
+  return result
+}
+
+const documentService = { getDocuments, createDocument, deleteDocument, countAllDocuments }
 
 export default documentService

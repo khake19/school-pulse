@@ -44,7 +44,9 @@ const DocumentList = (props: IDocumentListProps) => {
   return (
     <Box css={header}>
       <DocumentFormModal teacherId={teacherId} />
-      <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
+      {isAlertModalOpen && (
+        <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
+      )}
       <Box w="50%" mt={4}>
         <Flex gap={2}>
           <Box flex="1">

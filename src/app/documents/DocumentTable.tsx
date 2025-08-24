@@ -3,7 +3,7 @@ import { MenuContent, MenuRoot, MenuTrigger, MenuItem } from '~/components/ui/me
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Image from 'next/image'
 import { TDocumentData } from './types/documents'
-import TableProvider from '~/components/TableProvider/TableProvider'
+import TableWrapper from '~/components/TableProvider/TableWrapper'
 import Table from '~/components/TableProvider/Table'
 import { IPagination } from '~/components/TableProvider/types/pagination'
 import TablePagination from '~/components/TableProvider/TablePagination'
@@ -151,10 +151,10 @@ const DocumentTable = (props: IDocumentTableProps) => {
   const columns = mergeColumns(filteredColumns, customColumns)
 
   return (
-    <TableProvider defaultData={data} pagination={pagination} isLoading={isLoading} onPageChange={setCurrentPage}>
+    <TableWrapper defaultData={data} pagination={pagination} isLoading={isLoading} onPageChange={setCurrentPage}>
       <Table columns={columns} />
       <TablePagination />
-    </TableProvider>
+    </TableWrapper>
   )
 }
 
