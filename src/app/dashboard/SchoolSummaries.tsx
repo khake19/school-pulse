@@ -4,6 +4,7 @@ import TableWrapper from '~/components/TableProvider/TableWrapper'
 import Table from '~/components/TableProvider/Table'
 import useGetSchoolsTeachers from './hooks/useGetSchoolsSummaries'
 import { TSchoolSummariesData } from './types/dashboard'
+import TablePagination from '~/components/TableProvider/TablePagination'
 
 const SchoolsSummary = () => {
   const { data, meta, isLoading, setCurrentPage } = useGetSchoolsTeachers()
@@ -52,6 +53,7 @@ const SchoolsSummary = () => {
       </Heading>
       <TableWrapper defaultData={data} pagination={meta} isLoading={isLoading} onPageChange={setCurrentPage}>
         <Table columns={defaultColumns} />
+        <TablePagination />
       </TableWrapper>
     </Box>
   )

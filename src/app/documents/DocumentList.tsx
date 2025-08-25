@@ -47,7 +47,7 @@ const DocumentList = (props: IDocumentListProps) => {
       {isAlertModalOpen && (
         <DocumentDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} documentId={documentId} />
       )}
-      <Box w="50%" mt={4}>
+      <Box w="50%" my={4}>
         <Flex gap={2}>
           <Box flex="1">
             <TeacherSelectFilter

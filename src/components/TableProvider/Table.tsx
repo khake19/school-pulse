@@ -21,21 +21,23 @@ const BasicTable = <T extends object>(props: TableProps<T>) => {
   const rows = useTableRows(isLoading, table, columns)
 
   return (
-    <Stack width="100%" maxHeight="100vh" shadow="md" borderRadius="md">
-      <Table.Root size="md">
-        <Table.Header>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Row key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <Table.ColumnHeader key={header.id} borderRadius="md">
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </Table.ColumnHeader>
-              ))}
-            </Table.Row>
-          ))}
-        </Table.Header>
-        <Table.Body>{rows}</Table.Body>
-      </Table.Root>
+    <Stack shadow="md" borderRadius="md" width="full" gap="5">
+      <Table.ScrollArea borderWidth="1px" rounded="md" maxH="60vh">
+        <Table.Root size="md" stickyHeader bg="bg.subtle">
+          <Table.Header>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <Table.Row key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <Table.ColumnHeader key={header.id} borderRadius="md">
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </Table.ColumnHeader>
+                ))}
+              </Table.Row>
+            ))}
+          </Table.Header>
+          <Table.Body>{rows}</Table.Body>
+        </Table.Root>
+      </Table.ScrollArea>
     </Stack>
   )
 }

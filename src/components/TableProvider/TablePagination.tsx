@@ -1,7 +1,13 @@
 import { Box, Flex, HStack, Spacer } from '@chakra-ui/react'
 import PaginationSummary from './Pagination/PaginationSummary'
 import { useTableDataContext, useTableDispatchContext } from './TableWrapper'
-import { PaginationItems, PaginationNextTrigger, PaginationPrevTrigger, PaginationRoot } from '../ui/pagination'
+import {
+  PaginationItems,
+  PaginationNextTrigger,
+  PaginationPageText,
+  PaginationPrevTrigger,
+  PaginationRoot
+} from '../ui/pagination'
 
 const TablePagination = () => {
   const data = useTableDataContext()
@@ -17,9 +23,9 @@ const TablePagination = () => {
       <Spacer />
       <Box p="4">
         <PaginationRoot
-          page={page}
-          count={pages}
+          count={total}
           pageSize={size}
+          page={page}
           onPageChange={(e) => {
             onPageChange(e.page)
           }}

@@ -64,7 +64,7 @@ const TeacherList = () => {
       </Box>
       <TeacherFormModal isOpen={isFormModalOpen} onClose={onFormModalClose} />
       <TeacherDeleteModal isOpen={isAlertModalOpen} onClose={onAlertModalClose} teacherId={teacherId} />
-      <Box w="50%" mt={4}>
+      <Box w="50%" my={4}>
         <Flex gap={2}>
           <Box flex="1">
             <SearchInput handleSearchValue={handleSearchValue} width="100%" value={filters?.search} />
