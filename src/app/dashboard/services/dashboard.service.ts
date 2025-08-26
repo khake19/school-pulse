@@ -9,11 +9,6 @@ interface ISchoolMetricsResponse {
   leaves: number
 }
 
-const schoolMetrics = async (schoolId: string): Promise<IResponse<ISchoolMetricsResponse>> => {
-  const result = await get<IResponse<ISchoolMetricsResponse>>(`/api/schools/${schoolId}/counts`)
-  return result
-}
-
 const allSchoolsMetrics = async (): Promise<IResponse<ISchoolMetricsResponse>> => {
   const result = await get<IResponse<ISchoolMetricsResponse>>(`/api/schools/counts`)
   return result
@@ -25,6 +20,6 @@ const allSchoolsSummaries = async (params?: string): Promise<IArrayResponse<ISch
   return result
 }
 
-const teacherService = { schoolMetrics, allSchoolsMetrics, allSchoolsSummaries }
+const teacherService = { allSchoolsMetrics, allSchoolsSummaries }
 
 export default teacherService
