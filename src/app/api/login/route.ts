@@ -6,11 +6,17 @@ const handleResponse = async (data: Response) => {
   const response = NextResponse.json(res, { status: data.status })
 
   if (data.status === HttpResponse.ok) {
-    const { token } = res
+    const { access_token, refresh_token } = res
 
     response.cookies.set({
-      name: 'token',
-      value: token,
+      name: 'accessToken',
+      value: access_token,
+      httpOnly: true
+    })
+
+    response.cookies.set({
+      name: 'refreshToken',
+      value: refresh_token,
       httpOnly: true
     })
   }

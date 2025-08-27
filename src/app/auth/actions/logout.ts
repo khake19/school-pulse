@@ -7,18 +7,19 @@ import loginService from '~/app/login/services/login.service'
 
 export const logout = async () => {
   const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value
-
+  const accessToken = cookieStore.get('accessToken')?.value
+  const refreshToken = cookieStore.get('refreshToken')?.value
   const headers = {
     headers: {
       'Content-Type': 'application/json',
-      authorization: 'Bearer ' + token
+      authorization: 'Bearer ' + accessToken
     }
   }
   const result = await loginService.logout(headers)
 
   if (result) {
-    cookieStore.delete('token')
+    cookieStore.delete('accessToken')
+    cookieStore.delete('refreshToken')
     redirect(process.env.CLIENT_URL || '')
   }
 }
