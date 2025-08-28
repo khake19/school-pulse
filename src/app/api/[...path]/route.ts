@@ -107,12 +107,8 @@ export async function POST(request: NextRequest, { params }: IPathProps) {
     headers['Content-Type'] = 'application/json'
   }
 
-  const response = await fetch(`${process.env.SERVER_URL}/api/${params.path.join('/')}`, {
-    method: 'post',
-    body,
-    headers
-  })
-  return handleResponse(response)
+  const url = `${process.env.SERVER_URL}/api/${params.path.join('/')}`
+  return proxyWithAutoRefresh(request, new Request(url, { method: 'POST', headers, body }))
 }
 
 export async function PUT(request: NextRequest, { params }: IPathProps) {
@@ -132,26 +128,18 @@ export async function PUT(request: NextRequest, { params }: IPathProps) {
     headers['Content-Type'] = 'application/json'
   }
 
-  const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/'), {
-    method: 'put',
-    body,
-    headers
-  })
-  return handleResponse(data)
+  const url = `${process.env.SERVER_URL}/api/${params.path.join('/')}`
+  return proxyWithAutoRefresh(request, new Request(url, { method: 'PUT', headers, body }))
 }
 
 export async function DELETE(request: NextRequest, { params }: IPathProps) {
   const token = request.cookies.get('accessToken')?.value
 
-  const data = await fetch(process.env.SERVER_URL + '/api/' + params.path.join('/'), {
-    method: 'delete',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: 'Bearer ' + token
-    }
-  })
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json'
+  }
+  if (token) headers['authorization'] = `Bearer ${token}`
 
-  return new Response(null, {
-    status: data.status
-  })
+  const url = `${process.env.SERVER_URL}/api/${params.path.join('/')}`
+  return proxyWithAutoRefresh(request, new Request(url, { method: 'DELETE', headers }))
 }

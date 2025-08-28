@@ -17,11 +17,6 @@ const deleteDocument = async (schoolId: string, documentId: string) => {
   return result
 }
 
-const countAllDocuments = async (): Promise<IResponse<{ count: number }>> => {
-  const result = await get<IResponse<{ count: number }>>('/api/documents/count')
-  return result
-}
-
-const documentService = { getDocuments, createDocument, deleteDocument, countAllDocuments }
+const documentService = { getDocuments, createDocument, deleteDocument }
 
 export default documentService

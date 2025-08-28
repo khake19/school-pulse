@@ -21,8 +21,6 @@ export async function POST(request: NextRequest) {
   // Read refresh token from httpOnly cookies
   const refreshToken = request.cookies.get('refreshToken')?.value
 
-  console.log('refresh token', refreshToken)
-
   if (!refreshToken) {
     return NextResponse.json(
       {
