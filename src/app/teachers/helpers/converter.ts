@@ -55,5 +55,8 @@ export const filtersToQueryParams = (filters: IFilterProps | null) => {
   if (filters?.positions && filters.positions.length > 0) {
     params['position_id'] = filters.positions
   }
+  if (filters?.search) {
+    params['search'] = filters.search
+  }
   return params
 }

@@ -11,7 +11,7 @@ const useGetTeachers = () => {
   const schoolId = useCurrentSchool((state) => state.school.id)
   const filters = useFilterStore((state) => state.teachers.filters)
 
-  const filterQuery = filtersToQueryParams({ positions: filters?.positions })
+  const filterQuery = filtersToQueryParams({ positions: filters?.positions, search: filters?.search })
 
   const result = usePaginatedQuery<ITeacherResponse, unknown, TTeacherData>({
     queryKey: ['users', [schoolId, filters]],
