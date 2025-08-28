@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const hasToken = request.cookies.has('token')
+  const hasToken = request.cookies.has('accessToken')
 
   if (hasToken && request.nextUrl.pathname === '/login') {
     const dashboardUrl = new URL('/', request.url)
