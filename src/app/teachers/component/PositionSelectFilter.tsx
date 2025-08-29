@@ -1,5 +1,3 @@
-import { forwardRef, Ref } from 'react'
-
 import useGetPositions from '../hooks/useGetPositions'
 import MultiSelect from '~/components/Select/common/MultiSelect'
 
