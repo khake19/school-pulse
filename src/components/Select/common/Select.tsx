@@ -39,15 +39,10 @@ const BasicSelect = forwardRef<HTMLInputElement, BasicSelectProps>((props, ref) 
   const getFilteredOptions = (inputValue: string) => {
     if (!isSearchable || !inputValue) return options
     const lowerCasedInputValue = inputValue.toLowerCase()
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(lowerCasedInputValue)
-    )
+    return options.filter((option) => option.label.toLowerCase().includes(lowerCasedInputValue))
   }
 
-  const items = React.useMemo(
-    () => getFilteredOptions(inputValue),
-    [options, inputValue, isSearchable]
-  )
+  const items = getFilteredOptions(inputValue)
 
   const {
     isOpen,
@@ -87,10 +82,7 @@ const BasicSelect = forwardRef<HTMLInputElement, BasicSelectProps>((props, ref) 
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const target = e.currentTarget
-    if (
-      onMenuScrollToBottom &&
-      target.scrollTop + target.clientHeight >= target.scrollHeight - 5
-    ) {
+    if (onMenuScrollToBottom && target.scrollTop + target.clientHeight >= target.scrollHeight - 5) {
       onMenuScrollToBottom()
     }
   }
